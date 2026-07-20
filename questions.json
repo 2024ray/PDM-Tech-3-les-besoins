@@ -1,1 +1,104 @@
 
+{
+  "titreGeneral": "Technologie 3ème • Exprimer et analyser le besoin",
+  "cours": {
+    "titre": "Synthèse du cours : Exprimer et analyser le besoin",
+    "sections": [
+      {
+        "sousTitre": "1. Qu'est-ce qu'un besoin ?",
+        "contenu": "Un besoin est une nécessité ou un désir éprouvé par un utilisateur. Pour qu'un objet technique existe et soit utilisé, il doit obligatoirement répondre à un besoin (ex: se déplacer, communiquer, se loger)."
+      },
+      {
+        "sousTitre": "2. L'outil \"Bête à cornes\"",
+        "contenu": "Pour exprimer clairement le besoin fondamental, on utilise le diagramme de la Bête à cornes qui répond à 3 questions :<br>• <strong>À qui / À quoi rend-il service ?</strong> (L'utilisateur)<br>• <strong>Sur quoi agit-il ?</strong> (La matière ou l'élément transformé)<br>• <strong>Dans quel but ?</strong> (Le service rendu / la fonction principale)"
+      },
+      {
+        "sousTitre": "3. Distinctions clés",
+        "contenu": "• <strong>Objet technique :</strong> Fabriqué ou modifié par l'Homme.<br>• <strong>Fonction d'usage :</strong> À quoi sert l'objet ? (Action pratique et objective).<br>• <strong>Fonction d'estime :</strong> Pourquoi l'objet me plaît-il ? (Goût, esthétique, marque)."
+      },
+      {
+        "sousTitre": "4. Évolution et pérennité du besoin",
+        "contenu": "Un besoin évolue sous l'impact des innovations technologiques, des nouvelles habitudes de vie et des contraintes écologiques (ex: remplacer les gourdes en plastique jetables par des gourdes en inox)."
+      }
+    ]
+  },
+  "quizComprehension": [
+    {
+      "id": "q1",
+      "question": "1. La fonction d'usage d'un objet répond à la question : 'Pourquoi cet objet me plaît-il ?'",
+      "options": [
+        { "texte": "Vrai", "estCorrecte": false },
+        { "texte": "Faux", "estCorrecte": true }
+      ],
+      "explication": "La question 'Pourquoi il me plaît ?' désigne la fonction d'estime. La fonction d'usage répond à 'À quoi sert-il ?'."
+    },
+    {
+      "id": "q2",
+      "question": "2. Dans une Bête à cornes, la question 'Sur quoi agit-il ?' désigne :",
+      "options": [
+        { "texte": "A) L'utilisateur qui tient l'objet", "estCorrecte": false },
+        { "texte": "B) L'élément ou la matière que l'objet modifie ou transporte", "estCorrecte": true },
+        { "texte": "C) Le prix de vente de l'objet", "estCorrecte": false }
+      ],
+      "explication": "Il s'agit de la matière ou de l'élément physique sur lequel l'objet réalise son travail."
+    }
+  ],
+  "evaluation": [
+    {
+      "id": "ex1",
+      "titre": "Exercice 1 : Les Fondamentaux du Besoin",
+      "niveau": "Facile",
+      "points": 5,
+      "enonce": "Pour se protéger de la pluie devant le collège, les élèves utilisent un préau. Quelle est sa fonction d'usage principale ?",
+      "type": "qcm",
+      "options": [
+        { "texte": "A) Être peint avec des couleurs vives et modernes", "estCorrecte": false, "pts": 0 },
+        { "texte": "B) Abriter les élèves des intempéries", "estCorrecte": true, "pts": 5 },
+        { "texte": "C) Coûter le moins cher possible à la mairie", "estCorrecte": false, "pts": 0 }
+      ],
+      "correction": "La bonne réponse est la B (Abriter les élèves). La réponse A concerne l'estime, et la C est une contrainte économique."
+    },
+    {
+      "id": "ex2",
+      "titre": "Exercice 2 : Étude de cas - La Trottinette Électrique",
+      "niveau": "Moyen",
+      "points": 8,
+      "enonce": "Complète les éléments de la Bête à cornes pour une trottinette électrique urbaine :",
+      "type": "champs_textes",
+      "questionsTextes": [
+        {
+          "cle": "q2_a",
+          "label": "A) À qui la trottinette rend-elle service ?",
+          "motsCles": ["citadin", "utilisateur", "pieton", "personne", "usager"],
+          "reponseType": "Au citadin / utilisateur qui souhaite se déplacer.",
+          "pts": 2.5
+        },
+        {
+          "cle": "q2_b",
+          "label": "B) Sur quoi agit-elle directement ?",
+          "motsCles": ["deplacement", "position", "distance", "trajet"],
+          "reponseType": "Sur le déplacement / la position de l'utilisateur.",
+          "pts": 2.5
+        },
+        {
+          "cle": "q2_c",
+          "label": "C) Dans quel but existe-t-elle ?",
+          "motsCles": ["deplacer", "transporter", "rapide", "effort"],
+          "reponseType": "Permettre de se déplacer rapidement en ville sans effort physique majeur.",
+          "pts": 3
+        }
+      ]
+    },
+    {
+      "id": "ex3",
+      "titre": "Exercice 3 : Analyse critique - La Gourde Connectée",
+      "niveau": "Avancé",
+      "points": 7,
+      "enonce": "Une gourde connectée rappelle à l'utilisateur de boire grâce à des LED et une application mobile.<br><strong>Question :</strong> Rédige 2 à 3 lignes pour expliquer un avantage (ex: santé) et un inconvénient écologique (ex: batterie/composants) de cet objet.",
+      "type": "redaction",
+      "motsClesObligatoires": ["sante", "hydratation", "batterie", "recyclage", "electronique", "environnement", "ecologique"],
+      "correctionModele": "<strong>Exemple de réponse attendue :</strong> L'avantage est qu'elle incites l'utilisateur à bien s'hydrater au quotidien pour sa santé. Cependant, son impact écologique est plus lourd (batterie au lithium, composants électroniques difficiles à recycler) par rapport à une gourde classique.",
+      "pts": 7
+    }
+  ]
+}
