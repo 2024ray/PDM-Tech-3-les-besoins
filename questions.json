@@ -1,104 +1,249 @@
-
 {
-  "titreGeneral": "Technologie 3ème • Exprimer et analyser le besoin",
+  "titreGeneral": "Technologie 3ème • Exprimer et analyser le besoin (33 Questions)",
   "cours": {
     "titre": "Synthèse du cours : Exprimer et analyser le besoin",
     "sections": [
       {
         "sousTitre": "1. Qu'est-ce qu'un besoin ?",
-        "contenu": "Un besoin est une nécessité ou un désir éprouvé par un utilisateur. Pour qu'un objet technique existe et soit utilisé, il doit obligatoirement répondre à un besoin (ex: se déplacer, communiquer, se loger)."
+        "contenu": "Un <strong>besoin</strong> est une nécessité ou un désir éprouvé par un utilisateur. Un objet technique existe pour répondre à un besoin précis (se déplacer, s'informer, se loger)."
       },
       {
         "sousTitre": "2. L'outil \"Bête à cornes\"",
-        "contenu": "Pour exprimer clairement le besoin fondamental, on utilise le diagramme de la Bête à cornes qui répond à 3 questions :<br>• <strong>À qui / À quoi rend-il service ?</strong> (L'utilisateur)<br>• <strong>Sur quoi agit-il ?</strong> (La matière ou l'élément transformé)<br>• <strong>Dans quel but ?</strong> (Le service rendu / la fonction principale)"
+        "contenu": "Pour valider l'expression du besoin, on répond à 3 questions :<br>• <strong>À qui / À quoi rend-il service ?</strong> (L'utilisateur)<br>• <strong>Sur quoi agit-il ?</strong> (La matière, l'information ou l'élément modifié)<br>• <strong>Dans quel but ?</strong> (Le service rendu / La fonction principale)"
       },
       {
-        "sousTitre": "3. Distinctions clés",
-        "contenu": "• <strong>Objet technique :</strong> Fabriqué ou modifié par l'Homme.<br>• <strong>Fonction d'usage :</strong> À quoi sert l'objet ? (Action pratique et objective).<br>• <strong>Fonction d'estime :</strong> Pourquoi l'objet me plaît-il ? (Goût, esthétique, marque)."
+        "sousTitre": "3. Usage vs Estime",
+        "contenu": "• <strong>Fonction d'usage :</strong> À quoi sert l'objet ? (Aspect pratique et factuel).<br>• <strong>Fonction d'estime :</strong> Pourquoi l'objet me plaît-il ? (Esthétique, style, marque, goût)."
       },
       {
         "sousTitre": "4. Évolution et pérennité du besoin",
-        "contenu": "Un besoin évolue sous l'impact des innovations technologiques, des nouvelles habitudes de vie et des contraintes écologiques (ex: remplacer les gourdes en plastique jetables par des gourdes en inox)."
+        "contenu": "Le besoin évolue avec les innovations technologiques, les contraintes environnementales et les modes de vie (ex: passage des sacs plastiques jetables aux cabas réutilisables)."
       }
     ]
   },
   "quizComprehension": [
     {
       "id": "q1",
-      "question": "1. La fonction d'usage d'un objet répond à la question : 'Pourquoi cet objet me plaît-il ?'",
+      "question": "1. Un besoin est une nécessité ou un désir éprouvé par un utilisateur.",
+      "options": [
+        { "texte": "Vrai", "estCorrecte": true },
+        { "texte": "Faux", "estCorrecte": false }
+      ],
+      "explication": "C'est la définition exacte d'un besoin en technologie."
+    },
+    {
+      "id": "q2",
+      "question": "2. La fonction d'usage répond à la question 'Pourquoi l'objet me plaît-il ?'.",
       "options": [
         { "texte": "Vrai", "estCorrecte": false },
         { "texte": "Faux", "estCorrecte": true }
       ],
-      "explication": "La question 'Pourquoi il me plaît ?' désigne la fonction d'estime. La fonction d'usage répond à 'À quoi sert-il ?'."
+      "explication": "La question du plaisir/esthétique concerne la fonction d'estime."
     },
     {
-      "id": "q2",
-      "question": "2. Dans une Bête à cornes, la question 'Sur quoi agit-il ?' désigne :",
+      "id": "q3",
+      "question": "3. Dans la Bête à cornes, la question 'Sur quoi agit-il ?' désigne :",
       "options": [
-        { "texte": "A) L'utilisateur qui tient l'objet", "estCorrecte": false },
-        { "texte": "B) L'élément ou la matière que l'objet modifie ou transporte", "estCorrecte": true },
-        { "texte": "C) Le prix de vente de l'objet", "estCorrecte": false }
+        { "texte": "L'utilisateur qui achète l'objet", "estCorrecte": false },
+        { "texte": "La matière ou l'élément transformé/modifié", "estCorrecte": true },
+        { "texte": "Le coût de fabrication de l'objet", "estCorrecte": false }
       ],
-      "explication": "Il s'agit de la matière ou de l'élément physique sur lequel l'objet réalise son travail."
+      "explication": "Elle indique ce sur quoi l'objet produit un effet."
+    },
+    {
+      "id": "q4",
+      "question": "4. Un objet naturel (comme une pomme sur un arbre) est un objet technique.",
+      "options": [
+        { "texte": "Vrai", "estCorrecte": false },
+        { "texte": "Faux", "estCorrecte": true }
+      ],
+      "explication": "Un objet technique doit être conçu ou modifié par l'Homme."
+    },
+    {
+      "id": "q5",
+      "question": "5. Les contraintes écologiques peuvent faire évoluer le besoin d'un objet.",
+      "options": [
+        { "texte": "Vrai", "estCorrecte": true },
+        { "texte": "Faux", "estCorrecte": false }
+      ],
+      "explication": "Les nouvelles normes et la sensibilité écologique modifient nos attentes."
+    },
+    {
+      "id": "q6",
+      "question": "6. La couleur rouge et le logo de marque d'une paire de baskets font partie de :",
+      "options": [
+        { "texte": "Sa fonction d'usage", "estCorrecte": false },
+        { "texte": "Sa fonction d'estime", "estCorrecte": true }
+      ],
+      "explication": "L'apparence et l'image de marque relèvent du goût et de l'estime."
+    },
+    {
+      "id": "q7",
+      "question": "7. Quel est l'outil graphique utilisé pour exprimer le besoin principal ?",
+      "options": [
+        { "texte": "Le diagramme Pieuvre", "estCorrecte": false },
+        { "texte": "La Bête à cornes", "estCorrecte": true },
+        { "texte": "L'algorithme de chaîne d'énergie", "estCorrecte": false }
+      ],
+      "explication": "La Bête à cornes exprime le besoin fondamental."
+    },
+    {
+      "id": "q8",
+      "question": "8. Si le besoin auquel répond un objet disparaît, l'objet devient :",
+      "options": [
+        { "texte": "Plus cher", "estCorrecte": false },
+        { "texte": "Obsolète", "estCorrecte": true },
+        { "texte": "Plus performant", "estCorrecte": false }
+      ],
+      "explication": "Sans besoin actif, un objet perd son utilité et devient obsolète."
     }
   ],
   "evaluation": [
     {
       "id": "ex1",
-      "titre": "Exercice 1 : Les Fondamentaux du Besoin",
+      "titre": "Exercice 1 : QCM de Vocabulaire et Définitions",
       "niveau": "Facile",
       "points": 5,
-      "enonce": "Pour se protéger de la pluie devant le collège, les élèves utilisent un préau. Quelle est sa fonction d'usage principale ?",
-      "type": "qcm",
-      "options": [
-        { "texte": "A) Être peint avec des couleurs vives et modernes", "estCorrecte": false, "pts": 0 },
-        { "texte": "B) Abriter les élèves des intempéries", "estCorrecte": true, "pts": 5 },
-        { "texte": "C) Coûter le moins cher possible à la mairie", "estCorrecte": false, "pts": 0 }
-      ],
-      "correction": "La bonne réponse est la B (Abriter les élèves). La réponse A concerne l'estime, et la C est une contrainte économique."
-    },
-    {
-      "id": "ex2",
-      "titre": "Exercice 2 : Étude de cas - La Trottinette Électrique",
-      "niveau": "Moyen",
-      "points": 8,
-      "enonce": "Complète les éléments de la Bête à cornes pour une trottinette électrique urbaine :",
-      "type": "champs_textes",
-      "questionsTextes": [
+      "type": "qcm_multiple",
+      "questions": [
         {
-          "cle": "q2_a",
-          "label": "A) À qui la trottinette rend-elle service ?",
-          "motsCles": ["citadin", "utilisateur", "pieton", "personne", "usager"],
-          "reponseType": "Au citadin / utilisateur qui souhaite se déplacer.",
-          "pts": 2.5
+          "id": "ex1_1",
+          "texte": "1.1 Quelle est la fonction d'usage principale d'un stylo à bille ?",
+          "options": [
+            { "texte": "Décorer la trousse de l'élève", "estCorrecte": false, "pts": 0 },
+            { "texte": "Déposer de l'encre sur une feuille de papier pour écrire", "estCorrecte": true, "pts": 1 },
+            { "texte": "Valoir cher pour impressionner les camarades", "estCorrecte": false, "pts": 0 }
+          ],
+          "correction": "Le stylo sert à écrire en déposant de l'encre."
         },
         {
-          "cle": "q2_b",
-          "label": "B) Sur quoi agit-elle directement ?",
-          "motsCles": ["deplacement", "position", "distance", "trajet"],
-          "reponseType": "Sur le déplacement / la position de l'utilisateur.",
-          "pts": 2.5
+          "id": "ex1_2",
+          "texte": "1.2 Parmi ces propositions, laquelle est une fonction d'estime pour une montre ?",
+          "options": [
+            { "texte": "Afficher les heures et les minutes", "estCorrecte": false, "pts": 0 },
+            { "texte": "Avoir un cadran doré élégant et un bracelet en cuir", "estCorrecte": true, "pts": 1 },
+            { "texte": "Rappeler une alarme programmée", "estCorrecte": false, "pts": 0 }
+          ],
+          "correction": "Le cadran doré et le bracelet en cuir correspondent au style/goût."
         },
         {
-          "cle": "q2_c",
-          "label": "C) Dans quel but existe-t-elle ?",
-          "motsCles": ["deplacer", "transporter", "rapide", "effort"],
-          "reponseType": "Permettre de se déplacer rapidement en ville sans effort physique majeur.",
-          "pts": 3
+          "id": "ex1_3",
+          "texte": "1.3 Un besoin est dit 'éphémère' ou 'évolutif' s'il :",
+          "options": [
+            { "texte": "Ne change jamais au cours du temps", "estCorrecte": false, "pts": 0 },
+            { "texte": "Modifie ses exigences selon les époques et les technologies", "estCorrecte": true, "pts": 1 },
+            { "texte": "Est interdit par la loi", "estCorrecte": false, "pts": 0 }
+          ],
+          "correction": "Un besoin évolue avec son époque."
+        },
+        {
+          "id": "ex1_4",
+          "texte": "1.4 Qui est le destinataire de la question 'À qui rend-il service ?' ?",
+          "options": [
+            { "texte": "Le fabricant de l'objet", "estCorrecte": false, "pts": 0 },
+            { "texte": "L'utilisateur / le client", "estCorrecte": true, "pts": 1 },
+            { "texte": "Le magasin de vente", "estCorrecte": false, "pts": 0 }
+          ],
+          "correction": "L'objet rend service à l'utilisateur."
+        },
+        {
+          "id": "ex1_5",
+          "texte": "1.5 Un marteau en pierre préhistorique est-il un objet technique ?",
+          "options": [
+            { "texte": "Oui, car il a été taillé et façonné par l'Homme", "estCorrecte": true, "pts": 1 },
+            { "texte": "Non, car il n'a pas de batterie ni d'électronique", "estCorrecte": false, "pts": 0 }
+          ],
+          "correction": "Tout objet modifié par l'Homme pour répondre à un besoin est un objet technique."
         }
       ]
     },
     {
+      "id": "ex2",
+      "titre": "Exercice 2 : Association et Classification",
+      "niveau": "Facile",
+      "points": 5,
+      "type": "association",
+      "pairs": [
+        { "id": "p1", "element": "VTT tout-suspendu", "choix": ["Objet technique", "Fonction d'usage", "Fonction d'estime"], "bonneReponse": "Objet technique", "pts": 1 },
+        { "id": "p2", "element": "Permettre de rouler sur des chemins escarpés", "choix": ["Objet technique", "Fonction d'usage", "Fonction d'estime"], "bonneReponse": "Fonction d'usage", "pts": 1 },
+        { "id": "p3", "element": "Peinture vert fluo et look sportif", "choix": ["Objet technique", "Fonction d'usage", "Fonction d'estime"], "bonneReponse": "Fonction d'estime", "pts": 1 },
+        { "id": "p4", "element": "Éléments modifiés par un lave-linge", "choix": ["Le linge sale", "L'utilisateur", "Le fabricant"], "bonneReponse": "Le linge sale", "pts": 1 },
+        { "id": "p5", "element": "Bête à cornes - Question du bas", "choix": ["Dans quel but ?", "À qui rend-il service ?", "Combien coûte-t-il ?"], "bonneReponse": "Dans quel but ?", "pts": 1 }
+      ]
+    },
+    {
       "id": "ex3",
-      "titre": "Exercice 3 : Analyse critique - La Gourde Connectée",
+      "titre": "Exercice 3 : Étude de cas - Le Casque Audio à Réduction de Bruit",
+      "niveau": "Moyen",
+      "points": 5,
+      "type": "champs_textes",
+      "questionsTextes": [
+        {
+          "cle": "casque_a",
+          "label": "3.1 À qui le casque audio rend-il service ?",
+          "motsCles": ["utilisateur", "auditeur", "personne", "client", "eleve"],
+          "reponseType": "À l'utilisateur / auditeur.",
+          "pts": 1
+        },
+        {
+          "cle": "casque_b",
+          "label": "3.2 Sur quoi agit-il directement ?",
+          "motsCles": ["son", "bruit", "oreille", "signal", "musique"],
+          "reponseType": "Sur les ondes sonores / le son perçu par les oreilles.",
+          "pts": 1
+        },
+        {
+          "cle": "casque_c",
+          "label": "3.3 Dans quel but existe-t-il ?",
+          "motsCles": ["ecouter", "musique", "isoler", "bruit", "reduire"],
+          "reponseType": "Permettre d'écouter du son en s'isolant des bruits extérieurs.",
+          "pts": 1
+        },
+        {
+          "cle": "casque_d",
+          "label": "3.4 Donne un exemple de fonction d'estime pour ce casque :",
+          "motsCles": ["couleur", "design", "marque", "coussinet", "cuir", "look"],
+          "reponseType": "Un fini noir mat, une marque prestigieuse, des coussinets à mémoire de forme.",
+          "pts": 1
+        },
+        {
+          "cle": "casque_e",
+          "label": "3.5 Pourquoi la technologie sans fil (Bluetooth) a-t-elle remplacé le câble jack ?",
+          "motsCles": ["liberte", "mouvement", "cable", "fil", "pratique", "smartphone"],
+          "reponseType": "Pour offrir une plus grande liberté de mouvement et s'adapter aux smartphones récents sans prise jack.",
+          "pts": 1
+        }
+      ]
+    },
+    {
+      "id": "ex4",
+      "titre": "Exercice 4 : Analyse critique et Éco-conception (Gourde vs Bouteille plastique)",
       "niveau": "Avancé",
-      "points": 7,
-      "enonce": "Une gourde connectée rappelle à l'utilisateur de boire grâce à des LED et une application mobile.<br><strong>Question :</strong> Rédige 2 à 3 lignes pour expliquer un avantage (ex: santé) et un inconvénient écologique (ex: batterie/composants) de cet objet.",
-      "type": "redaction",
-      "motsClesObligatoires": ["sante", "hydratation", "batterie", "recyclage", "electronique", "environnement", "ecologique"],
-      "correctionModele": "<strong>Exemple de réponse attendue :</strong> L'avantage est qu'elle incites l'utilisateur à bien s'hydrater au quotidien pour sa santé. Cependant, son impact écologique est plus lourd (batterie au lithium, composants électroniques difficiles à recycler) par rapport à une gourde classique.",
-      "pts": 7
+      "points": 5,
+      "type": "analyse_avancee",
+      "questionsLongues": [
+        {
+          "cle": "eco_1",
+          "label": "4.1 Quel problème environnemental a entraîné l'évolution du besoin vers la gourde réutilisable ?",
+          "motsCles": ["plastique", "pollution", "dechet", "ocean", "jetable", "environnement"],
+          "reponseType": "La pollution massive liée aux bouteilles en plastique à usage unique.",
+          "pts": 1.5
+        },
+        {
+          "cle": "eco_2",
+          "label": "4.2 Compare la fonction d'usage d'une gourde inox et d'une bouteille en plastique jetable :",
+          "motsCles": ["contenir", "eau", "liquide", "mantenir", "boire", "identique"],
+          "reponseType": "Leur fonction d'usage est identique : contenir et transporter un liquide pour s'hydrater.",
+          "pts": 1.5
+        },
+        {
+          "cle": "eco_3",
+          "label": "4.3 Explique pourquoi la gourde en inox est considérée comme plus pérenne et durable :",
+          "motsCles": ["reutilisable", "solide", "durable", "recyclable", "sans plastique", "annee"],
+          "reponseType": "Elle est réutilisable des milliers de fois, robuste et limite la création de déchets plastiques.",
+          "pts": 2
+        }
+      ]
     }
   ]
 }
