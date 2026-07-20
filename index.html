@@ -1,75 +1,74 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Technologie 3ème - Révision Interactive</title>
+    <title>Technologie 3ème - Révision Interactive (33 Questions)</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- En-tête principal -->
+    <!-- Header -->
     <header class="header">
         <div class="container">
             <span class="badge">Technologie • Collège 3ème</span>
             <h1 id="main-title">Analyse et Conception de l'Objet Technique</h1>
-            <p>Module interactif de révision (Durée estimée : 1 heure)</p>
+            <p>Module révisé comprenant 33 questions interactives (Durée : 1 heure)</p>
         </div>
     </header>
 
-    <!-- Contenu Principal -->
+    <!-- Main Content -->
     <main class="container space-y">
 
-        <!-- SECTION 1 : LE COURS -->
+        <!-- PARTIE 1 : COURS -->
         <section class="card">
             <div class="card-header">
                 <span class="step-num bg-blue">1</span>
-                <h2>Le Cours : Synthèse</h2>
+                <h2>Le Cours : Synthèse Fondamentale</h2>
             </div>
             <div id="cours-container" class="card-body space-y-sm">
-                <!-- Chargé dynamiquement via script.js -->
+                <!-- Injecté via JS -->
             </div>
         </section>
 
-        <!-- SECTION 2 : QUIZ DE COMPRÉHENSION -->
+        <!-- PARTIE 2 : QUIZ DE COMPRÉHENSION (8 Questions) -->
         <section class="card">
             <div class="card-header">
                 <span class="step-num bg-green">2</span>
-                <h2>Quiz de vérification rapide</h2>
+                <h2>Quiz de vérification rapide (8 Questions)</h2>
             </div>
             <div class="card-body">
                 <form id="quiz-form" class="space-y-sm">
                     <div id="quiz-container" class="space-y-sm">
-                        <!-- Chargé dynamiquement via script.js -->
+                        <!-- Injecté via JS -->
                     </div>
-                    <button type="button" id="btn-valider-quiz" class="btn btn-green">Vérifier mes réponses</button>
+                    <button type="button" id="btn-valider-quiz" class="btn btn-green">Vérifier le Quiz</button>
                 </form>
                 <div id="quiz-feedback" class="feedback-box hidden"></div>
             </div>
         </section>
 
-        <!-- SECTION 3 : ÉVALUATION PROGRESSIVE -->
+        <!-- PARTIE 3 : ÉVALUATION (25 Questions / Noté sur 20) -->
         <section class="card">
             <div class="card-header">
                 <span class="step-num bg-purple">3</span>
-                <h2>Évaluation Progressive (Noté sur 20)</h2>
+                <h2>Évaluation Progressive (25 Questions sur 20 points)</h2>
             </div>
             <div class="card-body">
                 <form id="eval-form" class="space-y-md">
                     <div id="eval-container" class="space-y-md">
-                        <!-- Chargé dynamiquement via script.js -->
+                        <!-- Injecté via JS -->
                     </div>
 
                     <div class="action-bar">
-                        <button type="button" id="btn-soumettre-eval" class="btn btn-primary">Soumettre mon évaluation</button>
+                        <button type="button" id="btn-soumettre-eval" class="btn btn-primary">Corriger mon évaluation</button>
                     </div>
                 </form>
 
-                <!-- Zone d'affichage des résultats et corrections -->
+                <!-- Zone de résultats -->
                 <div id="eval-results" class="results-box hidden space-y-sm">
                     <div class="score-banner">
-                        <h3>Résultat Final : <span id="note-finale">0</span> / 20</h3>
+                        <h3>Note Finale : <span id="note-finale">0</span> / 20</h3>
                     </div>
                     <div id="eval-corrections-detail" class="space-y-sm"></div>
                 </div>
@@ -78,12 +77,11 @@
 
     </main>
 
-    <!-- Pied de page -->
+    <!-- Footer -->
     <footer class="footer">
-        <p>Enseignement de Technologie • Niveau 3ème • Révision autonome</p>
+        <p>Enseignement de Technologie • Révision Interactive en Ligne • 33 Questions</p>
     </footer>
 
-    <!-- Script JavaScript -->
     <script src="script.js"></script>
 </body>
 </html>
