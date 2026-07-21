@@ -37,15 +37,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
         afficherCours();
         
-        // Préparation du Quiz
+        // Démarrage du Quiz uniquement au lancement
         quizQuestions = melanger(appData.quizComprehension);
         currentQuizIndex = 0;
         afficherQuestionQuiz();
 
-        // Préparation de l'Évaluation
+        // Préparation de l'Évaluation (Sera affichée plus tard)
         preparerEvaluation();
-        currentEvalIndex = 0;
-        afficherQuestionEval();
 
         ecouterEvenements();
     }
@@ -80,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (tempsRestant <= 0) {
                 clearInterval(quizTimerInterval);
-                suivantQuiz(); // Pass automatique à la question suivante
+                suivantQuiz();
             }
         }, 1000);
     }
@@ -93,7 +91,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         lancerMinuteurQuiz();
 
-        // Mise à jour de la barre de progression
         const total = quizQuestions.length;
         const pct = ((currentQuizIndex + 1) / total) * 100;
         document.getElementById("quiz-progress-bar").style.width = `${pct}%`;
@@ -127,10 +124,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function terminerQuiz() {
         clearInterval(quizTimerInterval);
-        document.getElementById("quiz-container").innerHTML = "<p><em>Quiz terminé ! Voici vos résultats ci-dessous :</em></p>";
+        document.getElementById("quiz-container").innerHTML = "<p><em>Quiz terminé ! Résultats ci-dessous :</em></p>";
         document.getElementById("btn-suivant-quiz").classList.add("hidden");
         
-        // Calcul des points
         let score = 0;
         let total = quizQuestions.length;
         let feedback = [];
@@ -147,6 +143,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const box = document.getElementById("quiz-feedback");
         box.classList.remove("hidden");
         box.innerHTML = `<strong>Score final : ${score}/${total}</strong><br>${feedback.join("<br>")}`;
+
+        // --- DÉCLENCHEMENT DE L'ÉVALUATION ---
+        lancerEvaluation();
     }
 
     // ==========================================
@@ -183,6 +182,16 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    function lancerEvaluation() {
+        const evalSection = document.getElementById("eval-section");
+        if (evalSection) {
+            evalSection.classList.remove("hidden");
+            evalSection.scrollIntoView({ behavior: "smooth" });
+        }
+        currentEvalIndex = 0;
+        afficherQuestionEval();
+    }
+
     function lancerMinuteurEval() {
         clearInterval(evalTimerInterval);
         let tempsRestant = TIMER_DURATION;
@@ -200,7 +209,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (tempsRestant <= 0) {
                 clearInterval(evalTimerInterval);
-                suivantEval(); // Passage automatique à l'élément suivant
+                suivantEval();
             }
         }, 1000);
     }
