@@ -1,21 +1,20 @@
 {
-    "titreGeneral": "Analyse du Besoin & Tableurs",
+    "titreGeneral": "Analyse du Besoin",
     "cours": {
         "introduction": "L'analyse du besoin est la première étape de tout projet technique. Elle permet d'identifier précisément ce que l'utilisateur attend d'un produit.",
         "sections": [
             {"titre": "1. La notion de Besoin", "contenu": "Un <strong>besoin</strong> est le sentiment d'une privation ou d'une insuffisance. En technologie, on cherche à identifier le besoin auquel un produit doit répondre. <br><em>Exemple : Besoin de se déplacer rapidement → création de la voiture.</em>"},
-            {"titre": "2. Le diagramme Bête à cornes", "contenu": "La <strong>Bête à cornes</strong> est un outil graphique qui répond à la question : <em>« À qui le produit rend-il service ? Sur quoi agit-il ? Dans quel but ? »</em>. Il se compose de 3 ovales reliés au produit central."},
+            {"titre": "2. Le diagramme Bête à cornes", "contenu": "La <strong>Bête à cornes</strong> est un outil graphique qui répond à 3 questions : <br>• <em>« À qui le produit rend-il service ? »</em><br>• <em>« Sur quoi agit-il ? »</em><br>• <em>« Dans quel but ? »</em><br>Il se compose de 3 ovales reliés au produit central."},
             {"titre": "3. Usage vs Estime", "contenu": "• <strong>Valeur d'usage</strong> : aptitude du produit à satisfaire le besoin (ex : une voiture roule).<br>• <strong>Valeur d'estime</strong> : caractéristiques subjectives qui plaisent (ex : couleur, marque, design)."},
-            {"titre": "4. Évolution des besoins et des objets", "contenu": "Les besoins évoluent avec la société, la technologie et l'environnement. Les objets techniques doivent donc s'adapter : nouveaux matériaux, nouvelles fonctions, nouvelles formes."},
-            {"titre": "5. Les tableurs (Excel, LibreOffice Calc)", "contenu": "Un <strong>tableur</strong> permet d'organiser des données dans des <strong>cellules</strong> identifiées par une lettre (colonne) et un chiffre (ligne).<br>• Formule : commence toujours par <code>=</code><br>• Exemples : <code>=SOMME(A1:A5)</code>, <code>=MOYENNE(B1:B4)</code>, <code>=SI(A1>10;\"Oui\";\"Non\")</code>"}
+            {"titre": "4. Évolution des besoins et des objets", "contenu": "Les besoins évoluent avec la société, la technologie et l'environnement. Les objets techniques doivent donc s'adapter : nouveaux matériaux, nouvelles fonctions, nouvelles formes."}
         ]
     },
     "quizComprehension": [
         {"id": "q1", "question": "La Bête à cornes sert à identifier le besoin auquel répond un produit.", "options": [{"texte": "Vrai", "correct": true}, {"texte": "Faux", "correct": false}, {"texte": "Partiellement vrai seulement", "correct": false}, {"texte": "Impossible à dire", "correct": false}]},
         {"id": "q2", "question": "La valeur d'estime correspond à l'utilité pratique du produit.", "options": [{"texte": "Vrai", "correct": false}, {"texte": "Faux, c'est la valeur d'usage", "correct": true}, {"texte": "Vrai dans certains cas", "correct": false}, {"texte": "Faux, c'est la valeur d'usage", "correct": false}]},
-        {"id": "q3", "question": "Dans un tableur, une formule commence toujours par le signe « = ».", "options": [{"texte": "Vrai", "correct": true}, {"texte": "Faux", "correct": false}, {"texte": "Vrai seulement pour les calculs", "correct": false}, {"texte": "Ça dépend du tableur", "correct": false}]},
-        {"id": "q4", "question": "Un besoin technique peut évoluer au fil du temps.", "options": [{"texte": "Vrai", "correct": true}, {"texte": "Faux", "correct": false}, {"texte": "Seulement pour les objets anciens", "correct": false}, {"texte": "Vrai uniquement en informatique", "correct": false}]},
-        {"id": "q5", "question": "La cellule B3 se trouve à l'intersection de la ligne B et de la colonne 3.", "options": [{"texte": "Vrai", "correct": false}, {"texte": "Faux, c'est colonne B et ligne 3", "correct": true}, {"texte": "Vrai dans Excel", "correct": false}, {"texte": "Faux, c'est ligne B et colonne 3", "correct": false}]}
+        {"id": "q3", "question": "Un besoin technique peut évoluer au fil du temps.", "options": [{"texte": "Vrai", "correct": true}, {"texte": "Faux", "correct": false}, {"texte": "Seulement pour les objets anciens", "correct": false}, {"texte": "Vrai uniquement en informatique", "correct": false}]},
+        {"id": "q4", "question": "La Bête à cornes comporte 3 ovales reliés au produit central.", "options": [{"texte": "Vrai", "correct": true}, {"texte": "Faux, il y en a 4", "correct": false}, {"texte": "Faux, il y en a 2", "correct": false}, {"texte": "Faux, il n'y a pas d'ovales", "correct": false}]},
+        {"id": "q5", "question": "La valeur d'usage dépend des goûts personnels de l'utilisateur.", "options": [{"texte": "Faux, c'est la valeur d'estime", "correct": true}, {"texte": "Vrai", "correct": false}, {"texte": "Vrai seulement pour les vêtements", "correct": false}, {"texte": "Impossible à dire", "correct": false}]}
     ],
     "evaluation": [
         {
@@ -36,7 +35,7 @@
             "id": "ex2",
             "type": "tableau-menu",
             "niveau": "Facile",
-            "titre": "Exercice 2 - Bête à cornes : à qui ? (8 pts)",
+            "titre": "Exercice 2 - Bête à cornes : À qui rend-il service ? (8 pts)",
             "enonce": "Pour chaque produit, identifie <strong>à qui il rend service</strong> (première question de la Bête à cornes).",
             "questions": [
                 {"id": "ex2q1", "enonce": "Un tableau blanc interactif dans une salle de classe.", "options": [{"texte": "L'enseignant et les élèves", "correct": true}, {"texte": "Le principal du collège", "correct": false}, {"texte": "Les parents d'élèves", "correct": false}, {"texte": "Le gardien de l'établissement", "correct": false}, {"texte": "Les fournisseurs", "correct": false}], "pts": 1.6},
@@ -50,42 +49,42 @@
             "id": "ex3",
             "type": "tableau-menu",
             "niveau": "Moyen",
-            "titre": "Exercice 3 - Usage ou Estime ? (8 pts)",
-            "enonce": "Pour chaque caractéristique, indique s'il s'agit d'une <strong>valeur d'usage</strong> ou d'une <strong>valeur d'estime</strong>.",
+            "titre": "Exercice 3 - Bête à cornes : Sur quoi agit-il ? (8 pts)",
+            "enonce": "Pour chaque produit, identifie <strong>sur quoi il agit</strong> (deuxième question de la Bête à cornes).",
             "questions": [
-                {"id": "ex3q1", "enonce": "La capacité de freinage d'un vélo.", "options": [{"texte": "Valeur d'usage", "correct": true}, {"texte": "Valeur d'estime", "correct": false}, {"texte": "Ni l'un ni l'autre", "correct": false}, {"texte": "Les deux à la fois", "correct": false}, {"texte": "Impossible à déterminer", "correct": false}], "pts": 1.6},
-                {"id": "ex3q2", "enonce": "La couleur rouge d'une voiture de sport.", "options": [{"texte": "Valeur d'estime", "correct": true}, {"texte": "Valeur d'usage", "correct": false}, {"texte": "Ni l'un ni l'autre", "correct": false}, {"texte": "Les deux à la fois", "correct": false}, {"texte": "Impossible à déterminer", "correct": false}], "pts": 1.6},
-                {"id": "ex3q3", "enonce": "La marque de luxe d'un sac à main.", "options": [{"texte": "Valeur d'estime", "correct": true}, {"texte": "Valeur d'usage", "correct": false}, {"texte": "Ni l'un ni l'autre", "correct": false}, {"texte": "Les deux à la fois", "correct": false}, {"texte": "Impossible à déterminer", "correct": false}], "pts": 1.6},
-                {"id": "ex3q4", "enonce": "L'autonomie de la batterie d'un téléphone.", "options": [{"texte": "Valeur d'usage", "correct": true}, {"texte": "Valeur d'estime", "correct": false}, {"texte": "Ni l'un ni l'autre", "correct": false}, {"texte": "Les deux à la fois", "correct": false}, {"texte": "Impossible à déterminer", "correct": false}], "pts": 1.6},
-                {"id": "ex3q5", "enonce": "Le design élégant d'une montre.", "options": [{"texte": "Valeur d'estime", "correct": true}, {"texte": "Valeur d'usage", "correct": false}, {"texte": "Ni l'un ni l'autre", "correct": false}, {"texte": "Les deux à la fois", "correct": false}, {"texte": "Impossible à déterminer", "correct": false}], "pts": 1.6}
+                {"id": "ex3q1", "enonce": "Une voiture.", "options": [{"texte": "Sur le déplacement des personnes", "correct": true}, {"texte": "Sur la décoration urbaine", "correct": false}, {"texte": "Sur la météo", "correct": false}, {"texte": "Sur les routes uniquement", "correct": false}, {"texte": "Sur les passagers uniquement", "correct": false}], "pts": 1.6},
+                {"id": "ex3q2", "enonce": "Un aspirateur.", "options": [{"texte": "Sur la propreté des sols", "correct": true}, {"texte": "Sur l'éclairage", "correct": false}, {"texte": "Sur la température", "correct": false}, {"texte": "Sur les murs", "correct": false}, {"texte": "Sur le bruit ambiant", "correct": false}], "pts": 1.6},
+                {"id": "ex3q3", "enonce": "Un parapluie.", "options": [{"texte": "Sur la protection contre la pluie", "correct": true}, {"texte": "Sur la température du corps", "correct": false}, {"texte": "Sur le vent", "correct": false}, {"texte": "Sur la marche", "correct": false}, {"texte": "Sur les vêtements uniquement", "correct": false}], "pts": 1.6},
+                {"id": "ex3q4", "enonce": "Une lampe de bureau.", "options": [{"texte": "Sur l'éclairage du plan de travail", "correct": true}, {"texte": "Sur le chauffage de la pièce", "correct": false}, {"texte": "Sur la décoration murale", "correct": false}, {"texte": "Sur la lecture uniquement", "correct": false}, {"texte": "Sur l'ambiance sonore", "correct": false}], "pts": 1.6},
+                {"id": "ex3q5", "enonce": "Un casque audio.", "options": [{"texte": "Sur l'écoute personnelle de sons", "correct": true}, {"texte": "Sur la communication téléphonique", "correct": false}, {"texte": "Sur la protection auditive", "correct": false}, {"texte": "Sur la décoration", "correct": false}, {"texte": "Sur la concentration uniquement", "correct": false}], "pts": 1.6}
             ]
         },
         {
             "id": "ex4",
             "type": "tableau-menu",
             "niveau": "Moyen",
-            "titre": "Exercice 4 - Évolution des objets (8 pts)",
-            "enonce": "Pour chaque objet, identifie la <strong>principale évolution</strong> qu'il a connue au fil du temps.",
+            "titre": "Exercice 4 - Usage ou Estime ? (8 pts)",
+            "enonce": "Pour chaque caractéristique, indique s'il s'agit d'une <strong>valeur d'usage</strong> ou d'une <strong>valeur d'estime</strong>.",
             "questions": [
-                {"id": "ex4q1", "enonce": "Le téléphone : de fixe à mobile.", "options": [{"texte": "Mobilité et connectivité", "correct": true}, {"texte": "Réduction du poids uniquement", "correct": false}, {"texte": "Changement de couleur", "correct": false}, {"texte": "Augmentation du prix", "correct": false}, {"texte": "Disparition du son", "correct": false}], "pts": 1.6},
-                {"id": "ex4q2", "enonce": "L'éclairage : de la bougie à la LED.", "options": [{"texte": "Efficacité énergétique et durée de vie", "correct": true}, {"texte": "Changement de forme uniquement", "correct": false}, {"texte": "Réduction de la lumière", "correct": false}, {"texte": "Utilisation de bois", "correct": false}, {"texte": "Disparition de la fonction", "correct": false}], "pts": 1.6},
-                {"id": "ex4q3", "enonce": "Le transport : du cheval à la voiture électrique.", "options": [{"texte": "Écologie et performance", "correct": true}, {"texte": "Retour à l'ancien", "correct": false}, {"texte": "Suppression du confort", "correct": false}, {"texte": "Augmentation du bruit", "correct": false}, {"texte": "Ralentissement général", "correct": false}], "pts": 1.6},
-                {"id": "ex4q4", "enonce": "La musique : du vinyle au streaming.", "options": [{"texte": "Dématérialisation et accessibilité", "correct": true}, {"texte": "Retour au support physique", "correct": false}, {"texte": "Baisse de la qualité sonore", "correct": false}, {"texte": "Disparition des artistes", "correct": false}, {"texte": "Augmentation des coûts", "correct": false}], "pts": 1.6},
-                {"id": "ex4q5", "enonce": "La photographie : de l'argentique au numérique.", "options": [{"texte": "Instantanéité et stockage", "correct": true}, {"texte": "Retour au papier obligatoire", "correct": false}, {"texte": "Suppression des images", "correct": false}, {"texte": "Augmentation du temps de développement", "correct": false}, {"texte": "Disparition des couleurs", "correct": false}], "pts": 1.6}
+                {"id": "ex4q1", "enonce": "La capacité de freinage d'un vélo.", "options": [{"texte": "Valeur d'usage", "correct": true}, {"texte": "Valeur d'estime", "correct": false}, {"texte": "Ni l'un ni l'autre", "correct": false}, {"texte": "Les deux à la fois", "correct": false}, {"texte": "Impossible à déterminer", "correct": false}], "pts": 1.6},
+                {"id": "ex4q2", "enonce": "La couleur rouge d'une voiture de sport.", "options": [{"texte": "Valeur d'estime", "correct": true}, {"texte": "Valeur d'usage", "correct": false}, {"texte": "Ni l'un ni l'autre", "correct": false}, {"texte": "Les deux à la fois", "correct": false}, {"texte": "Impossible à déterminer", "correct": false}], "pts": 1.6},
+                {"id": "ex4q3", "enonce": "La marque de luxe d'un sac à main.", "options": [{"texte": "Valeur d'estime", "correct": true}, {"texte": "Valeur d'usage", "correct": false}, {"texte": "Ni l'un ni l'autre", "correct": false}, {"texte": "Les deux à la fois", "correct": false}, {"texte": "Impossible à déterminer", "correct": false}], "pts": 1.6},
+                {"id": "ex4q4", "enonce": "L'autonomie de la batterie d'un téléphone.", "options": [{"texte": "Valeur d'usage", "correct": true}, {"texte": "Valeur d'estime", "correct": false}, {"texte": "Ni l'un ni l'autre", "correct": false}, {"texte": "Les deux à la fois", "correct": false}, {"texte": "Impossible à déterminer", "correct": false}], "pts": 1.6},
+                {"id": "ex4q5", "enonce": "Le design élégant d'une montre.", "options": [{"texte": "Valeur d'estime", "correct": true}, {"texte": "Valeur d'usage", "correct": false}, {"texte": "Ni l'un ni l'autre", "correct": false}, {"texte": "Les deux à la fois", "correct": false}, {"texte": "Impossible à déterminer", "correct": false}], "pts": 1.6}
             ]
         },
         {
             "id": "ex5",
             "type": "tableau-menu",
             "niveau": "Avancé",
-            "titre": "Exercice 5 - Analyse complète de produits (8 pts)",
-            "enonce": "Pour chaque produit, choisis l'analyse la plus pertinente.",
+            "titre": "Exercice 5 - Analyse complète d'un produit (8 pts)",
+            "enonce": "Un collège souhaite équiper ses salles d'un <strong>vidéoprojecteur interactif</strong>. Réponds aux questions d'analyse.",
             "questions": [
-                {"id": "ex5q1", "enonce": "Un collège achète des tablettes pédagogiques. Quel est le besoin principal ?", "options": [{"texte": "Support d'apprentissage numérique", "correct": true}, {"texte": "Jouer à des jeux vidéo", "correct": false}, {"texte": "Regarder des films uniquement", "correct": false}, {"texte": "Remplacer les professeurs", "correct": false}, {"texte": "Décorer les salles", "correct": false}], "pts": 1.6},
-                {"id": "ex5q2", "enonce": "Pour ces tablettes, quelle est une valeur d'estime ?", "options": [{"texte": "La marque et le design", "correct": true}, {"texte": "La capacité de calcul", "correct": false}, {"texte": "L'autonomie de la batterie", "correct": false}, {"texte": "La taille de l'écran", "correct": false}, {"texte": "La vitesse du processeur", "correct": false}], "pts": 1.6},
-                {"id": "ex5q3", "enonce": "Quelle évolution future est probable pour ces tablettes ?", "options": [{"texte": "Intégration d'IA pédagogique", "correct": true}, {"texte": "Retour au papier", "correct": false}, {"texte": "Disparition des écrans", "correct": false}, {"texte": "Suppression du tactile", "correct": false}, {"texte": "Augmentation du poids", "correct": false}], "pts": 1.6},
-                {"id": "ex5q4", "enonce": "Dans la Bête à cornes des tablettes, 'Sur quoi agit-elle ?' répond :", "options": [{"texte": "Sur les apprentissages des élèves", "correct": true}, {"texte": "Sur les murs de la classe", "correct": false}, {"texte": "Sur les professeurs uniquement", "correct": false}, {"texte": "Sur les parents", "correct": false}, {"texte": "Sur les fournitures scolaires", "correct": false}], "pts": 1.6},
-                {"id": "ex5q5", "enonce": "Dans quel but principal le collège achète-t-il ces tablettes ?", "options": [{"texte": "Moderniser la pédagogie", "correct": true}, {"texte": "Remplacer les manuels uniquement", "correct": false}, {"texte": "Faire plaisir aux élèves", "correct": false}, {"texte": "Diminuer le nombre de professeurs", "correct": false}, {"texte": "Réduire les cours", "correct": false}], "pts": 1.6}
+                {"id": "ex5q1", "enonce": "Quel est le besoin principal identifié ?", "options": [{"texte": "Améliorer les supports pédagogiques", "correct": true}, {"texte": "Remplacer les professeurs", "correct": false}, {"texte": "Divertir les élèves", "correct": false}, {"texte": "Décorer les salles", "correct": false}, {"texte": "Réduire le nombre de cours", "correct": false}], "pts": 1.6},
+                {"id": "ex5q2", "enonce": "À qui rend-il service principalement ?", "options": [{"texte": "Aux enseignants et aux élèves", "correct": true}, {"texte": "Au personnel d'entretien", "correct": false}, {"texte": "Aux parents d'élèves", "correct": false}, {"texte": "Aux fournisseurs", "correct": false}, {"texte": "À la mairie uniquement", "correct": false}], "pts": 1.6},
+                {"id": "ex5q3", "enonce": "Sur quoi agit-il ?", "options": [{"texte": "Sur la présentation des cours", "correct": true}, {"texte": "Sur les murs de la classe", "correct": false}, {"texte": "Sur le chauffage", "correct": false}, {"texte": "Sur l'éclairage", "correct": false}, {"texte": "Sur les fenêtres", "correct": false}], "pts": 1.6},
+                {"id": "ex5q4", "enonce": "Quelle est une valeur d'usage de ce vidéoprojecteur ?", "options": [{"texte": "Sa capacité à projeter des images interactives", "correct": true}, {"texte": "Sa couleur blanche", "correct": false}, {"texte": "Sa marque", "correct": false}, {"texte": "Son design moderne", "correct": false}, {"texte": "Son prix élevé", "correct": false}], "pts": 1.6},
+                {"id": "ex5q5", "enonce": "Quelle évolution future est probable pour ce type de produit ?", "options": [{"texte": "Intégration de fonctions tactiles et connectées", "correct": true}, {"texte": "Retour au tableau noir", "correct": false}, {"texte": "Suppression de la projection", "correct": false}, {"texte": "Augmentation de la taille uniquement", "correct": false}, {"texte": "Disparition de l'interactivité", "correct": false}], "pts": 1.6}
             ]
         }
     ]
