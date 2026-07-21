@@ -1,6 +1,15 @@
 document.addEventListener("DOMContentLoaded", () => {
     let appData = null;
 
+    // Variables d'état pour la navigation question par question
+    let quizQuestions = [];
+    let currentQuizIndex = 0;
+    let quizAnswers = {}; // Pour sauvegarder les choix du quiz
+
+    let evalQuestions = [];
+    let currentEvalIndex = 0;
+    let evalAnswers = {}; // Pour sauvegarder les réponses de l'évaluation
+
     // Fonction de mélange aléatoire (Fisher-Yates)
     function melanger(array) {
         let copy = [...array];
@@ -25,8 +34,15 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         afficherCours();
-        afficherQuiz();
-        afficherEvaluation();
+        
+        // Préparation du quiz
+        quizQuestions = melanger(appData.quizComprehension);
+        afficherQuestionQuiz();
+
+        // Préparation de l'évaluation sous forme d'une liste unique de questions/exercices
+        preparerEvaluation();
+        afficherQuestionEval();
+
         ecouterEvenements();
     }
 
@@ -40,170 +56,273 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    function afficherQuiz() {
+    /* -------------------------------------------------------------------------- */
+    /*                               PARTIE 2 : QUIZ                              */
+    /* -------------------------------------------------------------------------- */
+
+    function afficherQuestionQuiz() {
         const container = document.getElementById("quiz-container");
-        container.innerHTML = "";
+        const item = quizQuestions[currentQuizIndex];
+        const total = quizQuestions.length;
 
-        // Mélanger les questions du quiz
-        const quizMelange = melanger(appData.quizComprehension);
+        // Mise à jour de la progression
+        document.getElementById("quiz-progress").textContent = `Question ${currentQuizIndex + 1} / ${total}`;
 
-        quizMelange.forEach((item, index) => {
-            const qDiv = document.createElement("div");
-            qDiv.className = "exercise-block";
-
-            const options = item.options.map((opt, idx) => `
+        const options = item.options.map((opt, idx) => {
+            const checked = quizAnswers[`quiz_${item.id}`] === idx ? "checked" : "";
+            return `
                 <label class="option-label">
-                    <input type="radio" name="quiz_${item.id}" value="${idx}">
+                    <input type="radio" name="quiz_${item.id}" value="${idx}" ${checked}>
                     ${opt.texte}
                 </label>
-            `).join("");
+            `;
+        }).join("");
 
-            qDiv.innerHTML = `<p><strong>${index + 1}. ${item.question}</strong></p><div>${options}</div>`;
-            container.appendChild(qDiv);
+        container.innerHTML = `
+            <div class="exercise-block">
+                <p><strong>${currentQuizIndex + 1}. ${item.question}</strong></p>
+                <div>${options}</div>
+            </div>
+        `;
+
+        // Gestion de l'affichage des boutons de navigation
+        document.getElementById("btn-quiz-prev").style.display = currentQuizIndex === 0 ? "none" : "inline-block";
+        if (currentQuizIndex === total - 1) {
+            document.getElementById("btn-quiz-next").style.display = "none";
+            document.getElementById("btn-valider-quiz").style.display = "inline-block";
+        } else {
+            document.getElementById("btn-quiz-next").style.display = "inline-block";
+            document.getElementById("btn-valider-quiz").style.display = "none";
+        }
+
+        // Écouter le changement pour sauvegarder la réponse
+        container.querySelectorAll(`input[name="quiz_${item.id}"]`).forEach(input => {
+            input.addEventListener("change", (e) => {
+                quizAnswers[`quiz_${item.id}`] = parseInt(e.target.value);
+            });
         });
     }
 
-    function afficherEvaluation() {
-        const container = document.getElementById("eval-container");
-        container.innerHTML = "";
+    /* -------------------------------------------------------------------------- */
+    /*                            PARTIE 3 : ÉVALUATION                           */
+    /* -------------------------------------------------------------------------- */
 
+    function preparerEvaluation() {
+        evalQuestions = [];
         appData.evaluation.forEach(ex => {
-            const exDiv = document.createElement("div");
-            exDiv.className = "exercise-block";
-
-            let contentHTML = "";
-
             if (ex.type === "qcm_multiple") {
-                // Mélanger les questions de l'exercice 1
-                const qMelangees = melanger(ex.questions);
-                contentHTML = qMelangees.map((q, idx) => `
-                    <div style="margin-top:12px;">
-                        <p><strong>1.${idx + 1} ${q.texte}</strong></p>
-                        ${q.options.map((opt, i) => `
+                melanger(ex.questions).forEach(q => {
+                    evalQuestions.push({ ...q, exType: ex.type, exTitre: ex.titre, ptsMax: 1 });
+                });
+            } else if (ex.type === "association") {
+                melanger(ex.pairs).forEach(p => {
+                    evalQuestions.push({ ...p, exType: ex.type, exTitre: ex.titre, ptsMax: p.pts });
+                });
+            } else if (ex.type === "champs_textes") {
+                melanger(ex.questionsTextes).forEach(q => {
+                    evalQuestions.push({ ...q, exType: ex.type, exTitre: ex.titre, ptsMax: q.pts });
+                });
+            } else if (ex.type === "analyse_avancee") {
+                melanger(ex.questionsLongues).forEach(q => {
+                    evalQuestions.push({ ...q, exType: ex.type, exTitre: ex.titre, ptsMax: q.pts });
+                });
+            } else if (ex.type === "tableur") {
+                evalQuestions.push({ ...ex, exType: ex.type, exTitre: ex.titre, ptsMax: ex.points });
+            } else if (ex.type === "tableur_classification") {
+                evalQuestions.push({ ...ex, exType: ex.type, exTitre: ex.titre, ptsMax: ex.points });
+            }
+        });
+    }
+
+    function afficherQuestionEval() {
+        const container = document.getElementById("eval-container");
+        const item = evalQuestions[currentEvalIndex];
+        const total = evalQuestions.length;
+
+        document.getElementById("eval-progress").textContent = `Étape ${currentEvalIndex + 1} / ${total}`;
+
+        let contentHTML = `<div class="exercise-header"><strong>${item.exTitre}</strong></div>`;
+
+        if (item.exType === "qcm_multiple") {
+            contentHTML += `
+                <div class="exercise-block">
+                    <p><strong>${item.texte}</strong></p>
+                    ${item.options.map((opt, i) => {
+                        const checked = evalAnswers[item.id] === i ? "checked" : "";
+                        return `
                             <label class="option-label">
-                                <input type="radio" name="${q.id}" value="${i}">
+                                <input type="radio" name="${item.id}" value="${i}" ${checked}>
                                 ${opt.texte}
                             </label>
-                        `).join("")}
-                    </div>
-                `).join("");
-            } 
-            else if (ex.type === "association") {
-                // Mélanger les paires de l'exercice 2
-                const pMelangees = melanger(ex.pairs);
-                contentHTML = pMelangees.map(p => `
-                    <div style="margin-top:10px;">
-                        <label><strong>${p.element} :</strong></label>
-                        <select name="${p.id}" class="select-input">
-                            <option value="">-- Choisis une option --</option>
-                            ${p.choix.map(c => `<option value="${c}">${c}</option>`).join("")}
-                        </select>
-                    </div>
-                `).join("");
-            }
-            else if (ex.type === "champs_textes") {
-                // Mélanger les questions ouvertes
-                const qTextesMelangees = melanger(ex.questionsTextes);
-                contentHTML = qTextesMelangees.map(q => `
-                    <div style="margin-top:10px;">
-                        <label><strong>${q.label}</strong></label>
-                        <input type="text" name="${q.cle}" class="input-text" placeholder="Rédige ta réponse...">
-                    </div>
-                `).join("");
-            }
-            else if (ex.type === "analyse_avancee") {
-                const qLonguesMelangees = melanger(ex.questionsLongues);
-                contentHTML = qLonguesMelangees.map(q => `
-                    <div style="margin-top:10px;">
-                        <label><strong>${q.label}</strong></label>
-                        <input type="text" name="${q.cle}" class="input-text" placeholder="Rédige ton explication...">
-                    </div>
-                `).join("");
-            }
-            else if (ex.type === "tableur") {
-                // Mélanger les lignes du tableur 1
-                const lignesMelangees = melanger(ex.lignes);
-                const headersHTML = ex.colonnes.map(col => `<th>${col}</th>`).join("");
-                const rowsHTML = lignesMelangees.map(l => `
-                    <tr>
-                        <td><strong>${l.objet}</strong></td>
-                        ${l.champs.map(c => `
+                        `;
+                    }).join("")}
+                </div>
+            `;
+        } else if (item.exType === "association") {
+            const currentVal = evalAnswers[item.id] || "";
+            contentHTML += `
+                <div class="exercise-block">
+                    <label><strong>${item.element} :</strong></label>
+                    <select name="${item.id}" class="select-input">
+                        <option value="">-- Choisis une option --</option>
+                        ${item.choix.map(c => `<option value="${c}" ${currentVal === c ? "selected" : ""}>${c}</option>`).join("")}
+                    </select>
+                </div>
+            `;
+        } else if (item.exType === "champs_textes" || item.exType === "analyse_avancee") {
+            const currentVal = evalAnswers[item.cle] || "";
+            contentHTML += `
+                <div class="exercise-block">
+                    <label><strong>${item.label}</strong></label>
+                    <input type="text" name="${item.cle}" class="input-text" value="${currentVal}" placeholder="Rédige ta réponse...">
+                </div>
+            `;
+        } else if (item.exType === "tableur") {
+            const lignesMelangees = melanger(item.lignes);
+            const headersHTML = item.colonnes.map(col => `<th>${col}</th>`).join("");
+            const rowsHTML = lignesMelangees.map(l => `
+                <tr>
+                    <td><strong>${l.objet}</strong></td>
+                    ${l.champs.map(c => {
+                        const val = evalAnswers[c.cle] || "";
+                        return `
                             <td>
-                                <input type="text" name="${c.cle}" class="tableur-cell-input" placeholder="Remplir...">
+                                <input type="text" name="${c.cle}" class="tableur-cell-input" value="${val}" placeholder="Remplir...">
                             </td>
-                        `).join("")}
-                    </tr>
-                `).join("");
+                        `;
+                    }).join("")}
+                </tr>
+            `).join("");
 
-                contentHTML = `
-                    <p style="margin-bottom:8px;">${ex.consigne}</p>
+            contentHTML += `
+                <div class="exercise-block">
+                    <p style="margin-bottom:8px;">${item.consigne}</p>
                     <div class="tableur-wrapper">
                         <table class="tableur-custom">
                             <thead><tr>${headersHTML}</tr></thead>
                             <tbody>${rowsHTML}</tbody>
                         </table>
                     </div>
-                `;
-            }
-            else if (ex.type === "tableur_classification") {
-                // Mélanger les lignes du tableur 2
-                const lignesMelangees = melanger(ex.lignes);
-                const headersHTML = ex.colonnes.map(col => `<th>${col}</th>`).join("");
-                const rowsHTML = lignesMelangees.map(l => `
+                </div>
+            `;
+        } else if (item.exType === "tableur_classification") {
+            const lignesMelangees = melanger(item.lignes);
+            const headersHTML = item.colonnes.map(col => `<th>${col}</th>`).join("");
+            const rowsHTML = lignesMelangees.map(l => {
+                const val = evalAnswers[l.id] || "";
+                return `
                     <tr>
                         <td>${l.element}</td>
                         <td>
                             <select name="${l.id}" class="tableur-cell-input">
                                 <option value="">-- Sélectionner --</option>
-                                <option value="Usage">Fonction d'Usage</option>
-                                <option value="Estime">Fonction d'Estime</option>
-                                <option value="Aucun">Aucun</option>
-                                <option value="Les deux">Les deux</option>
+                                <option value="Usage" ${val === "Usage" ? "selected" : ""}>Fonction d'Usage</option>
+                                <option value="Estime" ${val === "Estime" ? "selected" : ""}>Fonction d'Estime</option>
+                                <option value="Aucun" ${val === "Aucun" ? "selected" : ""}>Aucun</option>
+                                <option value="Les deux" ${val === "Les deux" ? "selected" : ""}>Les deux</option>
                             </select>
                         </td>
                     </tr>
-                `).join("");
+                `;
+            }).join("");
 
-                contentHTML = `
-                    <p style="margin-bottom:8px;">${ex.consigne}</p>
+            contentHTML += `
+                <div class="exercise-block">
+                    <p style="margin-bottom:8px;">${item.consigne}</p>
                     <div class="tableur-wrapper">
                         <table class="tableur-custom">
                             <thead><tr>${headersHTML}</tr></thead>
                             <tbody>${rowsHTML}</tbody>
                         </table>
                     </div>
-                `;
-            }
-
-            exDiv.innerHTML = `
-                <div class="exercise-header">
-                    <strong>${ex.titre}</strong>
-                    <span class="tag bg-purple">${ex.niveau} • ${ex.points} pts</span>
                 </div>
-                ${contentHTML}
             `;
-            container.appendChild(exDiv);
+        }
+
+        container.innerHTML = contentHTML;
+
+        // Mise à jour de la visibilité des boutons
+        document.getElementById("btn-eval-prev").style.display = currentEvalIndex === 0 ? "none" : "inline-block";
+        if (currentEvalIndex === total - 1) {
+            document.getElementById("btn-eval-next").style.display = "none";
+            document.getElementById("btn-soumettre-eval").style.display = "inline-block";
+        } else {
+            document.getElementById("btn-eval-next").style.display = "inline-block";
+            document.getElementById("btn-soumettre-eval").style.display = "none";
+        }
+
+        attacherEcouteursSauvegarde(container, item);
+    }
+
+    function attacherEcouteursSauvegarde(container, item) {
+        container.querySelectorAll("input, select").forEach(input => {
+            input.addEventListener("change", (e) => {
+                if (e.target.type === "radio") {
+                    evalAnswers[e.target.name] = parseInt(e.target.value);
+                } else {
+                    evalAnswers[e.target.name] = e.target.value;
+                }
+            });
+            if (input.type === "text") {
+                input.addEventListener("input", (e) => {
+                    evalAnswers[e.target.name] = e.target.value;
+                });
+            }
         });
     }
 
+    /* -------------------------------------------------------------------------- */
+    /*                            GESTION DES ÉVÉNEMENTS                          */
+    /* -------------------------------------------------------------------------- */
+
     function ecouterEvenements() {
+        // Navigation Quiz
+        document.getElementById("btn-quiz-next").addEventListener("click", () => {
+            if (currentQuizIndex < quizQuestions.length - 1) {
+                currentQuizIndex++;
+                afficherQuestionQuiz();
+            }
+        });
+
+        document.getElementById("btn-quiz-prev").addEventListener("click", () => {
+            if (currentQuizIndex > 0) {
+                currentQuizIndex--;
+                afficherQuestionQuiz();
+            }
+        });
+
         document.getElementById("btn-valider-quiz").addEventListener("click", () => {
             let score = 0;
-            let total = appData.quizComprehension.length;
+            let total = quizQuestions.length;
             let feedback = [];
 
-            appData.quizComprehension.forEach(item => {
-                const selected = document.querySelector(`input[name="quiz_${item.id}"]:checked`);
-                if (selected && item.options[parseInt(selected.value)].estCorrecte) {
+            quizQuestions.forEach(item => {
+                const answerIdx = quizAnswers[`quiz_${item.id}`];
+                if (answerIdx !== undefined && item.options[answerIdx].estCorrecte) {
                     score++;
                 } else {
-                    feedback.push(`• <strong>Question "${item.question.substring(0, 30)}..." :</strong> ${item.explication}`);
+                    feedback.push(`• <strong>Question "${item.question.substring(0, 35)}..." :</strong> ${item.explication}`);
                 }
             });
 
             const box = document.getElementById("quiz-feedback");
             box.classList.remove("hidden");
             box.innerHTML = `<strong>Score : ${score}/${total}</strong><br>${feedback.join("<br>")}`;
+        });
+
+        // Navigation Évaluation
+        document.getElementById("btn-eval-next").addEventListener("click", () => {
+            if (currentEvalIndex < evalQuestions.length - 1) {
+                currentEvalIndex++;
+                afficherQuestionEval();
+            }
+        });
+
+        document.getElementById("btn-eval-prev").addEventListener("click", () => {
+            if (currentEvalIndex > 0) {
+                currentEvalIndex--;
+                afficherQuestionEval();
+            }
         });
 
         document.getElementById("btn-soumettre-eval").addEventListener("click", () => {
@@ -221,69 +340,61 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (ex.type === "qcm_multiple") {
                 ex.questions.forEach(q => {
-                    const sel = document.querySelector(`input[name="${q.id}"]:checked`);
-                    if (sel && q.options[parseInt(sel.value)].estCorrecte) {
+                    const ans = evalAnswers[q.id];
+                    if (ans !== undefined && q.options[ans].estCorrecte) {
                         ptsEx += 1;
                     } else {
-                        errs.push(`• <em>${q.texte}</em> $\rightarrow$ ${q.correction}`);
+                        errs.push(`• <em>${q.texte}</em> → ${q.correction}`);
                     }
                 });
-            }
-            else if (ex.type === "association") {
+            } else if (ex.type === "association") {
                 ex.pairs.forEach(p => {
-                    const sel = document.querySelector(`select[name="${p.id}"]`);
-                    if (sel && sel.value === p.bonneReponse) {
+                    const ans = evalAnswers[p.id];
+                    if (ans === p.bonneReponse) {
                         ptsEx += p.pts;
                     } else {
-                        errs.push(`• <em>${p.element}</em> $\rightarrow$ Attendu : <strong>${p.bonneReponse}</strong>`);
+                        errs.push(`• <em>${p.element}</em> → Attendu : <strong>${p.bonneReponse}</strong>`);
                     }
                 });
-            }
-            else if (ex.type === "champs_textes") {
+            } else if (ex.type === "champs_textes") {
                 ex.questionsTextes.forEach(q => {
-                    const input = document.querySelector(`input[name="${q.cle}"]`);
-                    const val = input ? input.value.toLowerCase().trim() : "";
+                    const val = (evalAnswers[q.cle] || "").toLowerCase().trim();
                     const ok = q.motsCles.some(m => val.includes(m));
                     if (ok) {
                         ptsEx += q.pts;
                     } else {
-                        errs.push(`• <em>${q.label}</em> $\rightarrow$ Attendu : <strong>${q.reponseType}</strong>`);
+                        errs.push(`• <em>${q.label}</em> → Attendu : <strong>${q.reponseType}</strong>`);
                     }
                 });
-            }
-            else if (ex.type === "analyse_avancee") {
+            } else if (ex.type === "analyse_avancee") {
                 ex.questionsLongues.forEach(q => {
-                    const input = document.querySelector(`input[name="${q.cle}"]`);
-                    const val = input ? input.value.toLowerCase().trim() : "";
+                    const val = (evalAnswers[q.cle] || "").toLowerCase().trim();
                     const ok = q.motsCles.some(m => val.includes(m));
                     if (ok) {
                         ptsEx += q.pts;
                     } else {
-                        errs.push(`• <em>${q.label}</em> $\rightarrow$ Attendu : <strong>${q.reponseType}</strong>`);
+                        errs.push(`• <em>${q.label}</em> → Attendu : <strong>${q.reponseType}</strong>`);
                     }
                 });
-            }
-            else if (ex.type === "tableur") {
+            } else if (ex.type === "tableur") {
                 ex.lignes.forEach(l => {
                     l.champs.forEach(c => {
-                        const input = document.querySelector(`input[name="${c.cle}"]`);
-                        const val = input ? input.value.toLowerCase().trim() : "";
+                        const val = (evalAnswers[c.cle] || "").toLowerCase().trim();
                         const ok = c.motsCles.some(m => val.includes(m));
                         if (ok) {
                             ptsEx += c.pts;
                         } else {
-                            errs.push(`• Tableur [${l.objet}] $\rightarrow$ Attendu : <strong>${c.reponseType}</strong>`);
+                            errs.push(`• Tableur [${l.objet}] → Attendu : <strong>${c.reponseType}</strong>`);
                         }
                     });
                 });
-            }
-            else if (ex.type === "tableur_classification") {
+            } else if (ex.type === "tableur_classification") {
                 ex.lignes.forEach(l => {
-                    const sel = document.querySelector(`select[name="${l.id}"]`);
-                    if (sel && sel.value === l.bonneReponse) {
+                    const ans = evalAnswers[l.id];
+                    if (ans === l.bonneReponse) {
                         ptsEx += l.pts;
                     } else {
-                        errs.push(`• <em>${l.element}</em> $\rightarrow$ Attendu : <strong>${l.bonneReponse}</strong>`);
+                        errs.push(`• <em>${l.element}</em> → Attendu : <strong>${l.bonneReponse}</strong>`);
                     }
                 });
             }
