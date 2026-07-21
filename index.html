@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Technologie 3ème - Module 4 Choix & Questions Mélangées</title>
     <link rel="stylesheet" href="style.css">
+    <!-- html2pdf.js CDN pour la génération fluide de PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
 
@@ -12,7 +14,7 @@
         <div class="container">
             <span class="badge">Technologie • Collège 3ème</span>
             <h1 id="main-title">Analyse du Besoin & Tableurs</h1>
-            <p>Module révisé : Questions et options mélangées à chaque rechargement</p>
+            <p>Module révisé : Questions et options mélangées avec minuterie et rapport PDF</p>
         </div>
     </header>
 
@@ -27,68 +29,76 @@
             <div id="cours-container" class="card-body space-y-sm"></div>
         </section>
 
-<!-- PARTIE 2 : QUIZ DE COMPRÉHENSION -->
-<section class="card">
-    <div class="card-header">
-        <span class="step-num bg-green">2</span>
-        <h2>Quiz de vérification rapide</h2>
-    </div>
-    <div class="card-body">
-        <div id="quiz-header-bar" class="exercise-header">
-            <div id="quiz-timer" class="timer-badge">⏱️ Temps restant : 60s</div>
-            <span id="quiz-step-info" class="tag bg-green">Question 1/8</span>
-        </div>
-        
-        <div class="progress-container">
-            <div id="quiz-progress-bar" class="progress-bar"></div>
-        </div>
-
-        <form id="quiz-form">
-            <div id="quiz-container"></div>
-            <div class="step-controls">
-                <div></div> <!-- Espaceur -->
-                <button type="button" id="btn-suivant-quiz" class="btn btn-green">Suivant ➔</button>
+        <!-- PARTIE 2 : QUIZ DE COMPRÉHENSION -->
+        <section class="card">
+            <div class="card-header">
+                <span class="step-num bg-green">2</span>
+                <h2>Quiz de vérification rapide</h2>
             </div>
-        </form>
-        <div id="quiz-feedback" class="feedback-box hidden"></div>
-    </div>
-</section>
+            <div class="card-body">
+                <div id="quiz-header-bar" class="exercise-header">
+                    <div id="quiz-timer" class="timer-badge">⏱️ Temps restant : 60s</div>
+                    <span id="quiz-step-info" class="tag bg-green">Question 1/8</span>
+                </div>
+                
+                <div class="progress-container">
+                    <div id="quiz-progress-bar" class="progress-bar"></div>
+                </div>
 
-<!-- PARTIE 3 : ÉVALUATION -->
-        <!-- PARTIE 3 : ÉVALUATION (Masquée par défaut) -->
-<section id="eval-section" class="card hidden">
-<section class="card">
-    <div class="card-header">
-        <span class="step-num bg-purple">3</span>
-        <h2>Évaluation Progressive & Grilles Tableurs (40 pts)</h2>
-    </div>
-    <div class="card-body">
-        <div id="eval-header-bar" class="exercise-header">
-            <div id="eval-timer" class="timer-badge">⏱️ Temps restant : 60s</div>
-            <span id="eval-step-info" class="tag bg-purple">Question 1/X</span>
-        </div>
-
-        <div class="progress-container">
-            <div id="eval-progress-bar" class="progress-bar"></div>
-        </div>
-
-        <form id="eval-form">
-            <div id="eval-container"></div>
-            <div class="step-controls">
-                <div></div> <!-- Espaceur -->
-                <button type="button" id="btn-suivant-eval" class="btn btn-primary">Suivant ➔</button>
+                <form id="quiz-form">
+                    <div id="quiz-container"></div>
+                    <div class="step-controls">
+                        <div></div>
+                        <button type="button" id="btn-suivant-quiz" class="btn btn-green">Suivant ➔</button>
+                    </div>
+                </form>
+                <div id="quiz-feedback" class="feedback-box hidden"></div>
             </div>
-        </form>
+        </section>
 
-        <div id="eval-results" class="results-box hidden space-y-sm">
-            <div class="score-banner">
-                <h3>Note Finale : <span id="note-finale">0</span> / 40</h3>
+        <!-- PARTIE 3 : ÉVALUATION (Masquée au départ) -->
+        <section id="eval-section" class="card hidden">
+            <div class="card-header">
+                <span class="step-num bg-purple">3</span>
+                <h2>Évaluation Progressive & Grilles Tableurs (40 pts)</h2>
             </div>
-            <div id="eval-corrections-detail" class="space-y-sm"></div>
-        </div>
-    </div>
-</section>
-</section>
+            <div class="card-body">
+                <div id="eval-header-bar" class="exercise-header">
+                    <div id="eval-timer" class="timer-badge">⏱️ Temps restant : 60s</div>
+                    <span id="eval-step-info" class="tag bg-purple">Question 1/X</span>
+                </div>
+
+                <div class="progress-container">
+                    <div id="eval-progress-bar" class="progress-bar"></div>
+                </div>
+
+                <form id="eval-form">
+                    <div id="eval-container"></div>
+                    <div class="step-controls">
+                        <div></div>
+                        <button type="button" id="btn-suivant-eval" class="btn btn-primary">Suivant ➔</button>
+                    </div>
+                </form>
+
+                <div id="eval-results" class="results-box hidden space-y-sm">
+                    <div id="pdf-report-area">
+                        <div class="pdf-header">
+                            <h2>📊 Rapport de Résultats - Évaluation de Technologie (3ème)</h2>
+                            <p><strong>Module :</strong> Analyse du Besoin & Tableurs</p>
+                            <p id="pdf-date"></p>
+                        </div>
+                        <div class="score-banner">
+                            <h3>Note Finale : <span id="note-finale">0</span> / 40</h3>
+                        </div>
+                        <div id="eval-corrections-detail" class="space-y-sm"></div>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 1.5rem;">
+                        <button type="button" id="btn-telecharger-pdf" class="btn btn-green">📄 Télécharger / Afficher le Rapport PDF</button>
+                    </div>
+                </div>
+            </div>
+        </section>
 
     </main>
 
