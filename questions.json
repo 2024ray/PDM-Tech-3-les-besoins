@@ -3,39 +3,35 @@
     "cours": {
         "introduction": "L'analyse du besoin est la première étape de tout projet technique.",
         "sections": [
-            {"titre": "1. La notion de Besoin", "contenu": "Un besoin est le sentiment d'une privation ou d'une insuffisance."},
-            {"titre": "2. Bête à cornes", "contenu": "Diagramme à 3 ovales : À qui ? Sur quoi ? Dans quel but ?"},
-            {"titre": "3. Usage vs Estime", "contenu": "Usage = utilité pratique. Estime = subjectif."},
-            {"titre": "4. Évolution", "contenu": "Les besoins évoluent avec la société."}
+            {"titre": "1. La notion de Besoin", "contenu": "Un <strong>besoin</strong> est le sentiment d'une privation ou d'une insuffisance."},
+            {"titre": "2. Bête à cornes", "contenu": "Diagramme à 3 ovales : <em>À qui ? Sur quoi ? Dans quel but ?</em>"},
+            {"titre": "3. Usage vs Estime", "contenu": "<strong>Usage</strong> = utilité pratique. <strong>Estime</strong> = subjectif (design, marque)."},
+            {"titre": "4. Évolution", "contenu": "Les besoins évoluent avec la société et la technologie."}
         ]
     },
     "quizComprehension": [
-        {"id": "q1", "question": "Bête à cornes = identifier besoin.", "options": [{"texte": "Vrai", "correct": true}, {"texte": "Faux", "correct": false}, {"texte": "Partiellement", "correct": false}, {"texte": "Impossible", "correct": false}]},
-        {"id": "q2", "question": "Estime = utilité pratique.", "options": [{"texte": "Vrai", "correct": false}, {"texte": "Faux, c'est usage", "correct": true}, {"texte": "Vrai parfois", "correct": false}, {"texte": "Faux", "correct": false}]},
-        {"id": "q3", "question": "Besoin peut évoluer.", "options": [{"texte": "Vrai", "correct": true}, {"texte": "Faux", "correct": false}, {"texte": "Anciens", "correct": false}, {"texte": "Informatique", "correct": false}]},
+        {"id": "q1", "question": "La Bête à cornes sert à identifier le besoin.", "options": [{"texte": "Vrai", "correct": true}, {"texte": "Faux", "correct": false}, {"texte": "Partiellement", "correct": false}, {"texte": "Impossible", "correct": false}]},
+        {"id": "q2", "question": "La valeur d'estime = utilité pratique.", "options": [{"texte": "Vrai", "correct": false}, {"texte": "Faux, c'est l'usage", "correct": true}, {"texte": "Vrai parfois", "correct": false}, {"texte": "Faux", "correct": false}]},
+        {"id": "q3", "question": "Un besoin peut évoluer.", "options": [{"texte": "Vrai", "correct": true}, {"texte": "Faux", "correct": false}, {"texte": "Seulement anciens", "correct": false}, {"texte": "Uniquement informatique", "correct": false}]},
         {"id": "q4", "question": "Bête à cornes = 3 ovales.", "options": [{"texte": "Vrai", "correct": true}, {"texte": "Faux, 4", "correct": false}, {"texte": "Faux, 2", "correct": false}, {"texte": "Faux", "correct": false}]},
-        {"id": "q5", "question": "Usage = goûts personnels.", "options": [{"texte": "Faux, c'est estime", "correct": true}, {"texte": "Vrai", "correct": false}, {"texte": "Vrai vêtements", "correct": false}, {"texte": "Impossible", "correct": false}]}
+        {"id": "q5", "question": "Valeur d'usage = goûts personnels.", "options": [{"texte": "Faux, c'est l'estime", "correct": true}, {"texte": "Vrai", "correct": false}, {"texte": "Vrai vêtements", "correct": false}, {"texte": "Impossible", "correct": false}]}
     ],
     "evaluation": [
         {
-            "id": "ex1",
-            "type": "tableau-menu",
-            "niveau": "Facile",
-            "titre": "Exercice 1 - Identifier le besoin (5 pts)",
+            "id": "ex1", "type": "tableau-menu", "niveau": "Facile",
+            "titre": "Ex1 - Identifier le besoin (3 pts)",
             "enonce": "Choisis le besoin auquel répond chaque produit.",
             "questions": [
-                {"id": "ex1q1", "enonce": "Calculatrice.", "options": [{"texte": "Calculer", "correct": true}, {"texte": "Déplacer", "correct": false}, {"texte": "Communiquer", "correct": false}, {"texte": "Divertir", "correct": false}, {"texte": "Nourrir", "correct": false}], "pts": 1},
-                {"id": "ex1q2", "enonce": "Réfrigérateur.", "options": [{"texte": "Conserver", "correct": true}, {"texte": "Éclairer", "correct": false}, {"texte": "Chauffer", "correct": false}, {"texte": "Divertir", "correct": false}, {"texte": "Communiquer", "correct": false}], "pts": 1},
-                {"id": "ex1q3", "enonce": "Baskets.", "options": [{"texte": "Protéger", "correct": true}, {"texte": "Parer", "correct": false}, {"texte": "Nourrir", "correct": false}, {"texte": "Loger", "correct": false}, {"texte": "Communiquer", "correct": false}], "pts": 1},
-                {"id": "ex1q4", "enonce": "Bancs parc.", "options": [{"texte": "Reposer", "correct": true}, {"texte": "Déplacer", "correct": false}, {"texte": "Chauffer", "correct": false}, {"texte": "Nourrir", "correct": false}, {"texte": "Éclairer", "correct": false}], "pts": 1},
-                {"id": "ex1q5", "enonce": "Casque vélo.", "options": [{"texte": "Protéger", "correct": true}, {"texte": "Déplacer", "correct": false}, {"texte": "Communiquer", "correct": false}, {"texte": "Divertir", "correct": false}, {"texte": "Loger", "correct": false}], "pts": 1}
+                {"id": "ex1q1", "enonce": "Calculatrice.", "options": [{"texte": "Calculer", "correct": true}, {"texte": "Déplacer", "correct": false}, {"texte": "Communiquer", "correct": false}, {"texte": "Divertir", "correct": false}, {"texte": "Nourrir", "correct": false}], "pts": 0.6},
+                {"id": "ex1q2", "enonce": "Réfrigérateur.", "options": [{"texte": "Conserver", "correct": true}, {"texte": "Éclairer", "correct": false}, {"texte": "Chauffer", "correct": false}, {"texte": "Divertir", "correct": false}, {"texte": "Communiquer", "correct": false}], "pts": 0.6},
+                {"id": "ex1q3", "enonce": "Baskets.", "options": [{"texte": "Protéger", "correct": true}, {"texte": "Parer", "correct": false}, {"texte": "Nourrir", "correct": false}, {"texte": "Loger", "correct": false}, {"texte": "Communiquer", "correct": false}], "pts": 0.6},
+                {"id": "ex1q4", "enonce": "Bancs parc.", "options": [{"texte": "Reposer", "correct": true}, {"texte": "Déplacer", "correct": false}, {"texte": "Chauffer", "correct": false}, {"texte": "Nourrir", "correct": false}, {"texte": "Éclairer", "correct": false}], "pts": 0.6},
+                {"id": "ex1q5", "enonce": "Casque vélo.", "options": [{"texte": "Protéger", "correct": true}, {"texte": "Déplacer", "correct": false}, {"texte": "Communiquer", "correct": false}, {"texte": "Divertir", "correct": false}, {"texte": "Loger", "correct": false}], "pts": 0.6}
             ]
         },
         {
-            "id": "ex2",
-            "type": "choix-multiple",
-            "niveau": "Facile",
-            "titre": "Exercice 2 - Caractéristiques besoin (3 pts)",
+            "id": "ex2", "type": "choix-multiple", "niveau": "Facile",
+            "titre": "Ex2 - Caractéristiques besoin (3 pts)",
             "enonce": "Coche TOUTES les affirmations correctes.",
             "options": [
                 {"texte": "Besoin = privation ressentie", "correct": true, "pts": 1},
@@ -46,19 +42,15 @@
             ]
         },
         {
-            "id": "ex3",
-            "type": "valeur-numerique",
-            "niveau": "Moyen",
-            "titre": "Exercice 3 - Bête à cornes (2 pts)",
+            "id": "ex3", "type": "valeur-numerique", "niveau": "Moyen",
+            "titre": "Ex3 - Bête à cornes (2 pts)",
             "enonce": "Combien d'ovales dans la Bête à cornes ?",
             "bonnesReponses": ["3"],
             "pts": 2
         },
         {
-            "id": "ex4",
-            "type": "reponse-saisie",
-            "niveau": "Moyen",
-            "titre": "Exercice 4 - Définition besoin (2 pts)",
+            "id": "ex4", "type": "reponse-saisie", "niveau": "Moyen",
+            "titre": "Ex4 - Définition besoin (2 pts)",
             "enonce": "Complète : Un besoin est le sentiment d'une _______ ou d'une insuffisance.",
             "bonnesReponses": ["privation"],
             "ignorerCasse": true,
@@ -66,117 +58,96 @@
             "pts": 2
         },
         {
-            "id": "ex5",
-            "type": "association",
-            "niveau": "Moyen",
-            "titre": "Exercice 5 - Associations (4 pts)",
+            "id": "ex5", "type": "association", "niveau": "Moyen",
+            "titre": "Ex5 - Associations (3 pts)",
             "enonce": "Associe chaque concept à sa définition.",
             "associations": [
                 {"terme": "Bête à cornes", "definition": "Diagramme 3 ovales", "pts": 1},
                 {"terme": "Valeur d'usage", "definition": "Utilité pratique", "pts": 1},
-                {"terme": "Valeur d'estime", "definition": "Subjectif", "pts": 1},
-                {"terme": "Besoin", "definition": "Privation", "pts": 1}
+                {"terme": "Valeur d'estime", "definition": "Subjectif", "pts": 1}
             ]
         },
         {
-            "id": "ex6",
-            "type": "texte-trous-libre",
-            "niveau": "Moyen",
-            "titre": "Exercice 6 - Texte à trous libre (3 pts)",
+            "id": "ex6", "type": "texte-trous-libre", "niveau": "Moyen",
+            "titre": "Ex6 - Texte à trous libre (2 pts)",
             "enonce": "Complète en saisissant les mots.",
-            "texte": "Bête à cornes : À {{qui}} rend-il service ? Sur {{quoi}} agit-il ? Dans quel {{but}} ?",
+            "texte": "Bête à cornes : À {{}} rend-il service ? Sur {{}} agit-il ?",
             "trous": [
-                {"placeholder": "qui", "bonnesReponses": ["qui"], "pts": 1},
-                {"placeholder": "quoi", "bonnesReponses": ["quoi"], "pts": 1},
-                {"placeholder": "but", "bonnesReponses": ["but"], "pts": 1}
+                {"bonnesReponses": ["qui"], "pts": 1},
+                {"bonnesReponses": ["quoi"], "pts": 1}
             ]
         },
         {
-            "id": "ex7",
-            "type": "texte-trous-liste-unique",
-            "niveau": "Moyen",
-            "titre": "Exercice 7 - Texte à trous liste unique (3 pts)",
+            "id": "ex7", "type": "texte-trous-liste-unique", "niveau": "Moyen",
+            "titre": "Ex7 - Texte à trous liste unique (2 pts)",
             "enonce": "Complète avec la liste commune.",
-            "texte": "Tableur : données dans des {{cellules}} par {{colonne}} et {{numéro}}.",
-            "listeCommune": ["cellules", "colonne", "numéro", "ligne", "formule"],
+            "texte": "Tableur : données dans des {{}} par {{}}.",
+            "listeCommune": ["cellules", "colonne", "ligne", "formule"],
             "trous": [
-                {"placeholder": "cellules", "bonneReponse": "cellules", "pts": 1},
-                {"placeholder": "colonne", "bonneReponse": "colonne", "pts": 1},
-                {"placeholder": "numéro", "bonneReponse": "numéro", "pts": 1}
+                {"bonneReponse": "cellules", "pts": 1},
+                {"bonneReponse": "colonne", "pts": 1}
             ]
         },
         {
-            "id": "ex8",
-            "type": "texte-trous-liste-variable",
-            "niveau": "Avancé",
-            "titre": "Exercice 8 - Texte à trous liste variable (3 pts)",
+            "id": "ex8", "type": "texte-trous-liste-variable", "niveau": "Avancé",
+            "titre": "Ex8 - Texte à trous liste variable (2 pts)",
             "enonce": "Complète avec liste spécifique.",
-            "texte": "Valeur d'{{usage}} = utilité, valeur d'{{estime}} = design.",
+            "texte": "Valeur d'{{}} = utilité, valeur d'{{}} = design.",
             "trous": [
-                {"placeholder": "usage", "liste": ["usage", "estime", "besoin", "produit"], "bonneReponse": "usage", "pts": 1},
-                {"placeholder": "estime", "liste": ["usage", "estime", "besoin", "produit"], "bonneReponse": "estime", "pts": 1}
+                {"liste": ["usage", "estime", "besoin"], "bonneReponse": "usage", "pts": 1},
+                {"liste": ["usage", "estime", "besoin"], "bonneReponse": "estime", "pts": 1}
             ]
         },
         {
-            "id": "ex9",
-            "type": "choix-unique",
-            "niveau": "Facile",
-            "titre": "Exercice 9 - QCM besoin (2 pts)",
+            "id": "ex9", "type": "choix-unique", "niveau": "Facile",
+            "titre": "Ex9 - QCM besoin (3 pts)",
             "enonce": "Qu'est-ce qu'un besoin technique ?",
             "options": [
-                {"texte": "Privation ressentie", "correct": true, "pts": 2},
+                {"texte": "Privation ressentie", "correct": true, "pts": 3},
                 {"texte": "Objet obligatoire", "correct": false, "pts": 0},
                 {"texte": "Marque", "correct": false, "pts": 0},
                 {"texte": "Prix élevé", "correct": false, "pts": 0}
             ]
         },
         {
-            "id": "ex10",
-            "type": "tableau-menu",
-            "niveau": "Facile",
-            "titre": "Exercice 10 - À qui ? (5 pts)",
+            "id": "ex10", "type": "tableau-menu", "niveau": "Facile",
+            "titre": "Ex10 - À qui ? (3 pts)",
             "enonce": "À qui rend service chaque produit ?",
             "questions": [
-                {"id": "ex10q1", "enonce": "Tableau interactif.", "options": [{"texte": "Enseignant/élèves", "correct": true}, {"texte": "Principal", "correct": false}, {"texte": "Parents", "correct": false}, {"texte": "Gardien", "correct": false}, {"texte": "Fournisseurs", "correct": false}], "pts": 1},
-                {"id": "ex10q2", "enonce": "Tondeuse.", "options": [{"texte": "Jardinier", "correct": true}, {"texte": "Boulanger", "correct": false}, {"texte": "Médecin", "correct": false}, {"texte": "Chauffeur", "correct": false}, {"texte": "Pilote", "correct": false}], "pts": 1},
-                {"id": "ex10q3", "enonce": "Fauteuil roulant.", "options": [{"texte": "PMR", "correct": true}, {"texte": "Sportif", "correct": false}, {"texte": "Cuisinier", "correct": false}, {"texte": "Astronaute", "correct": false}, {"texte": "Plongeur", "correct": false}], "pts": 1},
-                {"id": "ex10q4", "enonce": "Distributeur.", "options": [{"texte": "Clients banque", "correct": true}, {"texte": "Agriculteurs", "correct": false}, {"texte": "Pompiers", "correct": false}, {"texte": "Profs musique", "correct": false}, {"texte": "Architectes", "correct": false}], "pts": 1},
-                {"id": "ex10q5", "enonce": "App traduction.", "options": [{"texte": "Voyageurs", "correct": true}, {"texte": "Pêcheurs", "correct": false}, {"texte": "Maçons", "correct": false}, {"texte": "Boulangers", "correct": false}, {"texte": "Coiffeurs", "correct": false}], "pts": 1}
+                {"id": "ex10q1", "enonce": "Tableau interactif.", "options": [{"texte": "Enseignant/élèves", "correct": true}, {"texte": "Principal", "correct": false}, {"texte": "Parents", "correct": false}, {"texte": "Gardien", "correct": false}, {"texte": "Fournisseurs", "correct": false}], "pts": 0.6},
+                {"id": "ex10q2", "enonce": "Tondeuse.", "options": [{"texte": "Jardinier", "correct": true}, {"texte": "Boulanger", "correct": false}, {"texte": "Médecin", "correct": false}, {"texte": "Chauffeur", "correct": false}, {"texte": "Pilote", "correct": false}], "pts": 0.6},
+                {"id": "ex10q3", "enonce": "Fauteuil roulant.", "options": [{"texte": "PMR", "correct": true}, {"texte": "Sportif", "correct": false}, {"texte": "Cuisinier", "correct": false}, {"texte": "Astronaute", "correct": false}, {"texte": "Plongeur", "correct": false}], "pts": 0.6},
+                {"id": "ex10q4", "enonce": "Distributeur.", "options": [{"texte": "Clients banque", "correct": true}, {"texte": "Agriculteurs", "correct": false}, {"texte": "Pompiers", "correct": false}, {"texte": "Profs musique", "correct": false}, {"texte": "Architectes", "correct": false}], "pts": 0.6},
+                {"id": "ex10q5", "enonce": "App traduction.", "options": [{"texte": "Voyageurs", "correct": true}, {"texte": "Pêcheurs", "correct": false}, {"texte": "Maçons", "correct": false}, {"texte": "Boulangers", "correct": false}, {"texte": "Coiffeurs", "correct": false}], "pts": 0.6}
             ]
         },
         {
-            "id": "ex11",
-            "type": "tableau-menu",
-            "niveau": "Moyen",
-            "titre": "Exercice 11 - Sur quoi ? (5 pts)",
+            "id": "ex11", "type": "tableau-menu", "niveau": "Moyen",
+            "titre": "Ex11 - Sur quoi ? (3 pts)",
             "enonce": "Sur quoi agit chaque produit ?",
             "questions": [
-                {"id": "ex11q1", "enonce": "Voiture.", "options": [{"texte": "Déplacement", "correct": true}, {"texte": "Décoration", "correct": false}, {"texte": "Météo", "correct": false}, {"texte": "Routes", "correct": false}, {"texte": "Passagers", "correct": false}], "pts": 1},
-                {"id": "ex11q2", "enonce": "Aspirateur.", "options": [{"texte": "Propreté", "correct": true}, {"texte": "Éclairage", "correct": false}, {"texte": "Température", "correct": false}, {"texte": "Murs", "correct": false}, {"texte": "Bruit", "correct": false}], "pts": 1},
-                {"id": "ex11q3", "enonce": "Parapluie.", "options": [{"texte": "Pluie", "correct": true}, {"texte": "Température", "correct": false}, {"texte": "Vent", "correct": false}, {"texte": "Marche", "correct": false}, {"texte": "Vêtements", "correct": false}], "pts": 1},
-                {"id": "ex11q4", "enonce": "Lampe.", "options": [{"texte": "Éclairage", "correct": true}, {"texte": "Chauffage", "correct": false}, {"texte": "Décoration", "correct": false}, {"texte": "Lecture", "correct": false}, {"texte": "Son", "correct": false}], "pts": 1},
-                {"id": "ex11q5", "enonce": "Casque.", "options": [{"texte": "Écoute", "correct": true}, {"texte": "Téléphone", "correct": false}, {"texte": "Protection", "correct": false}, {"texte": "Décoration", "correct": false}, {"texte": "Concentration", "correct": false}], "pts": 1}
+                {"id": "ex11q1", "enonce": "Voiture.", "options": [{"texte": "Déplacement", "correct": true}, {"texte": "Décoration", "correct": false}, {"texte": "Météo", "correct": false}, {"texte": "Routes", "correct": false}, {"texte": "Passagers", "correct": false}], "pts": 0.6},
+                {"id": "ex11q2", "enonce": "Aspirateur.", "options": [{"texte": "Propreté", "correct": true}, {"texte": "Éclairage", "correct": false}, {"texte": "Température", "correct": false}, {"texte": "Murs", "correct": false}, {"texte": "Bruit", "correct": false}], "pts": 0.6},
+                {"id": "ex11q3", "enonce": "Parapluie.", "options": [{"texte": "Pluie", "correct": true}, {"texte": "Température", "correct": false}, {"texte": "Vent", "correct": false}, {"texte": "Marche", "correct": false}, {"texte": "Vêtements", "correct": false}], "pts": 0.6},
+                {"id": "ex11q4", "enonce": "Lampe.", "options": [{"texte": "Éclairage", "correct": true}, {"texte": "Chauffage", "correct": false}, {"texte": "Décoration", "correct": false}, {"texte": "Lecture", "correct": false}, {"texte": "Son", "correct": false}], "pts": 0.6},
+                {"id": "ex11q5", "enonce": "Casque.", "options": [{"texte": "Écoute", "correct": true}, {"texte": "Téléphone", "correct": false}, {"texte": "Protection", "correct": false}, {"texte": "Décoration", "correct": false}, {"texte": "Concentration", "correct": false}], "pts": 0.6}
             ]
         },
         {
-            "id": "ex12",
-            "type": "tableau-menu",
-            "niveau": "Moyen",
-            "titre": "Exercice 12 - Usage/Estime (5 pts)",
+            "id": "ex12", "type": "tableau-menu", "niveau": "Moyen",
+            "titre": "Ex12 - Usage/Estime (3 pts)",
             "enonce": "Usage ou Estime ?",
             "questions": [
-                {"id": "ex12q1", "enonce": "Freinage.", "options": [{"texte": "Usage", "correct": true}, {"texte": "Estime", "correct": false}, {"texte": "Ni l'un", "correct": false}, {"texte": "Les deux", "correct": false}, {"texte": "Impossible", "correct": false}], "pts": 1},
-                {"id": "ex12q2", "enonce": "Couleur.", "options": [{"texte": "Estime", "correct": true}, {"texte": "Usage", "correct": false}, {"texte": "Ni l'un", "correct": false}, {"texte": "Les deux", "correct": false}, {"texte": "Impossible", "correct": false}], "pts": 1},
-                {"id": "ex12q3", "enonce": "Marque.", "options": [{"texte": "Estime", "correct": true}, {"texte": "Usage", "correct": false}, {"texte": "Ni l'un", "correct": false}, {"texte": "Les deux", "correct": false}, {"texte": "Impossible", "correct": false}], "pts": 1},
-                {"id": "ex12q4", "enonce": "Autonomie.", "options": [{"texte": "Usage", "correct": true}, {"texte": "Estime", "correct": false}, {"texte": "Ni l'un", "correct": false}, {"texte": "Les deux", "correct": false}, {"texte": "Impossible", "correct": false}], "pts": 1},
-                {"id": "ex12q5", "enonce": "Design.", "options": [{"texte": "Estime", "correct": true}, {"texte": "Usage", "correct": false}, {"texte": "Ni l'un", "correct": false}, {"texte": "Les deux", "correct": false}, {"texte": "Impossible", "correct": false}], "pts": 1}
+                {"id": "ex12q1", "enonce": "Freinage.", "options": [{"texte": "Usage", "correct": true}, {"texte": "Estime", "correct": false}, {"texte": "Ni l'un", "correct": false}, {"texte": "Les deux", "correct": false}, {"texte": "Impossible", "correct": false}], "pts": 0.6},
+                {"id": "ex12q2", "enonce": "Couleur.", "options": [{"texte": "Estime", "correct": true}, {"texte": "Usage", "correct": false}, {"texte": "Ni l'un", "correct": false}, {"texte": "Les deux", "correct": false}, {"texte": "Impossible", "correct": false}], "pts": 0.6},
+                {"id": "ex12q3", "enonce": "Marque.", "options": [{"texte": "Estime", "correct": true}, {"texte": "Usage", "correct": false}, {"texte": "Ni l'un", "correct": false}, {"texte": "Les deux", "correct": false}, {"texte": "Impossible", "correct": false}], "pts": 0.6},
+                {"id": "ex12q4", "enonce": "Autonomie.", "options": [{"texte": "Usage", "correct": true}, {"texte": "Estime", "correct": false}, {"texte": "Ni l'un", "correct": false}, {"texte": "Les deux", "correct": false}, {"texte": "Impossible", "correct": false}], "pts": 0.6},
+                {"id": "ex12q5", "enonce": "Design.", "options": [{"texte": "Estime", "correct": true}, {"texte": "Usage", "correct": false}, {"texte": "Ni l'un", "correct": false}, {"texte": "Les deux", "correct": false}, {"texte": "Impossible", "correct": false}], "pts": 0.6}
             ]
         },
         {
-            "id": "ex13",
-            "type": "choix-multiple",
-            "niveau": "Avancé",
-            "titre": "Exercice 13 - Évolutions (3 pts)",
+            "id": "ex13", "type": "choix-multiple", "niveau": "Avancé",
+            "titre": "Ex13 - Évolutions (3 pts)",
             "enonce": "Coche TOUTES les évolutions correctes.",
             "options": [
                 {"texte": "Téléphone : mobilité", "correct": true, "pts": 1},
@@ -187,28 +158,28 @@
             ]
         },
         {
-            "id": "ex14",
-            "type": "reponse-saisie",
-            "niveau": "Avancé",
-            "titre": "Exercice 14 - Outil analyse (2 pts)",
+            "id": "ex14", "type": "reponse-saisie", "niveau": "Avancé",
+            "titre": "Ex14 - Outil analyse (1 pt)",
             "enonce": "Quel outil graphique identifie le besoin ? (2 mots)",
             "bonnesReponses": ["bête à cornes", "bete a cornes"],
             "ignorerCasse": true,
             "ignorerAccents": true,
-            "pts": 2
+            "pts": 1
         },
         {
-            "id": "ex15",
-            "type": "tableau-menu",
-            "niveau": "Avancé",
-            "titre": "Exercice 15 - Vidéoprojecteur (5 pts)",
-            "enonce": "Analyse complète.",
+            "id": "ex15", "type": "tableau-menu", "niveau": "Avancé",
+            "titre": "Ex15 - Vidéoprojecteur (5 pts)",
+            "enonce": "Analyse complète d'un vidéoprojecteur interactif.",
             "questions": [
                 {"id": "ex15q1", "enonce": "Besoin ?", "options": [{"texte": "Pédagogie", "correct": true}, {"texte": "Remplacer profs", "correct": false}, {"texte": "Divertir", "correct": false}, {"texte": "Décorer", "correct": false}, {"texte": "Réduire cours", "correct": false}], "pts": 1},
                 {"id": "ex15q2", "enonce": "À qui ?", "options": [{"texte": "Enseignants/élèves", "correct": true}, {"texte": "Entretien", "correct": false}, {"texte": "Parents", "correct": false}, {"texte": "Fournisseurs", "correct": false}, {"texte": "Mairie", "correct": false}], "pts": 1},
                 {"id": "ex15q3", "enonce": "Sur quoi ?", "options": [{"texte": "Présentation", "correct": true}, {"texte": "Murs", "correct": false}, {"texte": "Chauffage", "correct": false}, {"texte": "Éclairage", "correct": false}, {"texte": "Fenêtres", "correct": false}], "pts": 1},
                 {"id": "ex15q4", "enonce": "Usage ?", "options": [{"texte": "Projection", "correct": true}, {"texte": "Couleur", "correct": false}, {"texte": "Marque", "correct": false}, {"texte": "Design", "correct": false}, {"texte": "Prix", "correct": false}], "pts": 1},
-                {"id": "ex15q5", "enonce": "Évolution ?", "options": [{"texte": "Connecté", "correct": true}, {"texte": "Tableau noir", "correct": false}, {"texte": "Suppression", "correct": false}, {"texte": "Taille", "correct": false}, {"texte": "Disparition", "correct": false}], "pts": 1}
+                {"id": "ex15q5", "enonce": "Évolution ?", "options": [{"texte": "Connecté", "correct": true}, {"texte": "Tableau noir", "correct": false}, {"texte": "Suppression", "correct": false}, {"texte": "Taille", "correct": false}, {"texte": "Disparition", "correct": false}], "pts": 1},
+                {"id": "ex15q6", "enonce": "Valeur d'estime ?", "options": [{"texte": "Design moderne", "correct": true}, {"texte": "Résolution", "correct": false}, {"texte": "Luminosité", "correct": false}, {"texte": "Connectivité", "correct": false}, {"texte": "Taille projection", "correct": false}], "pts": 1},
+                {"id": "ex15q7", "enonce": "Utilisateur principal ?", "options": [{"texte": "Enseignant", "correct": true}, {"texte": "Élève", "correct": false}, {"texte": "Principal", "correct": false}, {"texte": "Parent", "correct": false}, {"texte": "Technicien", "correct": false}], "pts": 1},
+                {"id": "ex15q8", "enonce": "Fonction principale ?", "options": [{"texte": "Projeter interactif", "correct": true}, {"texte": "Imprimer", "correct": false}, {"texte": "Scanner", "correct": false}, {"texte": "Photocopier", "correct": false}, {"texte": "Télécharger", "correct": false}], "pts": 1},
+                {"id": "ex15q9", "enonce": "Avantage principal ?", "options": [{"texte": "Interactivité", "correct": true}, {"texte": "Prix bas", "correct": false}, {"texte": "Légèreté", "correct": false}, {"texte": "Couleur", "correct": false}, {"texte": "Marque", "correct": false}], "pts": 1}
             ]
         }
     ]
