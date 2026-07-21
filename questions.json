@@ -1,321 +1,157 @@
 {
-  "titreGeneral": "Technologie 3ème • Exprimer et analyser le besoin (Questions Mélangées)",
-  "cours": {
-    "titre": "Synthèse du cours : Exprimer et analyser le besoin",
-    "sections": [
-      {
-        "sousTitre": "1. Qu'est-ce qu'un besoin ?",
-        "contenu": "Un <strong>besoin</strong> est une nécessité ou un désir éprouvé par un utilisateur. Un objet technique existe pour répondre à un besoin précis (se déplacer, s'informer, se loger)."
-      },
-      {
-        "sousTitre": "2. L'outil \"Bête à cornes\"",
-        "contenu": "Pour valider l'expression du besoin, on répond à 3 questions :<br>• <strong>À qui / À quoi rend-il service ?</strong> (L'utilisateur)<br>• <strong>Sur quoi agit-il ?</strong> (La matière, l'information ou l'élément modifié)<br>• <strong>Dans quel but ?</strong> (Le service rendu / La fonction principale)"
-      },
-      {
-        "sousTitre": "3. Usage vs Estime",
-        "contenu": "• <strong>Fonction d'usage :</strong> À quoi sert l'objet ? (Aspect pratique et factuel).<br>• <strong>Fonction d'estime :</strong> Pourquoi l'objet me plaît-il ? (Esthétique, style, marque, goût)."
-      },
-      {
-        "sousTitre": "4. Évolution et pérennité du besoin",
-        "contenu": "Le besoin évolue avec les innovations technologiques, les contraintes environnementales et les modes de vie (ex: passage des bouteilles plastiques jetables aux gourdes réutilisables)."
-      }
+    "titreGeneral": "Analyse du Besoin & Tableurs",
+    "cours": {
+        "introduction": "L'analyse du besoin est la première étape de tout projet technique. Elle permet d'identifier précisément ce que l'utilisateur attend d'un produit.",
+        "sections": [
+            {
+                "titre": "1. La notion de Besoin",
+                "contenu": "Un <strong>besoin</strong> est le sentiment d'une privation ou d'une insuffisance. En technologie, on cherche à identifier le besoin auquel un produit doit répondre. <br><em>Exemple : Besoin de se déplacer rapidement → création de la voiture.</em>"
+            },
+            {
+                "titre": "2. Le diagramme Bête à cornes",
+                "contenu": "La <strong>Bête à cornes</strong> est un outil graphique qui répond à la question : <em>« À qui le produit rend-il service ? Sur quoi agit-il ? Dans quel but ? »</em>. Il se compose de 3 ovales reliés au produit central."
+            },
+            {
+                "titre": "3. Usage vs Estime",
+                "contenu": "• <strong>Valeur d'usage</strong> : aptitude du produit à satisfaire le besoin (ex : une voiture roule).<br>• <strong>Valeur d'estime</strong> : caractéristiques subjectives qui plaisent (ex : couleur, marque, design)."
+            },
+            {
+                "titre": "4. Évolution des besoins et des objets",
+                "contenu": "Les besoins évoluent avec la société, la technologie et l'environnement. Les objets techniques doivent donc s'adapter : nouveaux matériaux, nouvelles fonctions, nouvelles formes."
+            },
+            {
+                "titre": "5. Les tableurs (Excel, LibreOffice Calc)",
+                "contenu": "Un <strong>tableur</strong> permet d'organiser des données dans des <strong>cellules</strong> identifiées par une lettre (colonne) et un chiffre (ligne).<br>• Formule : commence toujours par <code>=</code><br>• Exemples : <code>=SOMME(A1:A5)</code>, <code>=MOYENNE(B1:B4)</code>, <code>=SI(A1>10;\"Oui\";\"Non\")</code>"
+            }
+        ]
+    },
+    "quizComprehension": [
+        {
+            "id": "q1",
+            "question": "La Bête à cornes sert à identifier le besoin auquel répond un produit.",
+            "options": [
+                {"texte": "Vrai", "correct": true},
+                {"texte": "Faux", "correct": false},
+                {"texte": "Partiellement vrai seulement", "correct": false},
+                {"texte": "Impossible à dire", "correct": false}
+            ]
+        },
+        {
+            "id": "q2",
+            "question": "La valeur d'estime correspond à l'utilité pratique du produit.",
+            "options": [
+                {"texte": "Vrai", "correct": false},
+                {"texte": "Faux, c'est la valeur d'usage", "correct": true},
+                {"texte": "Vrai dans certains cas", "correct": false},
+                {"texte": "Faux, c'est la valeur d'usage", "correct": false}
+            ]
+        },
+        {
+            "id": "q3",
+            "question": "Dans un tableur, une formule commence toujours par le signe « = ».",
+            "options": [
+                {"texte": "Vrai", "correct": true},
+                {"texte": "Faux", "correct": false},
+                {"texte": "Vrai seulement pour les calculs", "correct": false},
+                {"texte": "Ça dépend du tableur", "correct": false}
+            ]
+        },
+        {
+            "id": "q4",
+            "question": "Un besoin technique peut évoluer au fil du temps.",
+            "options": [
+                {"texte": "Vrai", "correct": true},
+                {"texte": "Faux", "correct": false},
+                {"texte": "Seulement pour les objets anciens", "correct": false},
+                {"texte": "Vrai uniquement en informatique", "correct": false}
+            ]
+        },
+        {
+            "id": "q5",
+            "question": "La cellule B3 se trouve à l'intersection de la ligne B et de la colonne 3.",
+            "options": [
+                {"texte": "Vrai", "correct": false},
+                {"texte": "Faux, c'est colonne B et ligne 3", "correct": true},
+                {"texte": "Vrai dans Excel", "correct": false},
+                {"texte": "Faux, c'est ligne B et colonne 3", "correct": false}
+            ]
+        }
+    ],
+    "evaluation": [
+        {
+            "id": "ex1",
+            "type": "qcm",
+            "niveau": "Facile",
+            "titre": "Exercice 1 - QCM sur le besoin (4 pts)",
+            "enonce": "Parmi les affirmations suivantes, lesquelles sont correctes ? (plusieurs réponses possibles)",
+            "options": [
+                {"texte": "Le besoin est une privation ou une insuffisance ressentie", "correct": true, "pts": 1},
+                {"texte": "Le besoin est toujours matériel", "correct": false, "pts": 0},
+                {"texte": "L'analyse du besoin précède la conception du produit", "correct": true, "pts": 1},
+                {"texte": "Un besoin ne peut jamais évoluer", "correct": false, "pts": 0},
+                {"texte": "La Bête à cornes aide à formaliser le besoin", "correct": true, "pts": 2}
+            ]
+        },
+        {
+            "id": "ex2",
+            "type": "association",
+            "niveau": "Facile",
+            "titre": "Exercice 2 - Associer les concepts (6 pts)",
+            "enonce": "Associe chaque notion à sa définition correcte.",
+            "associations": [
+                {"terme": "Bête à cornes", "bonnesDefinitions": ["Diagramme à 3 ovales", "Identifie le besoin"], "mauvaises": ["Valeur subjective", "Formule de calcul"], "pts": 2},
+                {"terme": "Valeur d'usage", "bonnesDefinitions": ["Utilité pratique", "Fonction du produit"], "mauvaises": ["Design", "Marque"], "pts": 2},
+                {"terme": "Valeur d'estime", "bonnesDefinitions": ["Aspect subjectif", "Design / marque"], "mauvaises": ["Utilité technique", "Fonction principale"], "pts": 2}
+            ]
+        },
+        {
+            "id": "ex3",
+            "type": "redaction",
+            "niveau": "Moyen",
+            "titre": "Exercice 3 - Répondre à la Bête à cornes (10 pts)",
+            "enonce": "Pour un <strong>vélo électrique</strong>, complète les 3 questions de la Bête à cornes :",
+            "champs": [
+                {"label": "À qui le produit rend-il service ?", "motsCles": ["utilisateur", "cycliste", "personne", "conducteur"], "pts": 3},
+                {"label": "Sur quoi agit-il ?", "motsCles": ["déplacement", "distance", "terrain", "trajet"], "pts": 3},
+                {"label": "Dans quel but ?", "motsCles": ["se déplacer", "déplacer", "transport", "mobilité", "aller"], "pts": 4}
+            ]
+        },
+        {
+            "id": "ex4",
+            "type": "tableur",
+            "niveau": "Moyen",
+            "titre": "Exercice 4 - Formules tableur (10 pts)",
+            "enonce": "Observe le tableau ci-dessous. Écris la formule attendue dans chaque cellule.",
+            "grille": {
+                "entetes": ["", "A", "B", "C"],
+                "lignes": [
+                    ["1", "Note élève", "Coeff", "Résultat"],
+                    ["2", "15", "2", ""],
+                    ["3", "12", "3", ""],
+                    ["4", "Total", "", ""],
+                    ["5", "Moyenne", "", ""]
+                ]
+            },
+            "reponses": [
+                {"cellule": "C2", "motsCles": ["=A2*B2", "=15*2", "=30"], "pts": 2.5},
+                {"cellule": "C3", "motsCles": ["=A3*B3", "=12*3", "=36"], "pts": 2.5},
+                {"cellule": "A4", "motsCles": ["=SOMME(A2:A3)", "=A2+A3", "=27"], "pts": 2.5},
+                {"cellule": "A5", "motsCles": ["=MOYENNE(A2:A3)", "=A4/2", "=13.5"], "pts": 2.5}
+            ]
+        },
+        {
+            "id": "ex5",
+            "type": "redaction",
+            "niveau": "Avancé",
+            "titre": "Exercice 5 - Analyse complète (10 pts)",
+            "enonce": "Un collège souhaite équiper ses salles d'un <strong>vidéoprojecteur interactif</strong>. Rédige en 4 à 6 lignes une analyse complète comprenant :<br>• Le besoin identifié<br>• La valeur d'usage principale<br>• La valeur d'estime possible<br>• Une évolution possible de ce besoin",
+            "motsCles": [
+                "besoin", "enseignant", "élève", "cours", "pédagogie",
+                "usage", "projeter", "interactif", "tableau",
+                "estime", "design", "marque", "qualité", "prix",
+                "évolution", "numérique", "connecté", "wifi", "tablettes"
+            ],
+            "pts": 10
+        }
     ]
-  },
-  "quizComprehension": [
-    {
-      "id": "q1",
-      "question": "Un besoin est une nécessité ou un désir éprouvé par un utilisateur.",
-      "options": [
-        { "texte": "Vrai", "estCorrecte": true },
-        { "texte": "Faux", "estCorrecte": false },
-        { "texte": "Aucun", "estCorrecte": false },
-        { "texte": "Les deux", "estCorrecte": false }
-      ],
-      "explication": "C'est la définition exacte d'un besoin en technologie."
-    },
-    {
-      "id": "q2",
-      "question": "La fonction d'usage répond à la question 'Pourquoi l'objet me plaît-il ?'.",
-      "options": [
-        { "texte": "Vrai", "estCorrecte": false },
-        { "texte": "Faux", "estCorrecte": true },
-        { "texte": "Aucun", "estCorrecte": false },
-        { "texte": "Les deux", "estCorrecte": false }
-      ],
-      "explication": "La question du plaisir/esthétique concerne la fonction d'estime."
-    },
-    {
-      "id": "q3",
-      "question": "Dans la Bête à cornes, la question 'Sur quoi agit-il ?' désigne la matière ou l'élément transformé.",
-      "options": [
-        { "texte": "Vrai", "estCorrecte": true },
-        { "texte": "Faux", "estCorrecte": false },
-        { "texte": "Aucun", "estCorrecte": false },
-        { "texte": "Les deux", "estCorrecte": false }
-      ],
-      "explication": "Cette question demande la matière ou l'élément transformé/modifié par l'objet."
-    },
-    {
-      "id": "q4",
-      "question": "Un objet naturel (comme une pomme sur un arbre) est un objet technique.",
-      "options": [
-        { "texte": "Vrai", "estCorrecte": false },
-        { "texte": "Faux", "estCorrecte": true },
-        { "texte": "Aucun", "estCorrecte": false },
-        { "texte": "Les deux", "estCorrecte": false }
-      ],
-      "explication": "Un objet technique doit être conçu ou modifié par l'Homme."
-    },
-    {
-      "id": "q5",
-      "question": "Les contraintes écologiques peuvent faire évoluer le besoin d'un objet.",
-      "options": [
-        { "texte": "Vrai", "estCorrecte": true },
-        { "texte": "Faux", "estCorrecte": false },
-        { "texte": "Aucun", "estCorrecte": false },
-        { "texte": "Les deux", "estCorrecte": false }
-      ],
-      "explication": "Les nouvelles normes et la sensibilité écologique modifient nos attentes."
-    },
-    {
-      "id": "q6",
-      "question": "La couleur rouge et le logo d'une paire de baskets font partie de sa fonction d'usage.",
-      "options": [
-        { "texte": "Vrai", "estCorrecte": false },
-        { "texte": "Faux", "estCorrecte": true },
-        { "texte": "Aucun", "estCorrecte": false },
-        { "texte": "Les deux", "estCorrecte": false }
-      ],
-      "explication": "L'apparence et le logo relèvent de la fonction d'estime."
-    },
-    {
-      "id": "q7",
-      "question": "La Bête à cornes est l'outil graphique utilisé pour exprimer le besoin principal.",
-      "options": [
-        { "texte": "Vrai", "estCorrecte": true },
-        { "texte": "Faux", "estCorrecte": false },
-        { "texte": "Aucun", "estCorrecte": false },
-        { "texte": "Les deux", "estCorrecte": false }
-      ],
-      "explication": "La Bête à cornes exprime le besoin fondamental."
-    },
-    {
-      "id": "q8",
-      "question": "Si le besoin auquel répond un objet disparaît, l'objet devient obsolète.",
-      "options": [
-        { "texte": "Vrai", "estCorrecte": true },
-        { "texte": "Faux", "estCorrecte": false },
-        { "texte": "Aucun", "estCorrecte": false },
-        { "texte": "Les deux", "estCorrecte": false }
-      ],
-      "explication": "Sans besoin actif, un objet perd son utilité et devient obsolète."
-    }
-  ],
-  "evaluation": [
-    {
-      "id": "ex1",
-      "titre": "Exercice 1 : QCM de Vocabulaire et Définitions",
-      "niveau": "Facile",
-      "points": 5,
-      "type": "qcm_multiple",
-      "questions": [
-        {
-          "id": "ex1_1",
-          "texte": "La fonction d'usage d'un stylo est de déposer de l'encre sur du papier pour écrire.",
-          "options": [
-            { "texte": "Vrai", "estCorrecte": true },
-            { "texte": "Faux", "estCorrecte": false },
-            { "texte": "Aucun", "estCorrecte": false },
-            { "texte": "Les deux", "estCorrecte": false }
-          ],
-          "correction": "C'est exact, le stylo sert à écrire."
-        },
-        {
-          "id": "ex1_2",
-          "texte": "Avoir un cadran doré et un bracelet élégant sur une montre est une fonction d'estime.",
-          "options": [
-            { "texte": "Vrai", "estCorrecte": true },
-            { "texte": "Faux", "estCorrecte": false },
-            { "texte": "Aucun", "estCorrecte": false },
-            { "texte": "Les deux", "estCorrecte": false }
-          ],
-          "correction": "Le style et le design correspondent bien à la fonction d'estime."
-        },
-        {
-          "id": "ex1_3",
-          "texte": "Un besoin reste strictly identique et ne change jamais à travers les époques.",
-          "options": [
-            { "texte": "Vrai", "estCorrecte": false },
-            { "texte": "Faux", "estCorrecte": true },
-            { "texte": "Aucun", "estCorrecte": false },
-            { "texte": "Les deux", "estCorrecte": false }
-          ],
-          "correction": "Un besoin évolue selon les époques et les technologies."
-        },
-        {
-          "id": "ex1_4",
-          "texte": "Dans la Bête à cornes, 'À qui rend-il service ?' s'adresse au fabricant de l'objet.",
-          "options": [
-            { "texte": "Vrai", "estCorrecte": false },
-            { "texte": "Faux", "estCorrecte": true },
-            { "texte": "Aucun", "estCorrecte": false },
-            { "texte": "Les deux", "estCorrecte": false }
-          ],
-          "correction": "L'objet rend service à l'utilisateur / au client."
-        },
-        {
-          "id": "ex1_5",
-          "texte": "Un marteau en pierre préhistorique taillé par l'Homme est un objet technique.",
-          "options": [
-            { "texte": "Vrai", "estCorrecte": true },
-            { "texte": "Faux", "estCorrecte": false },
-            { "texte": "Aucun", "estCorrecte": false },
-            { "texte": "Les deux", "estCorrecte": false }
-          ],
-          "correction": "Tout objet façonné par l'Homme pour répondre à un besoin est un objet technique."
-        }
-      ]
-    },
-    {
-      "id": "ex2",
-      "titre": "Exercice 2 : Association et Classification",
-      "niveau": "Facile",
-      "points": 5,
-      "type": "association",
-      "pairs": [
-        { "id": "p1", "element": "VTT tout-suspendu", "choix": ["Objet technique", "Fonction d'usage", "Fonction d'estime", "Aucun", "Les deux"], "bonneReponse": "Objet technique", "pts": 1 },
-        { "id": "p2", "element": "Permettre de rouler sur des chemins escarpés", "choix": ["Objet technique", "Fonction d'usage", "Fonction d'estime", "Aucun", "Les deux"], "bonneReponse": "Fonction d'usage", "pts": 1 },
-        { "id": "p3", "element": "Peinture vert fluo et look sportif", "choix": ["Objet technique", "Fonction d'usage", "Fonction d'estime", "Aucun", "Les deux"], "bonneReponse": "Fonction d'estime", "pts": 1 },
-        { "id": "p4", "element": "Éléments modifiés par un lave-linge", "choix": ["Le linge sale", "L'utilisateur", "Le fabricant", "Aucun", "Les deux"], "bonneReponse": "Le linge sale", "pts": 1 },
-        { "id": "p5", "element": "Bête à cornes - Question du bas", "choix": ["Dans quel but ?", "À qui rend-il service ?", "Combien coûte-t-il ?", "Aucun", "Les deux"], "bonneReponse": "Dans quel but ?", "pts": 1 }
-      ]
-    },
-    {
-      "id": "ex3",
-      "titre": "Exercice 3 : Étude de cas - Le Casque Audio à Réduction de Bruit",
-      "niveau": "Moyen",
-      "points": 5,
-      "type": "champs_textes",
-      "questionsTextes": [
-        {
-          "cle": "casque_a",
-          "label": "À qui le casque audio rend-il service ?",
-          "motsCles": ["utilisateur", "auditeur", "personne", "client", "eleve"],
-          "reponseType": "À l'utilisateur / auditeur.",
-          "pts": 1
-        },
-        {
-          "cle": "casque_b",
-          "label": "Sur quoi agit-il directement ?",
-          "motsCles": ["son", "bruit", "oreille", "signal", "musique"],
-          "reponseType": "Sur les ondes sonores / le son perçu par les oreilles.",
-          "pts": 1
-        },
-        {
-          "cle": "casque_c",
-          "label": "Dans quel but existe-t-il ?",
-          "motsCles": ["ecouter", "musique", "isoler", "bruit", "reduire"],
-          "reponseType": "Permettre d'écouter du son en s'isolant des bruits extérieurs.",
-          "pts": 1
-        },
-        {
-          "cle": "casque_d",
-          "label": "Donne un exemple de fonction d'estime pour ce casque :",
-          "motsCles": ["couleur", "design", "marque", "coussinet", "cuir", "look"],
-          "reponseType": "Un fini noir mat, une marque prestigieuse, des coussinets en cuir.",
-          "pts": 1
-        },
-        {
-          "cle": "casque_e",
-          "label": "Pourquoi la technologie sans fil (Bluetooth) a-t-elle remplacé le câble jack ?",
-          "motsCles": ["liberte", "mouvement", "cable", "fil", "pratique", "smartphone"],
-          "reponseType": "Pour offrir une plus grande liberté de mouvement et s'adapter aux nouveaux smartphones.",
-          "pts": 1
-        }
-      ]
-    },
-    {
-      "id": "ex4",
-      "titre": "Exercice 4 : Analyse critique et Éco-conception (Gourde vs Bouteille plastique)",
-      "niveau": "Avancé",
-      "points": 5,
-      "type": "analyse_avancee",
-      "questionsLongues": [
-        {
-          "cle": "eco_1",
-          "label": "Quel problème environnemental a entraîné l'évolution du besoin vers la gourde réutilisable ?",
-          "motsCles": ["plastique", "pollution", "dechet", "ocean", "jetable", "environnement"],
-          "reponseType": "La pollution massive liée aux bouteilles en plastique à usage unique.",
-          "pts": 1.5
-        },
-        {
-          "cle": "eco_2",
-          "label": "Compare la fonction d'usage d'une gourde inox et d'une bouteille en plastique jetable :",
-          "motsCles": ["contenir", "eau", "liquide", "maintenir", "boire", "identique"],
-          "reponseType": "Leur fonction d'usage est identique : contenir et transporter un liquide pour s'hydrater.",
-          "pts": 1.5
-        },
-        {
-          "cle": "eco_3",
-          "label": "Explique pourquoi la gourde en inox est considérée comme plus pérenne et durable :",
-          "motsCles": ["reutilisable", "solide", "durable", "recyclable", "sans plastique", "annee"],
-          "reponseType": "Elle est réutilisable des milliers de fois, solide et évite les déchets plastiques.",
-          "pts": 2
-        }
-      ]
-    },
-    {
-      "id": "ex5",
-      "titre": "Exercice 5 : Tableur - Analyse 'Bête à cornes' de 3 Objets",
-      "niveau": "Moyen",
-      "points": 12,
-      "type": "tableur",
-      "consigne": "Saisis directement dans la grille du tableur l'analyse du besoin pour chaque objet :",
-      "colonnes": ["Objet Technique", "À qui rend-il service ?", "Sur quoi agit-il ?", "Dans quel but ?"],
-      "lignes": [
-        {
-          "id": "t1_l1",
-          "objet": "Sèche-cheveux",
-          "champs": [
-            { "cle": "t1_1_1", "motsCles": ["utilisateur", "coiffeur", "personne", "client"], "reponseType": "L'utilisateur / Le coiffeur", "pts": 1.33 },
-            { "cle": "t1_1_2", "motsCles": ["cheveu", "cheveux", "tete"], "reponseType": "Les cheveux (mouillés)", "pts": 1.33 },
-            { "cle": "t1_1_3", "motsCles": ["secher", "evaporer", "eau"], "reponseType": "Sécher les cheveux", "pts": 1.34 }
-          ]
-        },
-        {
-          "id": "t1_l2",
-          "objet": "Tondeuse à gazon",
-          "champs": [
-            { "cle": "t1_2_1", "motsCles": ["jardinier", "utilisateur", "proprietaire"], "reponseType": "Le jardinier / L'utilisateur", "pts": 1.33 },
-            { "cle": "t1_2_2", "motsCles": ["herbe", "gazon", "pelouse"], "reponseType": "L'herbe / La pelouse", "pts": 1.33 },
-            { "cle": "t1_2_3", "motsCles": ["couper", "tondre", "egaliser", "raccourcir"], "reponseType": "Couper / tondre la pelouse", "pts": 1.34 }
-          ]
-        },
-        {
-          "id": "t1_l3",
-          "objet": "Smartphone",
-          "champs": [
-            { "cle": "t1_3_1", "motsCles": ["utilisateur", "personne", "humain"], "reponseType": "L'utilisateur", "pts": 1.33 },
-            { "cle": "t1_3_2", "motsCles": ["information", "donnee", "appel", "message", "signal"], "reponseType": "L'information / Les données", "pts": 1.33 },
-            { "cle": "t1_3_3", "motsCles": ["communiquer", "informer", "appeler", "echanger"], "reponseType": "Communiquer à distance", "pts": 1.34 }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "ex6",
-      "titre": "Exercice 6 : Tableur - Classification Usage vs Estime (Trottinette)",
-      "niveau": "Moyen",
-      "points": 8,
-      "type": "tableur_classification",
-      "consigne": "Sélectionne dans chaque cellule du tableur le type de fonction :",
-      "colonnes": ["Caractéristique / Élément", "Type de Fonction"],
-      "lignes": [
-        { "id": "t2_l1", "element": "Moteur électrique de 350W pour se déplacer à 25 km/h", "bonneReponse": "Usage", "pts": 2 },
-        { "id": "t2_l2", "element": "Couleur noir mat avec bandes néon personnalisables", "bonneReponse": "Estime", "pts": 2 },
-        { "id": "t2_l3", "element": "Système de freinage à disque à l'arrière", "bonneReponse": "Usage", "pts": 2 },
-        { "id": "t2_l4", "element": "Logo rétroéclairé d'une marque réputée", "bonneReponse": "Estime", "pts": 2 }
-      ]
-    }
-  ]
 }
