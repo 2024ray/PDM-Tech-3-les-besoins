@@ -1,5 +1,5 @@
 {
-  "titreGeneral": "Technologie 3ème • Exprimer et analyser le besoin (Avec Tableurs)",
+  "titreGeneral": "Technologie 3ème • Exprimer et analyser le besoin (Programme Complet + Tableurs)",
   "cours": {
     "titre": "Synthèse du cours : Exprimer et analyser le besoin",
     "sections": [
@@ -17,7 +17,7 @@
       },
       {
         "sousTitre": "4. Évolution et pérennité du besoin",
-        "contenu": "Le besoin évolue avec les innovations technologiques, les contraintes environnementales et les modes de vie."
+        "contenu": "Le besoin évolue avec les innovations technologiques, les contraintes environnementales et les modes de vie (ex: passage des bouteilles plastiques jetables aux gourdes réutilisables)."
       }
     ]
   },
@@ -67,6 +67,35 @@
         { "texte": "Faux", "estCorrecte": false }
       ],
       "explication": "Les nouvelles normes et la sensibilité écologique modifient nos attentes."
+    },
+    {
+      "id": "q6",
+      "question": "6. La couleur rouge et le logo de marque d'une paire de baskets font partie de :",
+      "options": [
+        { "texte": "Sa fonction d'usage", "estCorrecte": false },
+        { "texte": "Sa fonction d'estime", "estCorrecte": true }
+      ],
+      "explication": "L'apparence et l'image de marque relèvent du goût et de l'estime."
+    },
+    {
+      "id": "q7",
+      "question": "7. Quel est l'outil graphique utilisé pour exprimer le besoin principal ?",
+      "options": [
+        { "texte": "Le diagramme Pieuvre", "estCorrecte": false },
+        { "texte": "La Bête à cornes", "estCorrecte": true },
+        { "texte": "L'algorithme de chaîne d'énergie", "estCorrecte": false }
+      ],
+      "explication": "La Bête à cornes exprime le besoin fondamental."
+    },
+    {
+      "id": "q8",
+      "question": "8. Si le besoin auquel répond un objet disparaît, l'objet devient :",
+      "options": [
+        { "texte": "Plus cher", "estCorrecte": false },
+        { "texte": "Obsolète", "estCorrecte": true },
+        { "texte": "Plus performant", "estCorrecte": false }
+      ],
+      "explication": "Sans besoin actif, un objet perd son utilité et devient obsolète."
     }
   ],
   "evaluation": [
@@ -74,7 +103,7 @@
       "id": "ex1",
       "titre": "Exercice 1 : QCM de Vocabulaire et Définitions",
       "niveau": "Facile",
-      "points": 3,
+      "points": 5,
       "type": "qcm_multiple",
       "questions": [
         {
@@ -82,7 +111,7 @@
           "texte": "1.1 Quelle est la fonction d'usage principale d'un stylo à bille ?",
           "options": [
             { "texte": "Décorer la trousse de l'élève", "estCorrecte": false },
-            { "texte": "Déposer de l'encre sur une feuille pour écrire", "estCorrecte": true },
+            { "texte": "Déposer de l'encre sur une feuille de papier pour écrire", "estCorrecte": true },
             { "texte": "Valoir cher pour impressionner les camarades", "estCorrecte": false }
           ],
           "correction": "Le stylo sert à écrire en déposant de l'encre."
@@ -99,60 +128,168 @@
         },
         {
           "id": "ex1_3",
-          "texte": "1.3 Un besoin est dit 'évolutif' s'il :",
+          "texte": "1.3 Un besoin est dit 'éphémère' ou 'évolutif' s'il :",
           "options": [
             { "texte": "Ne change jamais au cours du temps", "estCorrecte": false },
-            { "texte": "Modifie ses exigences selon les époques et technologies", "estCorrecte": true }
+            { "texte": "Modifie ses exigences selon les époques et les technologies", "estCorrecte": true },
+            { "texte": "Est interdit par la loi", "estCorrecte": false }
           ],
           "correction": "Un besoin évolue avec son époque."
+        },
+        {
+          "id": "ex1_4",
+          "texte": "1.4 Qui est le destinataire de la question 'À qui rend-il service ?' ?",
+          "options": [
+            { "texte": "Le fabricant de l'objet", "estCorrecte": false },
+            { "texte": "L'utilisateur / le client", "estCorrecte": true },
+            { "texte": "Le magasin de vente", "estCorrecte": false }
+          ],
+          "correction": "L'objet rend service à l'utilisateur."
+        },
+        {
+          "id": "ex1_5",
+          "texte": "1.5 Un marteau en pierre préhistorique est-il un objet technique ?",
+          "options": [
+            { "texte": "Oui, car il a été taillé et façonné par l'Homme", "estCorrecte": true },
+            { "texte": "Non, car il n'a pas de batterie ni d'électronique", "estCorrecte": false }
+          ],
+          "correction": "Tout objet modifié par l'Homme pour répondre à un besoin est un objet technique."
         }
       ]
     },
     {
       "id": "ex2",
-      "titre": "Exercice 2 : Tableur - Analyse 'Bête à cornes' de 3 Objets",
+      "titre": "Exercice 2 : Association et Classification",
+      "niveau": "Facile",
+      "points": 5,
+      "type": "association",
+      "pairs": [
+        { "id": "p1", "element": "VTT tout-suspendu", "choix": ["Objet technique", "Fonction d'usage", "Fonction d'estime"], "bonneReponse": "Objet technique", "pts": 1 },
+        { "id": "p2", "element": "Permettre de rouler sur des chemins escarpés", "choix": ["Objet technique", "Fonction d'usage", "Fonction d'estime"], "bonneReponse": "Fonction d'usage", "pts": 1 },
+        { "id": "p3", "element": "Peinture vert fluo et look sportif", "choix": ["Objet technique", "Fonction d'usage", "Fonction d'estime"], "bonneReponse": "Fonction d'estime", "pts": 1 },
+        { "id": "p4", "element": "Éléments modifiés par un lave-linge", "choix": ["Le linge sale", "L'utilisateur", "Le fabricant"], "bonneReponse": "Le linge sale", "pts": 1 },
+        { "id": "p5", "element": "Bête à cornes - Question du bas", "choix": ["Dans quel but ?", "À qui rend-il service ?", "Combien coûte-t-il ?"], "bonneReponse": "Dans quel but ?", "pts": 1 }
+      ]
+    },
+    {
+      "id": "ex3",
+      "titre": "Exercice 3 : Étude de cas - Le Casque Audio à Réduction de Bruit",
       "niveau": "Moyen",
-      "points": 9,
+      "points": 5,
+      "type": "champs_textes",
+      "questionsTextes": [
+        {
+          "cle": "casque_a",
+          "label": "3.1 À qui le casque audio rend-il service ?",
+          "motsCles": ["utilisateur", "auditeur", "personne", "client", "eleve"],
+          "reponseType": "À l'utilisateur / auditeur.",
+          "pts": 1
+        },
+        {
+          "cle": "casque_b",
+          "label": "3.2 Sur quoi agit-il directement ?",
+          "motsCles": ["son", "bruit", "oreille", "signal", "musique"],
+          "reponseType": "Sur les ondes sonores / le son perçu par les oreilles.",
+          "pts": 1
+        },
+        {
+          "cle": "casque_c",
+          "label": "3.3 Dans quel but existe-t-il ?",
+          "motsCles": ["ecouter", "musique", "isoler", "bruit", "reduire"],
+          "reponseType": "Permettre d'écouter du son en s'isolant des bruits extérieurs.",
+          "pts": 1
+        },
+        {
+          "cle": "casque_d",
+          "label": "3.4 Donne un exemple de fonction d'estime pour ce casque :",
+          "motsCles": ["couleur", "design", "marque", "coussinet", "cuir", "look"],
+          "reponseType": "Un fini noir mat, une marque prestigieuse, des coussinets en cuir.",
+          "pts": 1
+        },
+        {
+          "cle": "casque_e",
+          "label": "3.5 Pourquoi la technologie sans fil (Bluetooth) a-t-elle remplacé le câble jack ?",
+          "motsCles": ["liberte", "mouvement", "cable", "fil", "pratique", "smartphone"],
+          "reponseType": "Pour offrir une plus grande liberté de mouvement et s'adapter aux nouveaux smartphones.",
+          "pts": 1
+        }
+      ]
+    },
+    {
+      "id": "ex4",
+      "titre": "Exercice 4 : Analyse critique et Éco-conception (Gourde vs Bouteille plastique)",
+      "niveau": "Avancé",
+      "points": 5,
+      "type": "analyse_avancee",
+      "questionsLongues": [
+        {
+          "cle": "eco_1",
+          "label": "4.1 Quel problème environnemental a entraîné l'évolution du besoin vers la gourde réutilisable ?",
+          "motsCles": ["plastique", "pollution", "dechet", "ocean", "jetable", "environnement"],
+          "reponseType": "La pollution massive liée aux bouteilles en plastique à usage unique.",
+          "pts": 1.5
+        },
+        {
+          "cle": "eco_2",
+          "label": "4.2 Compare la fonction d'usage d'une gourde inox et d'une bouteille en plastique jetable :",
+          "motsCles": ["contenir", "eau", "liquide", "maintenir", "boire", "identique"],
+          "reponseType": "Leur fonction d'usage est identique : contenir et transporter un liquide pour s'hydrater.",
+          "pts": 1.5
+        },
+        {
+          "cle": "eco_3",
+          "label": "4.3 Explique pourquoi la gourde en inox est considérée comme plus pérenne et durable :",
+          "motsCles": ["reutilisable", "solide", "durable", "recyclable", "sans plastique", "annee"],
+          "reponseType": "Elle est réutilisable des milliers de fois, solide et évite les déchets plastiques.",
+          "pts": 2
+        }
+      ]
+    },
+    {
+      "id": "ex5",
+      "titre": "Exercice 5 : Tableur - Analyse 'Bête à cornes' de 3 Objets",
+      "niveau": "Moyen",
+      "points": 12,
       "type": "tableur",
-      "consigne": "Remplis ce tableau d'analyse du besoin pour chaque objet technique :",
+      "consigne": "Saisis directement dans la grille du tableur l'analyse du besoin pour chaque objet :",
       "colonnes": ["Objet Technique", "À qui rend-il service ?", "Sur quoi agit-il ?", "Dans quel but ?"],
       "lignes": [
         {
           "id": "t1_l1",
           "objet": "Sèche-cheveux",
           "champs": [
-            { "cle": "t1_1_1", "motsCles": ["utilisateur", "coiffeur", "personne", "client"], "reponseType": "L'utilisateur / Le coiffeur", "pts": 1 },
-            { "cle": "t1_1_2", "motsCles": ["cheveu", "cheveux", "tete"], "reponseType": "Les cheveux (mouillés)", "pts": 1 },
-            { "cle": "t1_1_3", "motsCles": ["secher", "evaporer", "eau"], "reponseType": "Sécher les cheveux", "pts": 1 }
+            { "cle": "t1_1_1", "motsCles": ["utilisateur", "coiffeur", "personne", "client"], "reponseType": "L'utilisateur / Le coiffeur", "pts": 1.33 },
+            { "cle": "t1_1_2", "motsCles": ["cheveu", "cheveux", "tete"], "reponseType": "Les cheveux (mouillés)", "pts": 1.33 },
+            { "cle": "t1_1_3", "motsCles": ["secher", "evaporer", "eau"], "reponseType": "Sécher les cheveux", "pts": 1.34 }
           ]
         },
         {
           "id": "t1_l2",
           "objet": "Tondeuse à gazon",
           "champs": [
-            { "cle": "t1_2_1", "motsCles": ["jardinier", "utilisateur", "proprietaire"], "reponseType": "Le jardinier / L'utilisateur", "pts": 1 },
-            { "cle": "t1_2_2", "motsCles": ["herbe", "gazon", "pelouse"], "reponseType": "L'herbe / La pelouse", "pts": 1 },
-            { "cle": "t1_2_3", "motsCles": ["couper", "tondre", "egaliser", "raccourcir"], "reponseType": "Couper / tondre la pelouse", "pts": 1 }
+            { "cle": "t1_2_1", "motsCles": ["jardinier", "utilisateur", "proprietaire"], "reponseType": "Le jardinier / L'utilisateur", "pts": 1.33 },
+            { "cle": "t1_2_2", "motsCles": ["herbe", "gazon", "pelouse"], "reponseType": "L'herbe / La pelouse", "pts": 1.33 },
+            { "cle": "t1_2_3", "motsCles": ["couper", "tondre", "egaliser", "raccourcir"], "reponseType": "Couper / tondre la pelouse", "pts": 1.34 }
           ]
         },
         {
           "id": "t1_l3",
           "objet": "Smartphone",
           "champs": [
-            { "cle": "t1_3_1", "motsCles": ["utilisateur", "personne", "humain"], "reponseType": "L'utilisateur", "pts": 1 },
-            { "cle": "t1_3_2", "motsCles": ["information", "donnee", "appel", "message", "signal"], "reponseType": "L'information / Les données", "pts": 1 },
-            { "cle": "t1_3_3", "motsCles": ["communiquer", "informer", "appeler", "echanger"], "reponseType": "Communiquer à distance", "pts": 1 }
+            { "cle": "t1_3_1", "motsCles": ["utilisateur", "personne", "humain"], "reponseType": "L'utilisateur", "pts": 1.33 },
+            { "cle": "t1_3_2", "motsCles": ["information", "donnee", "appel", "message", "signal"], "reponseType": "L'information / Les données", "pts": 1.33 },
+            { "cle": "t1_3_3", "motsCles": ["communiquer", "informer", "appeler", "echanger"], "reponseType": "Communiquer à distance", "pts": 1.34 }
           ]
         }
       ]
     },
     {
-      "id": "ex3",
-      "titre": "Exercice 3 : Tableur - Classification Usage vs Estime",
+      "id": "ex6",
+      "titre": "Exercice 6 : Tableur - Classification Usage vs Estime (Trottinette)",
       "niveau": "Moyen",
       "points": 8,
       "type": "tableur_classification",
-      "consigne": "Indique dans la grille du tableur le type de fonction (Usage ou Estime) pour chaque caractéristique d'une trottinette électrique :",
+      "consigne": "Sélectionne dans chaque cellule du tableur le type de fonction (Usage ou Estime) :",
       "colonnes": ["Caractéristique / Élément", "Type de Fonction (Usage ou Estime)"],
       "lignes": [
         { "id": "t2_l1", "element": "Moteur électrique de 350W pour se déplacer à 25 km/h", "bonneReponse": "Usage", "pts": 2 },
