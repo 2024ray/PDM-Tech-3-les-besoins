@@ -265,6 +265,21 @@ body {
 
 @media (max-width: 600px) {
     .app-header h1 { font-size: 1.4rem; }
+
+    .trou-input, .trou-select {
+    padding: 0.3rem 0.6rem;
+    border: 2px solid #3b82f6;
+    border-radius: 6px;
+    background: #fefce8;
+    font-size: 0.95rem;
+    margin: 0 0.3rem;
+    min-width: 100px;
+}
+.trou-input:focus, .trou-select:focus {
+    outline: none;
+    border-color: #8b5cf6;
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
+}
     .card { padding: 1.2rem; }
     .tableau-menu { font-size: 0.8rem; }
     .association-container { grid-template-columns: 1fr; }
