@@ -27,44 +27,65 @@
             <div id="cours-container" class="card-body space-y-sm"></div>
         </section>
 
-        <!-- PARTIE 2 : QUIZ DE COMPRÉHENSION -->
-        <section class="card">
-            <div class="card-header">
-                <span class="step-num bg-green">2</span>
-                <h2>Quiz de vérification rapide (Ordre Aléatoire)</h2>
-            </div>
-            <div class="card-body">
-                <form id="quiz-form" class="space-y-sm">
-                    <div id="quiz-container" class="space-y-sm"></div>
-                    <button type="button" id="btn-valider-quiz" class="btn btn-green">Vérifier le Quiz</button>
-                </form>
-                <div id="quiz-feedback" class="feedback-box hidden"></div>
-            </div>
-        </section>
+<!-- PARTIE 2 : QUIZ DE COMPRÉHENSION -->
+<section class="card">
+    <div class="card-header">
+        <span class="step-num bg-green">2</span>
+        <h2>Quiz de vérification rapide</h2>
+    </div>
+    <div class="card-body">
+        <div id="quiz-header-bar" class="exercise-header">
+            <div id="quiz-timer" class="timer-badge">⏱️ Temps restant : 60s</div>
+            <span id="quiz-step-info" class="tag bg-green">Question 1/8</span>
+        </div>
+        
+        <div class="progress-container">
+            <div id="quiz-progress-bar" class="progress-bar"></div>
+        </div>
 
-        <!-- PARTIE 3 : ÉVALUATION -->
-        <section class="card">
-            <div class="card-header">
-                <span class="step-num bg-purple">3</span>
-                <h2>Évaluation Progressive & Grilles Tableurs (40 pts)</h2>
+        <form id="quiz-form">
+            <div id="quiz-container"></div>
+            <div class="step-controls">
+                <div></div> <!-- Espaceur -->
+                <button type="button" id="btn-suivant-quiz" class="btn btn-green">Suivant ➔</button>
             </div>
-            <div class="card-body">
-                <form id="eval-form" class="space-y-md">
-                    <div id="eval-container" class="space-y-md"></div>
+        </form>
+        <div id="quiz-feedback" class="feedback-box hidden"></div>
+    </div>
+</section>
 
-                    <div class="action-bar">
-                        <button type="button" id="btn-soumettre-eval" class="btn btn-primary">Corriger mon évaluation</button>
-                    </div>
-                </form>
+<!-- PARTIE 3 : ÉVALUATION -->
+<section class="card">
+    <div class="card-header">
+        <span class="step-num bg-purple">3</span>
+        <h2>Évaluation Progressive & Grilles Tableurs (40 pts)</h2>
+    </div>
+    <div class="card-body">
+        <div id="eval-header-bar" class="exercise-header">
+            <div id="eval-timer" class="timer-badge">⏱️ Temps restant : 60s</div>
+            <span id="eval-step-info" class="tag bg-purple">Question 1/X</span>
+        </div>
 
-                <div id="eval-results" class="results-box hidden space-y-sm">
-                    <div class="score-banner">
-                        <h3>Note Finale : <span id="note-finale">0</span> / 40</h3>
-                    </div>
-                    <div id="eval-corrections-detail" class="space-y-sm"></div>
-                </div>
+        <div class="progress-container">
+            <div id="eval-progress-bar" class="progress-bar"></div>
+        </div>
+
+        <form id="eval-form">
+            <div id="eval-container"></div>
+            <div class="step-controls">
+                <div></div> <!-- Espaceur -->
+                <button type="button" id="btn-suivant-eval" class="btn btn-primary">Suivant ➔</button>
             </div>
-        </section>
+        </form>
+
+        <div id="eval-results" class="results-box hidden space-y-sm">
+            <div class="score-banner">
+                <h3>Note Finale : <span id="note-finale">0</span> / 40</h3>
+            </div>
+            <div id="eval-corrections-detail" class="space-y-sm"></div>
+        </div>
+    </div>
+</section>
 
     </main>
 
