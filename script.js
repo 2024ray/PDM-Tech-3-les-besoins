@@ -73,6 +73,33 @@ document.addEventListener("DOMContentLoaded", () => {
                     </div>
                 `).join("");
             } 
+            else if (ex.type === "association") {
+                contentHTML = ex.pairs.map(p => `
+                    <div style="margin-top:10px;">
+                        <label><strong>${p.element} :</strong></label>
+                        <select name="${p.id}" class="select-input">
+                            <option value="">-- Choisis une option --</option>
+                            ${p.choix.map(c => `<option value="${c}">${c}</option>`).join("")}
+                        </select>
+                    </div>
+                `).join("");
+            }
+            else if (ex.type === "champs_textes") {
+                contentHTML = ex.questionsTextes.map(q => `
+                    <div style="margin-top:10px;">
+                        <label><strong>${q.label}</strong></label>
+                        <input type="text" name="${q.cle}" class="input-text" placeholder="Rédige ta réponse...">
+                    </div>
+                `).join("");
+            }
+            else if (ex.type === "analyse_avancee") {
+                contentHTML = ex.questionsLongues.map(q => `
+                    <div style="margin-top:10px;">
+                        <label><strong>${q.label}</strong></label>
+                        <input type="text" name="${q.cle}" class="input-text" placeholder="Rédige ton explication...">
+                    </div>
+                `).join("");
+            }
             else if (ex.type === "tableur") {
                 const headersHTML = ex.colonnes.map(col => `<th>${col}</th>`).join("");
                 const rowsHTML = ex.lignes.map(l => `
@@ -176,6 +203,40 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                 });
             }
+            else if (ex.type === "association") {
+                ex.pairs.forEach(p => {
+                    const sel = document.querySelector(`select[name="${p.id}"]`);
+                    if (sel && sel.value === p.bonneReponse) {
+                        ptsEx += p.pts;
+                    } else {
+                        errs.push(`• <em>${p.element}</em> $\rightarrow$ Attendu : <strong>${p.bonneReponse}</strong>`);
+                    }
+                });
+            }
+            else if (ex.type === "champs_textes") {
+                ex.questionsTextes.forEach(q => {
+                    const input = document.querySelector(`input[name="${q.cle}"]`);
+                    const val = input ? input.value.toLowerCase().trim() : "";
+                    const ok = q.motsCles.some(m => val.includes(m));
+                    if (ok) {
+                        ptsEx += q.pts;
+                    } else {
+                        errs.push(`• <em>${q.label}</em> $\rightarrow$ Attendu : <strong>${q.reponseType}</strong>`);
+                    }
+                });
+            }
+            else if (ex.type === "analyse_avancee") {
+                ex.questionsLongues.forEach(q => {
+                    const input = document.querySelector(`input[name="${q.cle}"]`);
+                    const val = input ? input.value.toLowerCase().trim() : "";
+                    const ok = q.motsCles.some(m => val.includes(m));
+                    if (ok) {
+                        ptsEx += q.pts;
+                    } else {
+                        errs.push(`• <em>${q.label}</em> $\rightarrow$ Attendu : <strong>${q.reponseType}</strong>`);
+                    }
+                });
+            }
             else if (ex.type === "tableur") {
                 ex.lignes.forEach(l => {
                     l.champs.forEach(c => {
@@ -205,13 +266,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
             detailsHTML += `
                 <div class="correction-item">
-                    <h4>${ex.titre} — Note : ${ptsEx}/${ex.points}</h4>
-                    ${errs.length > 0 ? errs.join("<br>") : "<p style='color:green;'>Parfait ! Grille remplie correctement.</p>"}
+                    <h4>${ex.titre} — Note : ${Math.round(ptsEx * 100) / 100}/${ex.points}</h4>
+                    ${errs.length > 0 ? errs.join("<br>") : "<p style='color:green;'>Parfait ! Tout est correct.</p>"}
                 </div>
             `;
         });
 
-        document.getElementById("note-finale").textContent = scoreTotal;
+        document.getElementById("note-finale").textContent = Math.round(scoreTotal);
         document.getElementById("eval-corrections-detail").innerHTML = detailsHTML;
         document.getElementById("eval-results").classList.remove("hidden");
         document.getElementById("eval-results").scrollIntoView({ behavior: "smooth" });
