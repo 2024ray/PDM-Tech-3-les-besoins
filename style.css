@@ -182,3 +182,49 @@ body {
 }
 
 .footer { text-align: center; padding: 2rem 0; color: #64748b; font-size: 0.85rem; }
+/* --- TIMER & PROGRESS BAR --- */
+.progress-container {
+    width: 100%;
+    background-color: #e2e8f0;
+    border-radius: 20px;
+    height: 12px;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--primary), #3b82f6);
+    transition: width 0.3s ease;
+}
+
+.step-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.5rem;
+}
+
+.timer-badge {
+    font-size: 1.1rem;
+    font-weight: bold;
+    padding: 6px 14px;
+    border-radius: 20px;
+    background-color: #fef3c7;
+    color: #92400e;
+    border: 1px solid #fde68a;
+}
+
+.timer-warning {
+    background-color: #fee2e2 !important;
+    color: #991b1b !important;
+    border-color: #fca5a5 !important;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.6; }
+    100% { opacity: 1; }
+}
