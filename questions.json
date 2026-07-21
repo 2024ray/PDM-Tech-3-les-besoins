@@ -1,5 +1,5 @@
 {
-  "titreGeneral": "Technologie 3ème • Exprimer et analyser le besoin (Programme Complet + Tableurs)",
+  "titreGeneral": "Technologie 3ème • Exprimer et analyser le besoin (4 Choix : Vrai / Faux / Aucun / Les deux)",
   "cours": {
     "titre": "Synthèse du cours : Exprimer et analyser le besoin",
     "sections": [
@@ -27,7 +27,9 @@
       "question": "1. Un besoin est une nécessité ou un désir éprouvé par un utilisateur.",
       "options": [
         { "texte": "Vrai", "estCorrecte": true },
-        { "texte": "Faux", "estCorrecte": false }
+        { "texte": "Faux", "estCorrecte": false },
+        { "texte": "Aucun", "estCorrecte": false },
+        { "texte": "Les deux", "estCorrecte": false }
       ],
       "explication": "C'est la définition exacte d'un besoin en technologie."
     },
@@ -36,7 +38,9 @@
       "question": "2. La fonction d'usage répond à la question 'Pourquoi l'objet me plaît-il ?'.",
       "options": [
         { "texte": "Vrai", "estCorrecte": false },
-        { "texte": "Faux", "estCorrecte": true }
+        { "texte": "Faux", "estCorrecte": true },
+        { "texte": "Aucun", "estCorrecte": false },
+        { "texte": "Les deux", "estCorrecte": false }
       ],
       "explication": "La question du plaisir/esthétique concerne la fonction d'estime."
     },
@@ -44,18 +48,21 @@
       "id": "q3",
       "question": "3. Dans la Bête à cornes, la question 'Sur quoi agit-il ?' désigne :",
       "options": [
-        { "texte": "L'utilisateur qui achète l'objet", "estCorrecte": false },
-        { "texte": "La matière ou l'élément transformé/modifié", "estCorrecte": true },
-        { "texte": "Le coût de fabrication de l'objet", "estCorrecte": false }
+        { "texte": "Vrai", "estCorrecte": false },
+        { "texte": "Faux", "estCorrecte": false },
+        { "texte": "Aucun", "estCorrecte": false },
+        { "texte": "Les deux", "estCorrecte": false }
       ],
-      "explication": "Elle indique ce sur quoi l'objet produit un effet."
+      "explication": "Cette question demande la matière ou l'élément transformé/modifié par l'objet."
     },
     {
       "id": "q4",
       "question": "4. Un objet naturel (comme une pomme sur un arbre) est un objet technique.",
       "options": [
         { "texte": "Vrai", "estCorrecte": false },
-        { "texte": "Faux", "estCorrecte": true }
+        { "texte": "Faux", "estCorrecte": true },
+        { "texte": "Aucun", "estCorrecte": false },
+        { "texte": "Les deux", "estCorrecte": false }
       ],
       "explication": "Un objet technique doit être conçu ou modifié par l'Homme."
     },
@@ -64,36 +71,42 @@
       "question": "5. Les contraintes écologiques peuvent faire évoluer le besoin d'un objet.",
       "options": [
         { "texte": "Vrai", "estCorrecte": true },
-        { "texte": "Faux", "estCorrecte": false }
+        { "texte": "Faux", "estCorrecte": false },
+        { "texte": "Aucun", "estCorrecte": false },
+        { "texte": "Les deux", "estCorrecte": false }
       ],
       "explication": "Les nouvelles normes et la sensibilité écologique modifient nos attentes."
     },
     {
       "id": "q6",
-      "question": "6. La couleur rouge et le logo de marque d'une paire de baskets font partie de :",
+      "question": "6. La couleur rouge et le logo d'une paire de baskets font partie de sa fonction d'usage.",
       "options": [
-        { "texte": "Sa fonction d'usage", "estCorrecte": false },
-        { "texte": "Sa fonction d'estime", "estCorrecte": true }
+        { "texte": "Vrai", "estCorrecte": false },
+        { "texte": "Faux", "estCorrecte": true },
+        { "texte": "Aucun", "estCorrecte": false },
+        { "texte": "Les deux", "estCorrecte": false }
       ],
-      "explication": "L'apparence et l'image de marque relèvent du goût et de l'estime."
+      "explication": "L'apparence et le logo relèvent de la fonction d'estime."
     },
     {
       "id": "q7",
-      "question": "7. Quel est l'outil graphique utilisé pour exprimer le besoin principal ?",
+      "question": "7. La Bête à cornes est l'outil graphique utilisé pour exprimer le besoin principal.",
       "options": [
-        { "texte": "Le diagramme Pieuvre", "estCorrecte": false },
-        { "texte": "La Bête à cornes", "estCorrecte": true },
-        { "texte": "L'algorithme de chaîne d'énergie", "estCorrecte": false }
+        { "texte": "Vrai", "estCorrecte": true },
+        { "texte": "Faux", "estCorrecte": false },
+        { "texte": "Aucun", "estCorrecte": false },
+        { "texte": "Les deux", "estCorrecte": false }
       ],
       "explication": "La Bête à cornes exprime le besoin fondamental."
     },
     {
       "id": "q8",
-      "question": "8. Si le besoin auquel répond un objet disparaît, l'objet devient :",
+      "question": "8. Si le besoin auquel répond un objet disparaît, l'objet devient obsolète.",
       "options": [
-        { "texte": "Plus cher", "estCorrecte": false },
-        { "texte": "Obsolète", "estCorrecte": true },
-        { "texte": "Plus performant", "estCorrecte": false }
+        { "texte": "Vrai", "estCorrecte": true },
+        { "texte": "Faux", "estCorrecte": false },
+        { "texte": "Aucun", "estCorrecte": false },
+        { "texte": "Les deux", "estCorrecte": false }
       ],
       "explication": "Sans besoin actif, un objet perd son utilité et devient obsolète."
     }
@@ -108,52 +121,58 @@
       "questions": [
         {
           "id": "ex1_1",
-          "texte": "1.1 Quelle est la fonction d'usage principale d'un stylo à bille ?",
+          "texte": "1.1 La fonction d'usage d'un stylo est de déposer de l'encre sur du papier pour écrire.",
           "options": [
-            { "texte": "Décorer la trousse de l'élève", "estCorrecte": false },
-            { "texte": "Déposer de l'encre sur une feuille de papier pour écrire", "estCorrecte": true },
-            { "texte": "Valoir cher pour impressionner les camarades", "estCorrecte": false }
+            { "texte": "Vrai", "estCorrecte": true },
+            { "texte": "Faux", "estCorrecte": false },
+            { "texte": "Aucun", "estCorrecte": false },
+            { "texte": "Les deux", "estCorrecte": false }
           ],
-          "correction": "Le stylo sert à écrire en déposant de l'encre."
+          "correction": "C'est exact, le stylo sert à écrire."
         },
         {
           "id": "ex1_2",
-          "texte": "1.2 Parmi ces propositions, laquelle est une fonction d'estime pour une montre ?",
+          "texte": "1.2 Avoir un cadran doré et un bracelet élégant sur une montre est une fonction d'estime.",
           "options": [
-            { "texte": "Afficher les heures et les minutes", "estCorrecte": false },
-            { "texte": "Avoir un cadran doré élégant et un bracelet en cuir", "estCorrecte": true },
-            { "texte": "Rappeler une alarme programmée", "estCorrecte": false }
+            { "texte": "Vrai", "estCorrecte": true },
+            { "texte": "Faux", "estCorrecte": false },
+            { "texte": "Aucun", "estCorrecte": false },
+            { "texte": "Les deux", "estCorrecte": false }
           ],
-          "correction": "Le cadran doré et le bracelet en cuir correspondent au style/goût."
+          "correction": "Le style et le design correspondent bien à la fonction d'estime."
         },
         {
           "id": "ex1_3",
-          "texte": "1.3 Un besoin est dit 'éphémère' ou 'évolutif' s'il :",
+          "texte": "1.3 Un besoin reste strictement identique et ne change jamais à travers les époques.",
           "options": [
-            { "texte": "Ne change jamais au cours du temps", "estCorrecte": false },
-            { "texte": "Modifie ses exigences selon les époques et les technologies", "estCorrecte": true },
-            { "texte": "Est interdit par la loi", "estCorrecte": false }
+            { "texte": "Vrai", "estCorrecte": false },
+            { "texte": "Faux", "estCorrecte": true },
+            { "texte": "Aucun", "estCorrecte": false },
+            { "texte": "Les deux", "estCorrecte": false }
           ],
-          "correction": "Un besoin évolue avec son époque."
+          "correction": "Un besoin évolue selon les époques et les technologies."
         },
         {
           "id": "ex1_4",
-          "texte": "1.4 Qui est le destinataire de la question 'À qui rend-il service ?' ?",
+          "texte": "1.4 Dans la Bête à cornes, 'À qui rend-il service ?' s'adresse au fabricant de l'objet.",
           "options": [
-            { "texte": "Le fabricant de l'objet", "estCorrecte": false },
-            { "texte": "L'utilisateur / le client", "estCorrecte": true },
-            { "texte": "Le magasin de vente", "estCorrecte": false }
+            { "texte": "Vrai", "estCorrecte": false },
+            { "texte": "Faux", "estCorrecte": true },
+            { "texte": "Aucun", "estCorrecte": false },
+            { "texte": "Les deux", "estCorrecte": false }
           ],
-          "correction": "L'objet rend service à l'utilisateur."
+          "correction": "L'objet rend service à l'utilisateur / au client."
         },
         {
           "id": "ex1_5",
-          "texte": "1.5 Un marteau en pierre préhistorique est-il un objet technique ?",
+          "texte": "1.5 Un marteau en pierre préhistorique taillé par l'Homme est un objet technique.",
           "options": [
-            { "texte": "Oui, car il a été taillé et façonné par l'Homme", "estCorrecte": true },
-            { "texte": "Non, car il n'a pas de batterie ni d'électronique", "estCorrecte": false }
+            { "texte": "Vrai", "estCorrecte": true },
+            { "texte": "Faux", "estCorrecte": false },
+            { "texte": "Aucun", "estCorrecte": false },
+            { "texte": "Les deux", "estCorrecte": false }
           ],
-          "correction": "Tout objet modifié par l'Homme pour répondre à un besoin est un objet technique."
+          "correction": "Tout objet façonné par l'Homme pour répondre à un besoin est un objet technique."
         }
       ]
     },
@@ -164,11 +183,11 @@
       "points": 5,
       "type": "association",
       "pairs": [
-        { "id": "p1", "element": "VTT tout-suspendu", "choix": ["Objet technique", "Fonction d'usage", "Fonction d'estime"], "bonneReponse": "Objet technique", "pts": 1 },
-        { "id": "p2", "element": "Permettre de rouler sur des chemins escarpés", "choix": ["Objet technique", "Fonction d'usage", "Fonction d'estime"], "bonneReponse": "Fonction d'usage", "pts": 1 },
-        { "id": "p3", "element": "Peinture vert fluo et look sportif", "choix": ["Objet technique", "Fonction d'usage", "Fonction d'estime"], "bonneReponse": "Fonction d'estime", "pts": 1 },
-        { "id": "p4", "element": "Éléments modifiés par un lave-linge", "choix": ["Le linge sale", "L'utilisateur", "Le fabricant"], "bonneReponse": "Le linge sale", "pts": 1 },
-        { "id": "p5", "element": "Bête à cornes - Question du bas", "choix": ["Dans quel but ?", "À qui rend-il service ?", "Combien coûte-t-il ?"], "bonneReponse": "Dans quel but ?", "pts": 1 }
+        { "id": "p1", "element": "VTT tout-suspendu", "choix": ["Objet technique", "Fonction d'usage", "Fonction d'estime", "Aucun", "Les deux"], "bonneReponse": "Objet technique", "pts": 1 },
+        { "id": "p2", "element": "Permettre de rouler sur des chemins escarpés", "choix": ["Objet technique", "Fonction d'usage", "Fonction d'estime", "Aucun", "Les deux"], "bonneReponse": "Fonction d'usage", "pts": 1 },
+        { "id": "p3", "element": "Peinture vert fluo et look sportif", "choix": ["Objet technique", "Fonction d'usage", "Fonction d'estime", "Aucun", "Les deux"], "bonneReponse": "Fonction d'estime", "pts": 1 },
+        { "id": "p4", "element": "Éléments modifiés par un lave-linge", "choix": ["Le linge sale", "L'utilisateur", "Le fabricant", "Aucun", "Les deux"], "bonneReponse": "Le linge sale", "pts": 1 },
+        { "id": "p5", "element": "Bête à cornes - Question du bas", "choix": ["Dans quel but ?", "À qui rend-il service ?", "Combien coûte-t-il ?", "Aucun", "Les deux"], "bonneReponse": "Dans quel but ?", "pts": 1 }
       ]
     },
     {
@@ -289,8 +308,8 @@
       "niveau": "Moyen",
       "points": 8,
       "type": "tableur_classification",
-      "consigne": "Sélectionne dans chaque cellule du tableur le type de fonction (Usage ou Estime) :",
-      "colonnes": ["Caractéristique / Élément", "Type de Fonction (Usage ou Estime)"],
+      "consigne": "Sélectionne dans chaque cellule du tableur le type de fonction :",
+      "colonnes": ["Caractéristique / Élément", "Type de Fonction"],
       "lignes": [
         { "id": "t2_l1", "element": "Moteur électrique de 350W pour se déplacer à 25 km/h", "bonneReponse": "Usage", "pts": 2 },
         { "id": "t2_l2", "element": "Couleur noir mat avec bandes néon personnalisables", "bonneReponse": "Estime", "pts": 2 },
