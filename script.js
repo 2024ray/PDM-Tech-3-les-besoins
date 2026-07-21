@@ -1,6 +1,16 @@
 document.addEventListener("DOMContentLoaded", () => {
     let appData = null;
 
+    // Fonction de mélange aléatoire (Fisher-Yates)
+    function melanger(array) {
+        let copy = [...array];
+        for (let i = copy.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [copy[i], copy[j]] = [copy[j], copy[i]];
+        }
+        return copy;
+    }
+
     fetch("questions.json")
         .then(res => res.json())
         .then(data => {
@@ -34,7 +44,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const container = document.getElementById("quiz-container");
         container.innerHTML = "";
 
-        appData.quizComprehension.forEach(item => {
+        // Mélanger les questions du quiz
+        const quizMelange = melanger(appData.quizComprehension);
+
+        quizMelange.forEach((item, index) => {
             const qDiv = document.createElement("div");
             qDiv.className = "exercise-block";
 
@@ -45,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 </label>
             `).join("");
 
-            qDiv.innerHTML = `<p><strong>${item.question}</strong></p><div>${options}</div>`;
+            qDiv.innerHTML = `<p><strong>${index + 1}. ${item.question}</strong></p><div>${options}</div>`;
             container.appendChild(qDiv);
         });
     }
@@ -61,9 +74,11 @@ document.addEventListener("DOMContentLoaded", () => {
             let contentHTML = "";
 
             if (ex.type === "qcm_multiple") {
-                contentHTML = ex.questions.map(q => `
-                    <div style="margin-top:10px;">
-                        <p><strong>${q.texte}</strong></p>
+                // Mélanger les questions de l'exercice 1
+                const qMelangees = melanger(ex.questions);
+                contentHTML = qMelangees.map((q, idx) => `
+                    <div style="margin-top:12px;">
+                        <p><strong>1.${idx + 1} ${q.texte}</strong></p>
                         ${q.options.map((opt, i) => `
                             <label class="option-label">
                                 <input type="radio" name="${q.id}" value="${i}">
@@ -74,7 +89,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 `).join("");
             } 
             else if (ex.type === "association") {
-                contentHTML = ex.pairs.map(p => `
+                // Mélanger les paires de l'exercice 2
+                const pMelangees = melanger(ex.pairs);
+                contentHTML = pMelangees.map(p => `
                     <div style="margin-top:10px;">
                         <label><strong>${p.element} :</strong></label>
                         <select name="${p.id}" class="select-input">
@@ -85,7 +102,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 `).join("");
             }
             else if (ex.type === "champs_textes") {
-                contentHTML = ex.questionsTextes.map(q => `
+                // Mélanger les questions ouvertes
+                const qTextesMelangees = melanger(ex.questionsTextes);
+                contentHTML = qTextesMelangees.map(q => `
                     <div style="margin-top:10px;">
                         <label><strong>${q.label}</strong></label>
                         <input type="text" name="${q.cle}" class="input-text" placeholder="Rédige ta réponse...">
@@ -93,7 +112,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 `).join("");
             }
             else if (ex.type === "analyse_avancee") {
-                contentHTML = ex.questionsLongues.map(q => `
+                const qLonguesMelangees = melanger(ex.questionsLongues);
+                contentHTML = qLonguesMelangees.map(q => `
                     <div style="margin-top:10px;">
                         <label><strong>${q.label}</strong></label>
                         <input type="text" name="${q.cle}" class="input-text" placeholder="Rédige ton explication...">
@@ -101,8 +121,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 `).join("");
             }
             else if (ex.type === "tableur") {
+                // Mélanger les lignes du tableur 1
+                const lignesMelangees = melanger(ex.lignes);
                 const headersHTML = ex.colonnes.map(col => `<th>${col}</th>`).join("");
-                const rowsHTML = ex.lignes.map(l => `
+                const rowsHTML = lignesMelangees.map(l => `
                     <tr>
                         <td><strong>${l.objet}</strong></td>
                         ${l.champs.map(c => `
@@ -124,8 +146,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 `;
             }
             else if (ex.type === "tableur_classification") {
+                // Mélanger les lignes du tableur 2
+                const lignesMelangees = melanger(ex.lignes);
                 const headersHTML = ex.colonnes.map(col => `<th>${col}</th>`).join("");
-                const rowsHTML = ex.lignes.map(l => `
+                const rowsHTML = lignesMelangees.map(l => `
                     <tr>
                         <td>${l.element}</td>
                         <td>
@@ -173,7 +197,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (selected && item.options[parseInt(selected.value)].estCorrecte) {
                     score++;
                 } else {
-                    feedback.push(`• <strong>Q${item.id.replace('q','')} :</strong> ${item.explication}`);
+                    feedback.push(`• <strong>Question "${item.question.substring(0, 30)}..." :</strong> ${item.explication}`);
                 }
             });
 
