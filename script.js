@@ -225,7 +225,6 @@ function renderTableauMenu(ex, container) {
     const table = document.createElement('table');
     table.className = 'tableau-menu';
     
-    // Mélanger les questions de l'exercice
     const questionsMelangees = shuffle([...ex.questions]);
     
     let thead = `<thead><tr>
@@ -239,34 +238,29 @@ function renderTableauMenu(ex, container) {
     questionsMelangees.forEach((q, i) => {
         const tr = document.createElement('tr');
         
-        // Colonne numéro
         const tdNum = document.createElement('td');
         tdNum.className = 'num';
         tdNum.textContent = i + 1;
         tr.appendChild(tdNum);
         
-        // Colonne énoncé
         const tdEnonce = document.createElement('td');
         tdEnonce.className = 'enonce-cell';
         tdEnonce.textContent = q.enonce;
         tr.appendChild(tdEnonce);
         
-        // Colonne réponse (menu déroulant)
         const tdRep = document.createElement('td');
         tdRep.className = 'reponse-cell';
         const select = document.createElement('select');
         select.dataset.questionId = q.id;
         select.dataset.pts = q.pts;
         
-        // Option vide par défaut
         const optVide = document.createElement('option');
         optVide.value = '';
         optVide.textContent = '-- Choisir --';
         select.appendChild(optVide);
         
-        // Mélanger les options
         const optionsMelangees = shuffle([...q.options]);
-        optionsMelangees.forEach((opt, j) => {
+        optionsMelangees.forEach(opt => {
             const option = document.createElement('option');
             option.value = opt.texte;
             option.dataset.correct = opt.correct;
@@ -297,7 +291,6 @@ function validerEtSuivantEval(auto = false) {
             const selectedValue = select.value;
             const selectedOption = select.querySelector(`option[value="${CSS.escape(selectedValue)}"]`);
             
-            // Retrouver la question dans l'exercice
             const questionData = ex.questions.find(q => q.id === qId);
             const bonneReponse = questionData.options.find(o => o.correct).texte;
             
@@ -383,15 +376,6 @@ function genererPDFResultats() {
     const element = $('#pdf-report-area');
     element.classList.remove('hidden');
     element.style.display = 'block';
-    
-    // Remplacer les selects par leur valeur texte pour le PDF
-    const selects = element.querySelectorAll('select');
-    selects.forEach(s => {
-        const span = document.createElement('span');
-        span.textContent = s.options[s.selectedIndex]?.text || '(non répondu)';
-        span.style.fontWeight = '600';
-        s.parentNode.replaceChild(span, s);
-    });
     
     setTimeout(() => {
         const opt = {
