@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Analyse du Besoin & Tableurs - Technologie 3ème</title>
+    <meta name="description" content="Application éducative interactive sur l'analyse du besoin et les tableurs pour les élèves de 3ème">
     <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
@@ -14,14 +15,14 @@
     </header>
 
     <main class="container">
-        <!-- ===================== SECTION 1 : COURS ===================== -->
+        <!-- ============ SECTION 1 : COURS ============ -->
         <section id="section-cours" class="card">
             <h2>📖 Cours synthétique</h2>
             <div id="contenu-cours"></div>
             <button id="btn-commencer-quiz" class="btn btn-primary">Commencer le Quiz de révision ➡️</button>
         </section>
 
-        <!-- ===================== SECTION 2 : QUIZ ===================== -->
+        <!-- ============ SECTION 2 : QUIZ ============ -->
         <section id="section-quiz" class="card hidden">
             <h2>🧠 Quiz de compréhension</h2>
             <div class="quiz-header">
@@ -38,7 +39,7 @@
             <button id="btn-suivant-quiz" class="btn btn-primary hidden">Suivant ➡️</button>
         </section>
 
-        <!-- ===================== SECTION 3 : ÉVALUATION ===================== -->
+        <!-- ============ SECTION 3 : ÉVALUATION ============ -->
         <section id="section-eval" class="card hidden">
             <h2>📝 Évaluation (40 points)</h2>
             <div class="quiz-header">
@@ -55,7 +56,7 @@
             <button id="btn-suivant-eval" class="btn btn-primary">Valider et continuer ➡️</button>
         </section>
 
-        <!-- ===================== RÉSULTATS ===================== -->
+        <!-- ============ RÉSULTATS ============ -->
         <section id="pdf-report-area" class="card hidden">
             <h2>📊 Bilan des résultats</h2>
             <div id="resultats-detail"></div>
@@ -65,6 +66,37 @@
             </div>
         </section>
     </main>
+
+    <!-- ============ FALLBACK JSON INLINE ============ -->
+    <script id="questions-data-inline" type="application/json">
+    {
+        "titreGeneral": "Analyse du Besoin & Tableurs",
+        "cours": {
+            "introduction": "L'analyse du besoin est la première étape de tout projet technique. Elle permet d'identifier précisément ce que l'utilisateur attend d'un produit.",
+            "sections": [
+                {"titre": "1. La notion de Besoin", "contenu": "Un <strong>besoin</strong> est le sentiment d'une privation ou d'une insuffisance. En technologie, on cherche à identifier le besoin auquel un produit doit répondre. <br><em>Exemple : Besoin de se déplacer rapidement → création de la voiture.</em>"},
+                {"titre": "2. Le diagramme Bête à cornes", "contenu": "La <strong>Bête à cornes</strong> est un outil graphique qui répond à la question : <em>« À qui le produit rend-il service ? Sur quoi agit-il ? Dans quel but ? »</em>. Il se compose de 3 ovales reliés au produit central."},
+                {"titre": "3. Usage vs Estime", "contenu": "• <strong>Valeur d'usage</strong> : aptitude du produit à satisfaire le besoin (ex : une voiture roule).<br>• <strong>Valeur d'estime</strong> : caractéristiques subjectives qui plaisent (ex : couleur, marque, design)."},
+                {"titre": "4. Évolution des besoins et des objets", "contenu": "Les besoins évoluent avec la société, la technologie et l'environnement. Les objets techniques doivent donc s'adapter : nouveaux matériaux, nouvelles fonctions, nouvelles formes."},
+                {"titre": "5. Les tableurs (Excel, LibreOffice Calc)", "contenu": "Un <strong>tableur</strong> permet d'organiser des données dans des <strong>cellules</strong> identifiées par une lettre (colonne) et un chiffre (ligne).<br>• Formule : commence toujours par <code>=</code><br>• Exemples : <code>=SOMME(A1:A5)</code>, <code>=MOYENNE(B1:B4)</code>, <code>=SI(A1>10;\"Oui\";\"Non\")</code>"}
+            ]
+        },
+        "quizComprehension": [
+            {"id": "q1", "question": "La Bête à cornes sert à identifier le besoin auquel répond un produit.", "options": [{"texte": "Vrai", "correct": true}, {"texte": "Faux", "correct": false}, {"texte": "Partiellement vrai seulement", "correct": false}, {"texte": "Impossible à dire", "correct": false}]},
+            {"id": "q2", "question": "La valeur d'estime correspond à l'utilité pratique du produit.", "options": [{"texte": "Vrai", "correct": false}, {"texte": "Faux, c'est la valeur d'usage", "correct": true}, {"texte": "Vrai dans certains cas", "correct": false}, {"texte": "Faux, c'est la valeur d'usage", "correct": false}]},
+            {"id": "q3", "question": "Dans un tableur, une formule commence toujours par le signe « = ».", "options": [{"texte": "Vrai", "correct": true}, {"texte": "Faux", "correct": false}, {"texte": "Vrai seulement pour les calculs", "correct": false}, {"texte": "Ça dépend du tableur", "correct": false}]},
+            {"id": "q4", "question": "Un besoin technique peut évoluer au fil du temps.", "options": [{"texte": "Vrai", "correct": true}, {"texte": "Faux", "correct": false}, {"texte": "Seulement pour les objets anciens", "correct": false}, {"texte": "Vrai uniquement en informatique", "correct": false}]},
+            {"id": "q5", "question": "La cellule B3 se trouve à l'intersection de la ligne B et de la colonne 3.", "options": [{"texte": "Vrai", "correct": false}, {"texte": "Faux, c'est colonne B et ligne 3", "correct": true}, {"texte": "Vrai dans Excel", "correct": false}, {"texte": "Faux, c'est ligne B et colonne 3", "correct": false}]}
+        ],
+        "evaluation": [
+            {"id": "ex1", "type": "qcm", "niveau": "Facile", "titre": "Exercice 1 - QCM sur le besoin (4 pts)", "enonce": "Parmi les affirmations suivantes, lesquelles sont correctes ? (plusieurs réponses possibles)", "options": [{"texte": "Le besoin est une privation ou une insuffisance ressentie", "correct": true, "pts": 1}, {"texte": "Le besoin est toujours matériel", "correct": false, "pts": 0}, {"texte": "L'analyse du besoin précède la conception du produit", "correct": true, "pts": 1}, {"texte": "Un besoin ne peut jamais évoluer", "correct": false, "pts": 0}, {"texte": "La Bête à cornes aide à formaliser le besoin", "correct": true, "pts": 2}]},
+            {"id": "ex2", "type": "association", "niveau": "Facile", "titre": "Exercice 2 - Associer les concepts (6 pts)", "enonce": "Associe chaque notion à sa définition correcte.", "associations": [{"terme": "Bête à cornes", "bonnesDefinitions": ["Diagramme à 3 ovales", "Identifie le besoin"], "mauvaises": ["Valeur subjective", "Formule de calcul"], "pts": 2}, {"terme": "Valeur d'usage", "bonnesDefinitions": ["Utilité pratique", "Fonction du produit"], "mauvaises": ["Design", "Marque"], "pts": 2}, {"terme": "Valeur d'estime", "bonnesDefinitions": ["Aspect subjectif", "Design / marque"], "mauvaises": ["Utilité technique", "Fonction principale"], "pts": 2}]},
+            {"id": "ex3", "type": "redaction", "niveau": "Moyen", "titre": "Exercice 3 - Répondre à la Bête à cornes (10 pts)", "enonce": "Pour un <strong>vélo électrique</strong>, complète les 3 questions de la Bête à cornes :", "champs": [{"label": "À qui le produit rend-il service ?", "motsCles": ["utilisateur", "cycliste", "personne", "conducteur"], "pts": 3}, {"label": "Sur quoi agit-il ?", "motsCles": ["déplacement", "distance", "terrain", "trajet"], "pts": 3}, {"label": "Dans quel but ?", "motsCles": ["se déplacer", "déplacer", "transport", "mobilité", "aller"], "pts": 4}]},
+            {"id": "ex4", "type": "tableur", "niveau": "Moyen", "titre": "Exercice 4 - Formules tableur (10 pts)", "enonce": "Observe le tableau ci-dessous. Écris la formule attendue dans chaque cellule.", "grille": {"entetes": ["", "A", "B", "C"], "lignes": [["1", "Note élève", "Coeff", "Résultat"], ["2", "15", "2", ""], ["3", "12", "3", ""], ["4", "Total", "", ""], ["5", "Moyenne", "", ""]]}, "reponses": [{"cellule": "C2", "motsCles": ["=A2*B2", "=15*2", "=30"], "pts": 2.5}, {"cellule": "C3", "motsCles": ["=A3*B3", "=12*3", "=36"], "pts": 2.5}, {"cellule": "A4", "motsCles": ["=SOMME(A2:A3)", "=A2+A3", "=27"], "pts": 2.5}, {"cellule": "A5", "motsCles": ["=MOYENNE(A2:A3)", "=A4/2", "=13.5"], "pts": 2.5}]},
+            {"id": "ex5", "type": "redaction", "niveau": "Avancé", "titre": "Exercice 5 - Analyse complète (10 pts)", "enonce": "Un collège souhaite équiper ses salles d'un <strong>vidéoprojecteur interactif</strong>. Rédige en 4 à 6 lignes une analyse complète comprenant :<br>• Le besoin identifié<br>• La valeur d'usage principale<br>• La valeur d'estime possible<br>• Une évolution possible de ce besoin", "motsCles": ["besoin", "enseignant", "élève", "cours", "pédagogie", "usage", "projeter", "interactif", "tableau", "estime", "design", "marque", "qualité", "prix", "évolution", "numérique", "connecté", "wifi", "tablettes"], "pts": 10}
+        ]
+    }
+    </script>
 
     <footer class="app-footer">
         <p>© 2026 - Application éducative Technologie 3ème</p>
