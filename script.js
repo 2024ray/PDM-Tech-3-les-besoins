@@ -10,6 +10,12 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentEvalIndex = 0;
     let evalAnswers = {}; // Pour sauvegarder les réponses de l'évaluation
 
+    // Variables pour le Minuteur
+    let timerInterval = null;
+    let tempsRestant = 20 * 60; // 20 minutes en secondes
+    let minuteurLance = false;
+    let evalSoumise = false;
+
     // Fonction de mélange aléatoire (Fisher-Yates)
     function melanger(array) {
         let copy = [...array];
@@ -39,9 +45,12 @@ document.addEventListener("DOMContentLoaded", () => {
         quizQuestions = melanger(appData.quizComprehension);
         afficherQuestionQuiz();
 
-        // Préparation de l'évaluation sous forme d'une liste unique de questions/exercices
+        // Préparation de l'évaluation
         preparerEvaluation();
         afficherQuestionEval();
+
+        // Démarrage du minuteur dès le chargement de la page
+        lancerMinuteur();
 
         ecouterEvenements();
     }
@@ -57,6 +66,52 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     /* -------------------------------------------------------------------------- */
+    /*                              GESTION DU MINUTEUR                           */
+    /* -------------------------------------------------------------------------- */
+
+    function lancerMinuteur() {
+        if (minuteurLance) return;
+        minuteurLance = true;
+
+        mettreAJourAffichageMinuteur();
+
+        timerInterval = setInterval(() => {
+            tempsRestant--;
+            mettreAJourAffichageMinuteur();
+
+            if (tempsRestant <= 0) {
+                clearInterval(timerInterval);
+                finDuTempsAutoSoumission();
+            }
+        }, 1000);
+    }
+
+    function mettreAJourAffichageMinuteur() {
+        const elTimer = document.getElementById("timer-display");
+        if (!elTimer) return;
+
+        const minutes = Math.floor(tempsRestant / 60);
+        const secondes = tempsRestant % 60;
+
+        const strMin = String(minutes).padStart(2, '0');
+        const strSec = String(secondes).padStart(2, '0');
+
+        elTimer.textContent = `⏱️ ${strMin}:${strSec}`;
+
+        // Alerte visuelle quand il reste moins de 2 minutes (120 sec)
+        if (tempsRestant <= 120) {
+            elTimer.classList.add("timer-danger");
+        }
+    }
+
+    function finDuTempsAutoSoumission() {
+        if (evalSoumise) return;
+        
+        alert("⏱️ Le temps de 20 minutes est écoulé ! Votre évaluation va être soumise automatiquement.");
+        calculerEvaluation();
+    }
+
+    /* -------------------------------------------------------------------------- */
     /*                               PARTIE 2 : QUIZ                              */
     /* -------------------------------------------------------------------------- */
 
@@ -65,7 +120,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const item = quizQuestions[currentQuizIndex];
         const total = quizQuestions.length;
 
-        // Mise à jour de la progression
         document.getElementById("quiz-progress").textContent = `Question ${currentQuizIndex + 1} / ${total}`;
 
         const options = item.options.map((opt, idx) => {
@@ -85,7 +139,6 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
         `;
 
-        // Gestion de l'affichage des boutons de navigation
         document.getElementById("btn-quiz-prev").style.display = currentQuizIndex === 0 ? "none" : "inline-block";
         if (currentQuizIndex === total - 1) {
             document.getElementById("btn-quiz-next").style.display = "none";
@@ -95,7 +148,6 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById("btn-valider-quiz").style.display = "none";
         }
 
-        // Écouter le changement pour sauvegarder la réponse
         container.querySelectorAll(`input[name="quiz_${item.id}"]`).forEach(input => {
             input.addEventListener("change", (e) => {
                 quizAnswers[`quiz_${item.id}`] = parseInt(e.target.value);
@@ -241,7 +293,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         container.innerHTML = contentHTML;
 
-        // Mise à jour de la visibilité des boutons
         document.getElementById("btn-eval-prev").style.display = currentEvalIndex === 0 ? "none" : "inline-block";
         if (currentEvalIndex === total - 1) {
             document.getElementById("btn-eval-next").style.display = "none";
@@ -251,10 +302,10 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById("btn-soumettre-eval").style.display = "none";
         }
 
-        attacherEcouteursSauvegarde(container, item);
+        attacherEcouteursSauvegarde(container);
     }
 
-    function attacherEcouteursSauvegarde(container, item) {
+    function attacherEcouteursSauvegarde(container) {
         container.querySelectorAll("input, select").forEach(input => {
             input.addEventListener("change", (e) => {
                 if (e.target.type === "radio") {
@@ -331,6 +382,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function calculerEvaluation() {
+        if (evalSoumise) return;
+        evalSoumise = true;
+
+        // Arrêter le minuteur
+        if (timerInterval) clearInterval(timerInterval);
+
         let scoreTotal = 0;
         let detailsHTML = "";
 
@@ -413,5 +470,10 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("eval-corrections-detail").innerHTML = detailsHTML;
         document.getElementById("eval-results").classList.remove("hidden");
         document.getElementById("eval-results").scrollIntoView({ behavior: "smooth" });
+
+        // Désactiver les boutons de navigation de l'évaluation
+        document.getElementById("btn-eval-prev").disabled = true;
+        document.getElementById("btn-eval-next").disabled = true;
+        document.getElementById("btn-soumettre-eval").disabled = true;
     }
 });
