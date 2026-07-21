@@ -231,11 +231,14 @@ body {
     100% { opacity: 1; }
 }
 
-/* STYLES RAPPORT PDF */
+/* --- STYLES SPÉCIFIQUES RAPPORT PDF (Correctif Page Blanche) --- */
 #pdf-report-area {
-    padding: 15px;
-    background: white;
+    padding: 20px;
+    background-color: #ffffff !important;
+    color: #1e293b !important;
     border-radius: 8px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .pdf-header {
