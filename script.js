@@ -1,21 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
     let appData = null;
 
-    // Charger les données du fichier JSON
     fetch("questions.json")
-        .then(response => {
-            if (!response.ok) throw new Error("Erreur de chargement du JSON");
-            return response.json();
-        })
+        .then(res => res.json())
         .then(data => {
             appData = data;
             initialiserSite();
         })
-        .catch(error => {
-            console.error("Erreur :", error);
-            document.getElementById("cours-container").innerHTML = 
-                `<p style="color:red;">⚠️ Erreur au chargement du fichier questions.json</p>`;
-        });
+        .catch(err => console.error("Erreur JSON :", err));
 
     function initialiserSite() {
         if (appData.titreGeneral) {
@@ -33,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
         container.innerHTML = "";
         appData.cours.sections.forEach(sec => {
             const div = document.createElement("div");
-            div.innerHTML = `<h3 style="color:#0f172a; margin-bottom:4px;">${sec.sousTitre}</h3><p style="color:#334155;">${sec.contenu}</p>`;
+            div.innerHTML = `<h3>${sec.sousTitre}</h3><p>${sec.contenu}</p>`;
             container.appendChild(div);
         });
     }
@@ -66,10 +58,10 @@ document.addEventListener("DOMContentLoaded", () => {
             const exDiv = document.createElement("div");
             exDiv.className = "exercise-block";
 
-            let htmlSpecifique = "";
+            let contentHTML = "";
 
             if (ex.type === "qcm_multiple") {
-                htmlSpecifique = ex.questions.map(q => `
+                contentHTML = ex.questions.map(q => `
                     <div style="margin-top:10px;">
                         <p><strong>${q.texte}</strong></p>
                         ${q.options.map((opt, i) => `
@@ -81,32 +73,53 @@ document.addEventListener("DOMContentLoaded", () => {
                     </div>
                 `).join("");
             } 
-            else if (ex.type === "association") {
-                htmlSpecifique = ex.pairs.map(p => `
-                    <div style="margin-top:10px;">
-                        <label><strong>${p.element} :</strong></label>
-                        <select name="${p.id}" class="select-input">
-                            <option value="">-- Choisis une option --</option>
-                            ${p.choix.map(c => `<option value="${c}">${c}</option>`).join("")}
-                        </select>
-                    </div>
+            else if (ex.type === "tableur") {
+                const headersHTML = ex.colonnes.map(col => `<th>${col}</th>`).join("");
+                const rowsHTML = ex.lignes.map(l => `
+                    <tr>
+                        <td><strong>${l.objet}</strong></td>
+                        ${l.champs.map(c => `
+                            <td>
+                                <input type="text" name="${c.cle}" class="tableur-cell-input" placeholder="Remplir...">
+                            </td>
+                        `).join("")}
+                    </tr>
                 `).join("");
-            } 
-            else if (ex.type === "champs_textes") {
-                htmlSpecifique = ex.questionsTextes.map(q => `
-                    <div style="margin-top:10px;">
-                        <label><strong>${q.label}</strong></label>
-                        <input type="text" name="${q.cle}" class="input-text" placeholder="Rédige ta réponse...">
+
+                contentHTML = `
+                    <p style="margin-bottom:8px;">${ex.consigne}</p>
+                    <div class="tableur-wrapper">
+                        <table class="tableur-custom">
+                            <thead><tr>${headersHTML}</tr></thead>
+                            <tbody>${rowsHTML}</tbody>
+                        </table>
                     </div>
+                `;
+            }
+            else if (ex.type === "tableur_classification") {
+                const headersHTML = ex.colonnes.map(col => `<th>${col}</th>`).join("");
+                const rowsHTML = ex.lignes.map(l => `
+                    <tr>
+                        <td>${l.element}</td>
+                        <td>
+                            <select name="${l.id}" class="tableur-cell-input">
+                                <option value="">-- Sélectionner --</option>
+                                <option value="Usage">Fonction d'Usage</option>
+                                <option value="Estime">Fonction d'Estime</option>
+                            </select>
+                        </td>
+                    </tr>
                 `).join("");
-            } 
-            else if (ex.type === "analyse_avancee") {
-                htmlSpecifique = ex.questionsLongues.map(q => `
-                    <div style="margin-top:10px;">
-                        <label><strong>${q.label}</strong></label>
-                        <input type="text" name="${q.cle}" class="input-text" placeholder="Rédige ton explication...">
+
+                contentHTML = `
+                    <p style="margin-bottom:8px;">${ex.consigne}</p>
+                    <div class="tableur-wrapper">
+                        <table class="tableur-custom">
+                            <thead><tr>${headersHTML}</tr></thead>
+                            <tbody>${rowsHTML}</tbody>
+                        </table>
                     </div>
-                `).join("");
+                `;
             }
 
             exDiv.innerHTML = `
@@ -114,51 +127,44 @@ document.addEventListener("DOMContentLoaded", () => {
                     <strong>${ex.titre}</strong>
                     <span class="tag bg-purple">${ex.niveau} • ${ex.points} pts</span>
                 </div>
-                ${htmlSpecifique}
+                ${contentHTML}
             `;
             container.appendChild(exDiv);
         });
     }
 
     function ecouterEvenements() {
-        // Validation du Quiz
         document.getElementById("btn-valider-quiz").addEventListener("click", () => {
             let score = 0;
             let total = appData.quizComprehension.length;
-            let explications = [];
+            let feedback = [];
 
             appData.quizComprehension.forEach(item => {
                 const selected = document.querySelector(`input[name="quiz_${item.id}"]:checked`);
-                if (selected) {
-                    const idx = parseInt(selected.value);
-                    if (item.options[idx].estCorrecte) {
-                        score++;
-                    } else {
-                        explications.push(`• <strong>Q${item.id.replace('q','')} :</strong> ${item.explication}`);
-                    }
+                if (selected && item.options[parseInt(selected.value)].estCorrecte) {
+                    score++;
                 } else {
-                    explications.push(`• <strong>Q${item.id.replace('q','')} :</strong> Non répondue.`);
+                    feedback.push(`• <strong>Q${item.id.replace('q','')} :</strong> ${item.explication}`);
                 }
             });
 
-            const feedback = document.getElementById("quiz-feedback");
-            feedback.classList.remove("hidden");
-            feedback.innerHTML = `<strong>Score Quiz : ${score}/${total}</strong><br>${explications.join("<br>")}`;
+            const box = document.getElementById("quiz-feedback");
+            box.classList.remove("hidden");
+            box.innerHTML = `<strong>Score : ${score}/${total}</strong><br>${feedback.join("<br>")}`;
         });
 
-        // Validation de l'Évaluation
         document.getElementById("btn-soumettre-eval").addEventListener("click", () => {
             calculerEvaluation();
         });
     }
 
     function calculerEvaluation() {
-        let noteTotale = 0;
+        let scoreTotal = 0;
         let detailsHTML = "";
 
         appData.evaluation.forEach(ex => {
             let ptsEx = 0;
-            let corrections = [];
+            let errs = [];
 
             if (ex.type === "qcm_multiple") {
                 ex.questions.forEach(q => {
@@ -166,56 +172,46 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (sel && q.options[parseInt(sel.value)].estCorrecte) {
                         ptsEx += 1;
                     } else {
-                        corrections.push(`• <em>${q.texte}</em> $\rightarrow$ ${q.correction}`);
+                        errs.push(`• <em>${q.texte}</em> $\rightarrow$ ${q.correction}`);
                     }
                 });
-            } 
-            else if (ex.type === "association") {
-                ex.pairs.forEach(p => {
-                    const sel = document.querySelector(`select[name="${p.id}"]`);
-                    if (sel && sel.value === p.bonneReponse) {
-                        ptsEx += p.pts;
-                    } else {
-                        corrections.push(`• <em>${p.element}</em> $\rightarrow$ Attendu : <strong>${p.bonneReponse}</strong>`);
-                    }
+            }
+            else if (ex.type === "tableur") {
+                ex.lignes.forEach(l => {
+                    l.champs.forEach(c => {
+                        const input = document.querySelector(`input[name="${c.cle}"]`);
+                        const val = input ? input.value.toLowerCase().trim() : "";
+                        const ok = c.motsCles.some(m => val.includes(m));
+                        if (ok) {
+                            ptsEx += c.pts;
+                        } else {
+                            errs.push(`• Tableur [${l.objet}] $\rightarrow$ Attendu : <strong>${c.reponseType}</strong>`);
+                        }
+                    });
                 });
-            } 
-            else if (ex.type === "champs_textes") {
-                ex.questionsTextes.forEach(q => {
-                    const input = document.querySelector(`input[name="${q.cle}"]`);
-                    const val = input ? input.value.toLowerCase().trim() : "";
-                    const OK = q.motsCles.some(m => val.includes(m));
-                    if (OK) {
-                        ptsEx += q.pts;
+            }
+            else if (ex.type === "tableur_classification") {
+                ex.lignes.forEach(l => {
+                    const sel = document.querySelector(`select[name="${l.id}"]`);
+                    if (sel && sel.value === l.bonneReponse) {
+                        ptsEx += l.pts;
                     } else {
-                        corrections.push(`• <em>${q.label}</em> $\rightarrow$ Attendu : <strong>${q.reponseType}</strong>`);
-                    }
-                });
-            } 
-            else if (ex.type === "analyse_avancee") {
-                ex.questionsLongues.forEach(q => {
-                    const input = document.querySelector(`input[name="${q.cle}"]`);
-                    const val = input ? input.value.toLowerCase().trim() : "";
-                    const OK = q.motsCles.some(m => val.includes(m));
-                    if (OK) {
-                        ptsEx += q.pts;
-                    } else {
-                        corrections.push(`• <em>${q.label}</em> $\rightarrow$ Attendu : <strong>${q.reponseType}</strong>`);
+                        errs.push(`• <em>${l.element}</em> $\rightarrow$ Attendu : <strong>${l.bonneReponse}</strong>`);
                     }
                 });
             }
 
-            noteTotale += ptsEx;
+            scoreTotal += ptsEx;
 
             detailsHTML += `
                 <div class="correction-item">
-                    <h4>${ex.titre} - Note : ${ptsEx}/${ex.points}</h4>
-                    ${corrections.length > 0 ? corrections.join("<br>") : "<p style='color:green;'>Parfait ! Toutes les réponses de cet exercice sont correctes.</p>"}
+                    <h4>${ex.titre} — Note : ${ptsEx}/${ex.points}</h4>
+                    ${errs.length > 0 ? errs.join("<br>") : "<p style='color:green;'>Parfait ! Grille remplie correctement.</p>"}
                 </div>
             `;
         });
 
-        document.getElementById("note-finale").textContent = noteTotale;
+        document.getElementById("note-finale").textContent = scoreTotal;
         document.getElementById("eval-corrections-detail").innerHTML = detailsHTML;
         document.getElementById("eval-results").classList.remove("hidden");
         document.getElementById("eval-results").scrollIntoView({ behavior: "smooth" });
