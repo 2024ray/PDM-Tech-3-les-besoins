@@ -1,16 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     let appData = null;
 
-    // Mélange Fisher-Yates
-    function melanger(array) {
-        let copy = [...array];
-        for (let i = copy.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [copy[i], copy[j]] = [copy[j], copy[i]];
-        }
-        return copy;
-    }
-
     // --- VARIABLES DE GESTION ---
     let quizQuestions = [];
     let currentQuizIndex = 0;
@@ -20,7 +10,21 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentEvalIndex = 0;
     let evalTimerInterval = null;
 
-    const TIMER_DURATION = 60; // 60 secondes par question
+    // Stockage des réponses utilisateur pour le calcul final
+    const userAnswers = {};
+
+    const QUIZ_TIMER_DURATION = 60;   // 60s pour les QCM rapides
+    const EVAL_TIMER_DURATION = 180;  // 180s pour laisser le temps de remplir les tableurs
+
+    // Mélange Fisher-Yates
+    function melanger(array) {
+        let copy = [...array];
+        for (let i = copy.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [copy[i], copy[j]] = [copy[j], copy[i]];
+        }
+        return copy;
+    }
 
     fetch("questions.json")
         .then(res => res.json())
@@ -32,7 +36,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function initialiserSite() {
         if (appData.titreGeneral) {
-            document.getElementById("main-title").textContent = appData.titreGeneral;
+            const titleEl = document.getElementById("main-title");
+            if (titleEl) titleEl.textContent = appData.titreGeneral;
         }
 
         afficherCours();
@@ -50,6 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function afficherCours() {
         const container = document.getElementById("cours-container");
+        if (!container) return;
         container.innerHTML = "";
         appData.cours.sections.forEach(sec => {
             const div = document.createElement("div");
@@ -63,8 +69,10 @@ document.addEventListener("DOMContentLoaded", () => {
     // ==========================================
     function lancerMinuteurQuiz() {
         clearInterval(quizTimerInterval);
-        let tempsRestant = TIMER_DURATION;
+        let tempsRestant = QUIZ_TIMER_DURATION;
         const timerEl = document.getElementById("quiz-timer");
+        if (!timerEl) return;
+        
         timerEl.classList.remove("timer-warning");
         timerEl.textContent = `⏱️ Temps restant : ${tempsRestant}s`;
 
@@ -78,9 +86,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (tempsRestant <= 0) {
                 clearInterval(quizTimerInterval);
+                sauvegarderReponseQuizCourante();
                 suivantQuiz();
             }
         }, 1000);
+    }
+
+    function sauvegarderReponseQuizCourante() {
+        const item = quizQuestions[currentQuizIndex];
+        if (!item) return;
+        const sel = document.querySelector(`input[name="quiz_${item.id}"]:checked`);
+        userAnswers[`quiz_${item.id}`] = sel ? sel.value : null;
     }
 
     function afficherQuestionQuiz() {
@@ -93,10 +109,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const total = quizQuestions.length;
         const pct = ((currentQuizIndex + 1) / total) * 100;
-        document.getElementById("quiz-progress-bar").style.width = `${pct}%`;
-        document.getElementById("quiz-step-info").textContent = `Question ${currentQuizIndex + 1}/${total}`;
+        
+        const progressBar = document.getElementById("quiz-progress-bar");
+        if (progressBar) progressBar.style.width = `${pct}%`;
+        
+        const stepInfo = document.getElementById("quiz-step-info");
+        if (stepInfo) stepInfo.textContent = `Question ${currentQuizIndex + 1}/${total}`;
 
         const container = document.getElementById("quiz-container");
+        if (!container) return;
         container.innerHTML = "";
 
         const item = quizQuestions[currentQuizIndex];
@@ -114,37 +135,45 @@ document.addEventListener("DOMContentLoaded", () => {
         container.appendChild(qDiv);
 
         const btnSuivant = document.getElementById("btn-suivant-quiz");
-        btnSuivant.textContent = (currentQuizIndex === total - 1) ? "Terminer le Quiz" : "Suivant ➔";
+        if (btnSuivant) {
+            btnSuivant.textContent = (currentQuizIndex === total - 1) ? "Terminer le Quiz" : "Suivant ➔";
+        }
     }
 
     function suivantQuiz() {
+        sauvegarderReponseQuizCourante();
         currentQuizIndex++;
         afficherQuestionQuiz();
     }
 
     function terminerQuiz() {
         clearInterval(quizTimerInterval);
-        document.getElementById("quiz-container").innerHTML = "<p><em>Quiz terminé ! Résultats ci-dessous :</em></p>";
-        document.getElementById("btn-suivant-quiz").classList.add("hidden");
+        const container = document.getElementById("quiz-container");
+        if (container) container.innerHTML = "<p><em>Quiz terminé ! Résultats ci-dessous :</em></p>";
+        
+        const btnSuivant = document.getElementById("btn-suivant-quiz");
+        if (btnSuivant) btnSuivant.classList.add("hidden");
         
         let score = 0;
         let total = quizQuestions.length;
         let feedback = [];
 
         quizQuestions.forEach(item => {
-            const selected = document.querySelector(`input[name="quiz_${item.id}"]:checked`);
-            if (selected && item.options[parseInt(selected.value)].estCorrecte) {
+            const val = userAnswers[`quiz_${item.id}`];
+            if (val !== null && val !== undefined && item.options[parseInt(val)].estCorrecte) {
                 score++;
             } else {
-                feedback.push(`• <strong>Question "${item.question.substring(0, 30)}..." :</strong> ${item.explication}`);
+                feedback.push(`• <strong>Question "${item.question.substring(0, 35)}..." :</strong> ${item.explication}`);
             }
         });
 
         const box = document.getElementById("quiz-feedback");
-        box.classList.remove("hidden");
-        box.innerHTML = `<strong>Score final : ${score}/${total}</strong><br>${feedback.join("<br>")}`;
+        if (box) {
+            box.classList.remove("hidden");
+            box.innerHTML = `<strong>Score final : ${score}/${total}</strong><br>${feedback.join("<br>")}`;
+        }
 
-        // Lancement de l'Évaluation
+        // Lancement automatique de l'Évaluation
         lancerEvaluation();
     }
 
@@ -194,8 +223,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function lancerMinuteurEval() {
         clearInterval(evalTimerInterval);
-        let tempsRestant = TIMER_DURATION;
+        let tempsRestant = EVAL_TIMER_DURATION;
         const timerEl = document.getElementById("eval-timer");
+        if (!timerEl) return;
+
         timerEl.classList.remove("timer-warning");
         timerEl.textContent = `⏱️ Temps restant : ${tempsRestant}s`;
 
@@ -203,15 +234,40 @@ document.addEventListener("DOMContentLoaded", () => {
             tempsRestant--;
             timerEl.textContent = `⏱️ Temps restant : ${tempsRestant}s`;
 
-            if (tempsRestant <= 10) {
+            if (tempsRestant <= 15) {
                 timerEl.classList.add("timer-warning");
             }
 
             if (tempsRestant <= 0) {
                 clearInterval(evalTimerInterval);
+                sauvegarderReponseEvalCourante();
                 suivantEval();
             }
         }, 1000);
+    }
+
+    function sauvegarderReponseEvalCourante() {
+        const item = evalItems[currentEvalIndex];
+        if (!item) return;
+
+        if (item.type === "qcm_multiple") {
+            const sel = document.querySelector(`input[name="${item.data.id}"]:checked`);
+            userAnswers[item.data.id] = sel ? sel.value : "";
+        } else if (item.type === "association") {
+            const sel = document.querySelector(`select[name="${item.data.id}"]`);
+            userAnswers[item.data.id] = sel ? sel.value : "";
+        } else if (item.type === "champs_textes" || item.type === "analyse_avancee") {
+            const input = document.querySelector(`input[name="${item.data.cle}"]`);
+            userAnswers[item.data.cle] = input ? input.value : "";
+        } else if (item.type === "tableur") {
+            item.data.champs.forEach(c => {
+                const input = document.querySelector(`input[name="${c.cle}"]`);
+                userAnswers[c.cle] = input ? input.value : "";
+            });
+        } else if (item.type === "tableur_classification") {
+            const sel = document.querySelector(`select[name="${item.data.id}"]`);
+            userAnswers[item.data.id] = sel ? sel.value : "";
+        }
     }
 
     function afficherQuestionEval() {
@@ -224,10 +280,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const total = evalItems.length;
         const pct = ((currentEvalIndex + 1) / total) * 100;
-        document.getElementById("eval-progress-bar").style.width = `${pct}%`;
-        document.getElementById("eval-step-info").textContent = `Élément ${currentEvalIndex + 1}/${total}`;
+        
+        const progressBar = document.getElementById("eval-progress-bar");
+        if (progressBar) progressBar.style.width = `${pct}%`;
+        
+        const stepInfo = document.getElementById("eval-step-info");
+        if (stepInfo) stepInfo.textContent = `Élément ${currentEvalIndex + 1}/${total}`;
 
         const container = document.getElementById("eval-container");
+        if (!container) return;
         container.innerHTML = "";
 
         const item = evalItems[currentEvalIndex];
@@ -326,36 +387,43 @@ document.addEventListener("DOMContentLoaded", () => {
         container.appendChild(exDiv);
 
         const btnSuivant = document.getElementById("btn-suivant-eval");
-        btnSuivant.textContent = (currentEvalIndex === total - 1) ? "Valider & Corriger" : "Suivant ➔";
+        if (btnSuivant) {
+            btnSuivant.textContent = (currentEvalIndex === total - 1) ? "Valider & Corriger" : "Suivant ➔";
+        }
     }
 
     function suivantEval() {
+        sauvegarderReponseEvalCourante();
         currentEvalIndex++;
         afficherQuestionEval();
     }
 
     function terminerEval() {
         clearInterval(evalTimerInterval);
-        document.getElementById("eval-container").innerHTML = "<p><em>Évaluation terminée ! Consultation de votre note ci-dessous :</em></p>";
-        document.getElementById("btn-suivant-eval").classList.add("hidden");
-        calculerEvaluation();
+        const container = document.getElementById("eval-container");
+        if (container) container.innerHTML = "<p><em>Évaluation terminée ! Consultation de votre note ci-dessous :</em></p>";
         
-        // Génération automatique / affichage du PDF
-        genererPDFResultats();
+        const btnSuivant = document.getElementById("btn-suivant-eval");
+        if (btnSuivant) btnSuivant.classList.add("hidden");
+        
+        calculerEvaluation();
     }
 
     function ecouterEvenements() {
-        document.getElementById("btn-suivant-quiz").addEventListener("click", () => {
-            suivantQuiz();
-        });
+        const btnSuivantQuiz = document.getElementById("btn-suivant-quiz");
+        if (btnSuivantQuiz) {
+            btnSuivantQuiz.addEventListener("click", () => suivantQuiz());
+        }
 
-        document.getElementById("btn-suivant-eval").addEventListener("click", () => {
-            suivantEval();
-        });
+        const btnSuivantEval = document.getElementById("btn-suivant-eval");
+        if (btnSuivantEval) {
+            btnSuivantEval.addEventListener("click", () => suivantEval());
+        }
 
-        document.getElementById("btn-telecharger-pdf").addEventListener("click", () => {
-            genererPDFResultats();
-        });
+        const btnPdf = document.getElementById("btn-telecharger-pdf");
+        if (btnPdf) {
+            btnPdf.addEventListener("click", () => genererPDFResultats());
+        }
     }
 
     function calculerEvaluation() {
@@ -368,69 +436,66 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (ex.type === "qcm_multiple") {
                 ex.questions.forEach(q => {
-                    const sel = document.querySelector(`input[name="${q.id}"]:checked`);
-                    if (sel && q.options[parseInt(sel.value)].estCorrecte) {
+                    const selVal = userAnswers[q.id];
+                    if (selVal !== undefined && selVal !== "" && q.options[parseInt(selVal)].estCorrecte) {
                         ptsEx += 1;
                     } else {
-                        errs.push(`• <em>${q.texte}</em> $\rightarrow$ ${q.correction}`);
+                        errs.push(`• <em>${q.texte}</em> ➔ ${q.correction}`);
                     }
                 });
             }
             else if (ex.type === "association") {
                 ex.pairs.forEach(p => {
-                    const sel = document.querySelector(`select[name="${p.id}"]`);
-                    if (sel && sel.value === p.bonneReponse) {
+                    const val = userAnswers[p.id];
+                    if (val === p.bonneReponse) {
                         ptsEx += p.pts;
                     } else {
-                        errs.push(`• <em>${p.element}</em> $\rightarrow$ Attendu : <strong>${p.bonneReponse}</strong>`);
+                        errs.push(`• <em>${p.element}</em> ➔ Attendu : <strong>${p.bonneReponse}</strong>`);
                     }
                 });
             }
             else if (ex.type === "champs_textes") {
                 ex.questionsTextes.forEach(q => {
-                    const input = document.querySelector(`input[name="${q.cle}"]`);
-                    const val = input ? input.value.toLowerCase().trim() : "";
+                    const val = (userAnswers[q.cle] || "").toLowerCase().trim();
                     const ok = q.motsCles.some(m => val.includes(m));
                     if (ok) {
                         ptsEx += q.pts;
                     } else {
-                        errs.push(`• <em>${q.label}</em> $\rightarrow$ Attendu : <strong>${q.reponseType}</strong>`);
+                        errs.push(`• <em>${q.label}</em> ➔ Attendu : <strong>${q.reponseType}</strong>`);
                     }
                 });
             }
             else if (ex.type === "analyse_avancee") {
                 ex.questionsLongues.forEach(q => {
-                    const input = document.querySelector(`input[name="${q.cle}"]`);
-                    const val = input ? input.value.toLowerCase().trim() : "";
+                    const val = (userAnswers[q.cle] || "").toLowerCase().trim();
                     const ok = q.motsCles.some(m => val.includes(m));
                     if (ok) {
                         ptsEx += q.pts;
                     } else {
-                        errs.push(`• <em>${q.label}</em> $\rightarrow$ Attendu : <strong>${q.reponseType}</strong>`);
+                        errs.push(`• <em>${q.label}</em> ➔ Attendu : <strong>${q.reponseType}</strong>`);
                     }
                 });
             }
             else if (ex.type === "tableur") {
                 ex.lignes.forEach(l => {
                     l.champs.forEach(c => {
-                        const input = document.querySelector(`input[name="${c.cle}"]`);
-                        const val = input ? input.value.toLowerCase().trim() : "";
+                        const val = (userAnswers[c.cle] || "").toLowerCase().trim();
                         const ok = c.motsCles.some(m => val.includes(m));
                         if (ok) {
                             ptsEx += c.pts;
                         } else {
-                            errs.push(`• Tableur [${l.objet}] $\rightarrow$ Attendu : <strong>${c.reponseType}</strong>`);
+                            errs.push(`• Tableur [${l.objet}] ➔ Attendu : <strong>${c.reponseType}</strong>`);
                         }
                     });
                 });
             }
             else if (ex.type === "tableur_classification") {
                 ex.lignes.forEach(l => {
-                    const sel = document.querySelector(`select[name="${l.id}"]`);
-                    if (sel && sel.value === l.bonneReponse) {
+                    const val = userAnswers[l.id];
+                    if (val === l.bonneReponse) {
                         ptsEx += l.pts;
                     } else {
-                        errs.push(`• <em>${l.element}</em> $\rightarrow$ Attendu : <strong>${l.bonneReponse}</strong>`);
+                        errs.push(`• <em>${l.element}</em> ➔ Attendu : <strong>${l.bonneReponse}</strong>`);
                     }
                 });
             }
@@ -445,12 +510,27 @@ document.addEventListener("DOMContentLoaded", () => {
             `;
         });
 
-        const mainteant = new Date();
-        document.getElementById("pdf-date").textContent = "Réalisé le : " + mainteant.toLocaleDateString("fr-FR") + " à " + mainteant.toLocaleTimeString("fr-FR");
-        document.getElementById("note-finale").textContent = Math.round(scoreTotal);
-        document.getElementById("eval-corrections-detail").innerHTML = detailsHTML;
-        document.getElementById("eval-results").classList.remove("hidden");
-        document.getElementById("eval-results").scrollIntoView({ behavior: "smooth" });
+        const maintenant = new Date();
+        const dateEl = document.getElementById("pdf-date");
+        if (dateEl) {
+            dateEl.textContent = "Réalisé le : " + maintenant.toLocaleDateString("fr-FR") + " à " + maintenant.toLocaleTimeString("fr-FR");
+        }
+        
+        const noteEl = document.getElementById("note-finale");
+        if (noteEl) {
+            noteEl.textContent = Math.round(scoreTotal * 100) / 100;
+        }
+
+        const detailsEl = document.getElementById("eval-corrections-detail");
+        if (detailsEl) {
+            detailsEl.innerHTML = detailsHTML;
+        }
+
+        const resultsBox = document.getElementById("eval-results");
+        if (resultsBox) {
+            resultsBox.classList.remove("hidden");
+            resultsBox.scrollIntoView({ behavior: "smooth" });
+        }
     }
 
     // ==========================================
@@ -458,6 +538,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // ==========================================
     function genererPDFResultats() {
         const element = document.getElementById("pdf-report-area");
+        if (!element) return;
         
         const opt = {
             margin:       10,
