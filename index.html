@@ -31,18 +31,12 @@
         <section class="card">
             <div class="card-header">
                 <span class="step-num bg-green">2</span>
-                <h2>Quiz de vérification rapide</h2>
-                <span id="quiz-progress" class="progress-indicator">Question 1 / --</span>
+                <h2>Quiz de vérification rapide (Ordre Aléatoire)</h2>
             </div>
             <div class="card-body">
                 <form id="quiz-form" class="space-y-sm">
                     <div id="quiz-container" class="space-y-sm"></div>
-                    
-                    <div class="action-bar flex-between">
-                        <button type="button" id="btn-quiz-prev" class="btn btn-secondary">Précédent</button>
-                        <button type="button" id="btn-quiz-next" class="btn btn-primary">Suivant</button>
-                        <button type="button" id="btn-valider-quiz" class="btn btn-green" style="display: none;">Vérifier le Quiz</button>
-                    </div>
+                    <button type="button" id="btn-valider-quiz" class="btn btn-green">Vérifier le Quiz</button>
                 </form>
                 <div id="quiz-feedback" class="feedback-box hidden"></div>
             </div>
@@ -52,17 +46,14 @@
         <section class="card">
             <div class="card-header">
                 <span class="step-num bg-purple">3</span>
-                <h2>Évaluation Progressive (40 pts)</h2>
-                <span id="eval-progress" class="progress-indicator">Étape 1 / --</span>
+                <h2>Évaluation Progressive & Grilles Tableurs (40 pts)</h2>
             </div>
             <div class="card-body">
                 <form id="eval-form" class="space-y-md">
                     <div id="eval-container" class="space-y-md"></div>
 
-                    <div class="action-bar flex-between">
-                        <button type="button" id="btn-eval-prev" class="btn btn-secondary">Précédent</button>
-                        <button type="button" id="btn-eval-next" class="btn btn-primary">Suivant</button>
-                        <button type="button" id="btn-soumettre-eval" class="btn btn-green" style="display: none;">Corriger mon évaluation</button>
+                    <div class="action-bar">
+                        <button type="button" id="btn-soumettre-eval" class="btn btn-primary">Corriger mon évaluation</button>
                     </div>
                 </form>
 
