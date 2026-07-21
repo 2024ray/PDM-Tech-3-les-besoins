@@ -133,6 +133,8 @@ document.addEventListener("DOMContentLoaded", () => {
                                 <option value="">-- Sélectionner --</option>
                                 <option value="Usage">Fonction d'Usage</option>
                                 <option value="Estime">Fonction d'Estime</option>
+                                <option value="Aucun">Aucun</option>
+                                <option value="Les deux">Les deux</option>
                             </select>
                         </td>
                     </tr>
