@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     let appData = null;
 
-    // Fonction de mélange aléatoire (Fisher-Yates)
+    // Mélange Fisher-Yates
     function melanger(array) {
         let copy = [...array];
         for (let i = copy.length - 1; i > 0; i--) {
@@ -10,6 +10,17 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         return copy;
     }
+
+    // --- VARIABLES DE GESTION DU PARENT/STEPPER ---
+    let quizQuestions = [];
+    let currentQuizIndex = 0;
+    let quizTimerInterval = null;
+
+    let evalItems = [];
+    let currentEvalIndex = 0;
+    let evalTimerInterval = null;
+
+    const TIMER_DURATION = 60; // 60 secondes par question
 
     fetch("questions.json")
         .then(res => res.json())
@@ -25,8 +36,17 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         afficherCours();
-        afficherQuiz();
-        afficherEvaluation();
+        
+        // Préparation du Quiz
+        quizQuestions = melanger(appData.quizComprehension);
+        currentQuizIndex = 0;
+        afficherQuestionQuiz();
+
+        // Préparation de l'Évaluation
+        preparerEvaluation();
+        currentEvalIndex = 0;
+        afficherQuestionEval();
+
         ecouterEvenements();
     }
 
@@ -40,174 +60,285 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    function afficherQuiz() {
+    // ==========================================
+    // --- GESTION DU QUIZ ---
+    // ==========================================
+    function lancerMinuteurQuiz() {
+        clearInterval(quizTimerInterval);
+        let tempsRestant = TIMER_DURATION;
+        const timerEl = document.getElementById("quiz-timer");
+        timerEl.classList.remove("timer-warning");
+        timerEl.textContent = `⏱️ Temps restant : ${tempsRestant}s`;
+
+        quizTimerInterval = setInterval(() => {
+            tempsRestant--;
+            timerEl.textContent = `⏱️ Temps restant : ${tempsRestant}s`;
+
+            if (tempsRestant <= 10) {
+                timerEl.classList.add("timer-warning");
+            }
+
+            if (tempsRestant <= 0) {
+                clearInterval(quizTimerInterval);
+                suivantQuiz(); // Pass automatique à la question suivante
+            }
+        }, 1000);
+    }
+
+    function afficherQuestionQuiz() {
+        if (currentQuizIndex >= quizQuestions.length) {
+            terminerQuiz();
+            return;
+        }
+
+        lancerMinuteurQuiz();
+
+        // Mise à jour de la barre de progression
+        const total = quizQuestions.length;
+        const pct = ((currentQuizIndex + 1) / total) * 100;
+        document.getElementById("quiz-progress-bar").style.width = `${pct}%`;
+        document.getElementById("quiz-step-info").textContent = `Question ${currentQuizIndex + 1}/${total}`;
+
         const container = document.getElementById("quiz-container");
         container.innerHTML = "";
 
-        // Mélanger les questions du quiz
-        const quizMelange = melanger(appData.quizComprehension);
+        const item = quizQuestions[currentQuizIndex];
+        const qDiv = document.createElement("div");
+        qDiv.className = "exercise-block";
 
-        quizMelange.forEach((item, index) => {
-            const qDiv = document.createElement("div");
-            qDiv.className = "exercise-block";
+        const options = item.options.map((opt, idx) => `
+            <label class="option-label">
+                <input type="radio" name="quiz_${item.id}" value="${idx}">
+                ${opt.texte}
+            </label>
+        `).join("");
 
-            const options = item.options.map((opt, idx) => `
-                <label class="option-label">
-                    <input type="radio" name="quiz_${item.id}" value="${idx}">
-                    ${opt.texte}
-                </label>
-            `).join("");
+        qDiv.innerHTML = `<p><strong>${currentQuizIndex + 1}. ${item.question}</strong></p><div>${options}</div>`;
+        container.appendChild(qDiv);
 
-            qDiv.innerHTML = `<p><strong>${index + 1}. ${item.question}</strong></p><div>${options}</div>`;
-            container.appendChild(qDiv);
+        const btnSuivant = document.getElementById("btn-suivant-quiz");
+        btnSuivant.textContent = (currentQuizIndex === total - 1) ? "Terminer le Quiz" : "Suivant ➔";
+    }
+
+    function suivantQuiz() {
+        currentQuizIndex++;
+        afficherQuestionQuiz();
+    }
+
+    function terminerQuiz() {
+        clearInterval(quizTimerInterval);
+        document.getElementById("quiz-container").innerHTML = "<p><em>Quiz terminé ! Voici vos résultats ci-dessous :</em></p>";
+        document.getElementById("btn-suivant-quiz").classList.add("hidden");
+        
+        // Calcul des points
+        let score = 0;
+        let total = quizQuestions.length;
+        let feedback = [];
+
+        quizQuestions.forEach(item => {
+            const selected = document.querySelector(`input[name="quiz_${item.id}"]:checked`);
+            if (selected && item.options[parseInt(selected.value)].estCorrecte) {
+                score++;
+            } else {
+                feedback.push(`• <strong>Question "${item.question.substring(0, 30)}..." :</strong> ${item.explication}`);
+            }
+        });
+
+        const box = document.getElementById("quiz-feedback");
+        box.classList.remove("hidden");
+        box.innerHTML = `<strong>Score final : ${score}/${total}</strong><br>${feedback.join("<br>")}`;
+    }
+
+    // ==========================================
+    // --- GESTION DE L'ÉVALUATION ---
+    // ==========================================
+    function preparerEvaluation() {
+        evalItems = [];
+        appData.evaluation.forEach(ex => {
+            if (ex.type === "qcm_multiple") {
+                melanger(ex.questions).forEach(q => {
+                    evalItems.push({ type: "qcm_multiple", titre: ex.titre, points: 1, data: q, parentEx: ex });
+                });
+            } else if (ex.type === "association") {
+                melanger(ex.pairs).forEach(p => {
+                    evalItems.push({ type: "association", titre: ex.titre, points: p.pts, data: p, parentEx: ex });
+                });
+            } else if (ex.type === "champs_textes") {
+                melanger(ex.questionsTextes).forEach(q => {
+                    evalItems.push({ type: "champs_textes", titre: ex.titre, points: q.pts, data: q, parentEx: ex });
+                });
+            } else if (ex.type === "analyse_avancee") {
+                melanger(ex.questionsLongues).forEach(q => {
+                    evalItems.push({ type: "analyse_avancee", titre: ex.titre, points: q.pts, data: q, parentEx: ex });
+                });
+            } else if (ex.type === "tableur") {
+                melanger(ex.lignes).forEach(l => {
+                    evalItems.push({ type: "tableur", titre: ex.titre, colonnes: ex.colonnes, consigne: ex.consigne, data: l, parentEx: ex });
+                });
+            } else if (ex.type === "tableur_classification") {
+                melanger(ex.lignes).forEach(l => {
+                    evalItems.push({ type: "tableur_classification", titre: ex.titre, colonnes: ex.colonnes, consigne: ex.consigne, data: l, parentEx: ex });
+                });
+            }
         });
     }
 
-    function afficherEvaluation() {
+    function lancerMinuteurEval() {
+        clearInterval(evalTimerInterval);
+        let tempsRestant = TIMER_DURATION;
+        const timerEl = document.getElementById("eval-timer");
+        timerEl.classList.remove("timer-warning");
+        timerEl.textContent = `⏱️ Temps restant : ${tempsRestant}s`;
+
+        evalTimerInterval = setInterval(() => {
+            tempsRestant--;
+            timerEl.textContent = `⏱️ Temps restant : ${tempsRestant}s`;
+
+            if (tempsRestant <= 10) {
+                timerEl.classList.add("timer-warning");
+            }
+
+            if (tempsRestant <= 0) {
+                clearInterval(evalTimerInterval);
+                suivantEval(); // Passage automatique à l'élément suivant
+            }
+        }, 1000);
+    }
+
+    function afficherQuestionEval() {
+        if (currentEvalIndex >= evalItems.length) {
+            terminerEval();
+            return;
+        }
+
+        lancerMinuteurEval();
+
+        const total = evalItems.length;
+        const pct = ((currentEvalIndex + 1) / total) * 100;
+        document.getElementById("eval-progress-bar").style.width = `${pct}%`;
+        document.getElementById("eval-step-info").textContent = `Élément ${currentEvalIndex + 1}/${total}`;
+
         const container = document.getElementById("eval-container");
         container.innerHTML = "";
 
-        appData.evaluation.forEach(ex => {
-            const exDiv = document.createElement("div");
-            exDiv.className = "exercise-block";
+        const item = evalItems[currentEvalIndex];
+        const exDiv = document.createElement("div");
+        exDiv.className = "exercise-block";
 
-            let contentHTML = "";
+        let contentHTML = "";
 
-            if (ex.type === "qcm_multiple") {
-                // Mélanger les questions de l'exercice 1
-                const qMelangees = melanger(ex.questions);
-                contentHTML = qMelangees.map((q, idx) => `
-                    <div style="margin-top:12px;">
-                        <p><strong>1.${idx + 1} ${q.texte}</strong></p>
-                        ${q.options.map((opt, i) => `
-                            <label class="option-label">
-                                <input type="radio" name="${q.id}" value="${i}">
-                                ${opt.texte}
-                            </label>
-                        `).join("")}
-                    </div>
-                `).join("");
-            } 
-            else if (ex.type === "association") {
-                // Mélanger les paires de l'exercice 2
-                const pMelangees = melanger(ex.pairs);
-                contentHTML = pMelangees.map(p => `
-                    <div style="margin-top:10px;">
-                        <label><strong>${p.element} :</strong></label>
-                        <select name="${p.id}" class="select-input">
-                            <option value="">-- Choisis une option --</option>
-                            ${p.choix.map(c => `<option value="${c}">${c}</option>`).join("")}
-                        </select>
-                    </div>
-                `).join("");
-            }
-            else if (ex.type === "champs_textes") {
-                // Mélanger les questions ouvertes
-                const qTextesMelangees = melanger(ex.questionsTextes);
-                contentHTML = qTextesMelangees.map(q => `
-                    <div style="margin-top:10px;">
-                        <label><strong>${q.label}</strong></label>
-                        <input type="text" name="${q.cle}" class="input-text" placeholder="Rédige ta réponse...">
-                    </div>
-                `).join("");
-            }
-            else if (ex.type === "analyse_avancee") {
-                const qLonguesMelangees = melanger(ex.questionsLongues);
-                contentHTML = qLonguesMelangees.map(q => `
-                    <div style="margin-top:10px;">
-                        <label><strong>${q.label}</strong></label>
-                        <input type="text" name="${q.cle}" class="input-text" placeholder="Rédige ton explication...">
-                    </div>
-                `).join("");
-            }
-            else if (ex.type === "tableur") {
-                // Mélanger les lignes du tableur 1
-                const lignesMelangees = melanger(ex.lignes);
-                const headersHTML = ex.colonnes.map(col => `<th>${col}</th>`).join("");
-                const rowsHTML = lignesMelangees.map(l => `
-                    <tr>
-                        <td><strong>${l.objet}</strong></td>
-                        ${l.champs.map(c => `
-                            <td>
-                                <input type="text" name="${c.cle}" class="tableur-cell-input" placeholder="Remplir...">
-                            </td>
-                        `).join("")}
-                    </tr>
-                `).join("");
-
-                contentHTML = `
-                    <p style="margin-bottom:8px;">${ex.consigne}</p>
-                    <div class="tableur-wrapper">
-                        <table class="tableur-custom">
-                            <thead><tr>${headersHTML}</tr></thead>
-                            <tbody>${rowsHTML}</tbody>
-                        </table>
-                    </div>
-                `;
-            }
-            else if (ex.type === "tableur_classification") {
-                // Mélanger les lignes du tableur 2
-                const lignesMelangees = melanger(ex.lignes);
-                const headersHTML = ex.colonnes.map(col => `<th>${col}</th>`).join("");
-                const rowsHTML = lignesMelangees.map(l => `
-                    <tr>
-                        <td>${l.element}</td>
-                        <td>
-                            <select name="${l.id}" class="tableur-cell-input">
-                                <option value="">-- Sélectionner --</option>
-                                <option value="Usage">Fonction d'Usage</option>
-                                <option value="Estime">Fonction d'Estime</option>
-                                <option value="Aucun">Aucun</option>
-                                <option value="Les deux">Les deux</option>
-                            </select>
-                        </td>
-                    </tr>
-                `).join("");
-
-                contentHTML = `
-                    <p style="margin-bottom:8px;">${ex.consigne}</p>
-                    <div class="tableur-wrapper">
-                        <table class="tableur-custom">
-                            <thead><tr>${headersHTML}</tr></thead>
-                            <tbody>${rowsHTML}</tbody>
-                        </table>
-                    </div>
-                `;
-            }
-
-            exDiv.innerHTML = `
-                <div class="exercise-header">
-                    <strong>${ex.titre}</strong>
-                    <span class="tag bg-purple">${ex.niveau} • ${ex.points} pts</span>
+        if (item.type === "qcm_multiple") {
+            const q = item.data;
+            contentHTML = `
+                <div style="margin-top:8px;">
+                    <p><strong>${q.texte}</strong></p>
+                    ${q.options.map((opt, i) => `
+                        <label class="option-label">
+                            <input type="radio" name="${q.id}" value="${i}">
+                            ${opt.texte}
+                        </label>
+                    `).join("")}
                 </div>
-                ${contentHTML}
             `;
-            container.appendChild(exDiv);
-        });
+        } else if (item.type === "association") {
+            const p = item.data;
+            contentHTML = `
+                <div style="margin-top:8px;">
+                    <label><strong>${p.element} :</strong></label>
+                    <select name="${p.id}" class="select-input">
+                        <option value="">-- Choisis une option --</option>
+                        ${p.choix.map(c => `<option value="${c}">${c}</option>`).join("")}
+                    </select>
+                </div>
+            `;
+        } else if (item.type === "champs_textes" || item.type === "analyse_avancee") {
+            const q = item.data;
+            contentHTML = `
+                <div style="margin-top:8px;">
+                    <label><strong>${q.label}</strong></label>
+                    <input type="text" name="${q.cle}" class="input-text" placeholder="Rédige ta réponse...">
+                </div>
+            `;
+        } else if (item.type === "tableur") {
+            const l = item.data;
+            const headersHTML = item.colonnes.map(col => `<th>${col}</th>`).join("");
+            contentHTML = `
+                <p style="margin-bottom:8px;">${item.consigne}</p>
+                <div class="tableur-wrapper">
+                    <table class="tableur-custom">
+                        <thead><tr>${headersHTML}</tr></thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>${l.objet}</strong></td>
+                                ${l.champs.map(c => `
+                                    <td>
+                                        <input type="text" name="${c.cle}" class="tableur-cell-input" placeholder="Remplir...">
+                                    </td>
+                                `).join("")}
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            `;
+        } else if (item.type === "tableur_classification") {
+            const l = item.data;
+            const headersHTML = item.colonnes.map(col => `<th>${col}</th>`).join("");
+            contentHTML = `
+                <p style="margin-bottom:8px;">${item.consigne}</p>
+                <div class="tableur-wrapper">
+                    <table class="tableur-custom">
+                        <thead><tr>${headersHTML}</tr></thead>
+                        <tbody>
+                            <tr>
+                                <td>${l.element}</td>
+                                <td>
+                                    <select name="${l.id}" class="tableur-cell-input">
+                                        <option value="">-- Sélectionner --</option>
+                                        <option value="Usage">Fonction d'Usage</option>
+                                        <option value="Estime">Fonction d'Estime</option>
+                                        <option value="Aucun">Aucun</option>
+                                        <option value="Les deux">Les deux</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            `;
+        }
+
+        exDiv.innerHTML = `
+            <div class="exercise-header">
+                <strong>${item.titre}</strong>
+                <span class="tag bg-purple">${item.parentEx.niveau}</span>
+            </div>
+            ${contentHTML}
+        `;
+        container.appendChild(exDiv);
+
+        const btnSuivant = document.getElementById("btn-suivant-eval");
+        btnSuivant.textContent = (currentEvalIndex === total - 1) ? "Valider & Corriger" : "Suivant ➔";
+    }
+
+    function suivantEval() {
+        currentEvalIndex++;
+        afficherQuestionEval();
+    }
+
+    function terminerEval() {
+        clearInterval(evalTimerInterval);
+        document.getElementById("eval-container").innerHTML = "<p><em>Évaluation terminée ! Consultation de votre note ci-dessous :</em></p>";
+        document.getElementById("btn-suivant-eval").classList.add("hidden");
+        calculerEvaluation();
     }
 
     function ecouterEvenements() {
-        document.getElementById("btn-valider-quiz").addEventListener("click", () => {
-            let score = 0;
-            let total = appData.quizComprehension.length;
-            let feedback = [];
-
-            appData.quizComprehension.forEach(item => {
-                const selected = document.querySelector(`input[name="quiz_${item.id}"]:checked`);
-                if (selected && item.options[parseInt(selected.value)].estCorrecte) {
-                    score++;
-                } else {
-                    feedback.push(`• <strong>Question "${item.question.substring(0, 30)}..." :</strong> ${item.explication}`);
-                }
-            });
-
-            const box = document.getElementById("quiz-feedback");
-            box.classList.remove("hidden");
-            box.innerHTML = `<strong>Score : ${score}/${total}</strong><br>${feedback.join("<br>")}`;
+        document.getElementById("btn-suivant-quiz").addEventListener("click", () => {
+            suivantQuiz();
         });
 
-        document.getElementById("btn-soumettre-eval").addEventListener("click", () => {
-            calculerEvaluation();
+        document.getElementById("btn-suivant-eval").addEventListener("click", () => {
+            suivantEval();
         });
     }
 
