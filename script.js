@@ -334,7 +334,6 @@ document.addEventListener("DOMContentLoaded", () => {
         btnSuivant.textContent = (currentEvalIndex === total - 1) ? "Valider & Corriger" : "Suivant ➔";
     }
 
-    // Sauvegarder les données du formulaire courant dans un objet JavaScript global
     function sauvegarderReponsesQuestionCourante() {
         const item = evalItems[currentEvalIndex];
         if (!item) return;
@@ -481,23 +480,40 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ==========================================
-    // --- GESTION DE LA GÉNÉRATION PDF ---
+    // --- GESTION DE LA GÉNÉRATION PDF (CORRIGÉ) ---
     // ==========================================
     function genererPDFResultats() {
         const element = document.getElementById("pdf-report-area");
-        
+        const containerResults = document.getElementById("eval-results");
+
+        // Force l'affichage global du composant
+        containerResults.classList.remove("hidden");
+
         const opt = {
-            margin:       10,
+            margin:       [10, 10, 10, 10],
             filename:     'Resultats_Evaluation_Technologie_3eme.pdf',
             image:        { type: 'jpeg', quality: 0.98 },
-            html2canvas:  { scale: 2 },
-            jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            html2canvas:  { 
+                scale: 2,
+                useCORS: true,
+                logging: false,
+                scrollX: 0,
+                scrollY: 0
+            },
+            jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
+            pagebreak:    { mode: ['avoid-all', 'css', 'legacy'] }
         };
 
-        if (window.html2pdf) {
-            html2pdf().set(opt).from(element).save();
-        } else {
-            window.print();
-        }
+        // Pause de 100ms pour garantir la fin du rendu du DOM avant capture
+        setTimeout(() => {
+            if (window.html2pdf) {
+                html2pdf().set(opt).from(element).save().catch(err => {
+                    console.error("Erreur PDF:", err);
+                    window.print();
+                });
+            } else {
+                window.print();
+            }
+        }, 100);
     }
 });
