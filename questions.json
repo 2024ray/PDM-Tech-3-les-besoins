@@ -1,5 +1,5 @@
 {
-  "titreGeneral": "Technologie 3ème • Exprimer et analyser le besoin (4 Choix : Vrai / Faux / Aucun / Les deux)",
+  "titreGeneral": "Technologie 3ème • Exprimer et analyser le besoin (Questions Mélangées)",
   "cours": {
     "titre": "Synthèse du cours : Exprimer et analyser le besoin",
     "sections": [
@@ -24,7 +24,7 @@
   "quizComprehension": [
     {
       "id": "q1",
-      "question": "1. Un besoin est une nécessité ou un désir éprouvé par un utilisateur.",
+      "question": "Un besoin est une nécessité ou un désir éprouvé par un utilisateur.",
       "options": [
         { "texte": "Vrai", "estCorrecte": true },
         { "texte": "Faux", "estCorrecte": false },
@@ -35,7 +35,7 @@
     },
     {
       "id": "q2",
-      "question": "2. La fonction d'usage répond à la question 'Pourquoi l'objet me plaît-il ?'.",
+      "question": "La fonction d'usage répond à la question 'Pourquoi l'objet me plaît-il ?'.",
       "options": [
         { "texte": "Vrai", "estCorrecte": false },
         { "texte": "Faux", "estCorrecte": true },
@@ -46,9 +46,9 @@
     },
     {
       "id": "q3",
-      "question": "3. Dans la Bête à cornes, la question 'Sur quoi agit-il ?' désigne :",
+      "question": "Dans la Bête à cornes, la question 'Sur quoi agit-il ?' désigne la matière ou l'élément transformé.",
       "options": [
-        { "texte": "Vrai", "estCorrecte": false },
+        { "texte": "Vrai", "estCorrecte": true },
         { "texte": "Faux", "estCorrecte": false },
         { "texte": "Aucun", "estCorrecte": false },
         { "texte": "Les deux", "estCorrecte": false }
@@ -57,7 +57,7 @@
     },
     {
       "id": "q4",
-      "question": "4. Un objet naturel (comme une pomme sur un arbre) est un objet technique.",
+      "question": "Un objet naturel (comme une pomme sur un arbre) est un objet technique.",
       "options": [
         { "texte": "Vrai", "estCorrecte": false },
         { "texte": "Faux", "estCorrecte": true },
@@ -68,7 +68,7 @@
     },
     {
       "id": "q5",
-      "question": "5. Les contraintes écologiques peuvent faire évoluer le besoin d'un objet.",
+      "question": "Les contraintes écologiques peuvent faire évoluer le besoin d'un objet.",
       "options": [
         { "texte": "Vrai", "estCorrecte": true },
         { "texte": "Faux", "estCorrecte": false },
@@ -79,7 +79,7 @@
     },
     {
       "id": "q6",
-      "question": "6. La couleur rouge et le logo d'une paire de baskets font partie de sa fonction d'usage.",
+      "question": "La couleur rouge et le logo d'une paire de baskets font partie de sa fonction d'usage.",
       "options": [
         { "texte": "Vrai", "estCorrecte": false },
         { "texte": "Faux", "estCorrecte": true },
@@ -90,7 +90,7 @@
     },
     {
       "id": "q7",
-      "question": "7. La Bête à cornes est l'outil graphique utilisé pour exprimer le besoin principal.",
+      "question": "La Bête à cornes est l'outil graphique utilisé pour exprimer le besoin principal.",
       "options": [
         { "texte": "Vrai", "estCorrecte": true },
         { "texte": "Faux", "estCorrecte": false },
@@ -101,7 +101,7 @@
     },
     {
       "id": "q8",
-      "question": "8. Si le besoin auquel répond un objet disparaît, l'objet devient obsolète.",
+      "question": "Si le besoin auquel répond un objet disparaît, l'objet devient obsolète.",
       "options": [
         { "texte": "Vrai", "estCorrecte": true },
         { "texte": "Faux", "estCorrecte": false },
@@ -121,7 +121,7 @@
       "questions": [
         {
           "id": "ex1_1",
-          "texte": "1.1 La fonction d'usage d'un stylo est de déposer de l'encre sur du papier pour écrire.",
+          "texte": "La fonction d'usage d'un stylo est de déposer de l'encre sur du papier pour écrire.",
           "options": [
             { "texte": "Vrai", "estCorrecte": true },
             { "texte": "Faux", "estCorrecte": false },
@@ -132,7 +132,7 @@
         },
         {
           "id": "ex1_2",
-          "texte": "1.2 Avoir un cadran doré et un bracelet élégant sur une montre est une fonction d'estime.",
+          "texte": "Avoir un cadran doré et un bracelet élégant sur une montre est une fonction d'estime.",
           "options": [
             { "texte": "Vrai", "estCorrecte": true },
             { "texte": "Faux", "estCorrecte": false },
@@ -143,7 +143,7 @@
         },
         {
           "id": "ex1_3",
-          "texte": "1.3 Un besoin reste strictement identique et ne change jamais à travers les époques.",
+          "texte": "Un besoin reste strictly identique et ne change jamais à travers les époques.",
           "options": [
             { "texte": "Vrai", "estCorrecte": false },
             { "texte": "Faux", "estCorrecte": true },
@@ -154,7 +154,7 @@
         },
         {
           "id": "ex1_4",
-          "texte": "1.4 Dans la Bête à cornes, 'À qui rend-il service ?' s'adresse au fabricant de l'objet.",
+          "texte": "Dans la Bête à cornes, 'À qui rend-il service ?' s'adresse au fabricant de l'objet.",
           "options": [
             { "texte": "Vrai", "estCorrecte": false },
             { "texte": "Faux", "estCorrecte": true },
@@ -165,7 +165,7 @@
         },
         {
           "id": "ex1_5",
-          "texte": "1.5 Un marteau en pierre préhistorique taillé par l'Homme est un objet technique.",
+          "texte": "Un marteau en pierre préhistorique taillé par l'Homme est un objet technique.",
           "options": [
             { "texte": "Vrai", "estCorrecte": true },
             { "texte": "Faux", "estCorrecte": false },
@@ -199,35 +199,35 @@
       "questionsTextes": [
         {
           "cle": "casque_a",
-          "label": "3.1 À qui le casque audio rend-il service ?",
+          "label": "À qui le casque audio rend-il service ?",
           "motsCles": ["utilisateur", "auditeur", "personne", "client", "eleve"],
           "reponseType": "À l'utilisateur / auditeur.",
           "pts": 1
         },
         {
           "cle": "casque_b",
-          "label": "3.2 Sur quoi agit-il directement ?",
+          "label": "Sur quoi agit-il directement ?",
           "motsCles": ["son", "bruit", "oreille", "signal", "musique"],
           "reponseType": "Sur les ondes sonores / le son perçu par les oreilles.",
           "pts": 1
         },
         {
           "cle": "casque_c",
-          "label": "3.3 Dans quel but existe-t-il ?",
+          "label": "Dans quel but existe-t-il ?",
           "motsCles": ["ecouter", "musique", "isoler", "bruit", "reduire"],
           "reponseType": "Permettre d'écouter du son en s'isolant des bruits extérieurs.",
           "pts": 1
         },
         {
           "cle": "casque_d",
-          "label": "3.4 Donne un exemple de fonction d'estime pour ce casque :",
+          "label": "Donne un exemple de fonction d'estime pour ce casque :",
           "motsCles": ["couleur", "design", "marque", "coussinet", "cuir", "look"],
           "reponseType": "Un fini noir mat, une marque prestigieuse, des coussinets en cuir.",
           "pts": 1
         },
         {
           "cle": "casque_e",
-          "label": "3.5 Pourquoi la technologie sans fil (Bluetooth) a-t-elle remplacé le câble jack ?",
+          "label": "Pourquoi la technologie sans fil (Bluetooth) a-t-elle remplacé le câble jack ?",
           "motsCles": ["liberte", "mouvement", "cable", "fil", "pratique", "smartphone"],
           "reponseType": "Pour offrir une plus grande liberté de mouvement et s'adapter aux nouveaux smartphones.",
           "pts": 1
@@ -243,21 +243,21 @@
       "questionsLongues": [
         {
           "cle": "eco_1",
-          "label": "4.1 Quel problème environnemental a entraîné l'évolution du besoin vers la gourde réutilisable ?",
+          "label": "Quel problème environnemental a entraîné l'évolution du besoin vers la gourde réutilisable ?",
           "motsCles": ["plastique", "pollution", "dechet", "ocean", "jetable", "environnement"],
           "reponseType": "La pollution massive liée aux bouteilles en plastique à usage unique.",
           "pts": 1.5
         },
         {
           "cle": "eco_2",
-          "label": "4.2 Compare la fonction d'usage d'une gourde inox et d'une bouteille en plastique jetable :",
+          "label": "Compare la fonction d'usage d'une gourde inox et d'une bouteille en plastique jetable :",
           "motsCles": ["contenir", "eau", "liquide", "maintenir", "boire", "identique"],
           "reponseType": "Leur fonction d'usage est identique : contenir et transporter un liquide pour s'hydrater.",
           "pts": 1.5
         },
         {
           "cle": "eco_3",
-          "label": "4.3 Explique pourquoi la gourde en inox est considérée comme plus pérenne et durable :",
+          "label": "Explique pourquoi la gourde en inox est considérée comme plus pérenne et durable :",
           "motsCles": ["reutilisable", "solide", "durable", "recyclable", "sans plastique", "annee"],
           "reponseType": "Elle est réutilisable des milliers de fois, solide et évite les déchets plastiques.",
           "pts": 2
