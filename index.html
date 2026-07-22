@@ -1,436 +1,112 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Techno 3ème - Programme & Analyse du Besoin</title>
-  <link rel="stylesheet" href="style.css">
-  <!-- CDN html2pdf.js pour la génération de rapport PDF -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analyse du Besoin - Technologie 3ème</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
+    <header class="app-header">
+        <h1>Analyse du Besoin</h1>
+        <p class="subtitle">Technologie - Niveau 3ème</p>
+    </header>
 
-  <header class="app-header">
-    <div class="header-content">
-      <h1>Technologie 3<sup>ème</sup></h1>
-      <p>Programme global & Module : L'Analyse du Besoin</p>
-    </div>
-    <nav class="step-nav">
-      <button id="nav-intro" class="nav-btn active" onclick="switchSection('intro')">📌 Intro & Programme</button>
-      <button id="nav-cours" class="nav-btn" onclick="switchSection('cours')">1. Cours</button>
-      <button id="nav-quiz" class="nav-btn" onclick="switchSection('quiz')">2. Quiz</button>
-      <button id="nav-eval" class="nav-btn" onclick="switchSection('eval')">3. Évaluation</button>
-      <button id="nav-bilan" class="nav-btn" onclick="switchSection('bilan')">4. Bilan</button>
-    </nav>
-  </header>
+    <main class="container">
+        <!-- NOUVEAU : Bloc Programme et Déroulement du Chapitre -->
+        <section id="section-programme" class="card">
+            <h2>📄 Programme et Déroulement du Chapitre : Besoin</h2>
+            <div class="intro">
+                <p><strong>Support de cours :</strong> <code>Programme et Déroulement du Chapitre Besoin.pptx</code></p>
+            </div>
+            <div class="section-cours" style="margin-top: 1rem;">
+                <h3>📌 Organisation de la séquence :</h3>
+                <ul style="margin-left: 1.5rem; margin-top: 0.5rem; line-height: 1.8;">
+                    <li><strong>Étape 1 :</strong> Étude du cours synthétique & notions fondamentales (Bête à cornes, Usage vs Estime, Évolution).</li>
+                    <li><strong>Étape 2 :</strong> Quiz de compréhension rapide (15 questions auto-corrigées).</li>
+                    <li><strong>Étape 3 :</strong> Évaluation formative guidée (15 exercices progressifs sur 40 points).</li>
+                    <li><strong>Étape 4 :</strong> Bilan individualisé & Téléchargement du rapport de résultats au format PDF.</li>
+                </ul>
+            </div>
+        </section>
 
-  <main class="main-container">
+        <!-- Section Cours synthétique -->
+        <section id="section-cours" class="card">
+            <h2>Cours synthétique</h2>
+            <div id="contenu-cours"></div>
+            <button id="btn-commencer-quiz" class="btn btn-primary">Commencer le Quiz</button>
+        </section>
 
-    <!-- SECTION INTRO : DÉROULEMENT DU PROGRAMME ET DU CHAPITRE -->
-    <section id="sec-intro" class="card-section active">
-      <div class="section-header">
-        <h2>PROGRAMME GLOBAL DE FORMATION DE VOTRE SUPER PROF MR DURAND</h2>
-        <span class="badge">Chapitre : L'Analyse du Besoin</span>
-      </div>
-      
-      <p class="intro-lead">
-        Bienvenue dans le <strong>Module 1</strong> de votre parcours de formation. La séance est structurée en deux phases complémentaires : <strong>Partie Cours (théorie)</strong> et <strong>Partie Exercices (pratique)</strong>.
-      </p>
+        <section id="section-quiz" class="card hidden">
+            <h2>Quiz de compréhension (15 questions)</h2>
+            <div class="quiz-header">
+                <div class="info-bar">
+                    <span id="quiz-progress">Question 1 / 15</span>
+                    <span id="quiz-timer" class="timer">20:00</span>
+                </div>
+                <div class="progress-bar"><div id="quiz-progress-bar" class="progress-fill"></div></div>
+            </div>
+            <div id="quiz-question" class="question-box"></div>
+            <div id="quiz-options" class="options-list"></div>
+            <button id="btn-suivant-quiz" class="btn btn-primary hidden">Suivant</button>
+        </section>
 
-      <h3 class="subsection-title">Vue d'Ensemble du Programme</h3>
-      <div class="modules-grid">
-        <div class="module-card">
-          <span class="module-num">MODULE 1</span>
-          <h4>Cadrage & Fondamentaux</h4>
-          <ul>
-            <li>Introduction au projet</li>
-            <li>Définition des objectifs</li>
-            <li>Analyse de l'existant</li>
-          </ul>
-        </div>
+        <section id="section-eval" class="card hidden">
+            <h2>Évaluation (40 points - 15 exercices)</h2>
+            <div class="quiz-header">
+                <div class="info-bar">
+                    <span id="eval-progress">Exercice 1 / 15</span>
+                    <span id="eval-timer" class="timer">01:30</span>
+                </div>
+                <div class="progress-bar"><div id="eval-progress-bar" class="progress-fill"></div></div>
+            </div>
+            <div id="eval-question" class="question-box"></div>
+            <div id="eval-content" class="eval-content"></div>
+            <button id="btn-suivant-eval" class="btn btn-primary">Valider</button>
+        </section>
 
-        <div class="module-card highlight">
-          <span class="module-num">MODULE 2 (AUJOURD'HUI)</span>
-          <h4>L'Analyse du Besoin</h4>
-          <ul>
-            <li>Saisie du besoin client</li>
-            <li>Outils d'expression</li>
-            <li>Partie Cours & Exercices</li>
-          </ul>
-        </div>
+        <section id="pdf-report-area" class="card hidden">
+            <h2>Bilan des résultats</h2>
+            <div id="resultats-detail"></div>
+            <div class="actions-pdf">
+                <button id="btn-telecharger-pdf" class="btn btn-success">Télécharger PDF</button>
+                <button id="btn-recommencer" class="btn btn-secondary">Recommencer</button>
+            </div>
+        </section>
+    </main>
 
-        <div class="module-card">
-          <span class="module-num">MODULE 3</span>
-          <h4>Cahier des Charges (CDCF)</h4>
-          <ul>
-            <li>Fonctions & Contraintes</li>
-            <li>Livrables du projet</li>
-            <li>Critères d'évaluation</li>
-          </ul>
-        </div>
-
-        <div class="module-card">
-          <span class="module-num">MODULE 4</span>
-          <h4>Validation & Recette</h4>
-          <ul>
-            <li>Tests de conformité</li>
-            <li>Bilan & Clôture</li>
-            <li>Niveaux de flexibilité</li>
-          </ul>
-        </div>
-      </div>
-
-      <hr class="divider">
-
-      <h3 class="subsection-title">Organisation du Chapitre Besoin</h3>
-      <div class="organisation-grid">
-        <div class="org-card">
-          <div class="org-icon">📖</div>
-          <h4>1. Partie Cours Théorique</h4>
-          <p class="org-subtitle"><strong>Objectif :</strong> Maîtriser les concepts fondamentaux de l'ingénierie des besoins.</p>
-          <ul>
-            <li>Identification et formulation du besoin client.</li>
-            <li>Outils de modélisation (Bête à cornes, Diagramme Pieuvre).</li>
-            <li>Établissement du Cahier des Charges Fonctionnel (CDCF).</li>
-          </ul>
-        </div>
-
-        <div class="org-card">
-          <div class="org-icon">🛠️</div>
-          <h4>2. Partie Exercices & Pratique</h4>
-          <p class="org-subtitle"><strong>Objectif :</strong> Appliquer la méthodologie sur un cas concret de projet.</p>
-          <ul>
-            <li>Mises en situation pratiques et travail de groupe.</li>
-            <li>Rédaction supervisée des critères de validation.</li>
-            <li>Restitution orale et correction interactive.</li>
-          </ul>
-        </div>
-      </div>
-
-      <hr class="divider">
-
-      <h3 class="subsection-title">Déroulement de la Séance</h3>
-      <div class="timeline">
-        <div class="timeline-step">
-          <div class="step-circle">1</div>
-          <div class="step-content">
-            <h5>1. Introduction</h5>
-            <p>Cadre global de la séance, objectifs pédagogiques et tour de table des attentes.</p>
-          </div>
-        </div>
-
-        <div class="timeline-step">
-          <div class="step-circle">2</div>
-          <div class="step-content">
-            <h5>2. Partie Cours</h5>
-            <p>Apport théorique sur le besoin, démarche fonctionnelle et méthodologie CDCF.</p>
-          </div>
-        </div>
-
-        <div class="timeline-step">
-          <div class="step-circle">3</div>
-          <div class="step-content">
-            <h5>3. Partie Exercices</h5>
-            <p>Atelier pratique en sous-groupes : cas d'étude réel et formalisation du besoin.</p>
-          </div>
-        </div>
-
-        <div class="timeline-step">
-          <div class="step-circle">4</div>
-          <div class="step-content">
-            <h5>4. Restitution</h5>
-            <p>Présentation des travaux, débat contradictoire, correction et bilan du chapitre.</p>
-          </div>
-        </div>
-      </div>
-
-      <blockquote class="info-callout">
-        💡 <strong>Théorie vers Pratique :</strong> Le cours nourrit directement la partie exercices et les cas d'application du programme.
-      </blockquote>
-
-      <div class="action-footer flex-center">
-        <button class="btn btn-primary btn-large" onclick="switchSection('cours')">Commencer le Cours &rarr;</button>
-      </div>
-    </section>
-
-    <!-- SECTION 1 : COURS -->
-    <section id="sec-cours" class="card-section">
-      <div class="section-header">
-        <h2>Fiche de Révision Synthétique</h2>
-        <span class="badge">Analyse du Besoin</span>
-      </div>
-      <div id="cours-content" class="cours-grid">
-        <!-- Chargé dynamiquement -->
-      </div>
-      <div class="action-footer">
-        <button class="btn btn-primary" onclick="startQuiz()">Passer au Quiz de Compréhension &rarr;</button>
-      </div>
-    </section>
-
-    <!-- SECTION 2 : QUIZ -->
-    <section id="sec-quiz" class="card-section">
-      <div class="section-header">
-        <h2>Quiz de Compréhension</h2>
-        <div class="timer-box" id="quiz-timer">Temps restant : 20:00</div>
-      </div>
-      <div class="progress-bar-container">
-        <div class="progress-bar" id="quiz-progress"></div>
-      </div>
-      <div id="quiz-card" class="question-card">
-        <!-- Contenu dynamique du Quiz -->
-      </div>
-      <div class="action-footer flex-between">
-        <span id="quiz-counter">Question 1 / 15</span>
-        <button id="btn-next-quiz" class="btn btn-primary" onclick="nextQuizQuestion()">Valider / Suivant</button>
-      </div>
-    </section>
-
-    <!-- SECTION 3 : ÉVALUATION -->
-    <section id="sec-eval" class="card-section">
-      <div class="section-header">
-        <h2>Évaluation Automatisée (Exercices)</h2>
-        <div class="timer-box" id="eval-timer">Temps question : 01:30</div>
-      </div>
-      <div class="progress-bar-container">
-        <div class="progress-bar" id="eval-progress"></div>
-      </div>
-      <div id="eval-card" class="question-card">
-        <!-- Rendu dynamique selon type d'exercice -->
-      </div>
-      <div class="action-footer flex-between">
-        <span id="eval-counter">Exercice 1 / 15</span>
-        <button id="btn-next-eval" class="btn btn-primary" onclick="nextEvalQuestion()">Valider l'exercice</button>
-      </div>
-    </section>
-
-    <!-- SECTION 4 : BILAN -->
-    <section id="sec-bilan" class="card-section">
-      <div id="pdf-report">
-        <div class="section-header">
-          <h2>Bilan Global des Performances</h2>
-          <span class="badge" id="app-date">Technologie 3ème</span>
-        </div>
-        <div class="score-summary">
-          <div class="score-card">
-            <h3>Quiz de Compréhension</h3>
-            <div class="score-val" id="quiz-score-display">0 / 15</div>
-          </div>
-          <div class="score-card main-score">
-            <h3>Note Évaluation</h3>
-            <div class="score-val" id="eval-score-display">0 / 40</div>
-            <div class="level-badge" id="level-display">Niveau</div>
-          </div>
-        </div>
-        <div class="details-section">
-          <h3>Détail des erreurs et corrections</h3>
-          <div id="corrections-list">
-            <!-- Liste dynamique des corrections -->
-          </div>
-        </div>
-      </div>
-      <div class="action-footer flex-center">
-        <button class="btn btn-secondary" onclick="exportPDF()">📄 Télécharger le bilan PDF</button>
-        <button class="btn btn-primary" onclick="resetModule()">🔄 Recommencer la session</button>
-      </div>
-    </section>
-
-  </main>
-
-  <footer class="app-footer">
-    <p>Module Pédagogique Technologie 3<sup>ème</sup> &bull; Conçu pour GitHub Pages</p>
-  </footer>
-
-  <!-- SECOURS JSON INLINE -->
-  <script id="questions-data-inline" type="application/json">
-  {
-    "cours": {
-      "titre": "Analyse du Besoin - Niveau 3ème",
-      "description": "Fiche de synthèse pour réviser la démarche d'analyse du besoin en Technologie.",
-      "notions": [
-        {
-          "titre": "1. Notion de Besoin",
-          "contenu": "Un **besoin** est un sentiment de manque, d'inconfort ou une nécessité éprouvée par un utilisateur. Un produit est créé pour répondre à un besoin précis (ex: communiquer, se déplacer, se chauffer)."
-        },
-        {
-          "titre": "2. Diagramme \"Bête à cornes\"",
-          "contenu": "C'est un outil graphique de validation du besoin qui pose 3 questions fondamentales :\n- **À qui** le produit rend-il service ?\n- **Sur quoi** agit-il ?\n- **Dans quel but** existe-t-il (quelle est sa fonction d'usage) ?"
-        },
-        {
-          "titre": "3. Valeur d'usage vs Valeur d'estime",
-          "contenu": "- **Valeur d'usage** : Liée à l'aspect utilitaire et technique (À quoi sert le produit ? Est-il efficace ?).\n- **Valeur d'estime** : Liée à l'aspect affectif, esthétique ou social (Pourquoi il me plaît ? Marque, design, statut)."
-        },
-        {
-          "titre": "4. Évolution des besoins",
-          "contenu": "Les besoins évoluent dans le temps sous l'influence des progrès technologiques, des normes environnementales, de l'économie et des modes de vie (ex: passage du téléphone fixe au smartphone)."
+    <script id="questions-data-inline" type="application/json">
+    {
+        "titreGeneral": "Analyse du Besoin",
+        "cours": {
+            "introduction": "L'analyse du besoin est la première étape fondamentale de tout projet technologique.",
+            "sections": [
+                {
+                    "titre": "0. Programme et Déroulement du Chapitre",
+                    "contenu": "Présentation du document <strong>Programme et Déroulement du Chapitre Besoin.pptx</strong>. Ce chapitre aborde la définition du besoin, l'outil Bête à cornes, la distinction entre valeur d'usage et valeur d'estime, ainsi que l'évolution des besoins dans le temps."
+                },
+                {
+                    "titre": "1. La notion de Besoin",
+                    "contenu": "Un <strong>besoin</strong> est le sentiment d'une privation ou d'une insuffisance ressenti par un utilisateur."
+                },
+                {
+                    "titre": "2. Le diagramme Bête à cornes",
+                    "contenu": "La <strong>Bête à cornes</strong> est un outil graphique répondant à 3 questions : À qui rend-il service ? Sur quoi agit-il ? Dans quel but ?"
+                },
+                {
+                    "titre": "3. Usage vs Estime",
+                    "contenu": "La <strong>valeur d'usage</strong> correspond à l'utilité pratique. La <strong>valeur d'estime</strong> répond aux goûts et à l'esthétique."
+                },
+                {
+                    "titre": "4. Évolution des besoins",
+                    "contenu": "Les besoins évoluent avec les technologies, les modes de vie et les enjeux environnementaux."
+                }
+            ]
         }
-      ]
-    },
-    "quiz": [
-      {"id": "q1", "question": "Quel est le rôle principal d'une bête à cornes ?", "options": ["Analyser l'impact environnemental", "Savoir à qui le produit rend service, sur quoi il agit et sa fonction", "Chiffrer le coût de fabrication", "Lister les composants"], "reponse": 1},
-      {"id": "q2", "question": "La valeur d'usage d'un produit est liée à :", "options": ["Son esthétique et sa marque", "Sa capacité à répondre à une fonction utilitaire", "Son prix de revente", "Sa couleur"], "reponse": 1},
-      {"id": "q3", "question": "La question 'Sur quoi agit le produit ?' concerne :", "options": ["L'utilisateur", "L'élément de la matière/environnement transformé ou modifié", "Le constructeur", "Le prix"], "reponse": 1},
-      {"id": "q4", "question": "Un smartphone qui possède un design très attrayant mise sur :", "options": ["Sa valeur d'usage uniquement", "Sa valeur d'estime", "Son absence de besoin", "Une fonction contrainte"], "reponse": 1},
-      {"id": "q5", "question": "Un besoin peut-il évoluer dans le temps ?", "options": ["Non, il est figé pour toujours", "Oui, avec les technologies, le contexte social et écologique", "Uniquement si la loi l'oblige", "Seulement pour les voitures"], "reponse": 1},
-      {"id": "q6", "question": "Quelle question valide le 'BUT' dans la bête à cornes ?", "options": ["À qui rend-il service ?", "Sur quoi agit-il ?", "Dans quel but le produit existe-t-il ?", "Combien coûte-t-il ?"], "reponse": 2},
-      {"id": "q7", "question": "Une montre connectée qui indique l'heure remplit :", "options": ["Une fonction d'usage", "Une fonction d'estime", "Une bête à cornes", "Un besoin secondaire non avéré"], "reponse": 0},
-      {"id": "q8", "question": "Pour qui est exprimé le besoin ?", "options": ["Pour le concepteur", "Pour l'utilisateur (ou le client)", "Pour l'usine de recyclage", "Pour les concurrents"], "reponse": 1},
-      {"id": "q9", "question": "Parmi ces propositions, laquelle est une valeur d'estime ?", "options": ["Autonomie de 10 heures", "Boîtier en or finitions luxe", "Résistance à l'eau 50m", "Compatibilité Bluetooth 5.0"], "reponse": 1},
-      {"id": "q10", "question": "Si un produit ne rend plus service à personne, on dit que :", "options": ["Le besoin a disparu ou changé", "La bête à cornes est fausse", "La valeur d'usage augmente", "Il devient un brevet"], "reponse": 0},
-      {"id": "q11", "question": "Le diagramme 'Bête à cornes' fait partie de quelle phase ?", "options": ["Fabrication en série", "Saisie du besoin / Analyse fonctionnelle", "Recyclage du produit", "Vente en magasin"], "reponse": 1},
-      {"id": "q12", "question": "Laquelle de ces affirmations est VRAIE ?", "options": ["Le besoin dépend uniquement de l'esthétique", "Un produit peut satisfaire un besoin implicite ou explicite", "La valeur d'estime est toujours identique pour tout le monde", "Le besoin ne concerne que les objets électroniques"], "reponse": 1},
-      {"id": "q13", "question": "L'ergonomie d'un outil participe principalement à :", "options": ["Sa valeur d'estime", "Sa valeur d'usage (facilité d'utilisation)", "Son coût de transport", "Son packaging"], "reponse": 1},
-      {"id": "q14", "question": "Sur quoi agit un lave-linge ?", "options": ["Sur l'utilisateur", "Sur le linge sale", "Sur la facture d'électricité", "Sur la notice"], "reponse": 1},
-      {"id": "q15", "question": "Qui bénéficie du service rendu par une trottinette électrique ?", "options": ["Le bitume", "L'utilisateur / le piéton qui se déplace", "Le fabricant de batteries", "Le vendeur"], "reponse": 1}
-    ],
-    "evaluations": [
-      {
-        "id": "e1",
-        "type": "tableau-menu",
-        "consigne": "Associez chaque objet à son domaine d'action principal.",
-        "points": 3,
-        "lignes": [
-          {"element": "Aspirateur robot", "options": ["Sols poussiéreux", "Chauffage", "Conducteur"], "reponse": "Sols poussiéreux"},
-          {"element": "Casque audio", "options": ["Ondes sonores", "Conducteur", "Chauffage"], "reponse": "Ondes sonores"},
-          {"element": "Thermostat", "options": ["Sols poussiéreux", "Température ambiante", "Conducteur"], "reponse": "Température ambiante"}
-        ]
-      },
-      {
-        "id": "e2",
-        "type": "choix-unique",
-        "consigne": "Sur quoi agit un stylo à bille ?",
-        "points": 2,
-        "options": ["La feuille de papier", "L'utilisateur", "La trousse", "La main"],
-        "reponse": 0
-      },
-      {
-        "id": "e3",
-        "type": "choix-multiple",
-        "consigne": "Cochez les éléments qui relèvent de la VALEUR D'ESTIME d'une voiture.",
-        "points": 3,
-        "options": [
-          {"texte": "La marque prestigieuse du véhicule", "correct": true},
-          {"texte": "La présence de 5 sièges pour la famille", "correct": false},
-          {"texte": "La couleur métallisée personnalisée", "correct": true},
-          {"texte": "La vitesse maximale autorisée", "correct": false}
-        ]
-      },
-      {
-        "id": "e4",
-        "type": "valeur-numerique",
-        "consigne": "Dans un diagramme bête à cornes, combien y a-t-il de questions fondamentales posées autour de la bulle centrale ?",
-        "points": 2,
-        "reponse": 3
-      },
-      {
-        "id": "e5",
-        "type": "reponse-saisie",
-        "consigne": "Quel est le nom de l'outil graphique utilisé pour exprimer et valider le besoin (3 mots) ?",
-        "points": 3,
-        "reponses_valides": ["bete a cornes", "diagramme bete a cornes", "la bete a cornes", "bête à cornes"]
-      },
-      {
-        "id": "e6",
-        "type": "association",
-        "consigne": "Associez chaque concept à sa définition.",
-        "points": 3,
-        "pairs": [
-          {"terme": "Besoin", "definition": "Nécessité ou manque éprouvé par un utilisateur"},
-          {"terme": "Fonction d'usage", "definition": "Ce à quoi sert concrètement l'objet"},
-          {"terme": "Valeur d'estime", "definition": "Séduction liée au design, à la marque ou à l'image"}
-        ]
-      },
-      {
-        "id": "e7",
-        "type": "texte-trous-liste-unique",
-        "consigne": "Complétez la phrase suivante avec le bon terme.",
-        "points": 2,
-        "texte_avant": "Un produit rend service à l'",
-        "options": ["utilisateur", "outil", "fabricant"],
-        "reponse": "utilisateur",
-        "texte_apres": "en répondant à son besoin."
-      },
-      {
-        "id": "e8",
-        "type": "texte-trous-libre",
-        "consigne": "Saisissez le mot manquant dans cette définition de l'analyse fonctionnelle.",
-        "points": 3,
-        "texte_avant": "La valeur d'",
-        "reponse_valide": ["usage", "d'usage"],
-        "texte_apres": "correspond à l'aspect pratique et technique du produit."
-      },
-      {
-        "id": "e9",
-        "type": "tableau-menu",
-        "consigne": "Indiquez pour chaque objet s'il vise principalement l'usage ou l'estime.",
-        "points": 3,
-        "lignes": [
-          {"element": "Tournevis d'électricien isolé", "options": ["Valeur d'usage", "Valeur d'estime"], "reponse": "Valeur d'usage"},
-          {"element": "Sac de luxe de créateur", "options": ["Valeur d'usage", "Valeur d'estime"], "reponse": "Valeur d'estime"},
-          {"element": "Marteau de charpentier", "options": ["Valeur d'usage", "Valeur d'estime"], "reponse": "Valeur d'usage"}
-        ]
-      },
-      {
-        "id": "e10",
-        "type": "choix-unique",
-        "consigne": "Quelle est la question associée à la bulle de droite de la bête à cornes ?",
-        "points": 2,
-        "options": ["À qui rend-il service ?", "Sur quoi agit-il ?", "Combien coûte-t-il ?", "Quelle est sa couleur ?"],
-        "reponse": 1
-      },
-      {
-        "id": "e11",
-        "type": "texte-trous-liste-variable",
-        "consigne": "Sélectionnez les termes adaptés pour compléter le cycle d'analyse.",
-        "points": 3,
-        "segments": [
-          {"texte": "Un besoin "},
-          {"id": "t1", "options": ["évolue", "reste fixe"], "reponse": "évolue"},
-          {"texte": " au cours du temps à cause des évolutions "},
-          {"id": "t2", "options": ["technologiques", "stagnantes"], "reponse": "technologiques"},
-          {"texte": "."}
-        ]
-      },
-      {
-        "id": "e12",
-        "type": "choix-multiple",
-        "consigne": "Quelles sont les conditions indispensables pour valider un besoin ?",
-        "points": 3,
-        "options": [
-          {"texte": "Le produit doit répondre à un besoin réel et explicite", "correct": true},
-          {"texte": "Le produit doit être vendu au moins 100€", "correct": false},
-          {"texte": "Le besoin doit être stable ou justifié", "correct": true},
-          {"texte": "Le produit doit être de couleur rouge", "correct": false}
-        ]
-      },
-      {
-        "id": "e13",
-        "type": "valeur-numerique",
-        "consigne": "Sur un barème total de 40 points, quel score minimal représente 50% de réussite ?",
-        "points": 2,
-        "reponse": 20
-      },
-      {
-        "id": "e14",
-        "type": "reponse-saisie",
-        "consigne": "Comment appelle-t-on la personne qui utilise le produit au quotidien ?",
-        "points": 2,
-        "reponses_valides": ["utilisateur", "l'utilisateur", "usager", "l'usager"]
-      },
-      {
-        "id": "e15",
-        "type": "association",
-        "consigne": "Reliez la question au composant du diagramme bête à cornes.",
-        "points": 3,
-        "pairs": [
-          {"terme": "À qui rend-il service ?", "definition": "Utilisateur / Client"},
-          {"terme": "Sur quoi agit-il ?", "definition": "Matière d'œuvre / Environnement"},
-          {"terme": "Dans quel but ?", "definition": "Fonction d'usage principale"}
-        ]
-      }
-    ]
-  }
-  </script>
-
-  <script src="script.js"></script>
+    }
+    </script>
+    <footer class="app-footer"><p>© 2026 Technologie 3ème</p></footer>
+    <script src="script.js"></script>
 </body>
 </html>
