@@ -1,5 +1,14 @@
 {
     "titreGeneral": "Analyse du Besoin",
+    "deroulement": {
+        "titre": "📌 Déroulement de l'activité",
+        "etapes": [
+            "<strong>1. Cours synthétique :</strong> Lisez attentivement la synthèse sur la notion de besoin, le diagramme Bête à cornes, la valeur d'usage/d'estime et l'évolution des objets.",
+            "<strong>2. Quiz de compréhension (15 questions) :</strong> Un QCM chrono de 20 minutes pour tester vos connaissances fondamentales.",
+            "<strong>3. Évaluation pratique (15 exercices - 40 pts) :</strong> Des exercices variés (tableaux, trous, associations) avec un temps limité à 1 min 30 par exercice.",
+            "<strong>4. Bilan & Bilan PDF :</strong> Consultez vos erreurs/réussites et téléchargez votre bilan au format PDF."
+        ]
+    },
     "cours": {
         "introduction": "L'analyse du besoin est la première étape de tout projet technique. Elle permet d'identifier précisément ce que l'utilisateur attend d'un produit.",
         "sections": [
