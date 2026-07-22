@@ -79,7 +79,7 @@ body {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
-/* Conteneur principal */
+/* Main Container */
 .main-container {
   max-width: 900px;
   width: 95%;
@@ -106,7 +106,7 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* En-têtes de section */
+/* En-têtes */
 .section-header {
   display: flex;
   justify-content: space-between;
@@ -132,6 +132,178 @@ body {
   font-weight: 600;
 }
 
+.divider {
+  border: 0;
+  height: 1px;
+  background: #dfe6e9;
+  margin: 1.5rem 0;
+}
+
+.intro-lead {
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+  margin-bottom: 1.2rem;
+}
+
+.subsection-title {
+  color: var(--primary-dark);
+  font-size: 1.1rem;
+  margin: 1rem 0 0.8rem 0;
+}
+
+/* Grille des modules */
+.modules-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 0.8rem;
+}
+
+.module-card {
+  background: #f8f9fa;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.8rem;
+}
+
+.module-card.highlight {
+  background: #eef2ff;
+  border-color: var(--primary);
+  box-shadow: 0 4px 10px rgba(108, 92, 231, 0.15);
+}
+
+.module-num {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--primary);
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+.module-card h4 {
+  font-size: 0.95rem;
+  margin-bottom: 0.4rem;
+  color: var(--text);
+}
+
+.module-card ul {
+  list-style: none;
+  padding: 0;
+}
+
+.module-card li {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 0.2rem;
+  position: relative;
+  padding-left: 0.8rem;
+}
+
+.module-card li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--primary);
+}
+
+/* Organisation Chapitre */
+.organisation-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.org-card {
+  background: #fdfdfd;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+.org-icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.3rem;
+}
+
+.org-card h4 {
+  color: var(--primary-dark);
+  margin-bottom: 0.3rem;
+}
+
+.org-subtitle {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 0.6rem;
+}
+
+.org-card ul {
+  padding-left: 1.2rem;
+  font-size: 0.88rem;
+  color: var(--text);
+}
+
+.org-card li {
+  margin-bottom: 0.3rem;
+}
+
+/* Déroulement / Timeline */
+.timeline {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.8rem;
+}
+
+.timeline-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  background: #f8f9fe;
+  padding: 0.8rem;
+  border-radius: 8px;
+}
+
+.step-circle {
+  background: var(--primary);
+  color: white;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+.step-content h5 {
+  font-size: 0.9rem;
+  color: var(--primary-dark);
+  margin-bottom: 0.2rem;
+}
+
+.step-content p {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.3;
+}
+
+.info-callout {
+  margin-top: 1.2rem;
+  background: #eef2ff;
+  border-left: 4px solid var(--primary);
+  padding: 0.8rem 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  color: var(--primary-dark);
+}
+
+.btn-large {
+  padding: 0.8rem 1.8rem;
+  font-size: 1rem;
+}
+
+/* Styles restants (Timers, Bilan, Questions, etc.) */
 .timer-box {
   background: #fff0f0;
   color: var(--danger);
@@ -151,7 +323,6 @@ body {
   to { background: var(--danger); color: white; opacity: 0.8; }
 }
 
-/* Barres de progression */
 .progress-bar-container {
   height: 6px;
   background: #e0e0e0;
@@ -167,7 +338,6 @@ body {
   transition: width 0.3s ease;
 }
 
-/* Fiche de cours */
 .cours-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -194,7 +364,6 @@ body {
   white-space: pre-line;
 }
 
-/* Exercices / Questions */
 .question-card {
   min-height: 220px;
 }
@@ -232,7 +401,6 @@ body {
   accent-color: var(--primary);
 }
 
-/* Formulaires interactifs spécifiques */
 .eval-table {
   width: 100%;
   border-collapse: collapse;
@@ -280,7 +448,6 @@ select:focus, input:focus {
   margin-top: 0.8rem;
 }
 
-/* Pied de section et Boutons */
 .action-footer {
   margin-top: 1.5rem;
   padding-top: 1rem;
@@ -328,7 +495,6 @@ select:focus, input:focus {
   background: var(--secondary);
 }
 
-/* Section Bilan */
 .score-summary {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
