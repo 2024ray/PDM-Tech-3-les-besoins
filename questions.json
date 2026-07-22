@@ -1,47 +1,28 @@
 {
-  "titre": "Technologie 3ème - Analyse du Besoin",
-  "programme": [
-    {
-      "id": 1,
-      "titre": "Programme et Déroulement du Chapitre Besoin",
-      "duree": "1 Séance (1h)",
-      "objectifs": [
-        "Présentation des objectifs du chapitre",
-        "Explication du calendrier et des critères d'évaluation",
-        "Introduction aux concepts fondamentaux du besoin"
-      ],
-      "description": "Prise en main du chapitre, explication de la méthodologie de travail et positionnement du besoin dans le cycle de vie d'un produit."
-    },
-    {
-      "id": 2,
-      "titre": "Validation du Besoin (Bête à cornes)",
-      "duree": "2 Séances (2h)",
-      "objectifs": [
-        "Identifier à qui le produit rend service",
-        "Déterminer sur quoi le produit agit",
-        "Formuler clairement l'objectif final du produit"
-      ],
-      "description": "Utilisation de l'outil graphique 'Bête à cornes' pour valider formellement la nécessité d'un produit."
-    },
-    {
-      "id": 3,
-      "titre": "Analyse des Valeurs (Usage vs Estime)",
-      "duree": "1 Séance (1h)",
-      "objectifs": [
-        "Distinguer la valeur d'usage et la valeur d'estime",
-        "Analyser les attentes socio-économiques des utilisateurs"
-      ],
-      "description": "Étude comparative entre les fonctions utilitaires d'un objet et ses critères d'attractivité (esthétique, marque, prestige)."
-    },
-    {
-      "id": 4,
-      "titre": "Validation & Évaluation du Chapitre",
-      "duree": "1 Séance (1h)",
-      "objectifs": [
-        "Compléter la grille d'évaluation du besoin",
-        "Réaliser la synthèse du chapitre et l'évaluation finale"
-      ],
-      "description": "Bilan des compétences acquises et vérification de la maîtrise des outils d'analyse."
-    }
-  ]
+  "titreGeneral": "Analyse du Besoin",
+  "cours": {
+    "introduction": "L'analyse du besoin est la première étape fondamentale de tout projet technologique.",
+    "sections": [
+      {
+        "titre": "0. Programme et Déroulement du Chapitre",
+        "contenu": "Support de référence : <strong>Programme et Déroulement du Chapitre Besoin.pptx</strong>. L'objectif de ce chapitre est d'apprendre à identifier un besoin, utiliser l'outil Bête à cornes, différencier les valeurs d'usage et d'estime, et comprendre l'évolution des objets technologiques."
+      },
+      {
+        "titre": "1. La notion de Besoin",
+        "contenu": "Un <strong>besoin</strong> est le sentiment d'une privation ou d'une insuffisance ressenti par un utilisateur."
+      },
+      {
+        "titre": "2. Le diagramme Bête à cornes",
+        "contenu": "La <strong>Bête à cornes</strong> est un outil graphique répondant à 3 questions : À qui rend-il service ? Sur quoi agit-il ? Dans quel but ?"
+      },
+      {
+        "titre": "3. Usage vs Estime",
+        "contenu": "La <strong>valeur d'usage</strong> correspond à l'utilité pratique. La <strong>valeur d'estime</strong> répond aux goûts et à l'esthétique."
+      },
+      {
+        "titre": "4. Évolution des besoins",
+        "contenu": "Les besoins évoluent avec les technologies, les modes de vie et les enjeux environnementaux."
+      }
+    ]
+  }
 }
