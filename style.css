@@ -262,3 +262,38 @@ body {
     .tableau-menu th, .tableau-menu td { padding: 0.4rem; }
     .trou-input, .trou-select { min-width: 80px; font-size: 0.85rem; }
 }
+.deroulement-box {
+    background: #f0fdf4;
+    border: 2px solid #22c55e;
+    border-radius: 12px;
+    padding: 1.2rem;
+    margin-bottom: 1.5rem;
+}
+.deroulement-box h3 {
+    color: #15803d;
+    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
+}
+.deroulement-box ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+.deroulement-box li {
+    margin-bottom: 0.5rem;
+    padding-left: 1.2rem;
+    position: relative;
+    font-size: 0.95rem;
+}
+.deroulement-box li::before {
+    content: "➡️";
+    position: absolute;
+    left: 0;
+    font-size: 0.8rem;
+    top: 2px;
+}
+.cours-separator {
+    border: 0;
+    height: 1px;
+    background: #cbd5e1;
+    margin: 1.5rem 0;
+}
