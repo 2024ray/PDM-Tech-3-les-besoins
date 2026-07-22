@@ -1,443 +1,473 @@
-// Variable d'état global
-let appData = null;
-let currentQuizIndex = 0;
-let quizScore = 0;
-let quizTimerInterval = null;
-let quizTimeRemaining = 1200; // 20 minutes
+let data = null;
+let quizQuestions = [];
+let evalQuestions = [];
+let quizIndex = 0;
+let evalIndex = 0;
+let scoreQuiz = 0;
+let scoreEval = 0;
+let detailsQuiz = [];
+let detailsEval = [];
+let timerQuiz = null;
+let timerEval = null;
+let tempsQuizRestant = 20 * 60;
 
-let currentEvalIndex = 0;
-let evalScore = 0;
-let evalMaxPoints = 40;
-let evalTimerInterval = null;
-let evalTimeRemaining = 90; // 1 min 30 s
-let userEvalAnswers = [];
+function $(sel) { return document.querySelector(sel); }
+function $$(sel) { return document.querySelectorAll(sel); }
 
-// Chargement Résilient des Données (JSON Externe -> Fallback Inline)
-document.addEventListener('DOMContentLoaded', async () => {
-  try {
-    const response = await fetch('questions.json');
-    if (!response.ok) throw new Error('Erreur HTTP ' + response.status);
-    appData = await response.json();
-  } catch (err) {
-    console.warn('Chargement de questions.json échoué. Bascule sur la balise inline HTML.', err);
-    const inlineScript = document.getElementById('questions-data-inline');
-    if (inlineScript) {
-      appData = JSON.parse(inlineScript.textContent);
-    } else {
-      alert("Erreur critique : Impossible de charger les données du module.");
-      return;
+function shuffle(array) {
+    const arr = [...array];
+    for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
     }
-  }
+    return arr;
+}
 
-  // Mélange aléatoire
-  shuffleArray(appData.quiz);
-  appData.quiz.forEach(q => shuffleArray(q.options));
-  shuffleArray(appData.evaluations);
+function formatTemps(s) {
+    const m = Math.floor(s / 60);
+    const sec = s % 60;
+    return `${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')}`;
+}
 
-  initCours();
+function normaliserTexte(texte, ignorerCasse, ignorerAccents) {
+    let t = texte.trim().toLowerCase();
+    if (ignorerAccents) t = t.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    return t;
+}
+
+function remplacerTrous(texte, elements) {
+    const parties = texte.split('{{}}');
+    let resultat = parties[0];
+    for (let i = 0; i < elements.length; i++) {
+        resultat += elements[i] + (parties[i + 1] || '');
+    }
+    return resultat;
+}
+
+// ========== CHARGEMENT ==========
+async function chargerDonnees() {
+    try {
+        const res = await fetch('questions.json?t=' + Date.now(), { cache: 'no-store' });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        data = await res.json();
+    } catch (e) {
+        try {
+            data = JSON.parse($('#questions-data-inline').textContent);
+        } catch (e2) {
+            document.body.innerHTML = '<div style="max-width:600px;margin:4rem auto;padding:2rem;background:#fee2e2;border:2px solid #ef4444;border-radius:12px;"><h2>⚠️ Erreur</h2><p>Impossible de charger les questions.</p><button onclick="location.reload()">Réessayer</button></div>';
+            return;
+        }
+    }
+    initialiserCours();
+    preparerQuiz();
+    preparerEval();
+}
+
+// ========== COURS ==========
+function initialiserCours() {
+    let html = `<div class="intro"><strong>🎯 Introduction :</strong> ${data.cours.introduction}</div>`;
+    data.cours.sections.forEach(s => {
+        html += `<div class="section-cours"><h3>${s.titre}</h3><p>${s.contenu}</p></div>`;
+    });
+    $('#contenu-cours').innerHTML = html;
+}
+
+// ========== QUIZ (15 questions) ==========
+function preparerQuiz() {
+    quizQuestions = shuffle(data.quizComprehension).map(q => ({ ...q, options: shuffle(q.options) }));
+    $('#btn-commencer-quiz').addEventListener('click', demarrerQuiz);
+}
+
+function demarrerQuiz() {
+    $('#section-cours').classList.add('hidden');
+    $('#section-quiz').classList.remove('hidden');
+    quizIndex = 0;
+    scoreQuiz = 0;
+    detailsQuiz = [];
+    tempsQuizRestant = 20 * 60;
+    afficherQuestionQuiz();
+    lancerTimerQuiz();
+}
+
+function afficherQuestionQuiz() {
+    if (quizIndex >= quizQuestions.length) { terminerQuiz(); return; }
+    const q = quizQuestions[quizIndex];
+    $('#quiz-progress').textContent = `Question ${quizIndex + 1} / ${quizQuestions.length}`;
+    $('#quiz-progress-bar').style.width = `${(quizIndex / quizQuestions.length) * 100}%`;
+    $('#quiz-question').innerHTML = `<strong>Q${quizIndex + 1}.</strong> ${q.question}`;
+    
+    const optDiv = $('#quiz-options');
+    optDiv.innerHTML = '';
+    q.options.forEach((opt, i) => {
+        const div = document.createElement('div');
+        div.className = 'option-item';
+        div.innerHTML = `<input type="radio" name="quiz-opt" id="qopt${i}" value="${i}"><label for="qopt${i}">${opt.texte}</label>`;
+        div.addEventListener('click', () => {
+            $$('#quiz-options .option-item').forEach(el => el.classList.remove('selected'));
+            div.classList.add('selected');
+            div.querySelector('input').checked = true;
+        });
+        optDiv.appendChild(div);
+    });
+    $('#btn-suivant-quiz').classList.remove('hidden');
+}
+
+function lancerTimerQuiz() {
+    clearInterval(timerQuiz);
+    mettreAJourTimerQuiz();
+    timerQuiz = setInterval(() => {
+        tempsQuizRestant--;
+        mettreAJourTimerQuiz();
+        if (tempsQuizRestant <= 0) { clearInterval(timerQuiz); terminerQuiz(); }
+    }, 1000);
+}
+
+function mettreAJourTimerQuiz() {
+    const t = $('#quiz-timer');
+    t.textContent = `⏱️ ${formatTemps(tempsQuizRestant)}`;
+    t.classList.toggle('warning', tempsQuizRestant < 60);
+}
+
+$('#btn-suivant-quiz').addEventListener('click', () => {
+    const sel = document.querySelector('input[name="quiz-opt"]:checked');
+    const q = quizQuestions[quizIndex];
+    let bonne = false;
+    if (sel) {
+        bonne = q.options[parseInt(sel.value)].correct;
+        if (bonne) scoreQuiz++;
+    }
+    detailsQuiz.push({
+        question: q.question,
+        reponseEleve: sel ? q.options[parseInt(sel.value)].texte : 'Aucune réponse',
+        bonneReponse: q.options.find(o => o.correct).texte,
+        correct: bonne
+    });
+    quizIndex++;
+    afficherQuestionQuiz();
 });
 
-// Fonctions Utilitaires
-function shuffleArray(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
+function terminerQuiz() {
+    clearInterval(timerQuiz);
+    $('#section-quiz').classList.add('hidden');
+    $('#section-eval').classList.remove('hidden');
+    evalIndex = 0;
+    scoreEval = 0;
+    detailsEval = [];
+    afficherExerciceEval();
 }
 
-function normalizeString(str) {
-  return String(str)
-    .trim()
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "");
+// ========== ÉVALUATION ==========
+function preparerEval() {
+    evalQuestions = shuffle(data.evaluation);
+    $('#btn-suivant-eval').addEventListener('click', () => validerEtSuivantEval());
 }
 
-// Navigation entre Sections
-function switchSection(secId) {
-  document.querySelectorAll('.card-section').forEach(sec => sec.classList.remove('active'));
-  document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
-
-  document.getElementById(`sec-${secId}`).classList.add('active');
-  document.getElementById(`nav-${secId}`).classList.add('active');
+function afficherExerciceEval() {
+    if (evalIndex >= evalQuestions.length) { terminerEval(); return; }
+    const ex = evalQuestions[evalIndex];
+    $('#eval-progress').textContent = `Exercice ${evalIndex + 1} / ${evalQuestions.length}`;
+    $('#eval-progress-bar').style.width = `${(evalIndex / evalQuestions.length) * 100}%`;
+    
+    let badge = ex.niveau === 'Facile' ? '<span class="badge badge-facile">Facile</span>' :
+                ex.niveau === 'Moyen' ? '<span class="badge badge-moyen">Moyen</span>' :
+                '<span class="badge badge-avance">Avancé</span>';
+    
+    $('#eval-question').innerHTML = `<strong>${ex.titre}</strong> ${badge}<br><br>${ex.enonce}`;
+    const content = $('#eval-content');
+    content.innerHTML = '';
+    
+    const renderers = {
+        'tableau-menu': renderTableauMenu,
+        'choix-unique': renderChoixUnique,
+        'choix-multiple': renderChoixMultiple,
+        'valeur-numerique': renderValeurNumerique,
+        'reponse-saisie': renderReponseSaisie,
+        'association': renderAssociation,
+        'texte-trous-libre': renderTexteTrousLibre,
+        'texte-trous-liste-unique': renderTexteTrousListeUnique,
+        'texte-trous-liste-variable': renderTexteTrousListeVariable
+    };
+    
+    if (renderers[ex.type]) renderers[ex.type](ex, content);
+    lancerTimerEval();
 }
 
-// SECTION 1 : COURS
-function initCours() {
-  const container = document.getElementById('cours-content');
-  container.innerHTML = appData.cours.notions.map(n => `
-    <div class="cours-card">
-      <h3>${n.titre}</h3>
-      <p>${n.contenu}</p>
-    </div>
-  `).join('');
+function lancerTimerEval() {
+    clearInterval(timerEval);
+    let tempsRestant = 90;
+    const t = $('#eval-timer');
+    t.textContent = `⏱️ ${formatTemps(tempsRestant)}`;
+    t.classList.remove('warning');
+    timerEval = setInterval(() => {
+        tempsRestant--;
+        t.textContent = `⏱️ ${formatTemps(tempsRestant)}`;
+        if (tempsRestant < 10) t.classList.add('warning');
+        if (tempsRestant <= 0) { clearInterval(timerEval); validerEtSuivantEval(); }
+    }, 1000);
 }
 
-function startQuiz() {
-  switchSection('quiz');
-  currentQuizIndex = 0;
-  quizScore = 0;
-  startQuizTimer();
-  renderQuizQuestion();
+// ========== RENDERS ==========
+function renderTableauMenu(ex, container) {
+    const table = document.createElement('table');
+    table.className = 'tableau-menu';
+    table.innerHTML = `<thead><tr><th>N°</th><th>Énoncé</th><th>Réponse</th></tr></thead>`;
+    const tbody = document.createElement('tbody');
+    shuffle([...ex.questions]).forEach((q, i) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td class="num">${i+1}</td><td>${q.enonce}</td><td></td>`;
+        const select = document.createElement('select');
+        select.dataset.questionId = q.id;
+        select.dataset.pts = q.pts;
+        select.innerHTML = '<option value="">-- Choisir --</option>';
+        shuffle([...q.options]).forEach(opt => {
+            const o = document.createElement('option');
+            o.value = opt.texte;
+            o.dataset.correct = opt.correct;
+            o.textContent = opt.texte;
+            select.appendChild(o);
+        });
+        tr.cells[2].appendChild(select);
+        tbody.appendChild(tr);
+    });
+    table.appendChild(tbody);
+    container.appendChild(table);
 }
 
-// SECTION 2 : QUIZ
-function startQuizTimer() {
-  clearInterval(quizTimerInterval);
-  quizTimeRemaining = 1200; // 20 min
-  const timerDisplay = document.getElementById('quiz-timer');
+function renderChoixUnique(ex, container) {
+    shuffle([...ex.options]).forEach((opt, i) => {
+        const div = document.createElement('div');
+        div.className = 'option-item';
+        div.innerHTML = `<input type="radio" name="choix-unique" id="cu${i}" value="${i}"><label for="cu${i}">${opt.texte}</label>`;
+        div.addEventListener('click', () => {
+            $$('#eval-content .option-item').forEach(el => el.classList.remove('selected'));
+            div.classList.add('selected');
+            div.querySelector('input').checked = true;
+        });
+        container.appendChild(div);
+    });
+}
 
-  quizTimerInterval = setInterval(() => {
-    quizTimeRemaining--;
-    const min = String(Math.floor(quizTimeRemaining / 60)).padStart(2, '0');
-    const sec = String(quizTimeRemaining % 60).padStart(2, '0');
-    timerDisplay.textContent = `Temps restant : ${min}:${sec}`;
+function renderChoixMultiple(ex, container) {
+    shuffle([...ex.options]).forEach((opt, i) => {
+        const div = document.createElement('div');
+        div.className = 'option-item';
+        div.innerHTML = `<input type="checkbox" id="cm${i}" value="${i}"><label for="cm${i}">${opt.texte}</label>`;
+        div.addEventListener('click', (e) => {
+            if (e.target.tagName !== 'INPUT') div.querySelector('input').checked = !div.querySelector('input').checked;
+            div.classList.toggle('selected', div.querySelector('input').checked);
+        });
+        container.appendChild(div);
+    });
+}
 
-    if (quizTimeRemaining <= 60) {
-      timerDisplay.classList.add('blink');
+function renderValeurNumerique(ex, container) {
+    container.innerHTML = `<input type="text" class="reponse-saisie-input" id="valeur-numerique-input" placeholder="Saisis ta réponse numérique...">`;
+}
+
+function renderReponseSaisie(ex, container) {
+    container.innerHTML = `<input type="text" class="reponse-saisie-input" id="reponse-saisie-input" placeholder="Saisis ta réponse...">`;
+}
+
+function renderAssociation(ex, container) {
+    const div = document.createElement('div');
+    div.className = 'association-container';
+    const col = document.createElement('div');
+    col.className = 'association-colonne';
+    col.innerHTML = '<h4>Associe chaque concept à sa définition :</h4>';
+    const defs = shuffle(ex.associations.map(a => a.definition));
+    shuffle([...ex.associations]).forEach(asso => {
+        const item = document.createElement('div');
+        item.className = 'association-item';
+        item.dataset.terme = asso.terme;
+        item.dataset.pts = asso.pts;
+        let selectHTML = `<strong>${asso.terme}</strong><select><option value="">-- Choisir --</option>`;
+        defs.forEach(d => { selectHTML += `<option value="${d}">${d}</option>`; });
+        selectHTML += '</select>';
+        item.innerHTML = selectHTML;
+        col.appendChild(item);
+    });
+    div.appendChild(col);
+    container.appendChild(div);
+}
+
+function renderTexteTrousLibre(ex, container) {
+    const div = document.createElement('div');
+    div.className = 'texte-trous';
+    const inputsHTML = ex.trous.map((trou, i) =>
+        `<input type="text" data-trou-index="${i}" data-pts="${trou.pts}" placeholder="..." class="trou-input">`
+    );
+    div.innerHTML = remplacerTrous(ex.texte, inputsHTML);
+    container.appendChild(div);
+}
+
+function renderTexteTrousListeUnique(ex, container) {
+    const div = document.createElement('div');
+    div.className = 'texte-trous';
+    const selectsHTML = ex.trous.map((trou, i) => {
+        let opts = '<option value="">--</option>';
+        ex.listeCommune.forEach(item => { opts += `<option value="${item}">${item}</option>`; });
+        return `<select data-trou-index="${i}" data-pts="${trou.pts}" class="trou-select">${opts}</select>`;
+    });
+    div.innerHTML = remplacerTrous(ex.texte, selectsHTML);
+    container.appendChild(div);
+}
+
+function renderTexteTrousListeVariable(ex, container) {
+    const div = document.createElement('div');
+    div.className = 'texte-trous';
+    const selectsHTML = ex.trous.map((trou, i) => {
+        let opts = '<option value="">--</option>';
+        trou.liste.forEach(item => { opts += `<option value="${item}">${item}</option>`; });
+        return `<select data-trou-index="${i}" data-pts="${trou.pts}" class="trou-select">${opts}</select>`;
+    });
+    div.innerHTML = remplacerTrous(ex.texte, selectsHTML);
+    container.appendChild(div);
+}
+
+// ========== VALIDATION ==========
+function validerEtSuivantEval() {
+    clearInterval(timerEval);
+    const ex = evalQuestions[evalIndex];
+    let pts = 0;
+    const details = { titre: ex.titre, niveau: ex.niveau, questions: [] };
+
+    if (ex.type === 'tableau-menu') {
+        $$('#eval-content select').forEach(select => {
+            const qId = select.dataset.questionId;
+            const qPts = parseFloat(select.dataset.pts);
+            const selOpt = select.options[select.selectedIndex];
+            const correct = selOpt && selOpt.dataset.correct === 'true';
+            if (correct) pts += qPts;
+            const qData = ex.questions.find(q => q.id === qId);
+            details.questions.push({ enonce: qData.enonce, reponseEleve: select.value || 'Aucune', bonneReponse: qData.options.find(o => o.correct).texte, correct, pts: correct ? qPts : 0 });
+        });
     }
-
-    if (quizTimeRemaining <= 0) {
-      clearInterval(quizTimerInterval);
-      alert('Temps écoulé pour le quiz !');
-      finishQuiz();
-    }
-  }, 1000);
-}
-
-function renderQuizQuestion() {
-  const q = appData.quiz[currentQuizIndex];
-  const container = document.getElementById('quiz-card');
-  
-  document.getElementById('quiz-counter').textContent = `Question ${currentQuizIndex + 1} / ${appData.quiz.length}`;
-  document.getElementById('quiz-progress').style.width = `${((currentQuizIndex) / appData.quiz.length) * 100}%`;
-
-  container.innerHTML = `
-    <div class="question-title">${q.question}</div>
-    <div class="options-list">
-      ${q.options.map((opt, idx) => `
-        <label class="option-item">
-          <input type="radio" name="quiz-opt" value="${idx}">
-          <span>${opt}</span>
-        </label>
-      `).join('')}
-    </div>
-  `;
-}
-
-function nextQuizQuestion() {
-  const selected = document.querySelector('input[name="quiz-opt"]:checked');
-  if (selected) {
-    if (parseInt(selected.value) === appData.quiz[currentQuizIndex].reponse) {
-      quizScore++;
-    }
-  }
-
-  currentQuizIndex++;
-  if (currentQuizIndex < appData.quiz.length) {
-    renderQuizQuestion();
-  } else {
-    clearInterval(quizTimerInterval);
-    finishQuiz();
-  }
-}
-
-function finishQuiz() {
-  alert(`Quiz terminé ! Votre score : ${quizScore} / ${appData.quiz.length}`);
-  switchSection('eval');
-  startEvalTimer();
-  renderEvalQuestion();
-}
-
-// SECTION 3 : ÉVALUATION (Moteur de Rendu)
-function startEvalTimer() {
-  clearInterval(evalTimerInterval);
-  evalTimeRemaining = 90; // 1 min 30 s par question
-  const timerDisplay = document.getElementById('eval-timer');
-  timerDisplay.classList.remove('blink');
-
-  evalTimerInterval = setInterval(() => {
-    evalTimeRemaining--;
-    const min = String(Math.floor(evalTimeRemaining / 60)).padStart(2, '0');
-    const sec = String(evalTimeRemaining % 60).padStart(2, '0');
-    timerDisplay.textContent = `Temps question : ${min}:${sec}`;
-
-    if (evalTimeRemaining <= 10) {
-      timerDisplay.classList.add('blink');
-    }
-
-    if (evalTimeRemaining <= 0) {
-      clearInterval(evalTimerInterval);
-      nextEvalQuestion(true); // Auto-validation à l'expiration
-    }
-  }, 1000);
-}
-
-function renderEvalQuestion() {
-  const ex = appData.evaluations[currentEvalIndex];
-  const container = document.getElementById('eval-card');
-
-  document.getElementById('eval-counter').textContent = `Exercice ${currentEvalIndex + 1} / ${appData.evaluations.length} (${ex.points} pts)`;
-  document.getElementById('eval-progress').style.width = `${((currentEvalIndex) / appData.evaluations.length) * 100}%`;
-
-  let html = `<div class="question-title">${ex.consigne}</div>`;
-
-  switch (ex.type) {
-    case 'tableau-menu':
-      html += `
-        <table class="eval-table">
-          <thead><tr><th>Élément</th><th>Choix</th></tr></thead>
-          <tbody>
-            ${ex.lignes.map((l, i) => `
-              <tr>
-                <td>${l.element}</td>
-                <td>
-                  <select class="eval-input" data-index="${i}">
-                    <option value="">-- Sélectionner --</option>
-                    ${l.options.map(o => `<option value="${o}">${o}</option>`).join('')}
-                  </select>
-                </td>
-              </tr>
-            `).join('')}
-          </tbody>
-        </table>`;
-      break;
-
-    case 'choix-unique':
-      html += `
-        <div class="options-list">
-          ${ex.options.map((o, i) => `
-            <label class="option-item">
-              <input type="radio" name="eval-opt" class="eval-input" value="${i}">
-              <span>${o}</span>
-            </label>
-          `).join('')}
-        </div>`;
-      break;
-
-    case 'choix-multiple':
-      html += `
-        <div class="options-list">
-          ${ex.options.map((o, i) => `
-            <label class="option-item">
-              <input type="checkbox" class="eval-input" value="${i}">
-              <span>${o.texte}</span>
-            </label>
-          `).join('')}
-        </div>`;
-      break;
-
-    case 'valeur-numerique':
-    case 'reponse-saisie':
-      html += `<input type="text" class="eval-input" placeholder="Saisissez votre réponse ici...">`;
-      break;
-
-    case 'association':
-      html += ex.pairs.map((p, i) => `
-        <div class="assoc-grid">
-          <div><strong>${p.terme}</strong></div>
-          <select class="eval-input" data-index="${i}">
-            <option value="">-- Associer --</option>
-            ${ex.pairs.map(d => `<option value="${d.definition}">${d.definition}</option>`).join('')}
-          </select>
-        </div>
-      `).join('');
-      break;
-
-    case 'texte-trous-libre':
-      html += `<p>${ex.texte_avant} <input type="text" class="eval-input fill-inline"> ${ex.texte_apres}</p>`;
-      break;
-
-    case 'texte-trous-liste-unique':
-      html += `<p>${ex.texte_avant} 
-        <select class="eval-input fill-inline">
-          <option value="">-- Choix --</option>
-          ${ex.options.map(o => `<option value="${o}">${o}</option>`).join('')}
-        </select> 
-      ${ex.texte_apres}</p>`;
-      break;
-
-    case 'texte-trous-liste-variable':
-      html += `<p>${ex.segments.map(s => {
-        if (s.id) {
-          return `<select class="eval-input fill-inline" data-id="${s.id}">
-            <option value="">-- Choix --</option>
-            ${s.options.map(o => `<option value="${o}">${o}</option>`).join('')}
-          </select>`;
+    else if (ex.type === 'choix-unique') {
+        const sel = document.querySelector('input[name="choix-unique"]:checked');
+        if (sel) {
+            const opt = ex.options[parseInt(sel.value)];
+            if (opt.correct) pts += opt.pts;
+            details.questions.push({ enonce: ex.enonce, reponseEleve: opt.texte, bonneReponse: ex.options.find(o => o.correct).texte, correct: opt.correct, pts: opt.correct ? opt.pts : 0 });
         }
-        return s.texte;
-      }).join('')}</p>`;
-      break;
-  }
+    }
+    else if (ex.type === 'choix-multiple') {
+        $$('#eval-content input[type="checkbox"]').forEach(cb => {
+            const opt = ex.options[parseInt(cb.value)];
+            const coche = cb.checked;
+            if (coche && opt.correct) pts += opt.pts;
+            details.questions.push({ enonce: opt.texte, reponseEleve: coche ? 'Coché' : 'Non coché', bonneReponse: opt.correct ? 'Coché' : 'Non coché', correct: coche === opt.correct, pts: (coche && opt.correct) ? opt.pts : 0 });
+        });
+    }
+    else if (ex.type === 'valeur-numerique') {
+        const val = ($('#valeur-numerique-input').value || '').replace(/\s/g, '').replace(',', '.');
+        const correct = ex.bonnesReponses.some(r => r.replace(/\s/g, '').replace(',', '.') === val);
+        if (correct) pts += ex.pts;
+        details.questions.push({ enonce: ex.enonce, reponseEleve: val || 'Aucune', bonneReponse: ex.bonnesReponses[0], correct, pts: correct ? ex.pts : 0 });
+    }
+    else if (ex.type === 'reponse-saisie') {
+        const val = normaliserTexte($('#reponse-saisie-input').value || '', ex.ignorerCasse, ex.ignorerAccents);
+        const correct = ex.bonnesReponses.some(r => normaliserTexte(r, ex.ignorerCasse, ex.ignorerAccents) === val);
+        if (correct) pts += ex.pts;
+        details.questions.push({ enonce: ex.enonce, reponseEleve: val || 'Aucune', bonneReponse: ex.bonnesReponses[0], correct, pts: correct ? ex.pts : 0 });
+    }
+    else if (ex.type === 'association') {
+        $$('#eval-content .association-item').forEach(item => {
+            const terme = item.dataset.terme;
+            const ptsA = parseFloat(item.dataset.pts);
+            const val = item.querySelector('select').value;
+            const correct = val === ex.associations.find(a => a.terme === terme).definition;
+            if (correct) pts += ptsA;
+            details.questions.push({ enonce: terme, reponseEleve: val || 'Aucune', bonneReponse: ex.associations.find(a => a.terme === terme).definition, correct, pts: correct ? ptsA : 0 });
+        });
+    }
+    else if (ex.type === 'texte-trous-libre') {
+        $$('#eval-content input[data-trou-index]').forEach(input => {
+            const idx = parseInt(input.dataset.trouIndex);
+            const ptsT = parseFloat(input.dataset.pts);
+            const trou = ex.trous[idx];
+            const val = normaliserTexte(input.value || '', true, true);
+            const correct = trou.bonnesReponses.some(r => normaliserTexte(r, true, true) === val);
+            if (correct) pts += ptsT;
+            details.questions.push({ enonce: `Trou ${idx+1}`, reponseEleve: input.value || 'Aucune', bonneReponse: trou.bonnesReponses[0], correct, pts: correct ? ptsT : 0 });
+        });
+    }
+    else if (ex.type === 'texte-trous-liste-unique' || ex.type === 'texte-trous-liste-variable') {
+        $$('#eval-content select[data-trou-index]').forEach(select => {
+            const idx = parseInt(select.dataset.trouIndex);
+            const ptsT = parseFloat(select.dataset.pts);
+            const trou = ex.trous[idx];
+            const val = select.value;
+            const correct = val === trou.bonneReponse;
+            if (correct) pts += ptsT;
+            details.questions.push({ enonce: `Trou ${idx+1}`, reponseEleve: val || 'Aucune', bonneReponse: trou.bonneReponse, correct, pts: correct ? ptsT : 0 });
+        });
+    }
 
-  container.innerHTML = html;
-  startEvalTimer();
+    scoreEval += pts;
+    details.points = Math.round(pts * 10) / 10;
+    let totalP = 0;
+    if (ex.type === 'tableau-menu') totalP = ex.questions.reduce((s,q) => s+q.pts, 0);
+    else if (ex.type === 'association') totalP = ex.associations.reduce((s,a) => s+a.pts, 0);
+    else if (ex.trous) totalP = ex.trous.reduce((s,t) => s+t.pts, 0);
+    else if (ex.pts) totalP = ex.pts;
+    else if (ex.options) totalP = ex.options.reduce((s,o) => s+(o.pts||0), 0);
+    details.totalPossible = totalP;
+    detailsEval.push(details);
+    evalIndex++;
+    afficherExerciceEval();
 }
 
-// Correction et calcul des scores d'évaluation
-function evaluateCurrentAnswer() {
-  const ex = appData.evaluations[currentEvalIndex];
-  let pointsGagnes = 0;
-  let reponseEleve = null;
-
-  switch (ex.type) {
-    case 'tableau-menu':
-      const selects = document.querySelectorAll('.eval-input');
-      let tCorrect = 0;
-      reponseEleve = [];
-      selects.forEach(s => {
-        const idx = s.dataset.index;
-        reponseEleve.push(s.value);
-        if (s.value === ex.lignes[idx].reponse) tCorrect++;
-      });
-      pointsGagnes = (tCorrect / ex.lignes.length) * ex.points;
-      break;
-
-    case 'choix-unique':
-      const checkedOpt = document.querySelector('input[name="eval-opt"]:checked');
-      if (checkedOpt) {
-        reponseEleve = parseInt(checkedOpt.value);
-        if (reponseEleve === ex.reponse) pointsGagnes = ex.points;
-      }
-      break;
-
-    case 'choix-multiple':
-      const chks = document.querySelectorAll('.eval-input');
-      let mPoints = 0;
-      reponseEleve = [];
-      const ptParCoche = ex.points / ex.options.length;
-      chks.forEach((c, idx) => {
-        const isChecked = c.checked;
-        reponseEleve.push(isChecked);
-        if (isChecked === ex.options[idx].correct) {
-          mPoints += ptParCoche;
-        }
-      });
-      pointsGagnes = mPoints;
-      break;
-
-    case 'valeur-numerique':
-      const valInput = document.querySelector('.eval-input').value.trim();
-      reponseEleve = valInput;
-      if (parseFloat(valInput) === parseFloat(ex.reponse)) pointsGagnes = ex.points;
-      break;
-
-    case 'reponse-saisie':
-    case 'texte-trous-libre':
-      const txtInput = document.querySelector('.eval-input').value;
-      reponseEleve = txtInput;
-      const normalizedInput = normalizeString(txtInput);
-      const valids = ex.reponses_valides || ex.reponse_valide;
-      const isValid = Array.isArray(valids) 
-        ? valids.some(v => normalizeString(v) === normalizedInput)
-        : normalizeString(valids) === normalizedInput;
-      if (isValid) pointsGagnes = ex.points;
-      break;
-
-    case 'association':
-      const assocSelects = document.querySelectorAll('.eval-input');
-      let aCorrect = 0;
-      reponseEleve = [];
-      assocSelects.forEach(s => {
-        const idx = s.dataset.index;
-        reponseEleve.push(s.value);
-        if (s.value === ex.pairs[idx].definition) aCorrect++;
-      });
-      pointsGagnes = (aCorrect / ex.pairs.length) * ex.points;
-      break;
-
-    case 'texte-trous-liste-unique':
-      const selOpt = document.querySelector('.eval-input').value;
-      reponseEleve = selOpt;
-      if (selOpt === ex.reponse) pointsGagnes = ex.points;
-      break;
-
-    case 'texte-trous-liste-variable':
-      const segSelects = document.querySelectorAll('.eval-input');
-      let segCorrect = 0;
-      reponseEleve = {};
-      const totalSegs = ex.segments.filter(s => s.id).length;
-      segSelects.forEach(s => {
-        const id = s.dataset.id;
-        reponseEleve[id] = s.value;
-        const targetSeg = ex.segments.find(sg => sg.id === id);
-        if (targetSeg && s.value === targetSeg.reponse) segCorrect++;
-      });
-      pointsGagnes = (segCorrect / totalSegs) * ex.points;
-      break;
-  }
-
-  evalScore += pointsGagnes;
-  userEvalAnswers.push({
-    exercice: ex,
-    pointsObtenus: pointsGagnes,
-    reponseEleve: reponseEleve
-  });
+function terminerEval() {
+    $('#section-eval').classList.add('hidden');
+    afficherResultats();
 }
 
-function nextEvalQuestion(auto = false) {
-  clearInterval(evalTimerInterval);
-  evaluateCurrentAnswer();
-
-  currentEvalIndex++;
-  if (currentEvalIndex < appData.evaluations.length) {
-    renderEvalQuestion();
-  } else {
-    finishEvaluation();
-  }
+// ========== RÉSULTATS ==========
+function afficherResultats() {
+    const zone = $('#pdf-report-area');
+    zone.classList.remove('hidden');
+    const totalQuiz = quizQuestions.length;
+    const totalEval = 40;
+    const total = scoreQuiz + scoreEval;
+    const mention = total >= 36 ? '🏆 Excellent' : total >= 28 ? '👍 Très bien' : total >= 20 ? '✅ Bien' : total >= 12 ? '📚 À renforcer' : '⚠️ À retravailler';
+    
+    let html = `<div class="score-final">🎯 Score total : ${total.toFixed(1)} / ${totalQuiz + totalEval} pts<br><small>Quiz : ${scoreQuiz}/${totalQuiz} | Évaluation : ${scoreEval.toFixed(1)}/${totalEval}</small><br><small>${mention}</small></div>`;
+    html += `<div class="resultat-section"><h3>📋 Détail du Quiz (15 questions)</h3>`;
+    detailsQuiz.forEach((d, i) => {
+        html += `<div class="detail-exercice ${d.correct ? '' : 'erreur'}"><strong>Q${i+1}.</strong> ${d.question}<br>${d.correct ? '✅ Bonne réponse' : `❌ "${d.reponseEleve}" → Attendu : "${d.bonneReponse}"`}</div>`;
+    });
+    html += `</div><div class="resultat-section"><h3>📝 Détail de l'évaluation</h3>`;
+    detailsEval.forEach(d => {
+        const nb = d.questions.filter(q => q.correct).length;
+        const ok = nb === d.questions.length;
+        html += `<div class="detail-exercice ${ok ? '' : 'erreur'}"><strong>${d.titre}</strong> — ${d.points}/${d.totalPossible} pts (${nb}/${d.questions.length})<br>`;
+        d.questions.forEach(q => {
+            html += `<div class="detail-question ${q.correct ? 'bonne' : 'mauvaise'}">${q.correct ? '✅' : '❌'} ${q.enonce} — ${q.correct ? q.reponseEleve : `"${q.reponseEleve}" → "${q.bonneReponse}"`}</div>`;
+        });
+        html += `</div>`;
+    });
+    html += `</div>`;
+    $('#resultats-detail').innerHTML = html;
+    zone.scrollIntoView({ behavior: 'smooth' });
 }
 
-function finishEvaluation() {
-  switchSection('bilan');
-  renderBilan();
+// ========== PDF ==========
+function genererPDFResultats() {
+    const el = $('#pdf-report-area');
+    el.classList.remove('hidden');
+    el.style.display = 'block';
+    setTimeout(() => {
+        html2pdf().set({
+            margin: [10,10,10,10],
+            filename: `Rapport_Technologie_${new Date().toISOString().slice(0,10)}.pdf`,
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff', windowWidth: 960 },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+            pagebreak: { mode: ['avoid-all','css','legacy'] }
+        }).from(el).save();
+    }, 100);
 }
 
-// SECTION 4 : BILAN
-function renderBilan() {
-  document.getElementById('quiz-score-display').textContent = `${quizScore} / ${appData.quiz.length}`;
-  
-  const scoreArrondi = Math.round(evalScore * 10) / 10;
-  document.getElementById('eval-score-display').textContent = `${scoreArrondi} / 40`;
-
-  const levelBadge = document.getElementById('level-display');
-  if (scoreArrondi >= 32) {
-    levelBadge.textContent = "Excellent";
-    levelBadge.style.background = "#00b894";
-  } else if (scoreArrondi >= 24) {
-    levelBadge.textContent = "Bon niveau";
-    levelBadge.style.background = "#0984e3";
-  } else if (scoreArrondi >= 16) {
-    levelBadge.textContent = "À consolider";
-    levelBadge.style.background = "#fdcb6e";
-  } else {
-    levelBadge.textContent = "À retravailler";
-    levelBadge.style.background = "#d63031";
-  }
-
-  const corrContainer = document.getElementById('corrections-list');
-  corrContainer.innerHTML = userEvalAnswers.map((res, i) => {
-    const isSuccess = res.pointsObtenus === res.exercice.points;
-    return `
-      <div class="corr-item ${isSuccess ? 'correct' : ''}">
-        <h4>Exercice ${i + 1} : ${res.exercice.consigne} (${res.pointsObtenus.toFixed(1)} / ${res.exercice.points} pts)</h4>
-        <p><strong>Statut :</strong> ${isSuccess ? 'Réussi' : 'Incomplet ou Incorrect'}</p>
-      </div>
-    `;
-  }).join('');
-}
-
-function exportPDF() {
-  const element = document.getElementById('pdf-report');
-  const opt = {
-    margin:       0.5,
-    filename:     'Bilan_Technologie_3eme_Analyse_Besoin.pdf',
-    image:        { type: 'jpeg', quality: 0.98 },
-    html2canvas:  { scale: 2 },
-    jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
-  };
-  html2pdf().set(opt).from(element).save();
-}
-
-function resetModule() {
-  location.reload();
-}
+$('#btn-telecharger-pdf').addEventListener('click', genererPDFResultats);
+$('#btn-recommencer').addEventListener('click', () => location.reload());
+document.addEventListener('DOMContentLoaded', chargerDonnees);
