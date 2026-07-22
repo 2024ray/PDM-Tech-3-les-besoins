@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Techno 3ème - Analyse du Besoin</title>
+  <title>Techno 3ème - Programme & Analyse du Besoin</title>
   <link rel="stylesheet" href="style.css">
   <!-- CDN html2pdf.js pour la génération de rapport PDF -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
@@ -13,10 +13,11 @@
   <header class="app-header">
     <div class="header-content">
       <h1>Technologie 3<sup>ème</sup></h1>
-      <p>Module interactif : Analyse du Besoin</p>
+      <p>Programme global & Module : L'Analyse du Besoin</p>
     </div>
     <nav class="step-nav">
-      <button id="nav-cours" class="nav-btn active" onclick="switchSection('cours')">1. Cours</button>
+      <button id="nav-intro" class="nav-btn active" onclick="switchSection('intro')">📌 Intro & Programme</button>
+      <button id="nav-cours" class="nav-btn" onclick="switchSection('cours')">1. Cours</button>
       <button id="nav-quiz" class="nav-btn" onclick="switchSection('quiz')">2. Quiz</button>
       <button id="nav-eval" class="nav-btn" onclick="switchSection('eval')">3. Évaluation</button>
       <button id="nav-bilan" class="nav-btn" onclick="switchSection('bilan')">4. Bilan</button>
@@ -25,8 +26,135 @@
 
   <main class="main-container">
 
+    <!-- SECTION INTRO : DÉROULEMENT DU PROGRAMME ET DU CHAPITRE -->
+    <section id="sec-intro" class="card-section active">
+      <div class="section-header">
+        <h2>PROGRAMME GLOBAL DE FORMATION</h2>
+        <span class="badge">Chapitre : L'Analyse du Besoin</span>
+      </div>
+      
+      <p class="intro-lead">
+        Bienvenue dans le <strong>Module 2</strong> de votre parcours de formation. La séance est structurée en deux phases complémentaires : <strong>Partie Cours (théorie)</strong> et <strong>Partie Exercices (pratique)</strong>.
+      </p>
+
+      <h3 class="subsection-title">Vue d'Ensemble du Programme</h3>
+      <div class="modules-grid">
+        <div class="module-card">
+          <span class="module-num">MODULE 1</span>
+          <h4>Cadrage & Fondamentaux</h4>
+          <ul>
+            <li>Introduction au projet</li>
+            <li>Définition des objectifs</li>
+            <li>Analyse de l'existant</li>
+          </ul>
+        </div>
+
+        <div class="module-card highlight">
+          <span class="module-num">MODULE 2 (AUJOURD'HUI)</span>
+          <h4>L'Analyse du Besoin</h4>
+          <ul>
+            <li>Saisie du besoin client</li>
+            <li>Outils d'expression</li>
+            <li>Partie Cours & Exercices</li>
+          </ul>
+        </div>
+
+        <div class="module-card">
+          <span class="module-num">MODULE 3</span>
+          <h4>Cahier des Charges (CDCF)</h4>
+          <ul>
+            <li>Fonctions & Contraintes</li>
+            <li>Livrables du projet</li>
+            <li>Critères d'évaluation</li>
+          </ul>
+        </div>
+
+        <div class="module-card">
+          <span class="module-num">MODULE 4</span>
+          <h4>Validation & Recette</h4>
+          <ul>
+            <li>Tests de conformité</li>
+            <li>Bilan & Clôture</li>
+            <li>Niveaux de flexibilité</li>
+          </ul>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <h3 class="subsection-title">Organisation du Chapitre Besoin</h3>
+      <div class="organisation-grid">
+        <div class="org-card">
+          <div class="org-icon">📖</div>
+          <h4>1. Partie Cours Théorique</h4>
+          <p class="org-subtitle"><strong>Objectif :</strong> Maîtriser les concepts fondamentaux de l'ingénierie des besoins.</p>
+          <ul>
+            <li>Identification et formulation du besoin client.</li>
+            <li>Outils de modélisation (Bête à cornes, Diagramme Pieuvre).</li>
+            <li>Établissement du Cahier des Charges Fonctionnel (CDCF).</li>
+          </ul>
+        </div>
+
+        <div class="org-card">
+          <div class="org-icon">🛠️</div>
+          <h4>2. Partie Exercices & Pratique</h4>
+          <p class="org-subtitle"><strong>Objectif :</strong> Appliquer la méthodologie sur un cas concret de projet.</p>
+          <ul>
+            <li>Mises en situation pratiques et travail de groupe.</li>
+            <li>Rédaction supervisée des critères de validation.</li>
+            <li>Restitution orale et correction interactive.</li>
+          </ul>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <h3 class="subsection-title">Déroulement de la Séance</h3>
+      <div class="timeline">
+        <div class="timeline-step">
+          <div class="step-circle">1</div>
+          <div class="step-content">
+            <h5>1. Introduction</h5>
+            <p>Cadre global de la séance, objectifs pédagogiques et tour de table des attentes.</p>
+          </div>
+        </div>
+
+        <div class="timeline-step">
+          <div class="step-circle">2</div>
+          <div class="step-content">
+            <h5>2. Partie Cours</h5>
+            <p>Apport théorique sur le besoin, démarche fonctionnelle et méthodologie CDCF.</p>
+          </div>
+        </div>
+
+        <div class="timeline-step">
+          <div class="step-circle">3</div>
+          <div class="step-content">
+            <h5>3. Partie Exercices</h5>
+            <p>Atelier pratique en sous-groupes : cas d'étude réel et formalisation du besoin.</p>
+          </div>
+        </div>
+
+        <div class="timeline-step">
+          <div class="step-circle">4</div>
+          <div class="step-content">
+            <h5>4. Restitution</h5>
+            <p>Présentation des travaux, débat contradictoire, correction et bilan du chapitre.</p>
+          </div>
+        </div>
+      </div>
+
+      <blockquote class="info-callout">
+        💡 <strong>Théorie vers Pratique :</strong> Le cours nourrit directement la partie exercices et les cas d'application du programme.
+      </blockquote>
+
+      <div class="action-footer flex-center">
+        <button class="btn btn-primary btn-large" onclick="switchSection('cours')">Commencer le Cours &rarr;</button>
+      </div>
+    </section>
+
     <!-- SECTION 1 : COURS -->
-    <section id="sec-cours" class="card-section active">
+    <section id="sec-cours" class="card-section">
       <div class="section-header">
         <h2>Fiche de Révision Synthétique</h2>
         <span class="badge">Analyse du Besoin</span>
@@ -60,7 +188,7 @@
     <!-- SECTION 3 : ÉVALUATION -->
     <section id="sec-eval" class="card-section">
       <div class="section-header">
-        <h2>Évaluation Automatisée</h2>
+        <h2>Évaluation Automatisée (Exercices)</h2>
         <div class="timer-box" id="eval-timer">Temps question : 01:30</div>
       </div>
       <div class="progress-bar-container">
@@ -112,7 +240,7 @@
     <p>Module Pédagogique Technologie 3<sup>ème</sup> &bull; Conçu pour GitHub Pages</p>
   </footer>
 
-  <!-- SECOURS JSON INLINE (Chargement résilient si exécution locale sans serveur) -->
+  <!-- SECOURS JSON INLINE -->
   <script id="questions-data-inline" type="application/json">
   {
     "cours": {
@@ -149,7 +277,7 @@
       {"id": "q9", "question": "Parmi ces propositions, laquelle est une valeur d'estime ?", "options": ["Autonomie de 10 heures", "Boîtier en or finitions luxe", "Résistance à l'eau 50m", "Compatibilité Bluetooth 5.0"], "reponse": 1},
       {"id": "q10", "question": "Si un produit ne rend plus service à personne, on dit que :", "options": ["Le besoin a disparu ou changé", "La bête à cornes est fausse", "La valeur d'usage augmente", "Il devient un brevet"], "reponse": 0},
       {"id": "q11", "question": "Le diagramme 'Bête à cornes' fait partie de quelle phase ?", "options": ["Fabrication en série", "Saisie du besoin / Analyse fonctionnelle", "Recyclage du produit", "Vente en magasin"], "reponse": 1},
-      {"id": "q12", "question": "Laquelle de ces affirmations est VRAIE ?", "options": ["Le besoin dépend uniquement de l'esthétique", "Un produit peut satisfaire un besoin implicit ou explicite", "La valeur d'estime est toujours identique pour tout le monde", "Le besoin ne concerne que les objets électroniques"], "reponse": 1},
+      {"id": "q12", "question": "Laquelle de ces affirmations est VRAIE ?", "options": ["Le besoin dépend uniquement de l'esthétique", "Un produit peut satisfaire un besoin implicite ou explicite", "La valeur d'estime est toujours identique pour tout le monde", "Le besoin ne concerne que les objets électroniques"], "reponse": 1},
       {"id": "q13", "question": "L'ergonomie d'un outil participe principalement à :", "options": ["Sa valeur d'estime", "Sa valeur d'usage (facilité d'utilisation)", "Son coût de transport", "Son packaging"], "reponse": 1},
       {"id": "q14", "question": "Sur quoi agit un lave-linge ?", "options": ["Sur l'utilisateur", "Sur le linge sale", "Sur la facture d'électricité", "Sur la notice"], "reponse": 1},
       {"id": "q15", "question": "Qui bénéficie du service rendu par une trottinette électrique ?", "options": ["Le bitume", "L'utilisateur / le piéton qui se déplace", "Le fabricant de batteries", "Le vendeur"], "reponse": 1}
