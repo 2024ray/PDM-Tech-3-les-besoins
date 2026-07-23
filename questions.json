@@ -124,8 +124,8 @@
             "enonce": "Pour chaque produit, identifie la Fonction Principale (FP) visée dans le CDCF.",
             "questions": [
                 {"id": "ex10q1", "enonce": "Smartphone tout-terrain.", "options": [{"texte": "Communiquer en milieu hostile", "correct": true}, {"texte": "Remplacer un ordinateur", "correct": false}, {"texte": "Éclairer une pièce", "correct": false}], "pts": 0.6},
-                {"id": "ex10q2", "enonce": "Venceur/Robot aspirateur.", "options": [{"texte": "Nettoyer les sols en autonomie", "correct": true}, {"texte": "Chauffer la maison", "correct": false}, {"texte": "Surveiller les animaux", "correct": false}], "pts": 0.6},
-                {"id": "ex10q3", "enonce": "Dronagri (Drone agricole).", "options": [{"texte": "Analyser les cultures à distance", "correct": true}, {"texte": "Transporter des passagers", "correct": false}, {"texte": "Arroser le jardin", "correct": false}], "pts": 0.6},
+                {"id": "ex10q2", "enonce": "Robot aspirateur.", "options": [{"texte": "Nettoyer les sols en autonomie", "correct": true}, {"texte": "Chauffer la maison", "correct": false}, {"texte": "Surveiller les animaux", "correct": false}], "pts": 0.6},
+                {"id": "ex10q3", "enonce": "Drone agricole.", "options": [{"texte": "Analyser les cultures à distance", "correct": true}, {"texte": "Transporter des passagers", "correct": false}, {"texte": "Arroser le jardin", "correct": false}], "pts": 0.6},
                 {"id": "ex10q4", "enonce": "Casque anti-bruit actif.", "options": [{"texte": "Isoler des perturbations sonores", "correct": true}, {"texte": "Diffuser de la lumière", "correct": false}, {"texte": "Mesurer le rythme cardiaque", "correct": false}], "pts": 0.6},
                 {"id": "ex10q5", "enonce": "Borne de recharge solaire.", "options": [{"texte": "Fournir de l'énergie propre", "correct": true}, {"texte": "Afficher l'heure", "correct": false}, {"texte": "Distribuer de l'eau", "correct": false}], "pts": 0.6}
             ]
@@ -157,7 +157,7 @@
         {
             "id": "ex13", "type": "choix-multiple", "niveau": "Avancé",
             "titre": "Ex13 - Restitution & Évaluation (3 pts)",
-            "enonce": "Coche TOUTES les actions réalisées lors de la Phase 4 (Restitution).",
+            "enonce": "Coche TOUSES les actions réalisées lors de la Phase 4 (Restitution).",
             "options": [
                 {"texte": "Présentation des travaux par les groupes", "correct": true, "pts": 1},
                 {"texte": "Débat contradictoire avec l'audience", "correct": true, "pts": 1},
