@@ -1,4 +1,3 @@
-
 // ==========================================
 // DONNÉES DU COURS, QUIZ ET EXERCICES
 // ==========================================
@@ -245,7 +244,6 @@ function remplacerTrous(texte, elements) {
 }
 
 function DémarrerApplication() {
-    // 1. Initialiser la soumission du formulaire d'identification
     const form = $('#form-eleve');
     if (form) {
         form.addEventListener('submit', (e) => {
@@ -263,10 +261,7 @@ function DémarrerApplication() {
         });
     }
 
-    // 2. Charger la partie cours
     initialiserCours();
-
-    // 3. Préparer le Quiz et l'Évaluation
     preparerQuiz();
     preparerEval();
 }
@@ -701,5 +696,4 @@ function genererPDFResultats() {
 $('#btn-telecharger-pdf').addEventListener('click', genererPDFResultats);
 $('#btn-recommencer').addEventListener('click', () => location.reload());
 
-// Lancement direct de l'application
 document.addEventListener('DOMContentLoaded', DémarrerApplication);
