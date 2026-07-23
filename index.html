@@ -18,8 +18,32 @@
     </header>
 
     <main class="container">
+        <!-- IDENTIFICATION DE L'ÉLÈVE -->
+        <section id="section-identification" class="card">
+            <h2><i class="fa-solid fa-user-graduate"></i> Identification de l'élève</h2>
+            <p class="subtitle-card">Veuillez renseigner vos informations pour démarrer la séance :</p>
+            <form id="form-identification">
+                <div class="form-group">
+                    <label for="input-nom"><i class="fa-solid fa-user"></i> Nom :</label>
+                    <input type="text" id="input-nom" placeholder="Ex: Dupont" required>
+                </div>
+                <div class="form-group">
+                    <label for="input-prenom"><i class="fa-solid fa-id-card"></i> Prénom :</label>
+                    <input type="text" id="input-prenom" placeholder="Ex: Thomas" required>
+                </div>
+                <div class="form-group">
+                    <label for="input-classe"><i class="fa-solid fa-school"></i> Classe :</label>
+                    <input type="text" id="input-classe" placeholder="Ex: 2nde A ou 1STI2D" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg">
+                    <span>Valider et Commencer le Cours</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </form>
+        </section>
+
         <!-- PARTIE COURS -->
-        <section id="section-cours" class="card card-cours">
+        <section id="section-cours" class="card card-cours hidden">
             <div class="cours-header">
                 <h2><i class="fa-solid fa-book-open"></i> Partie Cours (Théorie)</h2>
                 <p class="cours-subtitle">Découvrez la démarche méthodologique avant de passer aux exercices pratiques.</p>
@@ -68,6 +92,7 @@
         <!-- BILAN ET RESTITUTION -->
         <section id="pdf-report-area" class="card hidden">
             <h2>📊 Bilan & Restitution de la Séance</h2>
+            <div id="eleve-info-recap" class="eleve-recap-box"></div>
             <div id="resultats-detail"></div>
             <div class="actions-pdf">
                 <button id="btn-telecharger-pdf" class="btn btn-success">📥 Télécharger PDF du Bilan</button>
