@@ -1,8 +1,7 @@
 /* ==========================================
-   PALETTE DE COULEURS VIVES & VISIBLES
+   PALETTE DE COULEURS VIVES & ANIMATIONS
 ========================================== */
 
-/* 1. HEADER : Dégradé Violet / Rose / Orange */
 header, .app-header, .header {
     background: linear-gradient(135deg, #7c3aed 0%, #db2777 50%, #f97316 100%) !important;
     color: white !important;
@@ -10,7 +9,6 @@ header, .app-header, .header {
     text-align: center !important;
 }
 
-/* 2. FOND DE PAGE : Gris/Bleu très doux */
 body {
     background-color: #f1f5f9 !important;
     color: #0f172a !important;
@@ -27,7 +25,6 @@ body {
     z-index: 10 !important;
 }
 
-/* 3. CARTES GÉNÉRIQUES */
 .card, section, article {
     background: #ffffff !important;
     border-radius: 16px !important;
@@ -41,7 +38,91 @@ body {
     display: none !important;
 }
 
-/* 4. FORMULAIRE D'IDENTIFICATION */
+/* ==========================================
+   ANIMATIONS CSS (ILLUSTRATIONS & TRANSITIONS)
+========================================== */
+
+/* 1. Apparition en fondu */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in {
+    animation: fadeIn 0.4s ease-out forwards !important;
+}
+
+/* 2. Effet Pop sur les éléments de réponse */
+@keyframes popIn {
+    0% { opacity: 0; transform: scale(0.95); }
+    100% { opacity: 1; transform: scale(1); }
+}
+.animate-pop {
+    animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards !important;
+}
+
+/* 3. Glissement latéral des questions */
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(-15px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+.animate-slide-in {
+    animation: slideIn 0.3s ease-out forwards !important;
+}
+
+/* 4. Icônes flottantes animées */
+@keyframes float {
+    0% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-6px) rotate(3deg); }
+    100% { transform: translateY(0px) rotate(0deg); }
+}
+.floating-icon {
+    font-size: 2rem !important;
+    color: #8b5cf6 !important;
+    margin-right: 12px !important;
+    animation: float 3s ease-in-out infinite !important;
+    display: inline-block !important;
+}
+
+/* 5. Trophée rebondissant */
+@keyframes bounceTrophy {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+.bounce-icon {
+    font-size: 2.5rem !important;
+    color: #f59e0b !important;
+    margin-right: 12px !important;
+    animation: bounceTrophy 1.5s ease-in-out infinite !important;
+    display: inline-block !important;
+}
+
+/* 6. Effet Pulsation sur les boutons principaux */
+@keyframes subtlePulse {
+    0% { transform: scale(1); box-shadow: 0 4px 14px rgba(217, 70, 239, 0.4); }
+    50% { transform: scale(1.02); box-shadow: 0 6px 20px rgba(217, 70, 239, 0.6); }
+    100% { transform: scale(1); box-shadow: 0 4px 14px rgba(217, 70, 239, 0.4); }
+}
+.pulse-hover:hover {
+    animation: subtlePulse 1.2s infinite !important;
+}
+
+/* En-têtes de sections animés */
+.section-banner-anim, .success-banner-anim {
+    display: flex !important;
+    align-items: center !important;
+    margin-bottom: 20px !important;
+    border-bottom: 2px solid #f1f5f9 !important;
+    padding-bottom: 12px !important;
+}
+
+.section-banner-anim h2, .success-banner-anim h2 {
+    margin: 0 !important;
+    color: #1e293b !important;
+}
+
+/* ==========================================
+   STYLE FORMULAIRES & OPTIONS
+========================================== */
 .form-group {
     margin-bottom: 20px !important;
 }
@@ -58,7 +139,6 @@ body {
     margin-bottom: 20px !important;
 }
 
-/* Boîte récapitulative de l'élève dans le PDF/Bilan */
 .eleve-recap-box {
     background: #f3e8ff !important;
     border: 2px solid #8b5cf6 !important;
@@ -79,7 +159,6 @@ body {
     color: #1e293b !important;
 }
 
-/* 5. BLOCS & CARTES DE COURS */
 .cours-grid {
     display: grid !important;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important;
@@ -87,37 +166,12 @@ body {
     margin-top: 24px !important;
 }
 
-/* Bloc 1 : Violet / Indigo */
-.cours-grid > *:nth-child(1), .cours-card:nth-child(1) {
-    background-color: #f3e8ff !important;
-    border-left: 8px solid #8b5cf6 !important;
-}
+.cours-grid > *:nth-child(1), .cours-card:nth-child(1) { background-color: #f3e8ff !important; border-left: 8px solid #8b5cf6 !important; }
+.cours-grid > *:nth-child(2), .cours-card:nth-child(2) { background-color: #ffe4e6 !important; border-left: 8px solid #f43f5e !important; }
+.cours-grid > *:nth-child(3), .cours-card:nth-child(3) { background-color: #d1fae5 !important; border-left: 8px solid #10b981 !important; }
+.cours-grid > *:nth-child(4), .cours-card:nth-child(4) { background-color: #fef3c7 !important; border-left: 8px solid #f59e0b !important; }
 
-/* Bloc 2 : Rose / Magenta */
-.cours-grid > *:nth-child(2), .cours-card:nth-child(2) {
-    background-color: #ffe4e6 !important;
-    border-left: 8px solid #f43f5e !important;
-}
-
-/* Bloc 3 : Vert Émeraude */
-.cours-grid > *:nth-child(3), .cours-card:nth-child(3) {
-    background-color: #d1fae5 !important;
-    border-left: 8px solid #10b981 !important;
-}
-
-/* Bloc 4 : Orange / Ambre */
-.cours-grid > *:nth-child(4), .cours-card:nth-child(4) {
-    background-color: #fef3c7 !important;
-    border-left: 8px solid #f59e0b !important;
-}
-
-/* ==========================================
-   6. CHAMPS DE SAISIE ET BOÎTES DE RÉPONSES
-========================================== */
-input[type="text"], 
-input[type="number"], 
-select, 
-textarea {
+input[type="text"], input[type="number"], select, textarea {
     background-color: #fffbe2 !important;
     border: 2px solid #f59e0b !important;
     border-radius: 10px !important;
@@ -130,10 +184,7 @@ textarea {
     transition: all 0.25s ease !important;
 }
 
-input[type="text"]:focus, 
-input[type="number"]:focus, 
-select:focus, 
-textarea:focus {
+input[type="text"]:focus, input[type="number"]:focus, select:focus, textarea:focus {
     background-color: #ffffff !important;
     border-color: #8b5cf6 !important;
     box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.25) !important;
@@ -155,6 +206,7 @@ textarea:focus {
 .option-item:hover, .choice-box:hover {
     border-color: #ec4899 !important;
     background-color: #fdf2f8 !important;
+    transform: translateX(4px);
 }
 
 .option-item.selected, .choice-box.selected {
@@ -164,9 +216,6 @@ textarea:focus {
     font-weight: bold !important;
 }
 
-/* ==========================================
-   7. CHRONOMÈTRE & BARRE D'INFO
-========================================== */
 .quiz-header {
     margin-bottom: 24px !important;
     width: 100% !important;
@@ -201,15 +250,6 @@ textarea:focus {
     animation: pulse 1s infinite !important;
 }
 
-@keyframes pulse {
-    0% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.85; transform: scale(1.03); }
-    100% { opacity: 1; transform: scale(1); }
-}
-
-/* ==========================================
-   8. BOUTONS
-========================================== */
 .btn {
     border: none !important;
     padding: 12px 24px !important;
@@ -232,9 +272,6 @@ textarea:focus {
     box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4) !important;
 }
 
-/* ==========================================
-   9. FRISE, BADGES ET BARRE DE PROGRESSION
-========================================== */
 .timeline-container {
     display: grid !important;
     grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)) !important;
@@ -242,16 +279,16 @@ textarea:focus {
     margin-top: 20px !important;
 }
 
-.timeline-step, .step {
+.timeline-step {
     border-radius: 12px !important;
     padding: 14px 10px !important;
     text-align: center !important;
 }
 
-.timeline-step:nth-child(1), .step:nth-child(1) { background-color: #e0f2fe !important; }
-.timeline-step:nth-child(2), .step:nth-child(2) { background-color: #f3e8ff !important; }
-.timeline-step:nth-child(3), .step:nth-child(3) { background-color: #ffe4e6 !important; }
-.timeline-step:nth-child(4), .step:nth-child(4) { background-color: #d1fae5 !important; }
+.timeline-step:nth-child(1) { background-color: #e0f2fe !important; }
+.timeline-step:nth-child(2) { background-color: #f3e8ff !important; }
+.timeline-step:nth-child(3) { background-color: #ffe4e6 !important; }
+.timeline-step:nth-child(4) { background-color: #d1fae5 !important; }
 
 .badge {
     padding: 6px 12px !important;
@@ -262,9 +299,9 @@ textarea:focus {
     text-transform: uppercase !important;
 }
 
-.badge-facile, .badge-green { background-color: #10b981 !important; }
-.badge-moyen, .badge-orange { background-color: #f59e0b !important; }
-.badge-avance, .badge-red { background-color: #ef4444 !important; }
+.badge-facile { background-color: #10b981 !important; }
+.badge-moyen { background-color: #f59e0b !important; }
+.badge-avance { background-color: #ef4444 !important; }
 
 .progress-bar {
     background: #e2e8f0 !important;
