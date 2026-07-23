@@ -1,4 +1,3 @@
-
 let data = null;
 let quizQuestions = [];
 let evalQuestions = [];
@@ -11,6 +10,14 @@ let detailsEval = [];
 let timerQuiz = null;
 let timerEval = null;
 let tempsQuizRestant = 20 * 60;
+
+// Objet pour stocker les infos de l'élève
+let eleveInfo = {
+    nom: '',
+    prenom: '',
+    classe: '',
+    numero: ''
+};
 
 function $(sel) { return document.querySelector(sel); }
 function $$(sel) { return document.querySelectorAll(sel); }
@@ -45,6 +52,22 @@ function remplacerTrous(texte, elements) {
     return resultat;
 }
 
+// ========== GESTION D'IDENTIFICATION ==========
+function initialiserFormulaire() {
+    $('#form-eleve').addEventListener('submit', (e) => {
+        e.preventDefault();
+        eleveInfo.nom = $('#eleve-nom').value.trim();
+        eleveInfo.prenom = $('#eleve-prenom').value.trim();
+        eleveInfo.classe = $('#eleve-classe').value.trim();
+        eleveInfo.numero = $('#eleve-numero').value.trim();
+
+        if (eleveInfo.nom && eleveInfo.prenom && eleveInfo.classe && eleveInfo.numero) {
+            $('#section-identification').classList.add('hidden');
+            $('#section-cours').classList.remove('hidden');
+        }
+    });
+}
+
 // ========== CHARGEMENT DES DONNÉES ==========
 async function chargerDonnees() {
     try {
@@ -55,12 +78,13 @@ async function chargerDonnees() {
         console.error("Erreur de chargement du JSON:", e);
         return;
     }
+    initialiserFormulaire();
     initialiserCours();
     preparerQuiz();
     preparerEval();
 }
 
-// ========== INITIALISATION DU COURS (STYLE ÉPURÉ) ==========
+// ========== INITIALISATION DU COURS ==========
 function initialiserCours() {
     const icons = [
         "fa-solid fa-bullseye",
@@ -264,7 +288,6 @@ function lancerTimerEval() {
     }, 1000);
 }
 
-// Rendu interactif des types d'exercices
 function renderTableauMenu(ex, container) {
     const table = document.createElement('table');
     table.className = 'tableau-menu';
@@ -484,6 +507,16 @@ function terminerEval() {
 function afficherResultats() {
     const zone = $('#pdf-report-area');
     zone.classList.remove('hidden');
+    
+    // Affichage des informations de l'élève
+    $('#eleve-info-display').innerHTML = `
+        <div class="eleve-card">
+            <h3><i class="fa-solid fa-id-card"></i> Identité de l'Élève</h3>
+            <p><strong>Nom :</strong> ${eleveInfo.nom} | <strong>Prénom :</strong> ${eleveInfo.prenom}</p>
+            <p><strong>Classe :</strong> ${eleveInfo.classe} | <strong>N° :</strong> ${eleveInfo.numero}</p>
+        </div>
+    `;
+
     const totalQuiz = quizQuestions.length;
     const totalEval = 40;
     const total = scoreQuiz + scoreEval;
@@ -513,10 +546,13 @@ function genererPDFResultats() {
     const el = $('#pdf-report-area');
     el.classList.remove('hidden');
     el.style.display = 'block';
+    
+    const nomFichier = `Bilan_${eleveInfo.nom}_${eleveInfo.prenom}_Classe_${eleveInfo.classe}_N${eleveInfo.numero}.pdf`;
+
     setTimeout(() => {
         html2pdf().set({
             margin: [10,10,10,10],
-            filename: `Bilan_Module2_Analyse_Du_Besoin_${new Date().toISOString().slice(0,10)}.pdf`,
+            filename: nomFichier,
             image: { type: 'jpeg', quality: 0.98 },
             html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff', windowWidth: 960 },
             jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
