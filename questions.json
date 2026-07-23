@@ -10,357 +10,38 @@
         ]
     },
     "quizComprehension": [
-        {
-            "id": "q1",
-            "type": "choix-unique",
-            "question": "La Bête à cornes sert à identifier le besoin auquel répond un produit[cite: 2].",
-            "options": [
-                {"texte": "Vrai", "correct": true},
-                {"texte": "Faux", "correct": false},
-                {"texte": "Partiellement vrai", "correct": false},
-                {"texte": "Impossible à dire", "correct": false}
-            ]
-        },
-        {
-            "id": "q2",
-            "type": "choix-unique",
-            "question": "Quel outil permet d'identifier les fonctions principales (FP) et de contrainte (FC) ?[cite: 2]",
-            "options": [
-                {"texte": "Le Diagramme Pieuvre", "correct": true},
-                {"texte": "La Bête à cornes", "correct": false},
-                {"texte": "Le Grafcet", "correct": false},
-                {"texte": "L'organigramme", "correct": false}
-            ]
-        },
-        {
-            "id": "q3",
-            "type": "choix-unique",
-            "question": "Que signifie le sigle CDCF ?[cite: 2]",
-            "options": [
-                {"texte": "Cahier des Charges Fonctionnel", "correct": true},
-                {"texte": "Contrat de Conception Finale", "correct": false},
-                {"texte": "Calcul de Charge des Fonctions", "correct": false},
-                {"texte": "Cahier de Contrôle Fonctionnel", "correct": false}
-            ]
-        },
-        {
-            "id": "q4",
-            "type": "choix-unique",
-            "question": "La Bête à cornes comporte exactement combien d'ovales principaux ?[cite: 2]",
-            "options": [
-                {"texte": "3", "correct": true},
-                {"texte": "4", "correct": false},
-                {"texte": "2", "correct": false},
-                {"texte": "0", "correct": false}
-            ]
-        },
-        {
-            "id": "q5",
-            "type": "choix-unique",
-            "question": "Quelle est la dernière étape du déroulement de la séance du Module 2 ?[cite: 2]",
-            "options": [
-                {"texte": "Restitution et correction interactive", "correct": true},
-                {"texte": "Partie cours", "correct": false},
-                {"texte": "Introduction", "correct": false},
-                {"texte": "Atelier pratique", "correct": false}
-            ]
-        },
-        {
-            "id": "q6",
-            "type": "choix-unique",
-            "question": "Un besoin est défini de manière générale comme :[cite: 2]",
-            "options": [
-                {"texte": "Le sentiment d'une privation ou d'une insuffisance", "correct": true},
-                {"texte": "Uniquement une envie passagère sans importance", "correct": false},
-                {"texte": "Un processus de fabrication en usine", "correct": false},
-                {"texte": "Le prix de vente d'un produit", "correct": false}
-            ]
-        },
-        {
-            "id": "q7",
-            "type": "choix-unique",
-            "question": "Le Diagramme Pieuvre relie le produit à quoi ?[cite: 2]",
-            "options": [
-                {"texte": "Ses milieux environnants", "correct": true},
-                {"texte": "Uniquement aux pièces mécaniques internes", "correct": false},
-                {"texte": "Au code source du logiciel", "correct": false},
-                {"texte": "À la comptabilité de l'entreprise", "correct": false}
-            ]
-        },
-        {
-            "id": "q8",
-            "type": "choix-unique",
-            "question": "Dans un atelier pratique, la rédaction porte notamment sur quoi ?[cite: 2]",
-            "options": [
-                {"texte": "Les critères de validation", "correct": true},
-                {"texte": "La couleur des murs de la classe", "correct": false},
-                {"texte": "Le salaire des concepteurs", "correct": false},
-                {"texte": "Le choix du fournisseur d'électricité", "correct": false}
-            ]
-        },
-        {
-            "id": "q9",
-            "type": "choix-unique",
-            "question": "À quel moment réalise-t-on l'analyse du besoin dans un projet ?[cite: 2]",
-            "options": [
-                {"texte": "Avant la conception", "correct": true},
-                {"texte": "Après la commercialisation", "correct": false},
-                {"texte": "Pendant le SAV", "correct": false},
-                {"texte": "Au moment du recyclage", "correct": false}
-            ]
-        },
-        {
-            "id": "q10",
-            "type": "choix-unique",
-            "question": "Quel est le lien entre le cours théorique et les exercices pratiques ?[cite: 2]",
-            "options": [
-                {"texte": "Le cours théorique nourrit directement les cas pratiques", "correct": true},
-                {"texte": "Ils sont totalement indépendants", "correct": false},
-                {"texte": "Les exercices se font avant le cours", "correct": false},
-                {"texte": "Il n'y a aucun lien", "correct": false}
-            ]
-        },
-        {
-            "id": "q11",
-            "type": "choix-unique",
-            "question": "Que qualifie la valeur d'estime pour un produit ?[cite: 2]",
-            "options": [
-                {"texte": "Les caractéristiques subjectives (design, prestige)", "correct": true},
-                {"texte": "Le coût de fabrication brut", "correct": false},
-                {"texte": "L'efficacité pure de la machine", "correct": false},
-                {"texte": "La durée de garantie légale", "correct": false}
-            ]
-        },
-        {
-            "id": "q12",
-            "type": "choix-unique",
-            "question": "Le diagramme Bête à cornes répond notamment à quelle question ?[cite: 2]",
-            "options": [
-                {"texte": "Dans quel but ?", "correct": true},
-                {"texte": "Quel est le bénéfice net de l'entreprise ?", "correct": false},
-                {"texte": "Quel est le nom du fournisseur ?", "correct": false},
-                {"texte": "Quelle est la tension secteur ?", "correct": false}
-            ]
-        },
-        {
-            "id": "q13",
-            "type": "choix-unique",
-            "question": "Quels sont les deux grands axes d'organisation du chapitre ?[cite: 2]",
-            "options": [
-                {"texte": "Partie Cours Théorique et Partie Exercices Pratiques", "correct": true},
-                {"texte": "Examen final et Projet individuel", "correct": false},
-                {"texte": "Analyse du coût et Devis", "correct": false},
-                {"texte": "Soutenance orale et Rapport écrit", "correct": false}
-            ]
-        },
-        {
-            "id": "q14",
-            "type": "choix-unique",
-            "question": "L'autonomie d'une batterie relève de quelle notion ?[cite: 2]",
-            "options": [
-                {"texte": "La valeur d'usage", "correct": true},
-                {"texte": "La valeur d'estime", "correct": false},
-                {"texte": "Le design purement esthétique", "correct": false},
-                {"texte": "Le prestige de la marque", "correct": false}
-            ]
-        },
-        {
-            "id": "q15",
-            "type": "choix-unique",
-            "question": "Quel est l'intérêt de la restitution orale ?[cite: 2]",
-            "options": [
-                {"texte": "Permettre le débat contradictoire et le bilan du chapitre", "correct": true},
-                {"texte": "Imposer une note définitive sans discussion", "correct": false},
-                {"texte": "Remplacer complètement le travail de groupe", "correct": false},
-                {"texte": "Éviter de faire des exercices écrits", "correct": false}
-            ]
-        },
-        {
-            "id": "q16",
-            "type": "choix-unique",
-            "question": "Parmi les interrogations suivantes, laquelle n'est PAS traitée par la Bête à cornes ?[cite: 2]",
-            "options": [
-                {"texte": "Combien coûte la fabrication du produit ?", "correct": true},
-                {"texte": "À qui rend-il service ?", "correct": false},
-                {"texte": "Sur quoi agit-il ?", "correct": false},
-                {"texte": "Dans quel but existe-t-il ?", "correct": false}
-            ]
-        },
-        {
-            "id": "q17",
-            "type": "choix-unique",
-            "question": "Quel terme qualifie une fonction imposée par l'environnement extérieur du produit dans un diagramme Pieuvre ?[cite: 2]",
-            "options": [
-                {"texte": "Fonction de contrainte (FC)", "correct": true},
-                {"texte": "Fonction principale (FP)", "correct": false},
-                {"texte": "Fonction de fabrication", "correct": false},
-                {"texte": "Fonction interne", "correct": false}
-            ]
-        },
-        {
-            "id": "q18",
-            "type": "choix-unique",
-            "question": "À quel moment précis du cycle de vie d'un projet le Cahier des Charges Fonctionnel (CDCF) est-il généralement rédigé ?[cite: 2]",
-            "options": [
-                {"texte": "Avant le lancement de la conception technique", "correct": true},
-                {"texte": "Pendant la phase de recyclage", "correct": false},
-                {"texte": "Juste après la commercialisation", "correct": false},
-                {"texte": "Lors du SAV", "correct": false}
-            ]
-        },
-        {
-            "id": "q19",
-            "type": "choix-unique",
-            "question": "Comment appelle-t-on le lien établi entre deux milieux extérieurs par l'intermédiaire du produit dans le diagramme Pieuvre ?[cite: 2]",
-            "options": [
-                {"texte": "Une fonction principale (FP)", "correct": true},
-                {"texte": "Une fonction de contrainte (FC)", "correct": false},
-                {"texte": "Une fonction esthétique", "correct": false},
-                {"texte": "Une fonction optionnelle", "correct": false}
-            ]
-        },
-        {
-            "id": "q20",
-            "type": "choix-unique",
-            "question": "Si un produit cède sous l'effet d'une source de chaleur externe non prise en compte, quel type de fonction a été omis ou mal analysé ?[cite: 2]",
-            "options": [
-                {"texte": "Une fonction de contrainte", "correct": true},
-                {"texte": "Une fonction principale", "correct": false},
-                {"texte": "Une fonction d'usage pure", "correct": false},
-                {"texte": "Une valeur d'estime", "correct": false}
-            ]
-        },
-        {
-            "id": "q21",
-            "type": "choix-unique",
-            "question": "Pourquoi formalise-t-on l'analyse du besoin au moyen de diagrammes graphiques normalisés ?[cite: 2]",
-            "options": [
-                {"texte": "Pour faciliter la compréhension et éviter les malentendus", "correct": true},
-                {"texte": "Uniquement pour décorer le dossier technique", "correct": false},
-                {"texte": "Pour augmenter automatiquement le prix de vente", "correct": false},
-                {"texte": "Pour remplacer totalement le code informatique", "correct": false}
-            ]
-        },
-        {
-            "id": "q22",
-            "type": "choix-unique",
-            "question": "Dans le cadre de l'ingénierie des besoins, que représente l'utilisateur final ?[cite: 2]",
-            "options": [
-                {"texte": "Le bénéficiaire principal de l'action du produit", "correct": true},
-                {"texte": "L'élément perturbateur de l'environnement", "correct": false},
-                {"texte": "Le fournisseur de matières premières", "correct": false},
-                {"texte": "Le contrôleur des impôts", "correct": false}
-            ]
-        },
-        {
-            "id": "q23",
-            "type": "choix-unique",
-            "question": "Quelle est la principale distinction entre une valeur d'usage et une valeur d'estime ?[cite: 2]",
-            "options": [
-                {"texte": "L'usage concerne l'efficacité pratique, l'estime relève de l'aspect émotionnel ou statutaire", "correct": true},
-                {"texte": "L'usage est gratuit, l'estime est payante", "correct": false},
-                {"texte": "L'estime concerne les dimensions physiques, l'usage concerne la couleur", "correct": false},
-                {"texte": "Il n'y a aucune différence", "correct": false}
-            ]
-        },
-        {
-            "id": "q24",
-            "type": "choix-unique",
-            "question": "Dans la démarche de modélisation du besoin, que signifient les trois branches de la Bête à cornes ?[cite: 2]",
-            "options": [
-                {"texte": "À qui l'objet rend service, sur quoi il agit, dans quel but", "correct": true},
-                {"texte": "Le poids, la taille, la couleur", "correct": false},
-                {"texte": "Le nom du concepteur, le prix, la date", "correct": false},
-                {"texte": "La vitesse, l'accélération, la puissance", "correct": false}
-            ]
-        },
-        {
-            "id": "q25",
-            "type": "choix-unique",
-            "question": "Quel danger principal court-on si l'analyse du besoin est bâclée ou omise ?[cite: 2]",
-            "options": [
-                {"texte": "Concevoir un produit qui ne correspond pas aux attentes du marché", "correct": true},
-                {"texte": "Économiser trop d'argent sur la production", "correct": false},
-                {"texte": "Obtenir un brevet trop rapidement", "correct": false},
-                {"texte": "Améliorer l'ergonomie par hasard", "correct": false}
-            ]
-        },
-        {
-            "id": "q26",
-            "type": "choix-unique",
-            "question": "Dans le CDCF, à quoi servent les critères de caractérisation ?[cite: 2]",
-            "options": [
-                {"texte": "À mesurer objectivement si les fonctions exigées sont atteintes", "correct": true},
-                {"texte": "À noter la qualité de l'écriture", "correct": false},
-                {"texte": "À déterminer la classe de l'utilisateur", "correct": false},
-                {"texte": "À fixer la date limite de péremption du logiciel", "correct": false}
-            ]
-        },
-        {
-            "id": "q27",
-            "type": "choix-unique",
-            "question": "Dans un diagramme Pieuvre, comment distingue-t-on une fonction principale d'une fonction de contrainte ?[cite: 2]",
-            "options": [
-                {"texte": "La FP relie deux milieux extérieurs via l'objet, la FC relie un seul milieu extérieur à l'objet", "correct": true},
-                {"texte": "La FP est tracée en rouge, la FC en bleu", "correct": false},
-                {"texte": "La FP est ronde, la FC est carrée", "correct": false},
-                {"texte": "Il n'y a aucune distinction graphique", "correct": false}
-            ]
-        },
-        {
-            "id": "q28",
-            "type": "choix-unique",
-            "question": "Quelle étape de la séance permet de valider collectivement les choix de conception ?[cite: 2]",
-            "options": [
-                {"texte": "La restitution orale et la correction interactive", "correct": true},
-                {"texte": "La lecture silencieuse du cours", "correct": false},
-                {"texte": "Le remplissage individuel des formulaires", "correct": false},
-                {"texte": "Le téléchargement du PDF", "correct": false}
-            ]
-        },
-        {
-            "id": "q29",
-            "type": "choix-unique",
-            "question": "Lequel de ces énoncés décrit le mieux l'objectif d'un cahier des charges fonctionnel ?[cite: 2]",
-            "options": [
-                {"texte": "Exprimer les besoins sous forme de fonctions service sans imposer de solution technique prématurée", "correct": true},
-                {"texte": "Donner immédiatement le plan exact des pièces à usiner", "correct": false},
-                {"texte": "Lister les noms des fournisseurs de composants", "correct": false},
-                {"texte": "Rédiger le mode d'emploi définitif", "correct": false}
-            ]
-        },
-        {
-            "id": "q30",
-            "type": "choix-unique",
-            "question": "Que valide-t-on lors de la phase finale de l'exercice pratique ?[cite: 2]",
-            "options": [
-                {"texte": "La pertinence des fonctions et des critères de validation retenus", "correct": true},
-                {"texte": "La vitesse de frappe au clavier", "correct": false},
-                {"texte": "La capacité de la batterie du PC", "correct": false},
-                {"texte": "Le respect de l'horaire de récréation", "correct": false}
-            ]
-        }
+        {"id": "q1", "question": "La Bête à cornes sert à identifier le besoin auquel répond un produit[cite: 2].", "options": [{"texte": "Vrai", "correct": true}, {"texte": "Faux", "correct": false}, {"texte": "Partiellement vrai", "correct": false}, {"texte": "Impossible à dire", "correct": false}]},
+        {"id": "q2", "question": "Quel outil permet d'identifier les fonctions principales (FP) et de contrainte (FC) ?[cite: 2]", "options": [{"texte": "Le Diagramme Pieuvre", "correct": true}, {"texte": "La Bête à cornes", "correct": false}, {"texte": "Le Grafcet", "correct": false}, {"texte": "L'organigramme", "correct": false}]},
+        {"id": "q3", "question": "Que signifie le sigle CDCF ?[cite: 2]", "options": [{"texte": "Cahier des Charges Fonctionnel", "correct": true}, {"texte": "Contrat de Conception Finale", "correct": false}, {"texte": "Calcul de Charge des Fonctions", "correct": false}, {"texte": "Cahier de Contrôle Fonctionnel", "correct": false}]},
+        {"id": "q4", "question": "La Bête à cornes comporte exactement 3 ovales[cite: 2].", "options": [{"texte": "Vrai", "correct": true}, {"texte": "Faux, il y en a 4", "correct": false}, {"texte": "Faux, il y en a 2", "correct": false}, {"texte": "Faux, il n'y a pas d'ovales", "correct": false}]},
+        {"id": "q5", "question": "Quelle est la dernière étape du déroulement de la séance du Module 2 ?[cite: 2]", "options": [{"texte": "Restitution et correction interactive", "correct": true}, {"texte": "Partie cours", "correct": false}, {"texte": "Introduction", "correct": false}, {"texte": "Atelier pratique", "correct": false}]},
+        {"id": "q6", "question": "Un besoin est le sentiment d'une privation ou d'une insuffisance[cite: 2].", "options": [{"texte": "Vrai", "correct": true}, {"texte": "Faux", "correct": false}, {"texte": "Vrai uniquement en économie", "correct": false}, {"texte": "Faux, c'est un désir", "correct": false}]},
+        {"id": "q7", "question": "Le Diagramme Pieuvre relie le produit à ses milieux environnants[cite: 2].", "options": [{"texte": "Vrai", "correct": true}, {"texte": "Faux", "correct": false}, {"texte": "Uniquement pour l'informatique", "correct": false}, {"texte": "Uniquement pour le BTP", "correct": false}]},
+        {"id": "q8", "question": "Dans un atelier pratique, la rédaction porte notamment sur les critères de validation[cite: 2].", "options": [{"texte": "Vrai", "correct": true}, {"texte": "Faux", "correct": false}, {"texte": "C'est facultatif", "correct": false}, {"texte": "Uniquement sur le prix", "correct": false}]},
+        {"id": "q9", "question": "L'analyse du besoin se fait après la fabrication du produit[cite: 2].", "options": [{"texte": "Faux, elle se fait avant la conception", "correct": true}, {"texte": "Vrai", "correct": false}, {"texte": "Vrai pour les prototypes", "correct": false}, {"texte": "Impossible à dire", "correct": false}]},
+        {"id": "q10", "question": "Le cours théorique nourrit directement la partie exercices et cas pratiques[cite: 2].", "options": [{"texte": "Vrai", "correct": true}, {"texte": "Faux, ils sont indépendants", "correct": false}, {"texte": "Uniquement en contrôle continu", "correct": false}, {"texte": "Jamais", "correct": false}]},
+        {"id": "q11", "question": "La valeur d'estime correspond aux caractéristiques subjectives (design, prestige)[cite: 2].", "options": [{"texte": "Vrai", "correct": true}, {"texte": "Faux, c'est la valeur d'usage", "correct": false}, {"texte": "C'est le coût de fabrication", "correct": false}, {"texte": "C'est la garantie", "correct": false}]},
+        {"id": "q12", "question": "Le diagramme Bête à cornes répond à la question 'Dans quel but ?'[cite: 2].", "options": [{"texte": "Vrai", "correct": true}, {"texte": "Faux", "correct": false}, {"texte": "Seulement pour les véhicules", "correct": false}, {"texte": "Faux, c'est le diagramme pieuvre", "correct": false}]},
+        {"id": "q13", "question": "Quels sont les deux grands axes d'organisation du chapitre ?[cite: 2]", "options": [{"texte": "Partie Cours Théorique et Partie Exercices Pratiques", "correct": true}, {"texte": "Examen final et Projet individuel", "correct": false}, {"texte": "Analyse du coût et Devis", "correct": false}, {"texte": "Soutenance orale et Rapport écrit", "correct": false}]},
+        {"id": "q14", "question": "L'autonomie d'une batterie est une valeur d'usage[cite: 2].", "options": [{"texte": "Vrai", "correct": true}, {"texte": "Faux, c'est de l'estime", "correct": false}, {"texte": "Faux, c'est un prix", "correct": false}, {"texte": "Impossible à classer", "correct": false}]},
+        {"id": "q15", "question": "La restitution orale permet le débat contradictoire et le bilan du chapitre[cite: 2].", "options": [{"texte": "Vrai", "correct": true}, {"texte": "Faux", "correct": false}, {"texte": "Seulement si l'enseignant est absent", "correct": false}, {"texte": "Inutile", "correct": false}]}
     ],
     "evaluation": [
         {
-            "id": "ex1",
-            "type": "association",
-            "niveau": "Facile",
+            "id": "ex1", "type": "tableau-menu", "niveau": "Facile",
             "titre": "Ex1 - Étapes de la séance (3 pts)",
             "enonce": "Associe chaque étape du déroulement de séance à sa description.",
-            "associations": [
-                {"terme": "Étape 1 : Introduction[cite: 2]", "definition": "Cadre global & Objectifs", "pts": 0.75},
-                {"terme": "Étape 2 : Partie Cours[cite: 2]", "definition": "Apport théorique CDCF", "pts": 0.75},
-                {"terme": "Étape 3 : Partie Exercices[cite: 2]", "definition": "Atelier sur cas réel", "pts": 0.75},
-                {"terme": "Étape 4 : Restitution[cite: 2]", "definition": "Débat & Correction", "pts": 0.75}
+            "questions": [
+                {"id": "ex1q1", "enonce": "Étape 1 : Introduction[cite: 2].", "options": [{"texte": "Cadre global & Objectifs", "correct": true}, {"texte": "Mises en situation", "correct": false}, {"texte": "Correction finale", "correct": false}, {"texte": "Apport théorique", "correct": false}, {"texte": "Évaluation formative", "correct": false}, {"texte": "Synthèse atelier", "correct": false}, {"texte": "Validation module", "correct": false}, {"texte": "Introduction générale", "correct": false}, {"texte": "Remise des notes", "correct": false}, {"texte": "Clôture", "correct": false}], "pts": 0.75},
+                {"id": "ex1q2", "enonce": "Étape 2 : Partie Cours[cite: 2].", "options": [{"texte": "Apport théorique CDCF", "correct": true}, {"texte": "Travail de groupe", "correct": false}, {"texte": "Présentation orale", "correct": false}, {"texte": "Tour de table", "correct": false}, {"texte": "Étude terrain", "correct": false}, {"texte": "Recherche web", "correct": false}, {"texte": "Brainstorming", "correct": false}, {"texte": "Prototypage", "correct": false}, {"texte": "Test utilisateur", "correct": false}, {"texte": "Soutenance", "correct": false}], "pts": 0.75},
+                {"id": "ex1q3", "enonce": "Étape 3 : Partie Exercices[cite: 2].", "options": [{"texte": "Atelier sur cas réel", "correct": true}, {"texte": "Bilan théorique", "correct": false}, {"texte": "Validation finale", "correct": false}, {"texte": "Intro générale", "correct": false}, {"texte": "Lecture de cours", "correct": false}, {"texte": "QCM en ligne", "correct": false}, {"texte": "Examen blanc", "correct": false}, {"texte": "Correction magistrale", "correct": false}, {"texte": "Écriture du sujet", "correct": false}, {"texte": "Distribution documents", "correct": false}], "pts": 0.75},
+                {"id": "ex1q4", "enonce": "Étape 4 : Restitution[cite: 2].", "options": [{"texte": "Débat & Correction", "correct": true}, {"texte": "Écriture du cours", "correct": false}, {"texte": "Choix des sous-groupes", "correct": false}, {"texte": "Saisie initiale", "correct": false}, {"texte": "Conception CAO", "correct": false}, {"texte": "Impression 3D", "correct": false}, {"texte": "Assemblage", "correct": false}, {"texte": "Test de résistance", "correct": false}, {"texte": "Commercialisation", "correct": false}, {"texte": "Maintenance", "correct": false}], "pts": 0.75}
             ]
         },
         {
-            "id": "ex2",
-            "type": "choix-multiple",
-            "niveau": "Facile",
+            "id": "ex2", "type": "choix-multiple", "niveau": "Facile",
             "titre": "Ex2 - Outils de modélisation du besoin (3 pts)",
-            "enonce": "Coche TOUTES les options qui sont des outils d'expression et de modélisation du besoin[cite: 2].",
+            "enonce": "Coche TOUS les outils d'expression et modélisation du besoin mentionnés[cite: 2].",
             "options": [
                 {"texte": "Bête à cornes", "correct": true, "pts": 1},
                 {"texte": "Diagramme Pieuvre", "correct": true, "pts": 1},
@@ -370,29 +51,23 @@
             ]
         },
         {
-            "id": "ex3",
-            "type": "valeur-numerique",
-            "niveau": "Moyen",
+            "id": "ex3", "type": "valeur-numerique", "niveau": "Moyen",
             "titre": "Ex3 - Nombre d'étapes (2 pts)",
-            "enonce": "Combien d'étapes principales composent le déroulement de la séance du Module 2 ? (Format numérique)[cite: 2]",
-            "bonnesReponses": ["4", "quatre"],
+            "enonce": "Combien d'étapes principales composent le déroulement de la séance du Module 2 ?[cite: 2]",
+            "bonnesReponses": ["4"],
             "pts": 2
         },
         {
-            "id": "ex4",
-            "type": "reponse-saisie",
-            "niveau": "Moyen",
+            "id": "ex4", "type": "reponse-saisie", "niveau": "Moyen",
             "titre": "Ex4 - Sigle fondamental (2 pts)",
             "enonce": "Quel document formel récapitule les fonctions et critères de validation ? (Saisis le sigle)[cite: 2]",
-            "bonnesReponses": ["CDCF", "cdcf"],
+            "bonnesReponses": ["cdcf", "c.d.c.f"],
             "ignorerCasse": true,
             "ignorerAccents": true,
             "pts": 2
         },
         {
-            "id": "ex5",
-            "type": "association",
-            "niveau": "Moyen",
+            "id": "ex5", "type": "association", "niveau": "Moyen",
             "titre": "Ex5 - Associer concepts du Module 2 (3 pts)",
             "image": "images/1784530297.png",
             "enonce": "Associe chaque élément à sa définition ou rôle[cite: 2].",
@@ -403,26 +78,20 @@
             ]
         },
         {
-            "id": "ex6",
-            "type": "texte-trous",
-            "sousType": "reponse-libre",
-            "niveau": "Moyen",
+            "id": "ex6", "type": "texte-trous-libre", "niveau": "Moyen",
             "titre": "Ex6 - Compléter l'organisation (2 pts)",
             "image": "images/e(11).gif",
-            "enonce": "Complète le texte en saisissant les mots manquants (réponse libre)[cite: 2].",
+            "enonce": "Complète le texte en saisissant les mots manquants[cite: 2].",
             "texte": "Le chapitre comprend deux parties : la partie {{}} pour la théorie et la partie {{}} pour l'application[cite: 2].",
             "trous": [
                 {"bonnesReponses": ["cours"], "pts": 1},
-                {"bonnesReponses": ["exercices", "pratique"], "pts": 1}
+                {"bonnesReponses": ["exercices", "exercice", "pratique"], "pts": 1}
             ]
         },
         {
-            "id": "ex7",
-            "type": "texte-trous",
-            "sousType": "liste-unique",
-            "niveau": "Moyen",
+            "id": "ex7", "type": "texte-trous-liste-unique", "niveau": "Moyen",
             "titre": "Ex7 - Modélisation du besoin (2 pts)",
-            "enonce": "Complète le texte en choisissant les mots dans la liste unique commune[cite: 2].",
+            "enonce": "Complète le texte avec les options proposées[cite: 2].",
             "texte": "Pour la modélisation, on utilise le Diagramme {{}} et la Bête à {{}}[cite: 2].",
             "listeCommune": ["Pieuvre", "cornes", "CDCF", "Gantt", "Besoins"],
             "trous": [
@@ -431,12 +100,9 @@
             ]
         },
         {
-            "id": "ex8",
-            "type": "texte-trous",
-            "sousType": "liste-variable",
-            "niveau": "Avancé",
+            "id": "ex8", "type": "texte-trous-liste-variable", "niveau": "Avancé",
             "titre": "Ex8 - Objectifs Pédagogiques (2 pts)",
-            "enonce": "Complète la phrase en utilisant les listes déroulantes spécifiques à chaque trou[cite: 2].",
+            "enonce": "Complète la phrase caractérisant le programme[cite: 2].",
             "texte": "La théorie permet de maîtriser l'ingénierie des {{}}, puis la pratique permet de rédiger les critères de {{}}[cite: 2].",
             "trous": [
                 {"liste": ["besoins", "outils", "diagrammes", "fonctions"], "bonneReponse": "besoins", "pts": 1},
@@ -444,9 +110,7 @@
             ]
         },
         {
-            "id": "ex9",
-            "type": "choix-unique",
-            "niveau": "Facile",
+            "id": "ex9", "type": "choix-unique", "niveau": "Facile",
             "titre": "Ex9 - Objectif de l'atelier pratique (3 pts)",
             "enonce": "Quel est le but principal de l'atelier pratique en sous-groupes ?[cite: 2]",
             "options": [
@@ -457,51 +121,43 @@
             ]
         },
         {
-            "id": "ex10",
-            "type": "association",
-            "niveau": "Facile",
+            "id": "ex10", "type": "tableau-menu", "niveau": "Facile",
             "titre": "Ex10 - Identification des besoins clients (3 pts)",
-            "enonce": "Associe chaque produit à sa Fonction Principale (FP) visée dans le CDCF[cite: 2].",
-            "associations": [
-                {"terme": "Smartphone tout-terrain[cite: 2]", "definition": "Communiquer en milieu hostile", "pts": 0.6},
-                {"terme": "Robot aspirateur[cite: 2]", "definition": "Nettoyer les sols en autonomie", "pts": 0.6},
-                {"terme": "Drone agricole[cite: 2]", "definition": "Analyser les cultures à distance", "pts": 0.6},
-                {"terme": "Casque anti-bruit actif[cite: 2]", "definition": "Isoler des perturbations sonores", "pts": 0.6},
-                {"terme": "Borne de recharge solaire[cite: 2]", "definition": "Fournir de l'énergie propre", "pts": 0.6}
+            "enonce": "Pour chaque produit, identifie la Fonction Principale (FP) visée dans le CDCF[cite: 2].",
+            "questions": [
+                {"id": "ex10q1", "enonce": "Smartphone tout-terrain[cite: 2].", "options": [{"texte": "Communiquer en milieu hostile", "correct": true}, {"texte": "Remplacer un ordinateur", "correct": false}, {"texte": "Éclairer une pièce", "correct": false}, {"texte": "Mesurer la température", "correct": false}, {"texte": "Projeter des images", "correct": false}, {"texte": "Imprimer des documents", "correct": false}, {"texte": "Stocker de l'eau", "correct": false}, {"texte": "Naviguer sur voilier", "correct": false}, {"texte": "Piloter un drone", "correct": false}, {"texte": "Traiter du texte", "correct": false}], "pts": 0.6},
+                {"id": "ex10q2", "enonce": "Robot aspirateur[cite: 2].", "options": [{"texte": "Nettoyer les sols en autonomie", "correct": true}, {"texte": "Chauffer la maison", "correct": false}, {"texte": "Surveiller les animaux", "correct": false}, {"texte": "Tonter la pelouse", "correct": false}, {"texte": " Laver les vitres", "correct": false}, {"texte": "Cuire les aliments", "correct": false}, {"texte": "Laver le linge", "correct": false}, {"texte": "Repasser les chemises", "correct": false}, {"texte": "Trier les déchets", "correct": false}, {"texte": "Filtrer l'air", "correct": false}], "pts": 0.6},
+                {"id": "ex10q3", "enonce": "Drone agricole[cite: 2].", "options": [{"texte": "Analyser les cultures à distance", "correct": true}, {"texte": "Transporter des passagers", "correct": false}, {"texte": "Arroser le jardin", "correct": false}, {"texte": "Livrer du courrier", "correct": false}, {"texte": "Filmer des mariages", "correct": false}, {"texte": "Éteindre des feux", "correct": false}, {"texte": "Nettoyer des façades", "correct": false}, {"texte": "Transporter des briques", "correct": false}, {"texte": "Mesurer le trafic", "correct": false}, {"texte": "Capter le wi-fi", "correct": false}], "pts": 0.6},
+                {"id": "ex10q4", "enonce": "Casque anti-bruit actif[cite: 2].", "options": [{"texte": "Isoler des perturbations sonores", "correct": true}, {"texte": "Diffuser de la lumière", "correct": false}, {"texte": "Mesurer le rythme cardiaque", "correct": false}, {"texte": "Améliorer la vue", "correct": false}, {"texte": "Protéger du soleil", "correct": false}, {"texte": "Isoler du froid", "correct": false}, {"texte": "Transmettre la voix", "correct": false}, {"texte": "Enregistrer des vidéos", "correct": false}, {"texte": "Traduire des langues", "correct": false}, {"texte": "Analyser l'audition", "correct": false}], "pts": 0.6},
+                {"id": "ex10q5", "enonce": "Borne de recharge solaire[cite: 2].", "options": [{"texte": "Fournir de l'énergie propre", "correct": true}, {"texte": "Afficher l'heure", "correct": false}, {"texte": "Distribuer de l'eau", "correct": false}, {"texte": "Vendre des tickets", "correct": false}, {"texte": "Capter la pluie", "correct": false}, {"texte": "Éclairer une route", "correct": false}, {"texte": "Transmettre la fibre", "correct": false}, {"texte": "Chauffer une pièce", "correct": false}, {"texte": "Refroidir des boissons", "correct": false}, {"texte": "Mesurer la pollution", "correct": false}], "pts": 0.6}
             ]
         },
         {
-            "id": "ex11",
-            "type": "association",
-            "niveau": "Moyen",
+            "id": "ex11", "type": "tableau-menu", "niveau": "Moyen",
             "titre": "Ex11 - Fonctions Principales vs Contraintes (3 pts)",
-            "enonce": "Associe chaque caractéristique à sa classification fonctionnelle[cite: 2].",
-            "associations": [
-                {"terme": "Permettre à l'utilisateur de se déplacer[cite: 2]", "definition": "Fonction Principale (FP)", "pts": 0.6},
-                {"terme": "Respecter la norme de sécurité électrique CE[cite: 2]", "definition": "Fonction de Contrainte (FC)", "pts": 0.6},
-                {"terme": "Résister aux projections d'eau (IP67)[cite: 2]", "definition": "Fonction de Contrainte (FC)", "pts": 0.6},
-                {"terme": "Permettre la saisie d'un texte par l'utilisateur[cite: 2]", "definition": "Fonction Principale (FP)", "pts": 0.6},
-                {"terme": "Avoir un poids inférieur à 1.5 kg[cite: 2]", "definition": "Fonction de Contrainte (FC)", "pts": 0.6}
+            "enonce": "Identifie s'il s'agit d'une Fonction Principale (FP) ou de Contrainte (FC)[cite: 2].",
+            "questions": [
+                {"id": "ex11q1", "enonce": "Permettre à l'utilisateur de se déplacer[cite: 2].", "options": [{"texte": "Fonction Principale (FP)", "correct": true}, {"texte": "Fonction de Contrainte (FC)", "correct": false}, {"texte": "Fonction Esthétique", "correct": false}, {"texte": "Fonction de Sécurité", "correct": false}, {"texte": "Fonction de Maintenance", "correct": false}, {"texte": "Fonction d'Ergonomie", "correct": false}, {"texte": "Fonction Économique", "correct": false}, {"texte": "Fonction Légale", "correct": false}, {"texte": "Fonction Secondaire", "correct": false}, {"texte": "Fonction Inconnue", "correct": false}], "pts": 0.6},
+                {"id": "ex11q2", "enonce": "Respecter la norme de sécurité électrique CE[cite: 2].", "options": [{"texte": "Fonction de Contrainte (FC)", "correct": true}, {"texte": "Fonction Principale (FP)", "correct": false}, {"texte": "Fonction de Style", "correct": false}, {"texte": "Fonction d'Usage", "correct": false}, {"texte": "Fonction de Service", "correct": false}, {"texte": "Fonction Globale", "correct": false}, {"texte": "Fonction Partielle", "correct": false}, {"texte": "Fonction Optionnelle", "correct": false}, {"texte": "Fonction Externe", "correct": false}, {"texte": "Fonction Interne", "correct": false}], "pts": 0.6},
+                {"id": "ex11q3", "enonce": "Résister aux projections d'eau (IP67)[cite: 2].", "options": [{"texte": "Fonction de Contrainte (FC)", "correct": true}, {"texte": "Fonction Principale (FP)", "correct": false}, {"texte": "Fonction de Vente", "correct": false}, {"texte": "Fonction de Transport", "correct": false}, {"texte": "Fonction de Mesure", "correct": false}, {"texte": "Fonction d'Affichage", "correct": false}, {"texte": "Fonction d'Alimentation", "correct": false}, {"texte": "Fonction de Stockage", "correct": false}, {"texte": "Fonction de Guidage", "correct": false}, {"texte": "Fonction de Liaison", "correct": false}], "pts": 0.6},
+                {"id": "ex11q4", "enonce": "Permettre la saisie d'un texte par l'utilisateur[cite: 2].", "options": [{"texte": "Fonction Principale (FP)", "correct": true}, {"texte": "Fonction de Contrainte (FC)", "correct": false}, {"texte": "Fonction Thermique", "correct": false}, {"texte": "Fonction Mécanique", "correct": false}, {"texte": "Fonction Chimique", "correct": false}, {"texte": "Fonction Magnétique", "correct": false}, {"texte": "Fonction Optique", "correct": false}, {"texte": "Fonction Acoustique", "correct": false}, {"texte": "Fonction Énergétique", "correct": false}, {"texte": "Fonction Hydraulique", "correct": false}], "pts": 0.6},
+                {"id": "ex11q5", "enonce": "Avoir un poids inférieur à 1.5 kg[cite: 2].", "options": [{"texte": "Fonction de Contrainte (FC)", "correct": true}, {"texte": "Fonction Principale (FP)", "correct": false}, {"texte": "Fonction de Base", "correct": false}, {"texte": "Fonction Majeure", "correct": false}, {"texte": "Fonction Centrale", "correct": false}, {"texte": "Fonction Initiale", "correct": false}, {"texte": "Fonction Finale", "correct": false}, {"texte": "Fonction Directe", "correct": false}, {"texte": "Fonction Indirecte", "correct": false}, {"texte": "Fonction Absolue", "correct": false}], "pts": 0.6}
             ]
         },
         {
-            "id": "ex12",
-            "type": "association",
-            "niveau": "Moyen",
+            "id": "ex12", "type": "tableau-menu", "niveau": "Moyen",
             "titre": "Ex12 - Caractérisation des critères CDCF (3 pts)",
-            "enonce": "Associe chaque exigence de fonction à son critère d'évaluation mesurable[cite: 2].",
-            "associations": [
-                {"terme": "Avoir une grande autonomie[cite: 2]", "definition": "Durée de fonctionnement (heures)", "pts": 0.6},
-                {"terme": "Être facilement transportable[cite: 2]", "definition": "Masse max (kg) et dimensions", "pts": 0.6},
-                {"terme": "Résister aux chocs[cite: 2]", "definition": "Hauteur de chute supportée (m)", "pts": 0.6},
-                {"terme": "Recharger rapidement[cite: 2]", "definition": "Temps de charge max (minutes)", "pts": 0.6},
-                {"terme": "Ne pas être trop bruyant[cite: 2]", "definition": "Niveau acoustique (dB)", "pts": 0.6}
+            "enonce": "Associe la fonction à son critère d'évaluation[cite: 2].",
+            "questions": [
+                {"id": "ex12q1", "enonce": "Avoir une grande autonomie[cite: 2].", "options": [{"texte": "Durée de fonctionnement (heures)", "correct": true}, {"texte": "Poids total (kg)", "correct": false}, {"texte": "Couleur extérieure", "correct": false}, {"texte": "Nombre de touches", "correct": false}, {"texte": "Taille de l'écran", "correct": false}, {"texte": "Résolution photo", "correct": false}, {"texte": "Puissance du son", "correct": false}, {"texte": "Prix public", "correct": false}, {"texte": "Matériau de la coque", "correct": false}, {"texte": "Type de connecteur", "correct": false}], "pts": 0.6},
+                {"id": "ex12q2", "enonce": "Être facilement transportable[cite: 2].", "options": [{"texte": "Masse max (kg) et dimensions", "correct": true}, {"texte": "Prix de vente (€)", "correct": false}, {"texte": "Vitesse d'impression", "correct": false}, {"texte": "Capacité du disque", "correct": false}, {"texte": "Fréquence du processeur", "correct": false}, {"texte": "Tension d'alimentation", "correct": false}, {"texte": "Intensité lumineuse", "correct": false}, {"texte": "Débit d'eau", "correct": false}, {"texte": "Pression de service", "correct": false}, {"texte": "Couple moteur", "correct": false}], "pts": 0.6},
+                {"id": "ex12q3", "enonce": "Résister aux chocs[cite: 2].", "options": [{"texte": "Hauteur de chute supportée (m)", "correct": true}, {"texte": "Tension électrique (V)", "correct": false}, {"texte": "Temps de charge", "correct": false}, {"texte": "Température ambiante", "correct": false}, {"texte": "Humidité relative", "correct": false}, {"texte": "Niveau de vibration", "correct": false}, {"texte": "Taux de poussière", "correct": false}, {"texte": "Résistance de fuite", "correct": false}, {"texte": "Force de traction", "correct": false}, {"texte": "Indice de réfraction", "correct": false}], "pts": 0.6},
+                {"id": "ex12q4", "enonce": "Recharger rapidement[cite: 2].", "options": [{"texte": "Temps de charge max (minutes)", "correct": true}, {"texte": "Distance de freinage", "correct": false}, {"texte": "Niveau sonore (dB)", "correct": false}, {"texte": "Nombre de canaux", "correct": false}, {"texte": "Bande passante", "correct": false}, {"texte": "Portée maximale", "correct": false}, {"texte": "Temps de latence", "correct": false}, {"texte": "Capacité mémoire", "correct": false}, {"texte": "Vitesse maximale", "correct": false}, {"texte": "Accélération", "correct": false}], "pts": 0.6},
+                {"id": "ex12q5", "enonce": "Ne pas être trop bruyant[cite: 2].", "options": [{"texte": "Niveau acoustique (dB)", "correct": true}, {"texte": "Consommation (W)", "correct": false}, {"texte": "Luminosité (lumens)", "correct": false}, {"texte": "Débit d'air", "correct": false}, {"texte": "Rendement thermique", "correct": false}, {"texte": "Pression acoustique", "correct": false}, {"texte": "Fréquence sonore", "correct": false}, {"texte": "Taux d'harmoniques", "correct": false}, {"texte": "Impédance", "correct": false}, {"texte": "Capacité thermique", "correct": false}], "pts": 0.6}
             ]
         },
         {
-            "id": "ex13",
-            "type": "choix-multiple",
-            "niveau": "Avancé",
+            "id": "ex13", "type": "choix-multiple", "niveau": "Avancé",
             "titre": "Ex13 - Restitution & Évaluation (3 pts)",
             "enonce": "Coche TOUTES les actions réalisées lors de la Phase 4 (Restitution)[cite: 2].",
             "options": [
@@ -513,28 +169,24 @@
             ]
         },
         {
-            "id": "ex14",
-            "type": "reponse-saisie",
-            "niveau": "Avancé",
+            "id": "ex14", "type": "reponse-saisie", "niveau": "Avancé",
             "titre": "Ex14 - Saisie de vocabulaire (1 pt)",
-            "enonce": "Quel diagramme relie l'objet aux éléments de son milieu extérieur ? (Saisis uniquement le nom)[cite: 2]",
+            "enonce": "Quel diagramme relie l'objet aux éléments de son milieu extérieur ? (Diagramme ...)[cite: 2]",
             "bonnesReponses": ["pieuvre"],
             "ignorerCasse": true,
             "ignorerAccents": true,
             "pts": 1
         },
         {
-            "id": "ex15",
-            "type": "association",
-            "niveau": "Avancé",
+            "id": "ex15", "type": "tableau-menu", "niveau": "Avancé",
             "titre": "Ex15 - Analyse complète d'un projet d'étude (5 pts)",
-            "enonce": "Projet : Conception d'une trottinette électrique pliante. Associe chaque élément d'analyse à sa réponse correcte[cite: 2].",
-            "associations": [
-                {"terme": "Saisie du besoin client principal[cite: 2]", "definition": "Se déplacer facilement en milieu urbain", "pts": 1},
-                {"terme": "Outil pour identifier 'À qui rend service l'objet'[cite: 2]", "definition": "Diagramme Bête à cornes", "pts": 1},
-                {"terme": "Élément du milieu extérieur (Diagramme Pieuvre)[cite: 2]", "definition": "Utilisateur et Chaussée/Sol", "pts": 1},
-                {"terme": "Document synthétisant la validation des fonctions[cite: 2]", "definition": "Cahier des Charges Fonctionnel (CDCF)", "pts": 1},
-                {"terme": "Dernière phase de validation en classe[cite: 2]", "definition": "Restitution orale et bilan du chapitre", "pts": 1}
+            "enonce": "Projet : Conception d'une trottinette électrique pliante[cite: 2].",
+            "questions": [
+                {"id": "ex15q1", "enonce": "Saisie du besoin client principal ?[cite: 2]", "options": [{"texte": "Se déplacer facilement en milieu urbain", "correct": true}, {"texte": "Remplacer un bus scolaire", "correct": false}, {"texte": "Faire de la compétition sportive", "correct": false}, {"texte": "Transporter des marchandises lourdes", "correct": false}, {"texte": "Nettoyer les rues de la ville", "correct": false}, {"texte": "Éclairer les pistes cyclables", "correct": false}, {"texte": "Surveiller la circulation", "correct": false}, {"texte": "Mesurer la vitesse des usagers", "correct": false}, {"texte": "Distribuer des colis postaux", "correct": false}, {"texte": "Louer des vélos en libre-service", "correct": false}], "pts": 1},
+                {"id": "ex15q2", "enonce": "Outil pour identifier 'À qui rend service l'objet' ?[cite: 2]", "options": [{"texte": "Diagramme Bête à cornes", "correct": true}, {"texte": "Organigramme système", "correct": false}, {"texte": "Diagramme Pieuvre", "correct": false}, {"texte": "Diagramme de Gantt", "correct": false}, {"texte": "Schéma cinématique", "correct": false}, {"texte": "Algorithme de calcul", "correct": false}, {"texte": "Tableau croisé dynamique", "correct": false}, {"texte": "Graphe de transition", "correct": false}, {"texte": "Modèle numérique 3D", "correct": false}, {"texte": "Plan d'architecte", "correct": false}], "pts": 1},
+                {"id": "ex15q3", "enonce": "Élément du milieu extérieur (Diagramme Pieuvre) ?[cite: 2]", "options": [{"texte": "Utilisateur et Chaussée/Sol", "correct": true}, {"texte": "Prix de l'essence", "correct": false}, {"texte": "Logiciel de DAO", "correct": false}, {"texte": "Bilan comptable", "correct": false}, {"texte": "Contrat de travail", "correct": false}, {"texte": "Fiche de paie", "correct": false}, {"texte": "Facture d'achat", "correct": false}, {"texte": "Catalogue fournisseur", "correct": false}, {"texte": "Notice d'emballage", "correct": false}, {"texte": "Programme informatique", "correct": false}], "pts": 1},
+                {"id": "ex15q4", "enonce": "Document synthétisant la validation des fonctions ?[cite: 2]", "options": [{"texte": "Cahier des Charges Fonctionnel (CDCF)", "correct": true}, {"texte": "Plan de fabrication", "correct": false}, {"texte": "Bon d'achat", "correct": false}, {"texte": "Registre de sécurité", "correct": false}, {"texte": "Manuel d'utilisation", "correct": false}, {"texte": "Certificat de garantie", "correct": false}, {"texte": "Fiche technique constructeur", "correct": false}, {"texte": "Devis estimatif", "correct": false}, {"texte": "Ordre de mission", "correct": false}, {"texte": "Rapport d'audit", "correct": false}], "pts": 1},
+                {"id": "ex15q5", "enonce": "Dernière phase de validation en classe ?[cite: 2]", "options": [{"texte": "Restitution orale et bilan du chapitre", "correct": true}, {"texte": "Achat des matières premières", "correct": false}, {"texte": "Contrôle individuel écrit sans correction", "correct": false}, {"texte": "Démontage complet du prototype", "correct": false}, {"texte": "Nettoyage de la salle de cours", "correct": false}, {"texte": "Rangement des outils", "correct": false}, {"texte": "Signature des bulletins", "correct": false}, {"texte": "Distribution des prix", "correct": false}, {"texte": "Sortie pédagogique", "correct": false}, {"texte": "Fermeture de l'établissement", "correct": false}], "pts": 1}
             ]
         }
     ]
