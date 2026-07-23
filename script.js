@@ -1,4 +1,3 @@
-
 let data = null;
 let eleve = { nom: "", prenom: "", classe: "" };
 let quizQuestions = [];
