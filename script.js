@@ -251,7 +251,7 @@ function DémarrerApplication() {
             e.preventDefault();
             eleveInfo.nom = $('#eleve-nom').value.trim();
             eleveInfo.prenom = $('#eleve-prenom').value.trim();
-            eleveInfo.classe = $('#eleve-classe').value.trim();
+            eleveInfo.classe = $('#eleve-classe').value; // Valeur du menu déroulant
             eleveInfo.numero = $('#eleve-numero').value.trim();
 
             if (eleveInfo.nom && eleveInfo.prenom && eleveInfo.classe && eleveInfo.numero) {
@@ -700,5 +700,5 @@ function genererPDFResultats() {
 $('#btn-telecharger-pdf').addEventListener('click', genererPDFResultats);
 $('#btn-recommencer').addEventListener('click', () => location.reload());
 
-// Lancement direct de l'application au chargement
+// Lancement direct de l'application
 document.addEventListener('DOMContentLoaded', DémarrerApplication);
