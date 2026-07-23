@@ -41,7 +41,7 @@ body {
     display: none !important;
 }
 
-/* 4. BLOCS & CARTES DE COURS : Attribue une couleur VIVE à chaque bloc */
+/* 4. BLOCS & CARTES DE COURS */
 .cours-grid {
     display: grid !important;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important;
@@ -79,7 +79,74 @@ body {
     border-left: 8px solid #06b6d4 !important;
 }
 
-/* 5. POSITIONNEMENT DU CHRONOMÈTRE ET DE LA BARRE D'INFO */
+/* ==========================================
+   5. CADRES QUI DEMANDENT DES RÉPONSES (Mise en valeur)
+========================================== */
+
+/* Boîte de question / Énoncé */
+.question-box, .exercice-box, .question-item {
+    background-color: #f5f3ff !important;
+    border: 2px solid #a78bfa !important;
+    border-radius: 12px !important;
+    padding: 20px !important;
+    margin-bottom: 20px !important;
+}
+
+/* Champs de texte et sélecteurs de réponse */
+input[type="text"], 
+input[type="number"], 
+select, 
+textarea {
+    background-color: #fffbe2 !important; /* Jaune très doux pour indiquer l'action */
+    border: 2px solid #f59e0b !important; /* Bordure ambre bien visible */
+    border-radius: 10px !important;
+    padding: 12px 16px !important;
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    color: #1e293b !important;
+    transition: all 0.25s ease !important;
+}
+
+/* Effet quand l'utilisateur clique dans le champ de réponse */
+input[type="text"]:focus, 
+input[type="number"]:focus, 
+select:focus, 
+textarea:focus {
+    background-color: #ffffff !important;
+    border-color: #8b5cf6 !important; /* Devient violet vif */
+    box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.25) !important;
+    outline: none !important;
+}
+
+/* Options à choix multiples (Quiz) */
+.option-item, .choice-box, label.option {
+    background-color: #ffffff !important;
+    border: 2px solid #cbd5e1 !important;
+    border-radius: 12px !important;
+    padding: 14px 18px !important;
+    margin-bottom: 10px !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+.option-item:hover, .choice-box:hover {
+    border-color: #ec4899 !important; /* Rose vif au survol */
+    background-color: #fdf2f8 !important;
+}
+
+/* Option sélectionnée par l'utilisateur */
+.option-item.selected, .choice-box.selected {
+    background-color: #dcfce7 !important; /* Vert clair de validation */
+    border-color: #10b981 !important; /* Bordure verte émeraude */
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2) !important;
+    font-weight: bold !important;
+}
+
+/* ==========================================
+   6. CHRONOMÈTRE & BARRE D'INFO
+========================================== */
 .quiz-header {
     margin-bottom: 24px !important;
     width: 100% !important;
@@ -87,31 +154,26 @@ body {
 
 .info-bar {
     display: flex !important;
-    justify-content: space-between !important; /* Pousse le chrono à droite */
+    justify-content: space-between !important;
     align-items: center !important;
     margin-bottom: 12px !important;
     width: 100% !important;
 }
 
-/* Style et emplacement du chrono */
 .timer, #timer, #chronometre {
     display: inline-flex !important;
     align-items: center !important;
     gap: 8px !important;
-    
     color: #0284c7 !important;
     background-color: #e0f2fe !important;
     border: 2px solid #38bdf8 !important;
-    
     padding: 6px 16px !important;
     border-radius: 20px !important;
     font-weight: 700 !important;
     font-size: 0.95rem !important;
-    
-    margin-left: auto !important; /* Force l'alignement à droite */
+    margin-left: auto !important;
 }
 
-/* Alerte quand le temps presse */
 .timer.warning, #timer.warning {
     color: #dc2626 !important;
     background-color: #fef2f2 !important;
@@ -125,7 +187,9 @@ body {
     100% { opacity: 1; transform: scale(1); }
 }
 
-/* 6. BOUTONS ULTRA-COLORÉS */
+/* ==========================================
+   7. BOUTONS ULTRA-COLORÉS
+========================================== */
 .btn {
     border: none !important;
     padding: 12px 24px !important;
@@ -148,7 +212,9 @@ body {
     box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4) !important;
 }
 
-/* 7. FRISE / CHRONOLOGIE MULTICOLORE */
+/* ==========================================
+   8. FRISE, BADGES ET BARRE DE PROGRESSION
+========================================== */
 .timeline-container {
     display: grid !important;
     grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)) !important;
@@ -167,7 +233,6 @@ body {
 .timeline-step:nth-child(3), .step:nth-child(3) { background-color: #ffe4e6 !important; }
 .timeline-step:nth-child(4), .step:nth-child(4) { background-color: #d1fae5 !important; }
 
-/* 8. BADGES DE NIVEAU ET AUTRES ÉLÉMENTS */
 .badge {
     padding: 6px 12px !important;
     border-radius: 12px !important;
