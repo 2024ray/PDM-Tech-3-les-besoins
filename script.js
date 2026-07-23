@@ -1,4 +1,5 @@
 let data = null;
+let eleve = { nom: "", prenom: "", classe: "" };
 let quizQuestions = [];
 let evalQuestions = [];
 let quizIndex = 0;
@@ -44,7 +45,7 @@ function remplacerTrous(texte, elements) {
     return resultat;
 }
 
-// ========== CHARGEMENT DES DONNÉES ==========[cite: 3]
+// ========== CHARGEMENT DES DONNÉES ==========
 async function chargerDonnees() {
     try {
         const res = await fetch('questions.json?t=' + Date.now(), { cache: 'no-store' });
@@ -59,7 +60,24 @@ async function chargerDonnees() {
     preparerEval();
 }
 
-// ========== INITIALISATION DU COURS (STYLE ÉPURÉ) ==========[cite: 3]
+// ========== GESTION DE L'IDENTIFICATION ==========
+document.getElementById('form-identification').addEventListener('submit', (e) => {
+    e.preventDefault();
+    eleve.nom = $('#input-nom').value.trim();
+    eleve.prenom = $('#input-prenom').value.trim();
+    eleve.classe = $('#input-classe').value.trim();
+
+    if (!eleve.nom || !eleve.prenom || !eleve.classe) {
+        alert("Veuillez remplir tous les champs d'identification.");
+        return;
+    }
+
+    // Masquer l'identification et afficher la partie cours
+    $('#section-identification').classList.add('hidden');
+    $('#section-cours').classList.remove('hidden');
+});
+
+// ========== INITIALISATION DU COURS ==========
 function initialiserCours() {
     const icons = [
         "fa-solid fa-bullseye",
@@ -129,7 +147,7 @@ function initialiserCours() {
     $('#contenu-cours').innerHTML = html;
 }
 
-// ========== QUIZ (15 QUESTIONS) ==========[cite: 3]
+// ========== QUIZ (15 QUESTIONS) ==========
 function preparerQuiz() {
     quizQuestions = shuffle(data.quizComprehension).map(q => ({ ...q, options: shuffle(q.options) }));
     $('#btn-commencer-quiz').addEventListener('click', demarrerQuiz);
@@ -213,7 +231,7 @@ function terminerQuiz() {
     afficherExerciceEval();
 }
 
-// ========== ATELIER PRATIQUE / EXERCICES ==========[cite: 3]
+// ========== ATELIER PRATIQUE / EXERCICES ==========
 function preparerEval() {
     evalQuestions = shuffle(data.evaluation);
     $('#btn-suivant-eval').addEventListener('click', () => validerEtSuivantEval());
@@ -380,7 +398,7 @@ function renderTexteTrousListeVariable(ex, container) {
     container.appendChild(div);
 }
 
-// ========== VALIDATION DES RÉPONSES ==========[cite: 3]
+// ========== VALIDATION DES RÉPONSES ==========
 function validerEtSuivantEval() {
     clearInterval(timerEval);
     const ex = evalQuestions[evalIndex];
@@ -476,15 +494,22 @@ function validerEtSuivantEval() {
 function terminerEval() {
     $('#section-eval').classList.add('hidden');
     afficherResultats();
-    
-    // Déclenchement automatique du téléchargement du PDF dès la fin
     genererPDFResultats();
 }
 
-// ========== RESULTATS & PDF ==========[cite: 3]
+// ========== RESULTATS & PDF ==========
 function afficherResultats() {
     const zone = $('#pdf-report-area');
     zone.classList.remove('hidden');
+    
+    // Affichage des informations de l'élève en haut du bilan
+    $('#eleve-info-recap').innerHTML = `
+        <h3>👤 Informations de l'élève</h3>
+        <p><strong>Nom :</strong> ${eleve.nom}</p>
+        <p><strong>Prénom :</strong> ${eleve.prenom}</p>
+        <p><strong>Classe :</strong> ${eleve.classe}</p>
+    `;
+
     const totalQuiz = quizQuestions.length;
     const totalEval = 40;
     const total = scoreQuiz + scoreEval;
@@ -514,10 +539,14 @@ function genererPDFResultats() {
     const el = $('#pdf-report-area');
     el.classList.remove('hidden');
     el.style.display = 'block';
+
+    // Nom de fichier personnalisé avec le nom, prénom et classe de l'élève
+    const nomFichierSecurise = `Bilan_Module2_${eleve.nom}_${eleve.prenom}_${eleve.classe}`.replace(/[^a-zA-Z0-9_-]/g, "_");
+
     setTimeout(() => {
         html2pdf().set({
             margin: [10,10,10,10],
-            filename: `Bilan_Module2_Analyse_Du_Besoin_${new Date().toISOString().slice(0,10)}.pdf`,
+            filename: `${nomFichierSecurise}.pdf`,
             image: { type: 'jpeg', quality: 0.98 },
             html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff', windowWidth: 960 },
             jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
