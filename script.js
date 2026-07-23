@@ -1,4 +1,3 @@
-
 let data = null;
 let quizQuestions = [];
 let evalQuestions = [];
@@ -45,14 +44,8 @@ function remplacerTrous(texte, elements) {
     return resultat;
 }
 
-// ========== VÉRIFICATION DE LA SÉANCE DÉJÀ FAITE (VERROUILLAGE) ==========
+// ========== CHARGEMENT DES DONNÉES ==========
 async function chargerDonnees() {
-    const sessionFaite = localStorage.getItem('module2_termine');
-    if (sessionFaite === 'true') {
-        afficherMessageVerrouillage();
-        return;
-    }
-
     try {
         const res = await fetch('questions.json?t=' + Date.now(), { cache: 'no-store' });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -64,15 +57,6 @@ async function chargerDonnees() {
     initialiserCours();
     preparerQuiz();
     preparerEval();
-}
-
-function afficherMessageVerrouillage() {
-    $('main.container').innerHTML = `
-        <div class="card" style="text-align: center; padding: 40px;">
-            <h2>🔒 Séance déjà réalisée</h2>
-            <p>Vous avez déjà soumis vos réponses pour ce module. Il n'est pas possible de refaire les questions.</p>
-        </div>
-    `;
 }
 
 // ========== INITIALISATION DU COURS (STYLE ÉPURÉ) ==========
@@ -279,6 +263,7 @@ function lancerTimerEval() {
     }, 1000);
 }
 
+// Rendu interactif des types d'exercices
 function renderTableauMenu(ex, container) {
     const table = document.createElement('table');
     table.className = 'tableau-menu';
@@ -396,6 +381,7 @@ function renderTexteTrousListeVariable(ex, container) {
     container.appendChild(div);
 }
 
+// ========== VALIDATION DES RÉPONSES ==========
 function validerEtSuivantEval() {
     clearInterval(timerEval);
     const ex = evalQuestions[evalIndex];
@@ -489,13 +475,11 @@ function validerEtSuivantEval() {
 }
 
 function terminerEval() {
-    // Verrouillage définitif de la session pour empêcher de refaire les questions
-    localStorage.setItem('module2_termine', 'true');
-
     $('#section-eval').classList.add('hidden');
     afficherResultats();
 }
 
+// ========== RESULTATS & PDF ==========
 function afficherResultats() {
     const zone = $('#pdf-report-area');
     zone.classList.remove('hidden');
@@ -521,13 +505,6 @@ function afficherResultats() {
     });
     html += `</div>`;
     $('#resultats-detail').innerHTML = html;
-    
-    // Masquer le bouton recommencer pour empêcher les élèves de réinitialiser
-    const btnRecommencer = $('#btn-recommencer');
-    if (btnRecommencer) {
-        btnRecommencer.style.display = 'none';
-    }
-
     zone.scrollIntoView({ behavior: 'smooth' });
 }
 
@@ -548,4 +525,5 @@ function genererPDFResultats() {
 }
 
 $('#btn-telecharger-pdf').addEventListener('click', genererPDFResultats);
+$('#btn-recommencer').addEventListener('click', () => location.reload());
 document.addEventListener('DOMContentLoaded', chargerDonnees);
