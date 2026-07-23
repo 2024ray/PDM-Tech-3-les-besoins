@@ -45,7 +45,7 @@ function remplacerTrous(texte, elements) {
     return resultat;
 }
 
-// ========== CHARGEMENT DES DONNÉES ==========[cite: 3]
+// ========== CHARGEMENT DES DONNÉES ==========
 async function chargerDonnees() {
     try {
         const res = await fetch('questions.json?t=' + Date.now(), { cache: 'no-store' });
@@ -77,7 +77,7 @@ document.getElementById('form-identification').addEventListener('submit', (e) =>
     $('#section-cours').classList.remove('hidden');
 });
 
-// ========== INITIALISATION DU COURS ==========[cite: 3]
+// ========== INITIALISATION DU COURS ==========
 function initialiserCours() {
     const icons = [
         "fa-solid fa-bullseye",
@@ -147,7 +147,7 @@ function initialiserCours() {
     $('#contenu-cours').innerHTML = html;
 }
 
-// ========== QUIZ (15 QUESTIONS) ==========[cite: 3]
+// ========== QUIZ (15 QUESTIONS) ==========
 function preparerQuiz() {
     quizQuestions = shuffle(data.quizComprehension).map(q => ({ ...q, options: shuffle(q.options) }));
     $('#btn-commencer-quiz').addEventListener('click', demarrerQuiz);
@@ -231,7 +231,7 @@ function terminerQuiz() {
     afficherExerciceEval();
 }
 
-// ========== ATELIER PRATIQUE / EXERCICES ==========[cite: 3]
+// ========== ATELIER PRATIQUE / EXERCICES ==========
 function preparerEval() {
     evalQuestions = shuffle(data.evaluation);
     $('#btn-suivant-eval').addEventListener('click', () => validerEtSuivantEval());
@@ -345,6 +345,27 @@ function renderReponseSaisie(ex, container) {
 function renderAssociation(ex, container) {
     const div = document.createElement('div');
     div.className = 'association-container';
+
+    // --- AFFICHAGE DE L'IMAGE SI PRÉSENTE ---
+    if (ex.image) {
+        const imgContainer = document.createElement('div');
+        imgContainer.className = 'exercice-image-container';
+        imgContainer.style.marginBottom = "15px";
+        imgContainer.style.textAlign = "center";
+        
+        const img = document.createElement('img');
+        img.src = ex.image;
+        img.alt = "Illustration de l'exercice";
+        img.style.maxWidth = "100%";
+        img.style.maxHeight = "350px";
+        img.style.borderRadius = "8px";
+        img.style.border = "1px solid #cbd5e1";
+        
+        imgContainer.appendChild(img);
+        div.appendChild(imgContainer);
+    }
+    // ----------------------------------------
+
     const col = document.createElement('div');
     col.className = 'association-colonne';
     col.innerHTML = '<h4>Associe chaque terme à sa correspondance :</h4>';
@@ -398,7 +419,7 @@ function renderTexteTrousListeVariable(ex, container) {
     container.appendChild(div);
 }
 
-// ========== VALIDATION DES RÉPONSES ==========[cite: 3]
+// ========== VALIDATION DES RÉPONSES ==========
 function validerEtSuivantEval() {
     clearInterval(timerEval);
     const ex = evalQuestions[evalIndex];
@@ -497,12 +518,11 @@ function terminerEval() {
     genererPDFResultats();
 }
 
-// ========== RESULTATS & PDF ==========[cite: 3]
+// ========== RESULTATS & PDF ==========
 function afficherResultats() {
     const zone = $('#pdf-report-area');
     zone.classList.remove('hidden');
     
-    // Affichage des informations de l'élève en haut du bilan
     $('#eleve-info-recap').innerHTML = `
         <h3>👤 Informations de l'élève</h3>
         <p><strong>Nom :</strong> ${eleve.nom}</p>
