@@ -40,7 +40,7 @@
         {"id": "q28", "type": "choix-unique", "question": "Que caractérise la valeur d'estime d'un produit ?", "options": [{"texte": "Son design, son look et son image de marque", "correct": true}, {"texte": "Son efficacité purement technique", "correct": false}, {"texte": "Sa consommation d'énergie", "correct": false}, {"texte": "Son coût de fabrication en usine", "correct": false}]},
         {"id": "q29", "question": "Un besoin est le sentiment d'une privation ou d'une insuffisance.", "options": [{"texte": "Vrai", "correct": true}, {"texte": "Faux", "correct": false}, {"texte": "Vrai uniquement en économie", "correct": false}, {"texte": "Faux, c'est un désir", "correct": false}]},
         {"id": "q30", "type": "reponse-saisie", "question": "Quel est le nom du document contractuel qui formalise l'expression fonctionnelle du besoin ? (Saisissez le nom complet ou le sigle)", "bonnesReponses": ["cdcf", "cahier des charges fonctionnel"], "ignorerCasse": true, "ignorerAccents": true}
-    ]
+    ],
     "evaluation": [
         {
             "id": "ex1", "type": "tableau-menu", "niveau": "Facile",
