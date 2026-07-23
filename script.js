@@ -45,7 +45,7 @@ function remplacerTrous(texte, elements) {
     return resultat;
 }
 
-// ========== CHARGEMENT DES DONNÉES ==========[cite: 3]
+// ========== CHARGEMENT DES DONNÉES ==========
 async function chargerDonnees() {
     try {
         const res = await fetch('questions.json?t=' + Date.now(), { cache: 'no-store' });
@@ -72,12 +72,13 @@ document.getElementById('form-identification').addEventListener('submit', (e) =>
         return;
     }
 
-    // Masquer l'identification et afficher la partie cours
     $('#section-identification').classList.add('hidden');
-    $('#section-cours').classList.remove('hidden');
+    const coursSec = $('#section-cours');
+    coursSec.classList.remove('hidden');
+    coursSec.classList.add('animate-fade-in');
 });
 
-// ========== INITIALISATION DU COURS ==========[cite: 3]
+// ========== INITIALISATION DU COURS ==========
 function initialiserCours() {
     const icons = [
         "fa-solid fa-bullseye",
@@ -147,7 +148,7 @@ function initialiserCours() {
     $('#contenu-cours').innerHTML = html;
 }
 
-// ========== QUIZ (15 QUESTIONS) ==========[cite: 3]
+// ========== QUIZ (15 QUESTIONS) ==========
 function preparerQuiz() {
     quizQuestions = shuffle(data.quizComprehension).map(q => ({ ...q, options: shuffle(q.options) }));
     $('#btn-commencer-quiz').addEventListener('click', demarrerQuiz);
@@ -155,7 +156,9 @@ function preparerQuiz() {
 
 function demarrerQuiz() {
     $('#section-cours').classList.add('hidden');
-    $('#section-quiz').classList.remove('hidden');
+    const quizSec = $('#section-quiz');
+    quizSec.classList.remove('hidden');
+    quizSec.classList.add('animate-fade-in');
     quizIndex = 0;
     scoreQuiz = 0;
     detailsQuiz = [];
@@ -167,15 +170,23 @@ function demarrerQuiz() {
 function afficherQuestionQuiz() {
     if (quizIndex >= quizQuestions.length) { terminerQuiz(); return; }
     const q = quizQuestions[quizIndex];
+    
+    // Animation de transition fluide sur la question
+    const qBox = $('#quiz-question');
+    qBox.classList.remove('animate-slide-in');
+    void qBox.offsetWidth; // Force reflow
+    qBox.classList.add('animate-slide-in');
+
     $('#quiz-progress').textContent = `Question ${quizIndex + 1} / ${quizQuestions.length}`;
     $('#quiz-progress-bar').style.width = `${(quizIndex / quizQuestions.length) * 100}%`;
-    $('#quiz-question').innerHTML = `<strong>Q${quizIndex + 1}.</strong> ${q.question}`;
+    qBox.innerHTML = `<strong>Q${quizIndex + 1}.</strong> ${q.question}`;
     
     const optDiv = $('#quiz-options');
     optDiv.innerHTML = '';
     q.options.forEach((opt, i) => {
         const div = document.createElement('div');
-        div.className = 'option-item';
+        div.className = 'option-item animate-pop';
+        div.style.animationDelay = `${i * 0.05}s`;
         div.innerHTML = `<input type="radio" name="quiz-opt" id="qopt${i}" value="${i}"><label for="qopt${i}">${opt.texte}</label>`;
         div.addEventListener('click', () => {
             $$('#quiz-options .option-item').forEach(el => el.classList.remove('selected'));
@@ -224,14 +235,16 @@ $('#btn-suivant-quiz').addEventListener('click', () => {
 function terminerQuiz() {
     clearInterval(timerQuiz);
     $('#section-quiz').classList.add('hidden');
-    $('#section-eval').classList.remove('hidden');
+    const evalSec = $('#section-eval');
+    evalSec.classList.remove('hidden');
+    evalSec.classList.add('animate-fade-in');
     evalIndex = 0;
     scoreEval = 0;
     detailsEval = [];
     afficherExerciceEval();
 }
 
-// ========== ATELIER PRATIQUE / EXERCICES ==========[cite: 3]
+// ========== ATELIER PRATIQUE / EXERCICES ==========
 function preparerEval() {
     evalQuestions = shuffle(data.evaluation);
     $('#btn-suivant-eval').addEventListener('click', () => validerEtSuivantEval());
@@ -240,6 +253,12 @@ function preparerEval() {
 function afficherExerciceEval() {
     if (evalIndex >= evalQuestions.length) { terminerEval(); return; }
     const ex = evalQuestions[evalIndex];
+    
+    const qBox = $('#eval-question');
+    qBox.classList.remove('animate-slide-in');
+    void qBox.offsetWidth;
+    qBox.classList.add('animate-slide-in');
+
     $('#eval-progress').textContent = `Exercice ${evalIndex + 1} / ${evalQuestions.length}`;
     $('#eval-progress-bar').style.width = `${(evalIndex / evalQuestions.length) * 100}%`;
     
@@ -247,9 +266,10 @@ function afficherExerciceEval() {
                 ex.niveau === 'Moyen' ? '<span class="badge badge-moyen">Moyen</span>' :
                 '<span class="badge badge-avance">Avancé</span>';
     
-    $('#eval-question').innerHTML = `<strong>${ex.titre}</strong> ${badge}<br><br>${ex.enonce}`;
+    qBox.innerHTML = `<strong>${ex.titre}</strong> ${badge}<br><br>${ex.enonce}`;
     const content = $('#eval-content');
     content.innerHTML = '';
+    content.classList.add('animate-pop');
     
     const renderers = {
         'tableau-menu': renderTableauMenu,
@@ -310,7 +330,8 @@ function renderTableauMenu(ex, container) {
 function renderChoixUnique(ex, container) {
     shuffle([...ex.options]).forEach((opt, i) => {
         const div = document.createElement('div');
-        div.className = 'option-item';
+        div.className = 'option-item animate-pop';
+        div.style.animationDelay = `${i * 0.05}s`;
         div.innerHTML = `<input type="radio" name="choix-unique" id="cu${i}" value="${i}"><label for="cu${i}">${opt.texte}</label>`;
         div.addEventListener('click', () => {
             $$('#eval-content .option-item').forEach(el => el.classList.remove('selected'));
@@ -324,7 +345,8 @@ function renderChoixUnique(ex, container) {
 function renderChoixMultiple(ex, container) {
     shuffle([...ex.options]).forEach((opt, i) => {
         const div = document.createElement('div');
-        div.className = 'option-item';
+        div.className = 'option-item animate-pop';
+        div.style.animationDelay = `${i * 0.05}s`;
         div.innerHTML = `<input type="checkbox" id="cm${i}" value="${i}"><label for="cm${i}">${opt.texte}</label>`;
         div.addEventListener('click', (e) => {
             if (e.target.tagName !== 'INPUT') div.querySelector('input').checked = !div.querySelector('input').checked;
@@ -398,7 +420,7 @@ function renderTexteTrousListeVariable(ex, container) {
     container.appendChild(div);
 }
 
-// ========== VALIDATION DES RÉPONSES ==========[cite: 3]
+// ========== VALIDATION DES RÉPONSES ==========
 function validerEtSuivantEval() {
     clearInterval(timerEval);
     const ex = evalQuestions[evalIndex];
@@ -497,12 +519,12 @@ function terminerEval() {
     genererPDFResultats();
 }
 
-// ========== RESULTATS & PDF ==========[cite: 3]
+// ========== RESULTATS & PDF ==========
 function afficherResultats() {
     const zone = $('#pdf-report-area');
     zone.classList.remove('hidden');
+    zone.classList.add('animate-fade-in');
     
-    // Affichage des informations de l'élève en haut du bilan
     $('#eleve-info-recap').innerHTML = `
         <h3>👤 Informations de l'élève</h3>
         <p><strong>Nom :</strong> ${eleve.nom}</p>
