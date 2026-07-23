@@ -1,1 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Module 2 - L'Analyse du Besoin & CDCF</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
 
+    <!-- ============== HEADER ============== -->
+    <header class="hero">
+        <div class="hero-content">
+            <span class="badge-user"><i class="fa-solid fa-id-badge"></i> Module 01mr durand01</span>
+            <h1><i class="fa-solid fa-magnifying-glass-chart"></i> Module 2 : L'Analyse du Besoin & CDCF</h1>
+            <p class="subtitle">Parcours Ingénierie des Besoins — Auto-formation interactive</p>
+        </div>
+    </header>
+
+    <!-- ============== NAVIGATION ============== -->
+    <nav class="nav-steps">
+        <button class="nav-btn active" data-target="section-cours"><i class="fa-solid fa-book-open"></i> 1. Cours</button>
+        <button class="nav-btn" data-target="section-quiz"><i class="fa-solid fa-circle-question"></i> 2. Quiz</button>
+        <button class="nav-btn" data-target="section-atelier"><i class="fa-solid fa-screwdriver-wrench"></i> 3. Atelier</button>
+        <button class="nav-btn" data-target="section-bilan"><i class="fa-solid fa-chart-pie"></i> 4. Bilan</button>
+    </nav>
+
+    <main class="container">
+
+        <!-- ============== SECTION 1 : COURS ============== -->
+        <section id="section-cours" class="section active">
+            <h2 class="section-title"><i class="fa-solid fa-graduation-cap"></i> Apports théoriques</h2>
+            <div id="cours-content" class="cours-grid"></div>
+
+            <h2 class="section-title" style="margin-top:2.5rem;"><i class="fa-solid fa-timeline"></i> Déroulement de la séance</h2>
+            <div class="timeline" id="timeline"></div>
+
+            <div class="action-bar">
+                <button id="btn-start-quiz" class="btn btn-primary btn-lg">
+                    <i class="fa-solid fa-play"></i> Lancer le Quiz de compréhension
+                </button>
+            </div>
+        </section>
+
+        <!-- ============== SECTION 2 : QUIZ ============== -->
+        <section id="section-quiz" class="section">
+            <div class="quiz-header">
+                <h2 class="section-title"><i class="fa-solid fa-circle-question"></i> Quiz de compréhension</h2>
+                <div class="quiz-meta">
+                    <div class="timer-box" id="quiz-timer"><i class="fa-solid fa-stopwatch"></i> <span>20:00</span></div>
+                    <div class="progress-bar"><div class="progress-fill" id="quiz-progress"></div></div>
+                    <div class="progress-text" id="quiz-progress-text">0 / 15</div>
+                </div>
+            </div>
+            <div id="quiz-container" class="quiz-list"></div>
+            <div class="action-bar">
+                <button id="btn-validate-quiz" class="btn btn-success btn-lg">
+                    <i class="fa-solid fa-check-double"></i> Valider le Quiz
+                </button>
+            </div>
+        </section>
+
+        <!-- ============== SECTION 3 : ATELIER ============== -->
+        <section id="section-atelier" class="section">
+            <h2 class="section-title"><i class="fa-solid fa-screwdriver-wrench"></i> Exercices pratiques — Atelier</h2>
+            <p class="section-legend">15 exercices interactifs — <strong>40 points</strong> — 90 secondes par exercice.</p>
+            <div id="atelier-container" class="atelier-list"></div>
+            <div class="action-bar">
+                <button id="btn-validate-atelier" class="btn btn-success btn-lg">
+                    <i class="fa-solid fa-check-double"></i> Valider l'Atelier
+                </button>
+            </div>
+        </section>
+
+        <!-- ============== SECTION 4 : BILAN ============== -->
+        <section id="section-bilan" class="section">
+            <h2 class="section-title"><i class="fa-solid fa-chart-pie"></i> Bilan & Restitution</h2>
+            <div id="bilan-content" class="bilan-box">
+                <p class="placeholder"><i class="fa-solid fa-hourglass-half"></i> Complétez le Quiz et l'Atelier pour afficher votre bilan.</p>
+            </div>
+            <div class="action-bar bilan-actions">
+                <button id="btn-download-pdf" class="btn btn-primary btn-lg" disabled>
+                    <i class="fa-solid fa-file-pdf"></i> Télécharger le bilan en PDF
+                </button>
+                <button id="btn-restart" class="btn btn-secondary btn-lg">
+                    <i class="fa-solid fa-rotate-left"></i> Recommencer
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <p>© 2026 — Module Ingénierie des Besoins — Auto-formation interactive. Tous droits réservés.</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
