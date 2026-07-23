@@ -45,7 +45,7 @@ function remplacerTrous(texte, elements) {
     return resultat;
 }
 
-// ========== CHARGEMENT DES DONNÉES ==========
+// ========== CHARGEMENT DES DONNÉES ==========[cite: 3]
 async function chargerDonnees() {
     try {
         const res = await fetch('questions.json?t=' + Date.now(), { cache: 'no-store' });
@@ -65,10 +65,10 @@ document.getElementById('form-identification').addEventListener('submit', (e) =>
     e.preventDefault();
     eleve.nom = $('#input-nom').value.trim();
     eleve.prenom = $('#input-prenom').value.trim();
-    eleve.classe = $('#input-classe').value.trim();
+    eleve.classe = $('#input-classe').value;
 
     if (!eleve.nom || !eleve.prenom || !eleve.classe) {
-        alert("Veuillez remplir tous les champs d'identification.");
+        alert("Veuillez remplir tous les champs et sélectionner une classe.");
         return;
     }
 
@@ -77,7 +77,7 @@ document.getElementById('form-identification').addEventListener('submit', (e) =>
     $('#section-cours').classList.remove('hidden');
 });
 
-// ========== INITIALISATION DU COURS ==========
+// ========== INITIALISATION DU COURS ==========[cite: 3]
 function initialiserCours() {
     const icons = [
         "fa-solid fa-bullseye",
@@ -147,7 +147,7 @@ function initialiserCours() {
     $('#contenu-cours').innerHTML = html;
 }
 
-// ========== QUIZ (15 QUESTIONS) ==========
+// ========== QUIZ (15 QUESTIONS) ==========[cite: 3]
 function preparerQuiz() {
     quizQuestions = shuffle(data.quizComprehension).map(q => ({ ...q, options: shuffle(q.options) }));
     $('#btn-commencer-quiz').addEventListener('click', demarrerQuiz);
@@ -231,7 +231,7 @@ function terminerQuiz() {
     afficherExerciceEval();
 }
 
-// ========== ATELIER PRATIQUE / EXERCICES ==========
+// ========== ATELIER PRATIQUE / EXERCICES ==========[cite: 3]
 function preparerEval() {
     evalQuestions = shuffle(data.evaluation);
     $('#btn-suivant-eval').addEventListener('click', () => validerEtSuivantEval());
@@ -398,7 +398,7 @@ function renderTexteTrousListeVariable(ex, container) {
     container.appendChild(div);
 }
 
-// ========== VALIDATION DES RÉPONSES ==========
+// ========== VALIDATION DES RÉPONSES ==========[cite: 3]
 function validerEtSuivantEval() {
     clearInterval(timerEval);
     const ex = evalQuestions[evalIndex];
@@ -497,7 +497,7 @@ function terminerEval() {
     genererPDFResultats();
 }
 
-// ========== RESULTATS & PDF ==========
+// ========== RESULTATS & PDF ==========[cite: 3]
 function afficherResultats() {
     const zone = $('#pdf-report-area');
     zone.classList.remove('hidden');
@@ -540,7 +540,6 @@ function genererPDFResultats() {
     el.classList.remove('hidden');
     el.style.display = 'block';
 
-    // Nom de fichier personnalisé avec le nom, prénom et classe de l'élève
     const nomFichierSecurise = `Bilan_Module2_${eleve.nom}_${eleve.prenom}_${eleve.classe}`.replace(/[^a-zA-Z0-9_-]/g, "_");
 
     setTimeout(() => {
