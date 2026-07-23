@@ -41,7 +41,45 @@ body {
     display: none !important;
 }
 
-/* 4. BLOCS & CARTES DE COURS */
+/* 4. FORMULAIRE D'IDENTIFICATION */
+.form-group {
+    margin-bottom: 20px !important;
+}
+
+.form-group label {
+    display: block !important;
+    font-weight: 700 !important;
+    margin-bottom: 8px !important;
+    color: #334155 !important;
+}
+
+.subtitle-card {
+    color: #64748b !important;
+    margin-bottom: 20px !important;
+}
+
+/* Boîte récapitulative de l'élève dans le PDF/Bilan */
+.eleve-recap-box {
+    background: #f3e8ff !important;
+    border: 2px solid #8b5cf6 !important;
+    border-radius: 12px !important;
+    padding: 16px 20px !important;
+    margin-bottom: 24px !important;
+}
+
+.eleve-recap-box h3 {
+    margin-top: 0 !important;
+    color: #6d28d9 !important;
+    font-size: 1.1rem !important;
+}
+
+.eleve-recap-box p {
+    margin: 6px 0 !important;
+    font-weight: 600 !important;
+    color: #1e293b !important;
+}
+
+/* 5. BLOCS & CARTES DE COURS */
 .cours-grid {
     display: grid !important;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important;
@@ -73,52 +111,35 @@ body {
     border-left: 8px solid #f59e0b !important;
 }
 
-/* Bloc 5 : Cyan / Bleu Ciel */
-.cours-grid > *:nth-child(5), .cours-card:nth-child(5) {
-    background-color: #e0f2fe !important;
-    border-left: 8px solid #06b6d4 !important;
-}
-
 /* ==========================================
-   5. CADRES QUI DEMANDENT DES RÉPONSES (Mise en valeur)
+   6. CHAMPS DE SAISIE ET BOÎTES DE RÉPONSES
 ========================================== */
-
-/* Boîte de question / Énoncé */
-.question-box, .exercice-box, .question-item {
-    background-color: #f5f3ff !important;
-    border: 2px solid #a78bfa !important;
-    border-radius: 12px !important;
-    padding: 20px !important;
-    margin-bottom: 20px !important;
-}
-
-/* Champs de texte et sélecteurs de réponse */
 input[type="text"], 
 input[type="number"], 
 select, 
 textarea {
-    background-color: #fffbe2 !important; /* Jaune très doux pour indiquer l'action */
-    border: 2px solid #f59e0b !important; /* Bordure ambre bien visible */
+    background-color: #fffbe2 !important;
+    border: 2px solid #f59e0b !important;
     border-radius: 10px !important;
     padding: 12px 16px !important;
     font-size: 1rem !important;
     font-weight: 600 !important;
     color: #1e293b !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
     transition: all 0.25s ease !important;
 }
 
-/* Effet quand l'utilisateur clique dans le champ de réponse */
 input[type="text"]:focus, 
 input[type="number"]:focus, 
 select:focus, 
 textarea:focus {
     background-color: #ffffff !important;
-    border-color: #8b5cf6 !important; /* Devient violet vif */
+    border-color: #8b5cf6 !important;
     box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.25) !important;
     outline: none !important;
 }
 
-/* Options à choix multiples (Quiz) */
 .option-item, .choice-box, label.option {
     background-color: #ffffff !important;
     border: 2px solid #cbd5e1 !important;
@@ -132,20 +153,19 @@ textarea:focus {
 }
 
 .option-item:hover, .choice-box:hover {
-    border-color: #ec4899 !important; /* Rose vif au survol */
+    border-color: #ec4899 !important;
     background-color: #fdf2f8 !important;
 }
 
-/* Option sélectionnée par l'utilisateur */
 .option-item.selected, .choice-box.selected {
-    background-color: #dcfce7 !important; /* Vert clair de validation */
-    border-color: #10b981 !important; /* Bordure verte émeraude */
+    background-color: #dcfce7 !important;
+    border-color: #10b981 !important;
     box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2) !important;
     font-weight: bold !important;
 }
 
 /* ==========================================
-   6. CHRONOMÈTRE & BARRE D'INFO
+   7. CHRONOMÈTRE & BARRE D'INFO
 ========================================== */
 .quiz-header {
     margin-bottom: 24px !important;
@@ -188,7 +208,7 @@ textarea:focus {
 }
 
 /* ==========================================
-   7. BOUTONS ULTRA-COLORÉS
+   8. BOUTONS
 ========================================== */
 .btn {
     border: none !important;
@@ -213,7 +233,7 @@ textarea:focus {
 }
 
 /* ==========================================
-   8. FRISE, BADGES ET BARRE DE PROGRESSION
+   9. FRISE, BADGES ET BARRE DE PROGRESSION
 ========================================== */
 .timeline-container {
     display: grid !important;
