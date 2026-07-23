@@ -69,7 +69,7 @@
         {
             "id": "ex5", "type": "association", "niveau": "Moyen",
             "titre": "Ex5 - Associer concepts du Module 2 (3 pts)",
-            "image": "images/1784530256.png",
+            "image": "images/1784530297.png",
             "enonce": "Associe chaque élément à sa définition ou rôle[cite: 2].",
             "associations": [
                 {"terme": "Bête à cornes", "definition": "Exprime le besoin fondamental", "pts": 1},
