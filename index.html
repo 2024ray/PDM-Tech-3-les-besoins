@@ -18,10 +18,12 @@
     </header>
 
     <main class="container">
-        <!-- FORMULAIRE D'IDENTIFICATION -->
+        <!-- PAGE 1 : IDENTIFICATION DE L'ÉLÈVE -->
         <section id="section-identification" class="card">
-            <h2><i class="fa-solid fa-user-graduate"></i> Identification de l'Élève</h2>
-            <p class="subtitle">Veuillez renseigner vos informations avant de commencer l'exercice.</p>
+            <div class="cours-header">
+                <h2><i class="fa-solid fa-id-card"></i> Identification de l'Élève</h2>
+                <p class="cours-subtitle">Veuillez renseigner vos informations pour commencer la séance d'exercice.</p>
+            </div>
             
             <form id="form-eleve" class="form-identification">
                 <div class="form-grid">
@@ -35,21 +37,24 @@
                     </div>
                     <div class="form-group">
                         <label for="eleve-classe"><i class="fa-solid fa-school"></i> Classe :</label>
-                        <input type="text" id="eleve-classe" placeholder="Ex: 3ème B / 2nde 4" required>
+                        <input type="text" id="eleve-classe" placeholder="Ex: 3ème B" required>
                     </div>
                     <div class="form-group">
                         <label for="eleve-numero"><i class="fa-solid fa-hashtag"></i> N° de Classe / Élève :</label>
                         <input type="number" id="eleve-numero" placeholder="Ex: 12" min="1" required>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary btn-lg mt-20">
-                    <span>Valider et Accéder au Cours</span>
-                    <i class="fa-solid fa-arrow-right"></i>
-                </button>
+                
+                <div class="cours-footer">
+                    <button type="submit" id="btn-valider-identification" class="btn btn-primary btn-lg">
+                        <span>Valider mes informations</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
             </form>
         </section>
 
-        <!-- PARTIE COURS -->
+        <!-- PAGE 2 : PARTIE COURS -->
         <section id="section-cours" class="card card-cours hidden">
             <div class="cours-header">
                 <h2><i class="fa-solid fa-book-open"></i> Partie Cours (Théorie)</h2>
@@ -66,7 +71,7 @@
             </div>
         </section>
 
-        <!-- QUIZ DE COMPRÉHENSION -->
+        <!-- PAGE 3 : QUIZ DE COMPRÉHENSION -->
         <section id="section-quiz" class="card hidden">
             <h2>🧠 Quiz de compréhension (15 questions)</h2>
             <div class="quiz-header">
@@ -81,7 +86,7 @@
             <button id="btn-suivant-quiz" class="btn btn-primary hidden">Suivant ➡️</button>
         </section>
 
-        <!-- EVALUATION & PRATIQUE -->
+        <!-- PAGE 4 : EVALUATION & PRATIQUE -->
         <section id="section-eval" class="card hidden">
             <h2>📝 Partie Exercices & Pratique (40 points - 15 exercices)</h2>
             <div class="quiz-header">
@@ -96,7 +101,7 @@
             <button id="btn-suivant-eval" class="btn btn-primary">Valider ➡️</button>
         </section>
 
-        <!-- BILAN ET RESTITUTION -->
+        <!-- PAGE 5 : BILAN ET RESTITUTION -->
         <section id="pdf-report-area" class="card hidden">
             <h2>📊 Bilan & Restitution de la Séance</h2>
             <div id="eleve-info-display" class="eleve-badge-info"></div>
