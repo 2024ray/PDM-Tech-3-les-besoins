@@ -1,4 +1,3 @@
-
 let data = null;
 let quizQuestions = [];
 let evalQuestions = [];
@@ -45,35 +44,92 @@ function remplacerTrous(texte, elements) {
     return resultat;
 }
 
-// ========== CHARGEMENT ==========
+// ========== CHARGEMENT DES DONNÉES ==========
 async function chargerDonnees() {
     try {
         const res = await fetch('questions.json?t=' + Date.now(), { cache: 'no-store' });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         data = await res.json();
     } catch (e) {
-        try {
-            data = JSON.parse($('#questions-data-inline').textContent);
-        } catch (e2) {
-            document.body.innerHTML = '<div style="max-width:600px;margin:4rem auto;padding:2rem;background:#fee2e2;border:2px solid #ef4444;border-radius:12px;"><h2>⚠️ Erreur</h2><p>Impossible de charger les questions.</p><button onclick="location.reload()">Réessayer</button></div>';
-            return;
-        }
+        console.error("Erreur de chargement du JSON:", e);
+        return;
     }
     initialiserCours();
     preparerQuiz();
     preparerEval();
 }
 
-// ========== COURS ==========
+// ========== INITIALISATION DU COURS (STYLE ÉPURÉ) ==========
 function initialiserCours() {
-    let html = `<div class="intro"><strong>🎯 Introduction :</strong> ${data.cours.introduction}</div>`;
-    data.cours.sections.forEach(s => {
-        html += `<div class="section-cours"><h3>${s.titre}</h3><p>${s.contenu}</p></div>`;
+    const icons = [
+        "fa-solid fa-bullseye",
+        "fa-solid fa-diagram-project",
+        "fa-solid fa-file-contract",
+        "fa-solid fa-timeline"
+    ];
+
+    let html = `
+        <div class="cours-intro-box">
+            <div class="intro-icon"><i class="fa-solid fa-compass"></i></div>
+            <div class="intro-content">
+                <strong>Focus du Module 2</strong>
+                <p>${data.cours.introduction}</p>
+            </div>
+        </div>
+    `;
+
+    data.cours.sections.forEach((s, index) => {
+        const iconClass = icons[index] || "fa-solid fa-bookmark";
+        
+        if (s.titre.includes("Déroulement")) {
+            html += `
+                <div class="cours-card full-width">
+                    <div class="card-icon"><i class="${iconClass}"></i></div>
+                    <div class="card-body">
+                        <h3>${s.titre}</h3>
+                        <p class="section-desc">${s.contenu}</p>
+                        <div class="timeline-container">
+                            <div class="timeline-step">
+                                <span class="step-num">1</span>
+                                <span class="step-title">Introduction</span>
+                                <span class="step-desc">Objectifs & Cadre</span>
+                            </div>
+                            <div class="timeline-step">
+                                <span class="step-num">2</span>
+                                <span class="step-title">Théorie</span>
+                                <span class="step-desc">Cours & CDCF</span>
+                            </div>
+                            <div class="timeline-step">
+                                <span class="step-num">3</span>
+                                <span class="step-title">Pratique</span>
+                                <span class="step-desc">Cas concrets</span>
+                            </div>
+                            <div class="timeline-step">
+                                <span class="step-num">4</span>
+                                <span class="step-title">Restitution</span>
+                                <span class="step-desc">Débat & Bilan</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        } else {
+            html += `
+                <div class="cours-card">
+                    <div class="card-icon"><i class="${iconClass}"></i></div>
+                    <div class="card-body">
+                        <h3>${s.titre}</h3>
+                        <p>${s.contenu}</p>
+                    </div>
+                </div>
+            `;
+        }
     });
+
     $('#contenu-cours').innerHTML = html;
 }
 
-// ========== QUIZ (15 questions) ==========
+// ========== QUIZ (15 QUESTIONS) ==========
 function preparerQuiz() {
     quizQuestions = shuffle(data.quizComprehension).map(q => ({ ...q, options: shuffle(q.options) }));
     $('#btn-commencer-quiz').addEventListener('click', demarrerQuiz);
@@ -157,7 +213,7 @@ function terminerQuiz() {
     afficherExerciceEval();
 }
 
-// ========== ÉVALUATION ==========
+// ========== ATELIER PRATIQUE / EXERCICES ==========
 function preparerEval() {
     evalQuestions = shuffle(data.evaluation);
     $('#btn-suivant-eval').addEventListener('click', () => validerEtSuivantEval());
@@ -207,7 +263,7 @@ function lancerTimerEval() {
     }, 1000);
 }
 
-// ========== RENDERS ==========
+// Rendu interactif des types d'exercices
 function renderTableauMenu(ex, container) {
     const table = document.createElement('table');
     table.className = 'tableau-menu';
@@ -274,7 +330,7 @@ function renderAssociation(ex, container) {
     div.className = 'association-container';
     const col = document.createElement('div');
     col.className = 'association-colonne';
-    col.innerHTML = '<h4>Associe chaque concept à sa définition :</h4>';
+    col.innerHTML = '<h4>Associe chaque terme à sa correspondance :</h4>';
     const defs = shuffle(ex.associations.map(a => a.definition));
     shuffle([...ex.associations]).forEach(asso => {
         const item = document.createElement('div');
@@ -325,7 +381,7 @@ function renderTexteTrousListeVariable(ex, container) {
     container.appendChild(div);
 }
 
-// ========== VALIDATION ==========
+// ========== VALIDATION DES RÉPONSES ==========
 function validerEtSuivantEval() {
     clearInterval(timerEval);
     const ex = evalQuestions[evalIndex];
@@ -423,7 +479,7 @@ function terminerEval() {
     afficherResultats();
 }
 
-// ========== RÉSULTATS ==========
+// ========== RESULTATS & PDF ==========
 function afficherResultats() {
     const zone = $('#pdf-report-area');
     zone.classList.remove('hidden');
@@ -432,12 +488,12 @@ function afficherResultats() {
     const total = scoreQuiz + scoreEval;
     const mention = total >= 36 ? '🏆 Excellent' : total >= 28 ? '👍 Très bien' : total >= 20 ? '✅ Bien' : total >= 12 ? '📚 À renforcer' : '⚠️ À retravailler';
     
-    let html = `<div class="score-final">🎯 Score total : ${total.toFixed(1)} / ${totalQuiz + totalEval} pts<br><small>Quiz : ${scoreQuiz}/${totalQuiz} | Évaluation : ${scoreEval.toFixed(1)}/${totalEval}</small><br><small>${mention}</small></div>`;
-    html += `<div class="resultat-section"><h3>📋 Détail du Quiz (15 questions)</h3>`;
+    let html = `<div class="score-final">🎯 Bilan Module 2 : ${total.toFixed(1)} / ${totalQuiz + totalEval} pts<br><small>Théorie/Quiz : ${scoreQuiz}/${totalQuiz} | Pratique/Exercices : ${scoreEval.toFixed(1)}/${totalEval}</small><br><small>${mention}</small></div>`;
+    html += `<div class="resultat-section"><h3>📋 Restitution - Partie Théorique (Quiz)</h3>`;
     detailsQuiz.forEach((d, i) => {
         html += `<div class="detail-exercice ${d.correct ? '' : 'erreur'}"><strong>Q${i+1}.</strong> ${d.question}<br>${d.correct ? '✅ Bonne réponse' : `❌ "${d.reponseEleve}" → Attendu : "${d.bonneReponse}"`}</div>`;
     });
-    html += `</div><div class="resultat-section"><h3>📝 Détail de l'évaluation</h3>`;
+    html += `</div><div class="resultat-section"><h3>📝 Restitution - Partie Exercices Pratiques</h3>`;
     detailsEval.forEach(d => {
         const nb = d.questions.filter(q => q.correct).length;
         const ok = nb === d.questions.length;
@@ -452,7 +508,6 @@ function afficherResultats() {
     zone.scrollIntoView({ behavior: 'smooth' });
 }
 
-// ========== PDF ==========
 function genererPDFResultats() {
     const el = $('#pdf-report-area');
     el.classList.remove('hidden');
@@ -460,7 +515,7 @@ function genererPDFResultats() {
     setTimeout(() => {
         html2pdf().set({
             margin: [10,10,10,10],
-            filename: `Rapport_Technologie_${new Date().toISOString().slice(0,10)}.pdf`,
+            filename: `Bilan_Module2_Analyse_Du_Besoin_${new Date().toISOString().slice(0,10)}.pdf`,
             image: { type: 'jpeg', quality: 0.98 },
             html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff', windowWidth: 960 },
             jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
