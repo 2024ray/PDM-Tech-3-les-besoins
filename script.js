@@ -53,6 +53,7 @@ async function chargerDonnees() {
         data = await res.json();
     } catch (e) {
         console.error("Erreur de chargement du JSON:", e);
+        alert("Impossible de charger le fichier questions.json. Vérifiez qu'il est présent.");
         return;
     }
     initialiserCours();
@@ -72,7 +73,6 @@ document.getElementById('form-identification').addEventListener('submit', (e) =>
         return;
     }
 
-    // Masquer l'identification et afficher la partie cours
     $('#section-identification').classList.add('hidden');
     $('#section-cours').classList.remove('hidden');
 });
@@ -346,7 +346,6 @@ function renderAssociation(ex, container) {
     const div = document.createElement('div');
     div.className = 'association-container';
 
-    // --- AFFICHAGE DE L'IMAGE SI PRÉSENTE ---
     if (ex.image) {
         const imgContainer = document.createElement('div');
         imgContainer.className = 'exercice-image-container';
@@ -364,7 +363,6 @@ function renderAssociation(ex, container) {
         imgContainer.appendChild(img);
         div.appendChild(imgContainer);
     }
-    // ----------------------------------------
 
     const col = document.createElement('div');
     col.className = 'association-colonne';
@@ -443,6 +441,8 @@ function validerEtSuivantEval() {
             const opt = ex.options[parseInt(sel.value)];
             if (opt.correct) pts += opt.pts;
             details.questions.push({ enonce: ex.enonce, reponseEleve: opt.texte, bonneReponse: ex.options.find(o => o.correct).texte, correct: opt.correct, pts: opt.correct ? opt.pts : 0 });
+        } else {
+            details.questions.push({ enonce: ex.enonce, reponseEleve: 'Aucune', bonneReponse: ex.options.find(o => o.correct).texte, correct: false, pts: 0 });
         }
     }
     else if (ex.type === 'choix-multiple') {
