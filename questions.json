@@ -80,7 +80,7 @@
         {
             "id": "ex6", "type": "texte-trous-libre", "niveau": "Moyen",
             "titre": "Ex6 - Compléter l'organisation (2 pts)",
-            "image": "images/e().png",
+            "image": "images/e(11).png",
             "enonce": "Complète le texte en saisissant les mots manquants[cite: 2].",
             "texte": "Le chapitre comprend deux parties : la partie {{}} pour la théorie et la partie {{}} pour l'application[cite: 2].",
             "trous": [
