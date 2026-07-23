@@ -30,6 +30,7 @@
         {
             "id": "ex1", "type": "tableau-menu", "niveau": "Facile",
             "titre": "Ex1 - Étapes de la séance (3 pts)",
+            "image": "images/1784530297.png",
             "enonce": "Associe chaque étape du déroulement de séance à sa description.",
             "questions": [
                 {"id": "ex1q1", "enonce": "Étape 1 : Introduction[cite: 2].", "options": [{"texte": "Cadre global & Objectifs", "correct": true}, {"texte": "Mises en situation", "correct": false}, {"texte": "Correction finale", "correct": false}, {"texte": "Apport théorique", "correct": false}, {"texte": "Évaluation formative", "correct": false}, {"texte": "Synthèse atelier", "correct": false}, {"texte": "Validation module", "correct": false}, {"texte": "Introduction générale", "correct": false}, {"texte": "Remise des notes", "correct": false}, {"texte": "Clôture", "correct": false}], "pts": 0.75},
