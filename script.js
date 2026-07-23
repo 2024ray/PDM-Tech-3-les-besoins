@@ -10,6 +10,7 @@ let detailsEval = [];
 let timerQuiz = null;
 let timerEval = null;
 let tempsQuizRestant = 20 * 60;
+let eleveActuel = null;
 
 function $(sel) { return document.querySelector(sel); }
 function $$(sel) { return document.querySelectorAll(sel); }
@@ -44,14 +45,133 @@ function remplacerTrous(texte, elements) {
     return resultat;
 }
 
-// ========== VÉRIFICATION DE LA SÉANCE DÉJÀ FAITE (VERROUILLAGE) ==========
-async function chargerDonnees() {
-    const sessionFaite = localStorage.getItem('module2_termine');
-    if (sessionFaite === 'true') {
-        afficherMessageVerrouillage();
-        return;
-    }
+// ========== INITIALISATION & ÉCRAN DE CONNEXION ==========
+document.addEventListener('DOMContentLoaded', () => {
+    injecterEcranConnexion();
+});
 
+function injecterEcranConnexion() {
+    const mainContainer = $('main.container');
+    if (!mainContainer) return;
+
+    mainContainer.innerHTML = `
+        <div class="card login-card" style="max-width: 500px; margin: 40px auto; padding: 30px; background: #fff; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+            <div style="text-align: center; margin-bottom: 25px;">
+                <h2>🎓 Connexion à l'évaluation</h2>
+                <p style="color: #666; font-size: 0.95rem;">Veuillez renseigner vos informations pour accéder au Module.</p>
+            </div>
+            <form id="form-connexion" style="display: flex; flex-direction: column; gap: 15px;">
+                <div>
+                    <label for="input-nom" style="display: block; font-weight: 600; margin-bottom: 5px;">Nom et Prénom :</label>
+                    <input type="text" id="input-nom" required placeholder="Ex: Dupont Jean" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px;">
+                </div>
+                <div>
+                    <label for="select-classe" style="display: block; font-weight: 600; margin-bottom: 5px;">Classe :</label>
+                    <select id="select-classe" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; background: #fff;">
+                        <option value="">-- Choisir la classe --</option>
+                        <option value="3èmeA">3ème A</option>
+                        <option value="3èmeB">3ème B</option>
+                        <option value="3èmeC">3ème C</option>
+                        <option value="3èmePM">3ème PM</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="input-code" style="display: block; font-weight: 600; margin-bottom: 5px;">Code d'identification élève :</label>
+                    <input type="password" id="input-code" required placeholder="Entrez votre code secret" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px;">
+                </div>
+                <button type="submit" style="margin-top: 10px; padding: 12px; background: #4f46e5; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer;">Accéder au module</button>
+            </form>
+            <div id="login-error" style="color: #e11d48; text-align: center; margin-top: 15px; font-size: 0.9rem;"></div>
+        </div>
+    `;
+
+    $('#form-connexion').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const nom = $('#input-nom').value.trim();
+        const classe = $('#select-classe').value;
+        const code = $('#input-code').value.trim();
+
+        if (!nom || !classe || !code) {
+            $('#login-error').textContent = "Tous les champs sont obligatoires.";
+            return;
+        }
+
+        // Sécurité supplémentaire : Vérification de la clé unique par élève
+        eleveActuel = { nom, classe, code };
+        const cleStockage = `module_termine_${classe}_${code}_${nom.replace(/\s+/g, '_')}`;
+        
+        if (localStorage.getItem(cleStockage) === 'true') {
+            afficherMessageVerrouillage();
+            return;
+        }
+
+        // Si tout est ok, on charge le contenu initial de la page (cours, etc.)
+        restaurerStructureHTMLPrincipale();
+        chargerDonnees();
+    });
+}
+
+function restaurerStructureHTMLPrincipale() {
+    $('main.container').innerHTML = `
+        <!-- Section Cours -->
+        <section id="section-cours" class="card">
+            <h2>📚 Cours : Analyse du Besoin & CDCF</h2>
+            <div id="contenu-cours"></div>
+            <div style="text-align: right; margin-top: 20px;">
+                <button id="btn-commencer-quiz" class="btn primary">Commencer le Quiz de Compréhension ➔</button>
+            </div>
+        </section>
+
+        <!-- Section Quiz (15 Questions) -->
+        <section id="section-quiz" class="card hidden">
+            <div class="quiz-header">
+                <h2>📋 Quiz de Compréhension</h2>
+                <div id="quiz-timer" class="timer">⏱️ 20:00</div>
+            </div>
+            <div class="progress-container">
+                <div id="quiz-progress">Question 1 / 15</div>
+                <div class="progress-bar"><div id="quiz-progress-bar" style="width: 0%;"></div></div>
+            </div>
+            <div id="quiz-question" class="question-box"></div>
+            <div id="quiz-options" class="options-container"></div>
+            <div style="text-align: right; margin-top: 20px;">
+                <button id="btn-suivant-quiz" class="btn primary hidden">Valider et Continuer ➔</button>
+            </div>
+        </section>
+
+        <!-- Section Évaluation Pratique -->
+        <section id="section-eval" class="card hidden">
+            <div class="quiz-header">
+                <h2>🛠️ Atelier Pratique & Études de Cas</h2>
+                <div id="eval-timer" class="timer">⏱️ 01:30</div>
+            </div>
+            <div class="progress-container">
+                <div id="eval-progress">Exercice 1 / 4</div>
+                <div class="progress-bar"><div id="eval-progress-bar" style="width: 0%;"></div></div>
+            </div>
+            <div id="eval-question" class="question-box"></div>
+            <div id="eval-content" class="eval-content-container"></div>
+            <div style="text-align: right; margin-top: 20px;">
+                <button id="btn-suivant-eval" class="btn primary">Valider l'exercice ➔</button>
+            </div>
+        </section>
+
+        <!-- Zone de Rapport / PDF -->
+        <div id="pdf-report-area" class="card hidden">
+            <h2>📊 Bilan & Restitution Officielle</h2>
+            <div id="infos-eleve-bilan" style="margin-bottom: 15px; font-weight: bold; color: #333;"></div>
+            <div id="resultats-detail"></div>
+            <div style="text-align: center; margin-top: 30px; display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                <button id="btn-telecharger-pdf" class="btn primary">📥 Télécharger mon Bilan (PDF)</button>
+            </div>
+        </div>
+    `;
+    
+    // Réattacher les écouteurs globaux
+    $('#btn-telecharger-pdf').addEventListener('click', genererPDFResultats);
+}
+
+async function chargerDonnees() {
     try {
         const res = await fetch('questions.json?t=' + Date.now(), { cache: 'no-store' });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -69,12 +189,13 @@ function afficherMessageVerrouillage() {
     $('main.container').innerHTML = `
         <div class="card" style="text-align: center; padding: 40px;">
             <h2>🔒 Séance déjà réalisée</h2>
-            <p>Vous avez déjà soumis vos réponses pour ce module. Il n'est pas possible de refaire les questions.</p>
+            <p>Vous avez déjà soumis vos réponses pour ce module avec cet identifiant. Il n'est pas possible de refaire les questions.</p>
+            <button onclick="location.reload()" class="btn secondary" style="margin-top: 20px;">Retour à l'accueil</button>
         </div>
     `;
 }
 
-// ========== INITIALISATION DU COURS (STYLE ÉPURÉ) ==========
+// ========== INITIALISATION DU COURS ==========
 function initialiserCours() {
     const icons = [
         "fa-solid fa-bullseye",
@@ -87,7 +208,7 @@ function initialiserCours() {
         <div class="cours-intro-box">
             <div class="intro-icon"><i class="fa-solid fa-compass"></i></div>
             <div class="intro-content">
-                <strong>Focus du Module 2</strong>
+                <strong>Focus du Module</strong>
                 <p>${data.cours.introduction}</p>
             </div>
         </div>
@@ -95,56 +216,21 @@ function initialiserCours() {
 
     data.cours.sections.forEach((s, index) => {
         const iconClass = icons[index] || "fa-solid fa-bookmark";
-        
-        if (s.titre.includes("Déroulement")) {
-            html += `
-                <div class="cours-card full-width">
-                    <div class="card-icon"><i class="${iconClass}"></i></div>
-                    <div class="card-body">
-                        <h3>${s.titre}</h3>
-                        <p class="section-desc">${s.contenu}</p>
-                        <div class="timeline-container">
-                            <div class="timeline-step">
-                                <span class="step-num">1</span>
-                                <span class="step-title">Introduction</span>
-                                <span class="step-desc">Objectifs & Cadre</span>
-                            </div>
-                            <div class="timeline-step">
-                                <span class="step-num">2</span>
-                                <span class="step-title">Théorie</span>
-                                <span class="step-desc">Cours & CDCF</span>
-                            </div>
-                            <div class="timeline-step">
-                                <span class="step-num">3</span>
-                                <span class="step-title">Pratique</span>
-                                <span class="step-desc">Cas concrets</span>
-                            </div>
-                            <div class="timeline-step">
-                                <span class="step-num">4</span>
-                                <span class="step-title">Restitution</span>
-                                <span class="step-desc">Débat & Bilan</span>
-                            </div>
-                        </div>
-                    </div>
+        html += `
+            <div class="cours-card">
+                <div class="card-icon"><i class="${iconClass}"></i></div>
+                <div class="card-body">
+                    <h3>${s.titre}</h3>
+                    <p>${s.contenu}</p>
                 </div>
-            `;
-        } else {
-            html += `
-                <div class="cours-card">
-                    <div class="card-icon"><i class="${iconClass}"></i></div>
-                    <div class="card-body">
-                        <h3>${s.titre}</h3>
-                        <p>${s.contenu}</p>
-                    </div>
-                </div>
-            `;
-        }
+            </div>
+        `;
     });
 
     $('#contenu-cours').innerHTML = html;
 }
 
-// ========== QUIZ (15 QUESTIONS) ==========
+// ========== QUIZ ==========
 function preparerQuiz() {
     quizQuestions = shuffle(data.quizComprehension).map(q => ({ ...q, options: shuffle(q.options) }));
     $('#btn-commencer-quiz').addEventListener('click', demarrerQuiz);
@@ -200,22 +286,24 @@ function mettreAJourTimerQuiz() {
     t.classList.toggle('warning', tempsQuizRestant < 60);
 }
 
-$('#btn-suivant-quiz').addEventListener('click', () => {
-    const sel = document.querySelector('input[name="quiz-opt"]:checked');
-    const q = quizQuestions[quizIndex];
-    let bonne = false;
-    if (sel) {
-        bonne = q.options[parseInt(sel.value)].correct;
-        if (bonne) scoreQuiz++;
+document.addEventListener('click', (e) => {
+    if (e.target && e.target.id === 'btn-suivant-quiz') {
+        const sel = document.querySelector('input[name="quiz-opt"]:checked');
+        const q = quizQuestions[quizIndex];
+        let bonne = false;
+        if (sel) {
+            bonne = q.options[parseInt(sel.value)].correct;
+            if (bonne) scoreQuiz++;
+        }
+        detailsQuiz.push({
+            question: q.question,
+            reponseEleve: sel ? q.options[parseInt(sel.value)].texte : 'Aucune réponse',
+            bonneReponse: q.options.find(o => o.correct).texte,
+            correct: bonne
+        });
+        quizIndex++;
+        afficherQuestionQuiz();
     }
-    detailsQuiz.push({
-        question: q.question,
-        reponseEleve: sel ? q.options[parseInt(sel.value)].texte : 'Aucune réponse',
-        bonneReponse: q.options.find(o => o.correct).texte,
-        correct: bonne
-    });
-    quizIndex++;
-    afficherQuestionQuiz();
 });
 
 function terminerQuiz() {
@@ -228,10 +316,13 @@ function terminerQuiz() {
     afficherExerciceEval();
 }
 
-// ========== ATELIER PRATIQUE / EXERCICES ==========
+// ========== ATELIER PRATIQUE ==========
 function preparerEval() {
     evalQuestions = shuffle(data.evaluation);
-    $('#btn-suivant-eval').addEventListener('click', () => validerEtSuivantEval());
+    const btnEv = $('#btn-suivant-eval');
+    if (btnEv) {
+        btnEv.addEventListener('click', () => validerEtSuivantEval());
+    }
 }
 
 function afficherExerciceEval() {
@@ -268,6 +359,7 @@ function lancerTimerEval() {
     clearInterval(timerEval);
     let tempsRestant = 90;
     const t = $('#eval-timer');
+    if (!t) return;
     t.textContent = `⏱️ ${formatTemps(tempsRestant)}`;
     t.classList.remove('warning');
     timerEval = setInterval(() => {
@@ -488,8 +580,10 @@ function validerEtSuivantEval() {
 }
 
 function terminerEval() {
-    // Verrouillage définitif de la session pour empêcher de refaire les questions
-    localStorage.setItem('module2_termine', 'true');
+    if (eleveActuel) {
+        const cleStockage = `module_termine_${eleveActuel.classe}_${eleveActuel.code}_${eleveActuel.nom.replace(/\s+/g, '_')}`;
+        localStorage.setItem(cleStockage, 'true');
+    }
 
     $('#section-eval').classList.add('hidden');
     afficherResultats();
@@ -498,12 +592,17 @@ function terminerEval() {
 function afficherResultats() {
     const zone = $('#pdf-report-area');
     zone.classList.remove('hidden');
+    
+    if (eleveActuel) {
+        $('#infos-eleve-bilan').innerHTML = `Élève : ${eleveActuel.nom} | Classe : ${eleveActuel.classe}`;
+    }
+
     const totalQuiz = quizQuestions.length;
     const totalEval = 40;
     const total = scoreQuiz + scoreEval;
     const mention = total >= 36 ? '🏆 Excellent' : total >= 28 ? '👍 Très bien' : total >= 20 ? '✅ Bien' : total >= 12 ? '📚 À renforcer' : '⚠️ À retravailler';
     
-    let html = `<div class="score-final">🎯 Bilan Module 2 : ${total.toFixed(1)} / ${totalQuiz + totalEval} pts<br><small>Théorie/Quiz : ${scoreQuiz}/${totalQuiz} | Pratique/Exercices : ${scoreEval.toFixed(1)}/${totalEval}</small><br><small>${mention}</small></div>`;
+    let html = `<div class="score-final">🎯 Bilan : ${total.toFixed(1)} / ${totalQuiz + totalEval} pts<br><small>Théorie/Quiz : ${scoreQuiz}/${totalQuiz} | Pratique/Exercices : ${scoreEval.toFixed(1)}/${totalEval}</small><br><small>${mention}</small></div>`;
     html += `<div class="resultat-section"><h3>📋 Restitution - Partie Théorique (Quiz)</h3>`;
     detailsQuiz.forEach((d, i) => {
         html += `<div class="detail-exercice ${d.correct ? '' : 'erreur'}"><strong>Q${i+1}.</strong> ${d.question}<br>${d.correct ? '✅ Bonne réponse' : `❌ "${d.reponseEleve}" → Attendu : "${d.bonneReponse}"`}</div>`;
@@ -521,12 +620,6 @@ function afficherResultats() {
     html += `</div>`;
     $('#resultats-detail').innerHTML = html;
     
-    // Masquer le bouton recommencer pour empêcher les élèves de réinitialiser
-    const btnRecommencer = $('#btn-recommencer');
-    if (btnRecommencer) {
-        btnRecommencer.style.display = 'none';
-    }
-
     zone.scrollIntoView({ behavior: 'smooth' });
 }
 
@@ -537,7 +630,7 @@ function genererPDFResultats() {
     setTimeout(() => {
         html2pdf().set({
             margin: [10,10,10,10],
-            filename: `Bilan_Module2_Analyse_Du_Besoin_${new Date().toISOString().slice(0,10)}.pdf`,
+            filename: `Bilan_${eleveActuel ? eleveActuel.classe + '_' + eleveActuel.nom.replace(/\s+/g, '_') : 'Eleve'}.pdf`,
             image: { type: 'jpeg', quality: 0.98 },
             html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff', windowWidth: 960 },
             jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
@@ -545,6 +638,4 @@ function genererPDFResultats() {
         }).from(el).save();
     }, 100);
 }
-
-$('#btn-telecharger-pdf').addEventListener('click', genererPDFResultats);
-document.addEventListener('DOMContentLoaded', chargerDonnees);
+```[file: code-generated-file-91e0adda-dd94-4413-a993-a6fcad729dc5]
