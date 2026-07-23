@@ -11,7 +11,7 @@ let timerQuiz = null;
 let timerEval = null;
 let tempsQuizRestant = 20 * 60;
 
-// Objet pour stocker les infos de l'élève
+// Informations de l'élève
 let eleveInfo = {
     nom: '',
     prenom: '',
@@ -52,10 +52,14 @@ function remplacerTrous(texte, elements) {
     return resultat;
 }
 
-// ========== GESTION D'IDENTIFICATION ==========
-function initialiserFormulaire() {
-    $('#form-eleve').addEventListener('submit', (e) => {
+// ========== INITIALISATION IDENTIFICATION ==========
+function initialiserIdentification() {
+    const form = $('#form-eleve');
+    if (!form) return;
+
+    form.addEventListener('submit', (e) => {
         e.preventDefault();
+        
         eleveInfo.nom = $('#eleve-nom').value.trim();
         eleveInfo.prenom = $('#eleve-prenom').value.trim();
         eleveInfo.classe = $('#eleve-classe').value.trim();
@@ -64,11 +68,14 @@ function initialiserFormulaire() {
         if (eleveInfo.nom && eleveInfo.prenom && eleveInfo.classe && eleveInfo.numero) {
             $('#section-identification').classList.add('hidden');
             $('#section-cours').classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+            alert("Veuillez remplir tous les champs du formulaire d'identification.");
         }
     });
 }
 
-// ========== CHARGEMENT DES DONNÉES ==========
+// ========== CHARGEMENT DES DONNÉES JSON ==========
 async function chargerDonnees() {
     try {
         const res = await fetch('questions.json?t=' + Date.now(), { cache: 'no-store' });
@@ -78,7 +85,8 @@ async function chargerDonnees() {
         console.error("Erreur de chargement du JSON:", e);
         return;
     }
-    initialiserFormulaire();
+    
+    initialiserIdentification();
     initialiserCours();
     preparerQuiz();
     preparerEval();
@@ -86,6 +94,8 @@ async function chargerDonnees() {
 
 // ========== INITIALISATION DU COURS ==========
 function initialiserCours() {
+    if (!data || !data.cours) return;
+
     const icons = [
         "fa-solid fa-bullseye",
         "fa-solid fa-diagram-project",
@@ -156,6 +166,7 @@ function initialiserCours() {
 
 // ========== QUIZ (15 QUESTIONS) ==========
 function preparerQuiz() {
+    if (!data || !data.quizComprehension) return;
     quizQuestions = shuffle(data.quizComprehension).map(q => ({ ...q, options: shuffle(q.options) }));
     $('#btn-commencer-quiz').addEventListener('click', demarrerQuiz);
 }
@@ -240,6 +251,7 @@ function terminerQuiz() {
 
 // ========== ATELIER PRATIQUE / EXERCICES ==========
 function preparerEval() {
+    if (!data || !data.evaluation) return;
     evalQuestions = shuffle(data.evaluation);
     $('#btn-suivant-eval').addEventListener('click', () => validerEtSuivantEval());
 }
@@ -405,7 +417,7 @@ function renderTexteTrousListeVariable(ex, container) {
     container.appendChild(div);
 }
 
-// ========== VALIDATION DES RÉPONSES ==========
+// ========== VALIDATION DES RÉPONSES EXERCICE ==========
 function validerEtSuivantEval() {
     clearInterval(timerEval);
     const ex = evalQuestions[evalIndex];
@@ -507,8 +519,8 @@ function terminerEval() {
 function afficherResultats() {
     const zone = $('#pdf-report-area');
     zone.classList.remove('hidden');
-    
-    // Affichage des informations de l'élève
+
+    // Affichage des informations de l'élève en haut du bilan
     $('#eleve-info-display').innerHTML = `
         <div class="eleve-card">
             <h3><i class="fa-solid fa-id-card"></i> Identité de l'Élève</h3>
@@ -546,7 +558,7 @@ function genererPDFResultats() {
     const el = $('#pdf-report-area');
     el.classList.remove('hidden');
     el.style.display = 'block';
-    
+
     const nomFichier = `Bilan_${eleveInfo.nom}_${eleveInfo.prenom}_Classe_${eleveInfo.classe}_N${eleveInfo.numero}.pdf`;
 
     setTimeout(() => {
@@ -563,4 +575,6 @@ function genererPDFResultats() {
 
 $('#btn-telecharger-pdf').addEventListener('click', genererPDFResultats);
 $('#btn-recommencer').addEventListener('click', () => location.reload());
+
+// Chargement initial au démarrage du document
 document.addEventListener('DOMContentLoaded', chargerDonnees);
