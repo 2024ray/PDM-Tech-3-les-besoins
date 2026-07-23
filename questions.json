@@ -75,8 +75,7 @@
                 {"terme": "Diagramme Pieuvre", "definition": "Relie l'objet aux éléments extérieurs (FP / FC)", "pts": 1},
                 {"terme": "Restitution", "definition": "Débat contradictoire et correction interactive", "pts": 1}
             ]
-            "image": "images/1784530297.png",
-        },
+            },
         {
             "id": "ex6", "type": "texte-trous-libre", "niveau": "Moyen",
             "titre": "Ex6 - Compléter l'organisation (2 pts)",
