@@ -19,7 +19,7 @@
 
     <main class="container">
         <!-- IDENTIFICATION DE L'ÉLÈVE -->
-        <section id="section-identification" class="card">
+        <section id="section-identification" class="card animate-fade-in">
             <h2><i class="fa-solid fa-user-graduate"></i> Identification de l'élève</h2>
             <p class="subtitle-card">Veuillez renseigner vos informations pour démarrer la séance :</p>
             <form id="form-identification">
@@ -41,7 +41,7 @@
                         <option value="3ème PM">3ème PM</option>
                     </select>
                 </div>
-                <button type="submit" class="btn btn-primary btn-lg">
+                <button type="submit" class="btn btn-primary btn-lg pulse-hover">
                     <span>Valider et Commencer le Cours</span>
                     <i class="fa-solid fa-arrow-right"></i>
                 </button>
@@ -58,7 +58,7 @@
             <div id="contenu-cours" class="cours-grid"></div>
 
             <div class="cours-footer">
-                <button id="btn-commencer-quiz" class="btn btn-primary btn-lg">
+                <button id="btn-commencer-quiz" class="btn btn-primary btn-lg pulse-hover">
                     <span>Commencer le Quiz de Vérification (15 questions)</span>
                     <i class="fa-solid fa-arrow-right"></i>
                 </button>
@@ -67,7 +67,10 @@
 
         <!-- QUIZ DE COMPRÉHENSION -->
         <section id="section-quiz" class="card hidden">
-            <h2>🧠 Quiz de compréhension (15 questions)</h2>
+            <div class="section-banner-anim">
+                <i class="fa-solid fa-brain floating-icon"></i>
+                <h2>Quiz de compréhension</h2>
+            </div>
             <div class="quiz-header">
                 <div class="info-bar">
                     <span id="quiz-progress">Question 1 / 15</span>
@@ -77,12 +80,15 @@
             </div>
             <div id="quiz-question" class="question-box"></div>
             <div id="quiz-options" class="options-list"></div>
-            <button id="btn-suivant-quiz" class="btn btn-primary hidden">Suivant ➡️</button>
+            <button id="btn-suivant-quiz" class="btn btn-primary hidden animate-bounce-short">Suivant ➡️</button>
         </section>
 
         <!-- EVALUATION & PRATIQUE -->
         <section id="section-eval" class="card hidden">
-            <h2>📝 Partie Exercices & Pratique (40 points - 15 exercices)</h2>
+            <div class="section-banner-anim">
+                <i class="fa-solid fa-laptop-code floating-icon"></i>
+                <h2>Atelier Pratique & Exercices</h2>
+            </div>
             <div class="quiz-header">
                 <div class="info-bar">
                     <span id="eval-progress">Exercice 1 / 15</span>
@@ -92,16 +98,19 @@
             </div>
             <div id="eval-question" class="question-box"></div>
             <div id="eval-content" class="eval-content"></div>
-            <button id="btn-suivant-eval" class="btn btn-primary">Valider ➡️</button>
+            <button id="btn-suivant-eval" class="btn btn-primary pulse-hover">Valider ➡️</button>
         </section>
 
         <!-- BILAN ET RESTITUTION -->
         <section id="pdf-report-area" class="card hidden">
-            <h2>📊 Bilan & Restitution de la Séance</h2>
+            <div class="success-banner-anim">
+                <i class="fa-solid fa-trophy bounce-icon"></i>
+                <h2>Bilan & Restitution de la Séance</h2>
+            </div>
             <div id="eleve-info-recap" class="eleve-recap-box"></div>
             <div id="resultats-detail"></div>
             <div class="actions-pdf">
-                <button id="btn-telecharger-pdf" class="btn btn-success">📥 Télécharger PDF du Bilan</button>
+                <button id="btn-telecharger-pdf" class="btn btn-success pulse-hover">📥 Télécharger PDF du Bilan</button>
                 <button id="btn-recommencer" class="btn btn-secondary">🔄 Recommencer la Séance</button>
             </div>
         </section>
