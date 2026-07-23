@@ -1,1 +1,125 @@
 
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L'Analyse du Besoin - Module 2</title>
+    <!-- FontAwesome pour les icônes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- html2pdf pour la génération du bilan PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1><i class="fa-solid fa-graduation-cap"></i> Module 2 : L'Analyse du Besoin</h1>
+    </header>
+
+    <main class="container">
+
+        <!-- SECTION 1 : IDENTIFICATION ELEVE -->
+        <section id="section-identification" class="card">
+            <h2><i class="fa-solid fa-user-graduate"></i> Identification de l'élève</h2>
+            <p>Veuillez remplir vos informations avant de commencer le cours et les évaluations.</p>
+            
+            <form id="form-eleve">
+                <div class="form-group">
+                    <label for="eleve-nom">Nom :</label>
+                    <input type="text" id="eleve-nom" placeholder="Ex: Dupont" required>
+                </div>
+                <div class="form-group">
+                    <label for="eleve-prenom">Prénom :</label>
+                    <input type="text" id="eleve-prenom" placeholder="Ex: Jean" required>
+                </div>
+                <div class="form-group">
+                    <label for="eleve-classe">Classe :</label>
+                    <select id="eleve-classe" required>
+                        <option value="">-- Sélectionnez une classe --</option>
+                        <option value="3èmeA">3èmeA</option>
+                        <option value="3èmeB">3èmeB</option>
+                        <option value="3èmeC">3èmeC</option>
+                        <option value="3èmePM">3èmePM</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="eleve-numero">N° d'élève / Identifiant :</label>
+                    <input type="text" id="eleve-numero" placeholder="Ex: 12" required>
+                </div>
+                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-play"></i> Valider et Accéder au Cours</button>
+            </form>
+        </section>
+
+        <!-- SECTION 2 : COURS THÉORIQUE -->
+        <section id="section-cours" class="card hidden">
+            <h2><i class="fa-solid fa-book-open"></i> Cours : Synthèse du Module 2</h2>
+            <div id="contenu-cours" class="cours-grid">
+                <!-- Injecté dynamiquement par JS -->
+            </div>
+            <div class="action-bar">
+                <button id="btn-commencer-quiz" class="btn btn-success"><i class="fa-solid fa-arrow-right"></i> Passer au Quiz Théorique</button>
+            </div>
+        </section>
+
+        <!-- SECTION 3 : QUIZ DE COMPRÉHENSION -->
+        <section id="section-quiz" class="card hidden">
+            <div class="quiz-header">
+                <h2><i class="fa-solid fa-brain"></i> Quiz de Compréhension (Théorie)</h2>
+                <div id="quiz-timer" class="timer">⏱️ 20:00</div>
+            </div>
+            
+            <div class="progress-container">
+                <div id="quiz-progress-bar" class="progress-bar"></div>
+            </div>
+            <p id="quiz-progress" class="progress-text">Question 1 / 15</p>
+
+            <div id="quiz-container" class="question-container">
+                <div id="quiz-question" class="question-title"></div>
+                <div id="quiz-options" class="options-grid"></div>
+            </div>
+
+            <div class="action-bar">
+                <button id="btn-suivant-quiz" class="btn btn-primary hidden">Suivant <i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+        </section>
+
+        <!-- SECTION 4 : ÉVALUATION PRATIQUE -->
+        <section id="section-eval" class="card hidden">
+            <div class="eval-header">
+                <h2><i class="fa-solid fa-pen-ruler"></i> Exercices Pratiques (Application)</h2>
+                <div id="eval-timer" class="timer">⏱️ 01:30</div>
+            </div>
+
+            <div class="progress-container">
+                <div id="eval-progress-bar" class="progress-bar"></div>
+            </div>
+            <p id="eval-progress" class="progress-text">Exercice 1 / 15</p>
+
+            <div id="eval-container" class="question-container">
+                <div id="eval-question" class="question-title"></div>
+                <div id="eval-content" class="eval-content-box"></div>
+            </div>
+
+            <div class="action-bar">
+                <button id="btn-suivant-eval" class="btn btn-primary">Valider l'exercice <i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+        </section>
+
+        <!-- SECTION 5 : BILAN & EXPORT PDF -->
+        <section id="pdf-report-area" class="card hidden">
+            <h2><i class="fa-solid fa-square-poll-vertical"></i> Bilan Récapitulatif</h2>
+            <div id="eleve-info-display"></div>
+            <div id="resultats-detail"></div>
+            
+            <div class="action-bar no-print">
+                <button id="btn-telecharger-pdf" class="btn btn-danger"><i class="fa-solid fa-file-pdf"></i> Télécharger le Bilan PDF</button>
+                <button id="btn-recommencer" class="btn btn-secondary"><i class="fa-solid fa-rotate-right"></i> Recommencer</button>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
