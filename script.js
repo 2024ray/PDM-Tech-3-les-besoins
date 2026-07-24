@@ -173,18 +173,27 @@ function afficherQuestionQuiz() {
     
     const optDiv = $('#quiz-options');
     optDiv.innerHTML = '';
-    q.options.forEach((opt, i) => {
-        const div = document.createElement('div');
-        div.className = 'option-item';
-        div.innerHTML = `<input type="radio" name="quiz-opt" id="qopt${i}" value="${i}"><label for="qopt${i}">${opt.texte}</label>`;
-        div.addEventListener('click', () => {
-            $$('#quiz-options .option-item').forEach(el => el.classList.remove('selected'));
-            div.classList.add('selected');
-            div.querySelector('input').checked = true;
+
+    // Si la question possède des options
+    if (q.options && q.options.length > 0) {
+        q.options.forEach((opt, i) => {
+            const div = document.createElement('div');
+            div.className = 'option-item';
+            div.innerHTML = `<input type="radio" name="quiz-opt" id="qopt${i}" value="${i}"><label for="qopt${i}">${opt.texte}</label>`;
+            div.addEventListener('click', () => {
+                $$('#quiz-options .option-item').forEach(el => el.classList.remove('selected'));
+                div.classList.add('selected');
+                div.querySelector('input').checked = true;
+            });
+            optDiv.appendChild(div);
         });
-        optDiv.appendChild(div);
-    });
+    } else {
+        // Fallback simple si la question n'a pas d'options (ex: saisie)
+        optDiv.innerHTML = `<input type="text" id="quiz-input-libre" class="reponse-saisie-input" placeholder="Saisissez votre réponse...">`;
+    }
+
     $('#btn-suivant-quiz').classList.remove('hidden');
+}
 }
 
 function lancerTimerQuiz() {
