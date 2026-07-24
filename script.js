@@ -212,20 +212,44 @@ function mettreAJourTimerQuiz() {
     t.classList.toggle('warning', tempsQuizRestant < 60);
 }
 
+// Remplacez le listener du bouton 'btn-suivant-quiz' par celui-ci :
 $('#btn-suivant-quiz').addEventListener('click', () => {
-    const sel = document.querySelector('input[name="quiz-opt"]:checked');
     const q = quizQuestions[quizIndex];
     let bonne = false;
-    if (sel) {
-        bonne = q.options[parseInt(sel.value)].correct;
-        if (bonne) scoreQuiz++;
+    let reponseEleve = 'Aucune réponse';
+    let bonneReponse = '';
+
+    if (q.options) {
+        const sel = document.querySelector('input[name="quiz-opt"]:checked');
+        if (sel) {
+            reponseEleve = q.options[parseInt(sel.value)].texte;
+            bonne = q.options[parseInt(sel.value)].correct;
+        }
+        const optCorrecte = q.options.find(o => o.correct);
+        bonneReponse = optCorrecte ? optCorrecte.texte : '';
+    } else {
+        const input = $('#quiz-input-libre');
+        if (input) {
+            reponseEleve = input.value.trim();
+            if (q.bonnesReponses) {
+                bonne = q.bonnesReponses.some(r => normaliserTexte(r, true, true) === normaliserTexte(reponseEleve, true, true));
+                bonneReponse = q.bonnesReponses[0];
+            } else if (q.bonneReponse) {
+                bonne = normaliserTexte(reponseEleve, true, true) === normaliserTexte(q.bonneReponse, true, true);
+                bonneReponse = q.bonneReponse;
+            }
+        }
     }
+
+    if (bonne) scoreQuiz++;
+
     detailsQuiz.push({
         question: q.question,
-        reponseEleve: sel ? q.options[parseInt(sel.value)].texte : 'Aucune réponse',
-        bonneReponse: q.options.find(o => o.correct).texte,
+        reponseEleve: reponseEleve,
+        bonneReponse: bonneReponse,
         correct: bonne
     });
+
     quizIndex++;
     afficherQuestionQuiz();
 });
