@@ -209,6 +209,17 @@ function afficherQuestionQuiz() {
             });
             optDiv.appendChild(div);
         });
+        } else if (type === 'texte-trous-liste-unique' || type === 'texte-trous-liste-variable') {
+        const div = document.createElement('div');
+        div.className = 'texte-trous';
+        const selectsHTML = q.trous.map((trou, i) => {
+            let optionsSource = q.listeCommune || trou.liste;
+            let opts = '<option value="">-- Choisir --</option>';
+            optionsSource.forEach(item => { opts += `<option value="${item}">${item}</option>`; });
+            return `<select data-trou-index="${i}" class="trou-select">${opts}</select>`;
+        });
+        optDiv.innerHTML = remplacerTrous(q.texte, selectsHTML);
+    }
     } else if (type === 'choix-multiple') {
         q.options.forEach((opt, i) => {
             const div = document.createElement('div');
